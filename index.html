@@ -182,6 +182,8 @@ button:active:not(:disabled){transform:scale(.96)}
 .slab{font-size:12px;font-weight:600;color:#3b4a57}.slab select,.smsg{width:100%;font:inherit;font-size:14px;padding:8px;border-radius:8px;border:1.5px solid #c3ced8;background:#fff;color:#16222c;margin-top:2px}.smsg{margin-top:6px;resize:vertical}
 .ssum table{width:100%;font-size:13px;border-collapse:collapse;margin:6px 0}.ssum td{padding:3px 4px;border-bottom:1px solid rgba(127,127,127,.2)}.ssum small{opacity:.7}.ssum p{font-size:13px;margin:6px 0 0}
 #camb{position:absolute;left:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:3}#camb button{width:42px;height:42px;padding:0;margin:0;font-size:19px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.18);touch-action:manipulation}#camb button[aria-pressed="true"]{background:var(--ac);color:#06202a;border-color:var(--ac)}
+.cbreels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}.cbreels button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 4px;font-size:12px}.cbreels svg{width:56px!important;background:none!important}
+.cbcnt{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0}.cbcnt b{font-size:22px;min-width:76px;text-align:center}.cbcnt button{margin:0;padding:8px 12px}.cbrow{display:flex;justify-content:center;margin-top:8px}.cbrow button{margin:0}.cbh{font-size:13px;margin:8px 0 0;line-height:1.35}
 #invb{position:absolute;left:12px;bottom:max(14px,env(safe-area-inset-bottom));padding:8px 11px;font-size:14px;z-index:4;box-shadow:0 6px 18px rgba(0,0,0,.2)}
 .ot{background:rgba(127,127,127,.1);border-radius:12px;padding:8px 10px;margin:0 0 8px;font-size:13px;line-height:1.35}.ot p{margin:4px 0 0}
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
@@ -254,11 +256,11 @@ button:active:not(:disabled){transform:scale(.96)}
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
   <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
- <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
+ <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
  <div id="napw" hidden><h2>Cable que entra a la NAP</h2><div class="qrow" id="nsel" role="group" aria-label="Cable de la NAP"><button data-c="6">6 pelos</button><button data-c="12">12 pelos</button><button data-c="24">24 pelos</button></div><p class="note" id="nnote" style="margin-top:6px"></p></div>
  <div id="splw"><h2>Splitter PLC (juego libre)</h2><div class="qrow" id="ssel" role="group" aria-label="Splitter PLC"></div><p class="note" id="snote" style="margin-top:6px"></p></div>
- <div id="dropw" hidden><h2>Drop (cantidad de pelos)</h2><div class="qrow" id="dsel" role="group" aria-label="Pelos del drop"><button data-d="1">1</button><button data-d="2">2</button><button data-d="3">3</button><button data-d="4">4</button></div></div>
+ <div id="dropw" hidden><h2>Drop (cantidad de pelos)</h2><div class="qrow" id="dsel" role="group" aria-label="Pelos del drop"><button data-d="1">1</button><button data-d="2">2</button><button data-d="4">4</button></div></div>
  <h2>Herramientas para empalmar</h2><div class="qrow" id="hsel" role="group" aria-label="Herramientas"><button data-v="1">🧊 3D: fusionadora y cleaver</button><button data-v="0">✋ 2D rápido</button></div><p class="note" style="margin-top:6px">En 3D usás la peladora, el cleaver, la fusionadora y su horno como los reales.</p>
  <h2>Voces</h2><div class="qrow" id="vsel" role="group" aria-label="Voces"><button data-v="1">🔊 Con voces</button><button data-v="0">🔇 Sin voces</button></div><p class="note" style="margin-top:6px">El equipo y los clientes hablan con las voces de tu dispositivo. En soporte, lo que dice cada cliente lo escribe una IA (te pide permiso la primera vez).</p>
  <h2>Calidad gráfica</h2><div class="qrow" id="qsel" role="group" aria-label="Calidad gráfica"><button data-q="alta">Alta</button><button data-q="media">Media</button><button data-q="baja">Baja</button></div><p class="note" style="margin-top:6px">Si el juego va lento o el teléfono se calienta, probá Baja.</p>
@@ -545,9 +547,10 @@ cv.onpointerdown=e=>{if(!playing)return;if(e.isPrimary&&pts.size){pts.clear();pi
  if(pts.size===2){if(gr){back(gr);gr=null;hi(null)}if(FGR){FGR.m.userData.grab=null;FGR=null}down=0;lp=null;rotP=null;const [a,b]=[...pts.values()];pin={d:Math.hypot(a.x-b.x,a.y-b.y),z:zm,mx:(a.x+b.x)/2,my:(a.y+b.y)/2};return}
  if(pts.size>2)return;const r=ray(e);
  if(taps.length){const h=r.intersectObjects(taps,true)[0];if(h){onTap(rootOf(h.object,taps));return}}
- if(spFree(r))return;
+ if(!mode&&!drags.length&&spFree(r))return;
  if(mode){down=1;lp=null;if(MH[mode]&&MH[mode].down)MH[mode].down(e);return}
  const h=r.intersectObjects(drags,true)[0];if(h){gr=rootOf(h.object,drags);const u=gr.userData,hp=gnd(e,u.ph??u.dy??1.5);off=gr.position.clone().sub(hp);return}
+ if(spFree(r))return;
  if(FPHYS){const f=fPick(e);if(f){FGR=f;f.m.userData.grab=f.i;f.m.userData.rp.aw=true;return}}
  const now=performance.now();if(lastXY&&now-lastTap<320&&Math.hypot(e.clientX-lastXY.x,e.clientY-lastXY.y)<30){resetCam();lastXY=null;return}
  lastTap=now;lastXY={x:e.clientX,y:e.clientY};if(e.button===1||e.button===2||e.shiftKey){panP={x:e.clientX,y:e.clientY};return}rotP={x:e.clientX,y:e.clientY}};
@@ -826,7 +829,7 @@ function go(i){si=i;clr();msg('');S[i]()}
 const ttl=t=>{$('#st').textContent='Paso '+(si+1)+' de '+S.length+(si<2?' · Un dedo gira, dos dedos mueven y acercan':'');const e=$('#ti');e.textContent=t;e.classList.remove('tin');void e.offsetWidth;e.classList.add('tin');$('.hp i').style.width=((si+1)/S.length*100)+'%'};
 
 /* pasos */
-let MODE=(()=>{try{const m=localStorage.getItem('taller_modo');return m==='roseta'||m==='nap'?m:'botella'}catch(e){return 'botella'}})();
+let MODE=(()=>{try{const m=localStorage.getItem('taller_modo');return m==='roseta'||m==='nap'||m==='cableado'?m:'botella'}catch(e){return 'botella'}})();
 const SB=[
 ()=>{ttl('Abrí el domo: tocá el aro de cierre para soltarlo');camTo(-5.5,DZ,.7,PY,.7);taps=[ring];onTap=()=>{taps=[];ring.rotation.z=Math.PI/2;ring.position.set(6,.12,2.6);msg('Aro suelto.');nx()}},
 ()=>{ttl('Sacá la cúpula deslizándola hacia la derecha');camTo(DX()+1.5,DZ,MINI?.85:1.05,PY,.75);dome.userData.home=dome.position.clone();task([dome],[{x:Math.max(TXc+TL/2+.5,FBX+1.4),z:DZ,id:null,y:RD+.02,my:.05}],()=>msg('Domo abierto: la bandeja queda mirando hacia arriba.'))},
@@ -996,9 +999,9 @@ function mRoseta(){const g=G(),w=M(0xdedbd4,{roughness:.75,map:TX.noise,envMapIn
 function buildRoseta(){if(RSG)return;RSG=mRoseta();scene.add(RSG)}
 function setModo(m){MODE=m;try{localStorage.setItem('taller_modo',m)}catch(e){}
  document.querySelectorAll('#msel button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));
- $('#cabw').hidden=m!=='botella';$('#napw').hidden=m!=='nap';$('#mnote').textContent=m==='nap'?'Caja NAP con bandeja abatible y splitter conectorizado: empalmás el pelo con potencia, armás un conector de campo en el drop y medís el puerto.':m==='botella'?'Cable multifibra en un domo, con bandeja de empalmes.':'Drop de 1 fibra + pigtail SC/APC, guardado en el carrete, patchcord y medición con OPM.';
+ $('#cabw').hidden=m!=='botella';$('#napw').hidden=m!=='nap';$('#splw').hidden=m==='cableado';$('#mnote').textContent=m==='cableado'?'Cortás los metros de drop, abrís la cámara subterránea de Barrio Santa Ana, pasás el pasacables por el caño del lote hasta el pilar y llevás el drop por los corrugados de las tapas ciegas de la casa.':m==='nap'?'Caja NAP con bandeja abatible y splitter conectorizado: empalmás el pelo con potencia, armás un conector de campo en el drop y medís el puerto.':m==='botella'?'Cable multifibra en un domo, con bandeja de empalmes.':'Drop de 1 fibra + pigtail SC/APC, guardado en el carrete, patchcord y medición con OPM.';
  if(m==='botella'&&!CL)setCable(NFIB);if(CL)CL.visible=m==='botella';bB.forEach((ls,b)=>ls.forEach(x=>x.visible=m==='botella'&&b<NB));
- try{renderSpl()}catch(e){}if(m==='roseta')buildRoseta();if(RSG)RSG.visible=m==='roseta';if(m==='nap'&&!NSG)napBuild(SPLN);if(NSG)NSG.visible=m==='nap'}
+ try{renderSpl()}catch(e){}if(m==='cableado')$('#splw').hidden=true;if(m==='roseta')buildRoseta();if(RSG)RSG.visible=m==='roseta';if(m==='nap'&&!NSG)napBuild(SPLN);if(NSG)NSG.visible=m==='nap'}
 
 /* menú con pasos internos (pelar, cortar, …) */
 function seqRun(title,list,done){let i=0;const show=()=>openPan(title,()=>{const it=list[i];$('#pt').textContent=title+' · '+it[0];
@@ -1553,7 +1556,7 @@ function benchPrep(side,o,done){$('#m2d').hidden=false;const t=BT[side],u=t.user
 /* fusionar: paravientos, mordazas, cada pelo en su ranura en V, SET y la pantalla para alinear */
 function benchFuse(c1,c2,done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,PL=V(BKX-GLC-.03,y,z),PR=V(BKX+GLC+.03,y,z);bCam('splicer');
  const place=(t,p,txt)=>m=>{ttlB(txt);msg('Apoyá el vidrio en la ranura en V: la punta tiene que quedar cerca de los electrodos, sin pasarse.');const u=t.userData;u.home=t.position.clone();u.dy=y+.12;u.ph=y;
-  task([t],[{x:p.x,z:p.z,y:p.y,id:null,s:.12,my:y+.01}],ob=>{const e2=tipErr(ob,p,.06);if(e2){err++;msg(e2);return false}ob.position.copy(p);fxOK();setTimeout(m,300);return 'hold'})};
+  task([t],[{x:p.x,z:p.z,y:p.y,id:null,s:.12,my:y+.01}],ob=>{if(!S.hood.userData.open){msg('El paravientos está cerrado: abrilo para apoyar el pelo.');return false}if(!S.fh[p.x<BKX?0:1].userData.open){msg('La mordaza está cerrada: abrila para apoyar el pelo.');return false}const e2=tipErr(ob,p,.06);if(e2){err++;msg(e2);return false}ob.position.copy(p);fxOK();setTimeout(m,300);return 'hold'})};
  const clamp=(i,txt)=>m=>{if(!S.fh[i].userData.open)return m();ttlB(txt);msg('');taps=[S.fh[i]];onTap=()=>{taps=[];S.fh[i].userData.open=false;rotAnim(S.fh[i],'x',0,300,m)}};
  runSeq([m=>{if(S.hood.userData.open)return m();ttlB('Abrí el paravientos de la fusionadora');msg('Tocá la tapa del centro.');taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=true;rotAnim(S.hood,'x',-1.75,450,m)}},
   m=>{const op=S.fh.filter(f=>!f.userData.open);if(!op.length)return m();ttlB('Abrí las dos mordazas');taps=op;let k=0;onTap=o=>{if(o.userData.open)return;o.userData.open=true;rotAnim(o,'x',-1.9,300);if(++k===op.length){taps=[];setTimeout(m,350)}}},
@@ -1577,12 +1580,12 @@ function benchHeat(done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=
      S.hglow.material.emissiveIntensity=0;ding();msg('Termo contraído: el empalme quedó protegido.');setTimeout(m,300)};f()}},
   m=>{ttlB('Abrí el horno y sacá el empalme');const out=()=>tw(BT.sleeve,V(BKX-.6,.12,BKZ+2.0),400,()=>{setTimeout(m,300)});if(S.hl.userData.open){taps=[BT.sleeve];onTap=()=>{taps=[];out()};return}taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,350,out)}}],done)}
 /* tocar el paravientos, una mordaza o la tapa del horno la abre o la cierra en cualquier momento */
-function spParts(){const S=BK&&BK.sp&&BK.sp.userData;return S&&S.hood?[S.hood,...S.fh,S.hl]:[]}
+function spParts(){const S=BK&&BK.sp&&BK.sp.userData;if(!S||!S.hood)return [];if(!S.hits){S.hits=1;const inv=new THREE.MeshBasicMaterial({visible:false}),hb=(p,w,h,d,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),inv);m.position.set(x,y,z);p.add(m)};
+ hb(S.hood,1.15,.5,1.2,0,.22,.55);S.fh.forEach(f=>hb(f,.55,.26,.56,0,.06,.2));hb(S.hl,1.7,.28,.6,0,.08,.22)}return [S.hood,...S.fh,S.hl]}
 function spToggle(o){const S=BK.sp.userData,op=!o.userData.open,isFh=S.fh.includes(o),isHood=o===S.hood;
- if(!op&&drags.length&&(isFh||isHood)){msg('Primero acomodá el pelo en la ranura: después cerrás.');return}
  o.userData.open=op;rotAnim(o,'x',op?(isHood?-1.75:-1.9):0,isHood?450:320);
  msg((isHood?'Paravientos ':o===S.hl?'Tapa del horno ':'Mordaza ')+(op?(isHood?'abierto.':'abierta.'):(isHood?'cerrado.':'cerrada.')))}
-function spFree(r){if(!playing||!BK||!BK.out||!BK.sp||!BK.sp.visible)return false;const P=spParts();if(!P.length)return false;const h=r.intersectObjects(P,true)[0];if(!h)return false;spToggle(rootOf(h.object,P));return true}
+function spFree(r){if(!playing||!BK||!BK.out||!BK.sp||!BK.sp.visible)return false;const P=spParts();if(!P.length)return false;const H=r.intersectObjects(P,true);if(!H.length)return false;const S=BK.sp.userData,R=H.map(h=>rootOf(h.object,P));let o=R[0];if(o===S.hood&&S.hood.userData.open&&H[0].object.material.visible===false){const alt=R.find(x=>x!==S.hood);if(alt)o=alt}spToggle(o);return true}
 function flashPos(){return BENCHARC?V(BKX,SPYF+.1,BKZ+SPZF):null}
 /* ---- power meter con sus botones de verdad: ⏻ prende, λ cambia la longitud de onda, REF guarda referencia, dB muestra la diferencia, LIGHT luz de pantalla, LED linterna ---- */
 function opmPress(o,k){const s=o.st;if(!s)return;
@@ -1619,6 +1622,9 @@ const KIT=[
  {k:'dest',n:'Destornillador',a:'el',d:'Tornillos y tarugos'},
  {k:'vfl',n:'Lápiz de luz roja',a:'el',d:'Muestra cortes con luz visible'},
  {k:'tij',n:'Tijera de kevlar',a:'la',d:'Corta el hilo de kevlar'},
+ {k:'pasa',n:'Pasacables',a:'el',d:'Cinta guía para pasar cables por caños'},
+ {k:'cinta',n:'Cinta aisladora',a:'la',d:'Ata el drop a la guía'},
+ {k:'metro',n:'Cinta métrica',a:'la',d:'Mide los metros del recorrido'},
  {k:'mart',n:'Martillo',a:'el',d:'Para clavar'},
  {k:'llave',n:'Llave inglesa',a:'la',d:'Para tuercas'}];
 const kT=k=>KIT.find(t=>t.k===k),kN=k=>kT(k).n,kArt=k=>{const t=kT(k);return t.ar||t.a+' '+t.n.toLowerCase()};
@@ -1633,13 +1639,16 @@ const KICO={
  dest:'<g transform="rotate(-38 32 32)"><rect x="4" y="25" width="24" height="14" rx="7" fill="#facc15"/><path d="M10 25v14M16 25v14M22 25v14" stroke="#ca8a04" stroke-width="1.5"/><rect x="27" y="30" width="26" height="4" fill="#9aa3ad"/><path d="M53 29l7 3-7 3z" fill="#9aa3ad"/></g>',
  vfl:'<g transform="rotate(-38 32 32)"><rect x="6" y="26" width="36" height="12" rx="4" fill="#1f2937"/><rect x="12" y="29" width="6" height="6" rx="1" fill="#ef4444"/><rect x="42" y="28.5" width="8" height="7" fill="#9aa3ad"/><path d="M50 32 62 27v10z" fill="#ef4444" opacity=".75"/></g>',
  tij:'<circle cx="21" cy="47" r="8" fill="none" stroke="#f59e0b" stroke-width="5"/><circle cx="42" cy="50" r="8" fill="none" stroke="#f59e0b" stroke-width="5"/><path d="M25 41 47 7" stroke="#9aa3ad" stroke-width="5" stroke-linecap="round"/><path d="M38 44 29 7" stroke="#c0c7cf" stroke-width="5" stroke-linecap="round"/>',
+ pasa:'<circle cx="28" cy="28" r="20" fill="none" stroke="#1f8a5a" stroke-width="9"/><circle cx="28" cy="28" r="12.5" fill="none" stroke="#f0915a" stroke-width="2.5" stroke-dasharray="5 2"/><path d="M42 40 Q50 46 52 54" stroke="#f0915a" stroke-width="3" fill="none"/><path d="M52 54 q3 1 2 3 t2 3 t2 3" stroke="#9aa3ad" stroke-width="2" fill="none"/><rect x="55" y="61" width="5" height="3" fill="#9aa3ad"/>',
+ cinta:'<circle cx="30" cy="32" r="20" fill="#22272d"/><circle cx="30" cy="32" r="9" fill="#e5e7eb"/><path d="M46 44 L60 54 L56 60 L42 50Z" fill="#22272d"/>',
+ metro:'<rect x="8" y="16" width="36" height="36" rx="8" fill="#f2c200"/><circle cx="26" cy="34" r="9" fill="#2b2f36"/><path d="M44 46 H60 V52 H44Z" fill="#e8d36a" stroke="#7a6a10"/><path d="M48 46v3M52 46v3M56 46v3" stroke="#7a6a10"/>',
  mart:'<rect x="28.5" y="22" width="7" height="38" rx="3" fill="#a16207"/><path d="M12 9h34a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4H12l-3-7z" fill="#4b5563"/>',
  llave:'<g transform="rotate(-40 32 32)"><rect x="4" y="28" width="40" height="9" rx="4" fill="#9aa3ad"/><path d="M42 20h16v9h-7v7h7v9H42z" fill="#9aa3ad"/><circle cx="10" cy="32.5" r="2" fill="#5b636b"/></g>'};
 const kIco=k=>`<svg class="ki" viewBox="0 0 64 64" aria-hidden="true">${KICO[k]}</svg>`;
 let INV={has:new Set(),got:new Set(),used:new Set(),via:{},cut:{},pen:0,log:[],skip:true,back:false};
 const INVF=(()=>{try{return localStorage.getItem('taller_inv')}catch(e){return null}})();
-function kitNeeds(){return MODE==='botella'?['valija','cort','alicate','gel','pinza']:MODE==='nap'?['valija','cort','alicate','pinza','opm']:['valija','cort','alicate','opm','dfaz',...(DROPN>1?['pinza']:[])]}
-function kitJob(){if(MODE==='botella')return `Empalme en botella: entra un cable troncal de <b>${NFIB} fibras</b> relleno de gel${SPL?` y va un splitter 1x${SPL}`:''}. Hay que cortar la cubierta y el elemento central, limpiar el gel, empalmar y verificar que cada pelo tenga tráfico.`;
+function kitNeeds(){return MODE==='cableado'?['pasa','cinta','metro','alicate']:MODE==='botella'?['valija','cort','alicate','gel','pinza']:MODE==='nap'?['valija','cort','alicate','pinza','opm']:['valija','cort','alicate','opm','dfaz',...(DROPN>1?['pinza']:[])]}
+function kitJob(){if(MODE==='cableado')return `Cableado en Barrio Santa Ana: llevar un drop de <b>${cblDrop(CB.dropN)}</b> desde la cámara subterránea, por el caño del lote ${CB.lot} hasta el pilar, y por los corrugados de las tapas ciegas de la casa. Hay que medir el recorrido, pasar una guía por los caños, atar el drop y cortar lo que sobra.`;if(MODE==='botella')return `Empalme en botella: entra un cable troncal de <b>${NFIB} fibras</b> relleno de gel${SPL?` y va un splitter 1x${SPL}`:''}. Hay que cortar la cubierta y el elemento central, limpiar el gel, empalmar y verificar que cada pelo tenga tráfico.`;
  if(MODE==='nap')return `Caja NAP: entra un cable de <b>${NCAB} pelos</b>. Hay que cortar la cubierta y el elemento central, encontrar el pelo con señal, fusionarlo al splitter, armar el conector del drop y medir la potencia del cliente.`;
  return `Roseta en la casa del cliente: llega un drop plano de <b>${DROPN} pelo${DROPN>1?'s':''}</b> con dos refuerzos. Hay que abrir el drop, cortar los refuerzos,${DROPN>1?' buscar el pelo con señal,':''} empalmar con el pigtail, medir la potencia y pegar la roseta en la pared.`}
 function invReset(){INV={has:new Set(),got:new Set(),used:new Set(),via:{},cut:{},pen:0,log:[],skip:INVF==='0'||(TSKIP&&INVF!=='1'),back:false}}
@@ -1672,6 +1681,12 @@ const KALT={
   {t:'Dejarlo sin medir',p:60,r:'❌ Sin la medición no podés cerrar la orden, y si la potencia está baja el cliente reclama. −60 pts. Elegí otra opción.'}],
  gel:[kVan('gel',30),{t:'Limpiar con el alcohol isopropílico de la valija',p:10,ok:true,r:'El alcohol también saca el gel, pero gastás mucho y tardás más: −10 pts.'},
   {t:'Limpiar con la remera',p:20,r:'❌ La tela deja pelusa y grasa en los buffers. −20 pts. Elegí otra opción.'}],
+ pasa:[kVan('pasa',40),{t:'Pedirle el pasacables a un compañero',p:60,ok:true,r:'Tu compañero te prestó su pasacables, pero tuviste que esperarlo: −60 pts.'},
+  {t:'Empujar el drop solo por el caño',p:25,r:'❌ El drop se traba en las curvas del caño y se dobla: para pasar por un caño hace falta una guía. −25 pts. Elegí otra opción.'}],
+ cinta:[kVan('cinta',30),{t:'Pedirle cinta a un compañero',p:45,ok:true,r:'Te pasaron un rollo de cinta, pero tuviste que esperar: −45 pts.'},
+  {t:'Atarlo con un nudo, sin cinta',p:20,r:'❌ Un nudo solo se suelta adentro del caño y el drop queda trabado a mitad de camino. −20 pts. Elegí otra opción.'}],
+ metro:[kVan('metro',30),{t:'Medir a pasos',p:10,ok:true,via:'pasos',r:'Medís a pasos: las distancias te van a salir aproximadas. −10 pts.'},
+  {t:'Calcularlo al ojo',p:20,r:'❌ Al ojo te podés quedar corto y el drop no se puede estirar. −20 pts. Elegí otra opción.'}],
  dfaz:[kVan('dfaz',30),{t:'Atornillar la roseta a la pared',req:'dest',p:0,ok:true,via:'dest',r:'✅ ¡Bien pensado! La roseta tiene agujeros para tarugos: atornillada queda firme. Sin descuento.'},
   {t:'Pegarla con cinta aisladora',p:20,r:'❌ La cinta aisladora se despega con el calor y la roseta se cae. −20 pts. Elegí otra opción.'}]};
 function kitHas(k){return INV.skip||INV.has.has(k)||INV.got.has(k)}
@@ -1868,8 +1883,9 @@ let SUPON=false,SU=null;
 const SNOM=['Martina','Lucas','Sofía','Mateo','Valentina','Santiago','Camila','Benjamín','Julieta','Thiago','Agustina','Nicolás','Florencia','Joaquín','Milagros','Facundo','Rocío','Tomás','Abril','Gonzalo','Carla','Diego','Paula','Ramiro','Lorena','Héctor','Norma','Rubén','Graciela','Oscar'];
 const SAPE=['González','Rodríguez','Fernández','López','Martínez','Pérez','García','Sánchez','Romero','Sosa','Torres','Álvarez','Ruiz','Ramírez','Flores','Benítez','Acosta','Medina','Herrera','Suárez','Aguirre','Giménez','Jiménez','Gutiérrez','Pereyra','Molina','Castro','Ortiz','Silva','Núñez','Vázquez','Báez'];
 const SSPELL={'Giménez':'Giménez, con G','Jiménez':'Jiménez, con J','Pereyra':'Pereyra, con Y griega','Vázquez':'Vázquez, con V corta y zeta','Báez':'Báez, con B larga y zeta','Suárez':'Suárez, con zeta al final','Benítez':'Benítez, con zeta'};
-const SBAR=['Centro','Barrio Norte','Villa del Parque','Las Flores','San Martín','Los Álamos','Villa Esperanza','Parque Sur','El Mirador','Barrio Jardín','La Florida','Santa Rita','Los Pinos','Villa Nueva'];
-const SCAL=['San Martín','Belgrano','Rivadavia','Mitre','Sarmiento','25 de Mayo','Moreno','Urquiza','Alem','Lavalle','Italia','España','Las Heras','Pueyrredón','Güemes','Colón','Brown','Saavedra','9 de Julio','Corrientes'];
+const SBARR=[{n:'Casas de Santa Ana',t:'mzc'},{n:'Santa Ana Joven',t:'uf',a:1,b:110},{n:'Barrio Santa Ana',t:'lote',a:1,b:370},{n:'Casas de Santa María',t:'calle'},{n:'San Rafael',t:'lote',a:1,b:320},{n:'El Canal',t:'lote',a:1,b:80},{n:'Villa Marina 1',t:'lote',a:1,b:200},{n:'Vilahaus',t:'torre'},{n:'Studios',t:'uf',a:1,b:150},{n:'Estudios de la Bahía',t:'uf',a:100,b:728}];
+const SBAR=SBARR.map(b=>b.n);
+const SCAL=['Lanín','Fitz Roy','Tronador','Aconcagua','Antofalla','Tupungato'];
 const SMOT=['Instalación nueva','Mudanza','Sin servicio','Internet lento'];
 const SOPEN={'Instalación nueva':['Hola, buen día. Quería contratar internet por fibra, me dijeron que ya llega a mi zona.','¡Hola! Quiero poner internet en casa, ¿me pueden mandar a alguien para instalar?'],
  'Mudanza':['Hola, ¿qué tal? Me mudé y necesito pasar el servicio a la casa nueva.','Buenas, me estoy mudando y quiero llevarme el internet a la otra casa.'],
@@ -1880,10 +1896,14 @@ const sesc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 const snorm=t=>String(t||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/\b(av|avenida|calle|barrio|bo)\b\.?/g,'').replace(/[^a-z0-9ñ]+/g,' ').trim();
 const sdig=t=>String(t||'').replace(/\D/g,'');
 const scasa=t=>snorm(t).replace(/\b(casa|depto|dpto|departamento|lote|piso|nro|numero)\b/g,'').replace(/\s+/g,'');
-const SFLD=[['nom','Nombre','text'],['ape','Apellido','text'],['tel','Teléfono','tel'],['bar','Barrio','text'],['cal','Calle','text'],['alt','Altura','numeric'],['casa','Casa / Depto','text']];
+/* dirección armada: calle y altura, manzana o torre, y lote, casa o unidad funcional */
+const saddr=o=>[o.cal&&o.alt?`${o.cal} ${o.alt}`:(o.cal||o.alt||''),o.mz,o.ub||o.casa].filter(x=>String(x||'').trim()).join(', ');
+const snum=(m,x)=>!sdig(x)||new RegExp('(^|\\D)'+sdig(x)+'(\\D|$)').test(m);
+const SFLD=[['nom','Nombre','text'],['ape','Apellido','text'],['tel','Teléfono','tel'],['bar','Barrio','text'],['cal','Calle','text'],['alt','Altura','numeric'],['mz','Manzana / Torre','text'],['ub','Lote / Casa / UF','text']];
 function supClient(){const nom=srnd(SNOM),ape=srnd(SAPE),ar=srnd(['11','11','351','341','261','221']),tel=ar==='11'?`11 ${sint(4,6)}${sint(100,999)}-${sint(1000,9999)}`:`${ar} ${sint(400,699)}-${sint(1000,9999)}`;
- const k=Math.random(),casa=k<.45?`Casa ${sint(1,60)}`:k<.8?`Depto ${sint(1,9)}${srnd(['A','B','C','D'])}`:`Lote ${sint(1,80)}`,mot=srnd(SMOT);
- return {nom,ape,tel,bar:srnd(SBAR),cal:srnd(SCAL),alt:String(sint(1,48)*100+sint(0,99)),casa,mot}}
+ const B=srnd(SBARR),mot=srnd(SMOT);let cal='',alt='',mz='',ub='';
+ if(B.t==='calle'){cal=srnd(SCAL);alt=String(sint(5600,5698))}else if(B.t==='mzc'){mz=`Manzana ${sint(1,8)}`;ub=`Casa ${sint(1,24)}`}else if(B.t==='torre'){mz=`Torre ${sint(1,4)}`;ub=`UF ${sint(1,140)}`}else ub=`${B.t==='lote'?'Lote':'UF'} ${sint(B.a,B.b)}`;
+ return {nom,ape,tel,bar:B.n,bt:B.t,cal,alt,mz,ub,mot}}
 const supLoad=()=>{try{return JSON.parse(localStorage.getItem('taller_planilla')||'[]')}catch(e){return []}};
 const supSave=()=>{try{localStorage.setItem('taller_planilla',JSON.stringify(SU.rows.slice(-200)))}catch(e){}};
 /* sonido del teléfono y voz del cliente */
@@ -1912,8 +1932,7 @@ function supGreet(p){const c=SU.c;c.greet=p;c.pts+=p;const me=p>=15?`Soporte té
  if(c.aiP&&!c.ai&&SAMP&&SAMPOK){setTimeout(()=>supTyping(true),300);Promise.race([c.aiP,new Promise(r=>setTimeout(r,5000))]).then(go)}else setTimeout(go,500)}
 function supQs(){const a=SU.c.ai||{},q=supQs0();q.forEach(x=>{if(a[x[0]])x[2]=a[x[0]]});return q}
 function supQs0(){const c=SU.c.d,sp=SSPELL[c.ape];return [['nom','¿Me decís tu nombre y apellido?',`Sí, soy ${c.nom} ${sp?sp.split(',')[0]:c.ape}.${sp?' '+sp.slice(sp.indexOf(',')+2).replace(/^./,m=>m.toUpperCase())+'.':''}`],
- ['tel','¿Un teléfono de contacto?',`Anotá: ${c.tel}.`],['bar','¿En qué barrio estás?',`En ${c.bar}.`],['cal','¿Qué calle y altura?',`${c.cal} ${c.alt}.`],
- ['casa','¿Es casa, depto o lote? ¿Qué número?',/^Casa/.test(c.casa)?`Es una casa, la ${c.casa.replace('Casa ','')}.`:/^Depto/.test(c.casa)?`Es un departamento, el ${c.casa.replace('Depto ','')}.`:`Es un lote en un barrio privado, el ${c.casa.replace('Lote ','')}.`]]}
+ ['tel','¿Un teléfono de contacto?',`Anotá: ${c.tel}.`],['bar','¿En qué barrio estás?',`En ${c.bar}.`],['dir','¿Me pasás la dirección?',c.bt==='calle'?`Calle ${c.cal} ${c.alt}.`:c.bt==='mzc'?`${c.mz}, casa ${c.ub.replace('Casa ','')}.`:c.bt==='torre'?`${c.mz}, unidad funcional ${c.ub.replace('UF ','')}.`:c.bt==='lote'?`${c.ub}.`:`Unidad funcional ${c.ub.replace('UF ','')}.`]]}
 function supAsk(){const c=SU.c,qs=supQs(),o=qs.filter(q=>!c.asked[q[0]]).map(q=>[q[1],()=>{c.asked[q[0]]=true;supAdd('me',q[1]);setTimeout(()=>{supAdd('cl',q[2]);c.last=q[2];supAsk()},450)}]);
  if(c.last)o.push(['🔁 “¿Me lo repetís, por favor?”',()=>{if(!supItemOn('Ulises'))c.pts-=2;supAdd('me','¿Me lo repetís, por favor?');setTimeout(()=>{supAdd('cl',((c.ai&&c.ai.rep)||'Sí, claro:')+' '+c.last.replace(/^(Sí, |Anotá: )/,''));supAsk()},400)},'alt']);
  if(SAMP&&SAMPOK)o.push(['✍️ Preguntar con tus palabras',supFreeUI,'alt']);o.push(['✅ Despedirte',supCloseOpts,'alt']);supOpts(o)}
@@ -1941,41 +1960,41 @@ function supPc(){const s=$('#sscr');$('#spow').classList.toggle('on',SU.pc!=='of
 function supKeep(){const t=$('#sscr textarea');if(t)SU.msg=t.value}
 function supFormH(){const c=SU.c,f=SU.form;if(!c||SU.state==='ring'||SU.state==='idle'&&!c)return '<p class="sempty">No hay ninguna llamada en curso. Cuando suene el teléfono, atendé y cargá acá los datos del cliente.</p>';
  if(c.saved)return `<p class="sempty">✅ Orden #${c.saved} guardada en la planilla. Ahora mandásela a un técnico desde <b>💬 Técnicos</b>.</p>`;
- return `<p class="shelp">Escribí los datos tal como te los dice el cliente.</p><div class="sform">${SFLD.map(([k,n,t])=>`<label>${n}<input name="${k}"${k==='bar'?' list="dlbar"':k==='cal'?' list="dlcal"':''} value="${sesc(f[k]||'')}" autocomplete="off" autocapitalize="${k==='tel'||k==='alt'?'off':'words'}" ${t==='tel'?'inputmode="tel"':t==='numeric'?'inputmode="numeric"':''} spellcheck="false"></label>`).join('')}
+ return `<p class="shelp">Escribí los datos tal como te los dice el cliente. En barrios cerrados y edificios no hay calle: dejá calle y altura vacías y cargá manzana, torre, lote, casa o unidad funcional.</p><div class="sform">${SFLD.map(([k,n,t])=>`<label>${n}<input name="${k}"${k==='bar'?' list="dlbar"':k==='cal'?' list="dlcal"':''} value="${sesc(f[k]||'')}" autocomplete="off" autocapitalize="${k==='tel'||k==='alt'?'off':'words'}"${k==='mz'?' placeholder="Ej.: Manzana 3 · Torre 2"':k==='ub'?' placeholder="Ej.: Lote 45 · Casa 7 · UF 120"':''} ${t==='tel'?'inputmode="tel"':t==='numeric'?'inputmode="numeric"':''} spellcheck="false"></label>`).join('')}
   <label>Motivo<select name="mot"><option value="">Elegí…</option>${SMOT.map(m=>`<option${f.mot===m?' selected':''}>${m}</option>`).join('')}</select></label></div><p class="swarn" id="swarn"></p><button class="big ssave">💾 Guardar en la planilla</button>`}
-function supSaveRow(){const f=SU.form,miss=[...SFLD.map(x=>x[0]),'mot'].filter(k=>!String(f[k]||'').trim());
+function supSaveRow(){const f=SU.form,fv=k=>String(f[k]||'').trim(),miss=['nom','ape','tel','bar','mot'].filter(k=>!fv(k));if(!(fv('cal')&&fv('alt'))&&!fv('ub'))miss.push('dir');
  if(miss.length&&!SU.forceSave){SU.forceSave=true;$('#swarn').textContent=`Faltan datos (${miss.length}). Si igual querés guardar, tocá otra vez.`;return}SU.forceSave=false;
- const id=(SU.rows.reduce((m,r)=>Math.max(m,r.id||0),0))+1,d=new Date(),row={id,fecha:`${d.getDate()}/${d.getMonth()+1} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`,nom:f.nom||'',ape:f.ape||'',tel:f.tel||'',bar:f.bar||'',cal:f.cal||'',alt:f.alt||'',casa:f.casa||'',mot:f.mot||'',tec:'',est:'Pendiente'};
+ const id=(SU.rows.reduce((m,r)=>Math.max(m,r.id||0),0))+1,d=new Date(),row={id,fecha:`${d.getDate()}/${d.getMonth()+1} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`,nom:f.nom||'',ape:f.ape||'',tel:f.tel||'',bar:f.bar||'',cal:f.cal||'',alt:f.alt||'',mz:f.mz||'',ub:f.ub||'',mot:f.mot||'',tec:'',est:'Pendiente'};
  SU.rows.push(row);supSave();SU.c.saved=id;SU.selRow=id;SU.msg=null;SU.tab='chat';supPc();if(SU.state==='after')supOpts([])}
 function supPlanH(){const R=SU.rows.slice().reverse();if(!R.length)return '<p class="sempty">La planilla está vacía. Cada orden que guardes queda acá, también para los próximos turnos.</p>';
- return `<div class="stbl"><table><thead><tr><th>#</th><th>Fecha</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Barrio</th><th>Calle</th><th>Altura</th><th>Casa/Depto</th><th>Motivo</th><th>Técnico</th><th>Estado</th></tr></thead><tbody>${R.map(r=>`<tr${SU.c&&r.id===SU.c.saved?' class="snew"':''}><td>${r.id}</td><td>${sesc(r.fecha)}</td><td>${sesc(r.nom)}</td><td>${sesc(r.ape)}</td><td>${sesc(r.tel)}</td><td>${sesc(r.bar)}</td><td>${sesc(r.cal)}</td><td>${sesc(r.alt)}</td><td>${sesc(r.casa)}</td><td>${sesc(r.mot)}</td><td>${sesc(r.tec||'—')}</td><td><span class="sest ${r.est==='Enviada'?'ok':r.est==='Con problema'?'bad':''}">${sesc(r.est)}</span></td></tr>`).join('')}</tbody></table></div><p class="shelp">${R.length} orden${R.length>1?'es':''} · se guarda en este dispositivo</p><button class="lnk sclr">Borrar la planilla</button>`}
+ return `<div class="stbl"><table><thead><tr><th>#</th><th>Fecha</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Barrio</th><th>Calle</th><th>Altura</th><th>Mz/Torre</th><th>Lote/Casa/UF</th><th>Motivo</th><th>Técnico</th><th>Estado</th></tr></thead><tbody>${R.map(r=>`<tr${SU.c&&r.id===SU.c.saved?' class="snew"':''}><td>${r.id}</td><td>${sesc(r.fecha)}</td><td>${sesc(r.nom)}</td><td>${sesc(r.ape)}</td><td>${sesc(r.tel)}</td><td>${sesc(r.bar)}</td><td>${sesc(r.cal)}</td><td>${sesc(r.alt)}</td><td>${sesc(r.mz||'')}</td><td>${sesc(r.ub||r.casa||'')}</td><td>${sesc(r.mot)}</td><td>${sesc(r.tec||'—')}</td><td><span class="sest ${r.est==='Enviada'?'ok':r.est==='Con problema'?'bad':''}">${sesc(r.est)}</span></td></tr>`).join('')}</tbody></table></div><p class="shelp">${R.length} orden${R.length>1?'es':''} · se guarda en este dispositivo</p><button class="lnk sclr">Borrar la planilla</button>`}
 const STREP={Blas:b=>`👍 Dale, salgo para ${b}.`,Alan:b=>`¡Voy volando para ${b}! 🚐`,Víctor:b=>`Listo jefe, en camino a ${b} 🌯`,Dylan:b=>`Ok, ahí voy para ${b}.`,Federico:b=>`Recibido. Salgo para ${b}.`,Sebastián:b=>`Perfecto, voy para ${b} 😎`,Bruno:b=>`¡Dale! Voy para ${b} 🥤`};
-const supTpl=(r,t)=>`Hola ${t}! Nueva orden #${r.id}: ${r.mot||'—'}. Cliente: ${r.nom} ${r.ape}, tel ${r.tel}. Dirección: ${r.cal} ${r.alt}, ${r.casa}, barrio ${r.bar}. ¡Gracias!`;
+const supTpl=(r,t)=>`Hola ${t}! Nueva orden #${r.id}: ${r.mot||'—'}. Cliente: ${r.nom} ${r.ape}, tel ${r.tel}. Dirección: ${saddr(r)}, barrio ${r.bar}. ¡Gracias!`;
 function supTecH(){const pend=SU.rows.filter(r=>r.est==='Pendiente');if(SU.tec==null)SU.tec=0;
  const r=SU.rows.find(x=>x.id===SU.selRow&&x.est==='Pendiente')||pend[pend.length-1];if(r)SU.selRow=r.id;const t=TECS[SU.tec];
  const th=(SU.tchat||[]).filter(m=>m.k===SU.tec).map(m=>`<div class="sm ${m.me?'me':'cl'}">${m.me?'':`<b class="snm">${TECS[m.k].n}</b>`}${sesc(m.t)}</div>`).join('');
  return `<div class="stecs">${TECS.map((c,k)=>`<button class="stec" data-k="${k}" aria-pressed="${k===SU.tec}"><span class="stav">${avatar(c)}</span>${c.n}</button>`).join('')}</div>
   <div class="schat2">${th||`<div class="sm sys">Chat con ${t.n}</div>`}</div>
-  ${r?`<label class="slab">Orden<select class="srow">${pend.map(x=>`<option value="${x.id}"${x.id===r.id?' selected':''}>#${x.id} · ${sesc(x.nom)} ${sesc(x.ape)} · ${sesc(x.cal)} ${sesc(x.alt)}</option>`).join('')}</select></label>
+  ${r?`<label class="slab">Orden<select class="srow">${pend.map(x=>`<option value="${x.id}"${x.id===r.id?' selected':''}>#${x.id} · ${sesc(x.nom)} ${sesc(x.ape)} · ${sesc(x.bar)} ${sesc(saddr(x))}</option>`).join('')}</select></label>
   <textarea class="smsg" rows="4" aria-label="Mensaje para el técnico">${sesc(SU.msg??supTpl(r,t.n))}</textarea><button class="big ssend">📨 Enviar a ${t.n}</button>`:'<p class="sempty">No hay órdenes pendientes. Guardá una en <b>📝 Nueva orden</b>.</p>'}`}
 function supSend(){const r=SU.rows.find(x=>x.id===SU.selRow);if(!r)return;const tk=SU.tec,t=TECS[tk],m=$('#sscr textarea').value.trim();SU.tchat=SU.tchat||[];
- SU.tchat.push({k:tk,me:true,t:m});const wn=TECS.find(o=>o.n!==t.n&&new RegExp('^\\s*(?:hola|buenas|buen d[ií]a|che)[,!]?\\s+'+o.n+'\\b','i').test(m));const nm=snorm(m),has=s=>!s||nm.includes(snorm(s)),okA=r.cal&&r.alt&&has(r.cal)&&sdig(m).includes(sdig(r.alt));
- if(!okA){SU.msg=m;supPc();setTimeout(()=>{SU.tchat.push({k:tk,t:'¿A qué dirección voy? No me pasaste la calle y la altura 🤔'});if(SU.c&&SU.c.saved===r.id)SU.c.pts-=5;supPc()},700);return}
+ SU.tchat.push({k:tk,me:true,t:m});const wn=TECS.find(o=>o.n!==t.n&&new RegExp('^\\s*(?:hola|buenas|buen d[ií]a|che)[,!]?\\s+'+o.n+'\\b','i').test(m));const nm=snorm(m),has=s=>!s||nm.includes(snorm(s)),okA=!!saddr(r)&&has(r.cal)&&snum(m,r.alt)&&snum(m,r.mz)&&snum(m,r.ub||r.casa);
+ if(!okA){SU.msg=m;supPc();setTimeout(()=>{SU.tchat.push({k:tk,t:'¿A qué dirección voy? No me pasaste la dirección completa 🤔'});if(SU.c&&SU.c.saved===r.id)SU.c.pts-=5;supPc()},700);return}
  r.tec=t.n;r.tk=tk;r.est='Enviada';supSave();SU.msg=null;supPc();
  setTimeout(()=>{if(wn)SU.tchat.push({k:tk,t:`Soy ${t.n}, no ${wn.n} 😅. Igual voy yo.`});SU.tchat.push({k:tk,t:STREP[t.n](r.bar||'allá')});if(SU.tab==='chat')supPc();
   if(SU.c&&SU.c.saved===r.id&&!SU.c.sent){SU.c.sent=true;SU.c.tec=t.n;SU.c.t1=Date.now();setTimeout(()=>supCheck(r),1300)}},800)}
 /* lo que pasa cuando el técnico llega con los datos que cargaste */
-function supCheck(r){const c=SU.c,d=c.d,ok={nom:snorm(r.nom)===snorm(d.nom),ape:snorm(r.ape)===snorm(d.ape),tel:sdig(r.tel)===sdig(d.tel),bar:snorm(r.bar)===snorm(d.bar),cal:snorm(r.cal)===snorm(d.cal),alt:sdig(r.alt)===sdig(d.alt),casa:scasa(r.casa)===scasa(d.casa),mot:r.mot===d.mot};c.ok=ok;
- let fld=0;Object.values(ok).forEach(v=>{if(v)fld+=17});c.pts+=fld;const sec=(c.t1-c.t0)/1000,tb=Math.max(0,Math.min(30,Math.round(30-(sec-70-(supItemOn('Julián')?40:0))/4)));c.pts+=tb+25;c.tb=tb;
+function supCheck(r){const c=SU.c,d=c.d,ok={nom:snorm(r.nom)===snorm(d.nom),ape:snorm(r.ape)===snorm(d.ape),tel:sdig(r.tel)===sdig(d.tel),bar:snorm(r.bar)===snorm(d.bar),cal:snorm(r.cal)===snorm(d.cal),alt:sdig(r.alt)===sdig(d.alt),mz:sdig(r.mz)===sdig(d.mz),ub:sdig(r.ub||r.casa)===sdig(d.ub),mot:r.mot===d.mot};c.ok=ok;const adOk=ok.bar&&ok.cal&&ok.alt&&ok.mz&&ok.ub;
+ let fld=0;Object.values(ok).forEach(v=>{if(v)fld+=15});c.pts+=fld;const sec=(c.t1-c.t0)/1000,tb=Math.max(0,Math.min(30,Math.round(30-(sec-70-(supItemOn('Julián')?40:0))/4)));c.pts+=tb+25;c.tb=tb;
  const say=t=>{SU.tchat.push({k:r.tk??SU.tec,t});if(SU.tab==='chat')supPc()};let pen=0;
- if(!ok.cal||!ok.alt||!ok.bar||!ok.casa){if(ok.tel){say(`Llegué a ${r.cal} ${r.alt} y no era ahí 😕. Lo llamé al cliente y me pasó la dirección bien. Perdí 40 minutos.`);pen=40}else{say(`Estoy en ${r.cal} ${r.alt} y no es acá, y el teléfono que me pasaste no existe 😡. Orden cancelada.`);pen=80}r.est='Con problema'}
+ if(!adOk){if(ok.tel){say(`Llegué a ${r.bar}, ${saddr(r)||'sin dirección'} y no era ahí 😕. Lo llamé al cliente y me pasó la dirección bien. Perdí 40 minutos.`);pen=40}else{say(`Estoy en ${r.bar}, ${saddr(r)||'sin dirección'} y no es acá, y el teléfono que me pasaste no existe 😡. Orden cancelada.`);pen=80}r.est='Con problema'}
  else if(!ok.tel){say('Llegué bien, pero el teléfono no es del cliente: si no estaba, no tenía cómo avisarle. Anotalo bien la próxima.');pen=15}
  if(!ok.nom||!ok.ape)say(`Ojo: el cliente se llama ${d.nom} ${d.ape}, no ${r.nom} ${r.ape}. Corregí la planilla.`),pen+=10;
  if(!ok.mot)say(`Me pusiste "${r.mot||'nada'}" pero era ${d.mot.toLowerCase()}: traje las herramientas equivocadas.`),pen+=15;
- if(supItemOn('El Pana')&&(!ok.cal||!ok.alt||!ok.bar||!ok.casa)){const h=Math.round(pen/2);say(`📱 El Pana llamó al cliente y lo arregló: el descuento queda en −${h}.`);pen=h}
+ if(supItemOn('El Pana')&&!adOk){const h=Math.round(pen/2);say(`📱 El Pana llamó al cliente y lo arregló: el descuento queda en −${h}.`);pen=h}
  if(!pen)say('✅ Listo, instalado y funcionando. ¡Datos perfectos!');if(supItemOn('Jony')&&Object.values(ok).every(Boolean)){c.pts+=10;say('🗂️ Planilla impecable: +10.')}setTimeout(()=>jonySup(c,r),2200);c.pen=pen;c.pts-=pen;supSave();setTimeout(supSummary,900)}
 function supSummary(){const c=SU.c;if(!c||c.done||!c.sent||c.close==null||!c.ok)return;c.done=true;SU.pts+=c.pts;SU.log.push(c);supInfo();
- const L=[['nom','Nombre',c.d.nom],['ape','Apellido',c.d.ape],['tel','Teléfono',c.d.tel],['bar','Barrio',c.d.bar],['cal','Calle',c.d.cal],['alt','Altura',c.d.alt],['casa','Casa/Depto',c.d.casa],['mot','Motivo',c.d.mot]];
+ const L=[['nom','Nombre',c.d.nom],['ape','Apellido',c.d.ape],['tel','Teléfono',c.d.tel],['bar','Barrio',c.d.bar],['cal','Calle',c.d.cal||'—'],['alt','Altura',c.d.alt||'—'],['mz','Manzana/Torre',c.d.mz||'—'],['ub','Lote/Casa/UF',c.d.ub],['mot','Motivo',c.d.mot]];
  const row=SU.rows.find(r=>r.id===c.saved)||{};$('#schat').innerHTML=`<div class="ssum"><b>Resumen de la llamada ${SU.call}</b><table>${L.map(([k,n,v])=>`<tr><td>${c.ok[k]?'✅':'❌'}</td><td>${n}</td><td>${sesc(row[k]||'—')}${c.ok[k]?'':` <small>(era ${sesc(v)})</small>`}</td></tr>`).join('')}</table>
   <p>Saludo ${c.greet>0?'+'+c.greet:c.greet} · despedida ${c.close>0?'+'+c.close:c.close} · tiempo +${c.tb}${c.pen?` · problemas −${c.pen}`:''}<br><b>${c.pts} pts</b></p></div>`;
  supOpts([[SU.call>=SU.n?'🏁 Terminar el turno':'📞 Esperar la próxima llamada',()=>{SU.chat=[];supChat([]);$('#sphs').textContent='Esperando llamadas…';SU.state='idle';setTimeout(supNext,900)},'big']])}
@@ -2042,7 +2061,7 @@ function jonyEnd(){const L=[],avg=fusN?loss/fusN:0;if(err)L.push(`${err} error${
  if(typeof INV!=='undefined'&&INV.pen)L.push('te olvidaste herramientas en la camioneta');
  jony(L.length?`Repaso: ${L.join(', ')}. Mañana quiero todo perfecto.`:'Sin errores… Sospechoso. Mañana reviso todo de nuevo con lupa 🔍.',true)}
 /* en soporte: siempre encuentra algo */
-function jonySup(c,row){const d=c.d,bad=Object.keys(c.ok).filter(k=>!c.ok[k]),N={nom:'nombre',ape:'apellido',tel:'teléfono',bar:'barrio',cal:'calle',alt:'altura',casa:'casa/depto',mot:'motivo'};
+function jonySup(c,row){const d=c.d,bad=Object.keys(c.ok).filter(k=>!c.ok[k]),N={nom:'nombre',ape:'apellido',tel:'teléfono',bar:'barrio',cal:'calle',alt:'altura',mz:'manzana/torre',ub:'lote/casa/UF',mot:'motivo'};
  if(bad.length){const k=bad[0];jony(`${N[k][0].toUpperCase()+N[k].slice(1)} mal cargado: pusiste «${row[k]||'nada'}» y era «${d[k]}». Un dato. UN dato. Así no.`,true);return}
  const low=['nom','ape','bar','cal'].find(k=>row[k]&&row[k][0]!==row[k][0].toUpperCase());
  if(low){jony(`Escribiste «${row[low]}» con minúscula. Los nombres propios van con mayúscula. Detalles, ${SOPS[OP].n}, detalles.`,true);return}
@@ -2072,34 +2091,217 @@ const SPER=['apurado, contesta corto','muy amable y charlatán','una señora may
 async function supAI(c){if(!SAMP||!SAMPOK)return null;const d=c.d;c.per=srnd(SPER);
  const P=`Sos guionista de un juego argentino donde el jugador atiende el teléfono de soporte técnico de internet por fibra óptica. Escribí lo que dice UN cliente, en español rioplatense con voseo, frases naturales de teléfono, sin emojis.
 Personalidad: ${c.per}. Motivo del llamado: ${d.mot}.
-Datos EXACTOS del cliente (copialos tal cual, sin cambiar ni una letra ni un número): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", calle "${d.cal}", altura "${d.alt}", vivienda "${d.casa}".
+Datos EXACTOS del cliente (copialos tal cual, sin cambiar ni una letra ni un número): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", dirección "${saddr(d)}"${d.cal?'':' (es un barrio cerrado o un edificio: no tiene calle)'}.
 Devolvé SOLO un objeto JSON con estas claves, cada valor una sola intervención de máximo 28 palabras:
 "open": saluda y explica el motivo, sin dar ningún dato personal;
 "rude": reacción corta si el operador lo atiende de mala manera, y después explica el motivo;
 "nom": dice nombre y apellido (si el apellido se presta a confusión, como Giménez/Jiménez, Vázquez, Báez, Pereyra, Suárez o Benítez, aclara cómo se escribe);
 "tel": dicta el teléfono con los números escritos en cifras;
 "bar": dice el barrio;
-"cal": dice la calle y la altura en cifras;
-"casa": dice si es casa, departamento o lote y el número;
+"dir": dice la dirección exactamente como figura arriba, con los números en cifras;
 "rep": pide disculpas y repite el último dato más despacio (escribí solo la introducción, por ejemplo "Sí, claro, te repito:");
 "bye": se despide agradecido;
 "byeBad": se despide molesto porque lo despidieron seco.`;
  try{const j=await SAMP.json(P,{modelTier:'quick'});if(!j||typeof j!=='object')return null;
-  const has=(t,s)=>snorm(t).includes(snorm(s)),dig=(t,s)=>sdig(t).includes(sdig(s)),ok={open:t=>!dig(t,d.tel)&&!has(t,d.cal+' '+d.alt),nom:t=>has(t,d.nom)&&(has(t,d.ape)||has(t,d.ape.slice(1))),tel:t=>dig(t,d.tel),bar:t=>has(t,d.bar),cal:t=>has(t,d.cal)&&dig(t,d.alt),casa:t=>dig(t,d.casa)||has(t,d.casa.split(' ').pop()),rude:()=>1,rep:()=>1,bye:()=>1,byeBad:()=>1},out={};
+  const has=(t,s)=>snorm(t).includes(snorm(s)),dig=(t,s)=>sdig(t).includes(sdig(s)),ok={open:t=>!dig(t,d.tel)&&!snum(t,d.ub||d.alt),nom:t=>has(t,d.nom)&&(has(t,d.ape)||has(t,d.ape.slice(1))),tel:t=>dig(t,d.tel),bar:t=>has(t,d.bar),dir:t=>(!d.cal||has(t,d.cal))&&snum(t,d.alt)&&snum(t,d.mz)&&snum(t,d.ub),rude:()=>1,rep:()=>1,bye:()=>1,byeBad:()=>1},out={};
   for(const k in ok){const t=j[k];if(typeof t==='string'&&t.length<260&&ok[k](t))out[k]=t.trim()}return Object.keys(out).length?out:null}
  catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
 /* pregunta libre: el jugador escribe y el cliente contesta en personaje */
 async function supFree(q){const c=SU.c,d=c.d;if(!SAMP||!SAMPOK)return null;const hist=(SU.chat||[]).filter(m=>m.w!=='sys').slice(-10).map(m=>(m.w==='me'?'Operador: ':'Cliente: ')+m.t).join('\n');
  const P=`Juego argentino de soporte técnico de internet por fibra. Hacé de CLIENTE por teléfono, en español rioplatense con voseo, sin emojis, máximo 35 palabras.
-Personalidad: ${c.per||'normal'}. Motivo: ${d.mot}. Tus datos EXACTOS (si te los piden, decilos tal cual, con números en cifras): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", calle "${d.cal}", altura "${d.alt}", vivienda "${d.casa}". Si te preguntan algo que no tiene que ver, respondé con naturalidad y volvé al tema.
+Personalidad: ${c.per||'normal'}. Motivo: ${d.mot}. Tus datos EXACTOS (si te los piden, decilos tal cual, con números en cifras): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", dirección "${saddr(d)}". Si te preguntan algo que no tiene que ver, respondé con naturalidad y volvé al tema.
 Conversación hasta ahora:
 ${hist}
 Operador: ${q}
-Devolvé SOLO JSON: {"reply": lo que contesta el cliente, "reveals": lista con las claves de los datos que dijiste en esta respuesta, de entre "nom","tel","bar","cal","casa"}`;
- try{const j=await SAMP.json(P,{modelTier:'quick',cache:false});if(!j||typeof j.reply!=='string')return null;return {reply:j.reply.slice(0,320),reveals:Array.isArray(j.reveals)?j.reveals.filter(k=>['nom','tel','bar','cal','casa'].includes(k)):[]}}
+Devolvé SOLO JSON: {"reply": lo que contesta el cliente, "reveals": lista con las claves de los datos que dijiste en esta respuesta, de entre "nom","tel","bar","dir"}`;
+ try{const j=await SAMP.json(P,{modelTier:'quick',cache:false});if(!j||typeof j.reply!=='string')return null;return {reply:j.reply.slice(0,320),reveals:Array.isArray(j.reveals)?j.reveals.filter(k=>['nom','tel','bar','dir'].includes(k)):[]}}
  catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
 
 vozSel();
+/* ===== modo cableado: cortás los metros de drop, abrís la cámara subterránea de Barrio Santa Ana, pasás el pasacables
+   por el caño correcto hasta el pilar del lote, tirás el drop y lo llevás por los corrugados de las tapas ciegas de la casa ===== */
+let CB={},CBG=null;
+const CBX=-4.6,CBZ=1.5,PIX=2.2,PIZ=1.5,HSX=7.6,HSZ=-1.2;
+function cblJob(){const n=2*rint(1,184),lot=Math.random()<.5?n:n+1,segs=[];const k=rint(1,3);for(let i=0;i<k;i++)segs.push({m:rint(3,8),guia:Math.random()<.5,c:rint(2,3)});
+ CB={pair:[n,n+1],lot,side:lot===n?0:1,dropN:srnd([1,2,4]),dCam:rint(12,28),dPil:rint(4,9),segs,duct:srnd(['corrugado','caño de riego']),cut:0,pen:0,waste:0,short:false,wrongPipe:0,kinks:0,slips:0,res:0,tapasOpen:0,approx:false};
+ CB.need=CB.dCam+CB.dPil+segs.reduce((a,s)=>a+s.m,0);return CB}
+const cblLen=()=>CB.need+4;
+/* ---------- maqueta 3D sobre la mesa ---------- */
+function cblBuild(){if(CBG)scene.remove(CBG);CBG=G();scene.add(CBG);PARENT=CBG;const con=M(0x9aa0a6,{roughness:.95,map:TX.noise}),dk=M(0x15181b,{roughness:1}),wh=M(0xf1efe9,{roughness:.6}),brick=M(0xb5532f,{roughness:.9,map:TX.noise});
+ /* cámara subterránea: marco de hormigón, hueco oscuro y tapa */
+ {const s=rrect(2.6,2.6,.12);s.holes.push(rrect(2.0,2.0,.08));mesh(ext(s,.5),con,CBX,0,CBZ)}mesh(box(2.0,.02,2.0),dk,CBX,.05,CBZ);
+ const lid=G();lid.position.set(CBX-1.0,.5,CBZ);CBG.add(lid);mesh(box(2.0,.1,2.0),M(0x7c8288,{roughness:.8,map:TX.noise}),1.0,.05,0,lid);mesh(box(1.6,.012,.16),M(0x5f656b),1.0,.105,-.5,lid);mesh(box(1.6,.012,.16),M(0x5f656b),1.0,.105,.5,lid);
+ mesh(box(.5,.02,.16),M(0xffffff,{map:label('CÁMARA FO','#7c8288','#1d2024',256,64,30)}),1.0,.112,0,lid);CB.lid=lid;
+ /* roseta con empalmes adentro y las dos bocas de caño hacia el pilar */
+ mesh(box(.7,.22,.5),wh,CBX-.4,.16,CBZ-.3);mesh(box(.5,.02,.32),M(0x2fa84f),CBX-.4,.28,CBZ-.3);
+ [-.45,.45].forEach((dz,i)=>{mesh(cyl(.13,.13,.12,18),dk,CBX+.95,.22,CBZ+dz).rotation.z=Math.PI/2});
+ /* caños enterrados hasta el pilar (se ven a través de la tierra) */
+ const tubeM=c=>new THREE.MeshStandardMaterial({color:c,transparent:true,opacity:.55,roughness:.6});CB.pipes=[-.45,.45].map(dz=>{const m=mesh(cyl(.09,.09,PIX-CBX-1.6,14),tubeM(CB.duct==='corrugado'?0xf08a24:0x1d2024),(CBX+1.0+PIX-.6)/2,.12,CBZ+dz);m.rotation.z=Math.PI/2;return m});
+ /* pilar de dos lotes con medidores y número */
+ mesh(box(1.6,2.4,1.0),brick,PIX,1.2,PIZ);mesh(box(1.7,.12,1.1),con,PIX,2.46,PIZ);
+ [-.4,.4].forEach((dx,i)=>{mesh(box(.6,.7,.06),wh,PIX+dx,1.5,PIZ+.53);mesh(box(.5,.08,.02),M(0xffffff,{map:label('LOTE '+CB.pair[i],'#f1efe9','#1d2024',256,48,26)}),PIX+dx,1.95,PIZ+.565)});
+ /* casa: pared con tapas ciegas */
+ mesh(box(6.5,3.2,.4),M(0xe9e3d6,{roughness:.95,map:TX.noise}),HSX,1.6,HSZ);mesh(box(6.7,.25,.5),M(0x8b6a4a,{map:TX.wood}),HSX,.12,HSZ+.02);
+ CB.tp=[];const nt=CB.segs.length+1;for(let i=0;i<nt;i++){const x=HSX-2.4+i*(4.8/Math.max(1,nt-1||1)),t=mesh(box(.5,.5,.05),M(0xc9ced4,{roughness:.5}),x,1.1+((i%2)*.6),HSZ+.22);mesh(box(.36,.36,.02),wh,x,1.1+((i%2)*.6),HSZ+.25);CB.tp.push(t)}
+ /* tramos de drop (aparecen a medida que avanzás) */
+ const dm=DJM(),seg=(a,b)=>{const d=b.clone().sub(a),m=mesh(box(.12,.07,d.length()),dm,(a.x+b.x)/2,(a.y+b.y)/2,(a.z+b.z)/2);m.lookAt(b);m.visible=false;return m};
+ const pz=CBZ+(CB.side?.45:-.45);CB.dseg=[seg(V(CBX+.95,.2,pz),V(PIX-.8,.2,pz)),seg(V(PIX+.8,.3,PIZ),V(HSX-2.4,1.1,HSZ+.3))];
+ for(let i=1;i<nt;i++){const a=CB.tp[i-1].position,b=CB.tp[i].position;CB.dseg.push(seg(V(a.x,a.y,HSZ+.28),V(b.x,b.y,HSZ+.28)))}
+ /* rollo de drop */
+ {const pa=mPasa();pa.position.set(CBX+2.6,.02,CBZ+2.2);pa.rotation.y=-.6;CBG.add(pa);CB.pasa3=pa}
+ const reel=G();reel.position.set(CBX+1.2,.02,CBZ+3.2);CBG.add(reel);mesh(cyl(.9,.9,.08,30),M(0xc9a35a,{roughness:.8}),0,.04,0,reel);mesh(cyl(.75,.75,.5,30),dm,0,.33,0,reel);mesh(cyl(.9,.9,.08,30),M(0xc9a35a,{roughness:.8}),0,.62,0,reel);CB.reel=reel;
+ PARENT=null}
+/* ---------- piezas de interfaz ---------- */
+const cblSvg=(h,body)=>`<svg class="cbs" viewBox="0 0 300 ${h}"><rect width="300" height="${h}" rx="10" fill="url(#gbg)"/>${body}</svg>`;
+const cblDrop=n=>({1:'1 pelo',2:'2 pelos',4:'4 pelos'}[n]);
+/* elegir el rollo */
+function cblReelUI(el,done){el.innerHTML=`<div class="ot"><b>📋 Orden de trabajo · Barrio Santa Ana</b><p>Lote <b>${CB.lot}</b> (pilar compartido ${CB.pair[0]}–${CB.pair[1]}). Llevar un <b>drop de ${cblDrop(CB.dropN)}</b> desde la roseta de la cámara subterránea hasta la tapa ciega donde va la roseta del cliente.</p></div>
+ <p class="cbh">Elegí el rollo de drop que pide la orden.</p><div class="cbreels">${[1,2,4].map(n=>`<button data-n="${n}"><svg viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="26" fill="#c9a35a"/><circle cx="30" cy="30" r="20" fill="#1d2024"/><circle cx="30" cy="30" r="7" fill="#c9a35a"/>${[...Array(n)].map((_,i)=>`<circle cx="${24+i*4}" cy="47" r="1.8" fill="${['#1f6feb','#f08a24','#22a447','#8b5a2b'][i]}"/>`).join('')}</svg><b>Drop de ${cblDrop(n)}</b></button>`).join('')}</div><p class="kres bad"></p>`;
+ el.querySelectorAll('.cbreels button').forEach(b=>b.onclick=()=>{if(+b.dataset.n!==CB.dropN){err++;el.querySelector('.kres').textContent=`Ese es de ${cblDrop(+b.dataset.n)}: la orden pide ${cblDrop(CB.dropN)}.`;fxBad();return}done()})}
+/* medir y cortar los metros */
+function cblCutUI(el,done){const ap=CB.approx,r=v=>ap?`≈ ${v+rint(-2,2)}`:v,segTxt=CB.segs.map((s,i)=>`tapa ${i+1} → ${i+2<=CB.segs.length?'tapa '+(i+2):'roseta'}: ${r(s.m)} m`).join(' · ');let m=Math.max(5,Math.round(cblLen()*.6/5)*5);
+ const draw=()=>{el.innerHTML=cblSvg(130,`<rect x="14" y="70" width="40" height="34" rx="4" fill="#7c8288"/><text x="34" y="122" font-size="9" text-anchor="middle" fill="currentColor">Cámara</text>
+   <path d="M54 86 H150" stroke="#f08a24" stroke-width="5" stroke-dasharray="${CB.duct==='corrugado'?'3 2':'0'}"/><text x="102" y="78" font-size="10" text-anchor="middle" fill="currentColor">${r(CB.dCam)} m</text>
+   <rect x="150" y="50" width="26" height="54" fill="#b5532f"/><text x="163" y="122" font-size="9" text-anchor="middle" fill="currentColor">Pilar</text>
+   <path d="M176 70 H222" stroke="#1d2024" stroke-width="3"/><text x="199" y="62" font-size="10" text-anchor="middle" fill="currentColor">${r(CB.dPil)} m</text>
+   <rect x="222" y="22" width="66" height="82" fill="#e9e3d6" stroke="#b9b1a2"/>${CB.segs.map((s,i)=>`<rect x="${230+i*18}" y="${40+(i%2)*18}" width="10" height="10" fill="#fff" stroke="#8a857c"/>`).join('')}<text x="255" y="122" font-size="9" text-anchor="middle" fill="currentColor">Casa</text>`)
+   +`<p class="cbh">${ap?'Sin cinta métrica medís a pasos: las distancias son aproximadas.':'Medido con la cinta métrica.'} Adentro de la casa: ${segTxt}. Acordate de sumar la <b>reserva</b>: 3 m en la cámara y 1 m para la roseta.</p>
+   <div class="cbcnt"><button data-d="-5">−5</button><button data-d="-1">−1</button><b>${m} m</b><button data-d="1">+1</button><button data-d="5">+5</button></div><button class="big cbcut">✂️ Cortar ${m} m de drop</button>`;
+  el.querySelectorAll('.cbcnt button').forEach(b=>b.onclick=()=>{m=Math.max(1,Math.min(120,m+ +b.dataset.d));draw()});el.querySelector('.cbcut').onclick=()=>{CB.cut=m;snip();msg(`Cortaste ${m} m de drop de ${cblDrop(CB.dropN)}.`);done()}};draw()}
+/* abrir la cámara y elegir el caño */
+function cblCamUI(el,done){let open=CB.lidOpen?2:0;const draw=()=>{el.innerHTML=cblSvg(170,open<2?`<rect x="60" y="20" width="180" height="130" rx="6" fill="#7c8288"/><rect x="76" y="36" width="148" height="98" fill="#8b9197"/><text x="150" y="90" font-size="14" text-anchor="middle" fill="#1d2024" font-weight="700">CÁMARA FO</text>${[0,1].map(i=>`<g class="cbh${i}" style="cursor:pointer"><rect x="${i?196:84}" y="44" width="22" height="12" rx="3" fill="${open>i?'#22c55e':'#3b4148'}"/></g>`).join('')}`
+   :`<rect x="20" y="16" width="260" height="140" rx="8" fill="#2a2f35"/><rect x="34" y="96" width="84" height="40" rx="4" fill="#f1efe9"/><rect x="42" y="104" width="68" height="10" fill="#2fa84f"/><text x="76" y="129" font-size="7.5" text-anchor="middle" fill="#1d2024">ROSETA · EMPALMES</text>
+   <path d="M118 116 C150 116 150 60 172 52" stroke="#1d2024" stroke-width="3" fill="none"/>${[0,1].map(i=>`<g class="cbp" data-i="${i}" style="cursor:pointer"><circle cx="${i?248:180}" cy="52" r="20" fill="#0b0d10" stroke="${CB.duct==='corrugado'?'#f08a24':'#52585e'}" stroke-width="5"/><text x="${i?248:180}" y="86" font-size="10" text-anchor="middle" fill="#e6eaee">${i?'Derecho':'Izquierdo'}</text></g>`).join('')}
+   <text x="150" y="150" font-size="9" text-anchor="middle" fill="#cfd6dc">Caños hacia el pilar ${CB.pair[0]}–${CB.pair[1]} (${CB.duct})</text>`)
+   +`<p class="cbh">${open<2?'Tocá las dos manijas para levantar la tapa de la cámara.':`El cliente es del <b>lote ${CB.lot}</b>. Mirando hacia el pilar, el caño de la izquierda va al lote ${CB.pair[0]} y el de la derecha al ${CB.pair[1]}. Tocá el caño por el que vas a pasar el pasacables.`}</p>`;
+  if(open<2)[0,1].forEach(i=>{const g=el.querySelector('.cbh'+i);if(g)g.onclick=()=>{if(open===i){open++;if(open===2){CB.lidOpen=true;rotAnim(CB.lid,'z',-1.9,600);msg('Tapa de la cámara levantada: adentro está la roseta con los empalmes.')}draw()}}});
+  else el.querySelectorAll('.cbp').forEach(g=>g.onclick=()=>{CB.pipe=+g.dataset.i;done()})};draw()}
+/* pasacables con alma de acero: rollo verde, cinta naranja y punta de resorte con ojal.
+   1) desenrollás cinta girando el rollo, 2) embocás la punta en la boca del caño, 3) empujás a mano por el ducto
+   (solo avanza la cinta que desenrollaste), 4) en las curvas girás la cinta con el mango para que la punta pase */
+const PASA_PATHS={corr:'M50 96 C78 96 82 66 108 66 S138 98 164 98 S196 58 222 58 S246 96 262 96',rieg:'M50 96 C112 96 118 74 158 74 S226 96 262 96',casa:'M50 96 C92 96 100 52 150 52 S232 52 262 52'};
+function cblPushUI(el,o){const L=o.len,kind=o.kind||(o.curves.length>=3?'corr':o.curves.length===1&&o.from!=='Cámara'?'casa':'rieg'),D=PASA_PATHS[kind];
+ const curves=o.curves.map(c=>({c,need:o.twist,tw:0,ok:false}));let st='unspool',pos=0,slack=0,bend=0,ang=0,twA=0,fin=false,aimed=false,tip={x:30,y:132},act=null,a0=null,lx=0,lt=0;
+ const RX=64,RY=208,SLMAX=6;
+ el.innerHTML=`<svg class="cbs pasa" viewBox="0 0 300 276"><rect width="300" height="276" rx="10" fill="url(#gbg)"/>
+  <rect x="6" y="20" width="288" height="128" rx="8" fill="#8a6a4a" opacity=".55"/><path d="M6 30 H294" stroke="#4f7a3a" stroke-width="8" opacity=".7"/>
+  <rect x="10" y="40" width="40" height="100" rx="4" fill="#7c8288"/><rect x="16" y="46" width="28" height="88" fill="#3b4148"/><text x="30" y="156" font-size="9" text-anchor="middle" fill="currentColor">${o.from}</text>
+  <rect x="262" y="26" width="30" height="114" fill="${o.to==='Pilar'?'#b5532f':'#e9e3d6'}" stroke="#7a3a22" stroke-width="${o.to==='Pilar'?0:1}"/><text x="277" y="156" font-size="9" text-anchor="middle" fill="currentColor">${o.to}</text>
+  <path class="pp" d="${D}" fill="none" stroke="${o.col||'#f08a24'}" stroke-width="13" stroke-linecap="round" opacity=".45" ${kind==='corr'?'stroke-dasharray="3 2"':''}/>
+  <path class="pt" d="${D}" fill="none" stroke="#f0915a" stroke-width="3.2" stroke-dasharray="0 2000"/>
+  <g class="cvs"></g><circle class="mouth" cx="50" cy="96" r="7" fill="#0b0d10" stroke="#f2b900" stroke-width="2"/>
+  <g class="tipg"><path d="M0 0 l-14 0" stroke="#f0915a" stroke-width="3"/><path class="spr" d="M0 0 q2 -3 4 0 t4 0 t4 0" stroke="#c9d1d8" stroke-width="2" fill="none"/><rect x="12" y="-2.6" width="6" height="5.2" rx="1.5" fill="#d7dde2" stroke="#7d868f"/></g>
+  <text class="tt" x="150" y="16" font-size="11" text-anchor="middle" fill="currentColor" font-weight="700"></text>
+  <g class="reel" transform="translate(${RX} ${RY})"><g class="rr"><circle r="40" fill="none" stroke="#1f8a5a" stroke-width="13"/><circle r="46.5" fill="none" stroke="#17704a" stroke-width="1"/><circle r="33" fill="none" stroke="#17704a" stroke-width="1"/>
+   ${[...Array(6)].map((_,i)=>{const a=i*Math.PI/3;return `<circle cx="${(31*Math.cos(a)).toFixed(1)}" cy="${(31*Math.sin(a)).toFixed(1)}" r="3.2" fill="#1f8a5a" stroke="#17704a"/>`}).join('')}
+   <path d="M-8 -40 h16" stroke="#e8f5ee" stroke-width="2" opacity=".5"/><circle r="26" fill="none" stroke="#f0915a" stroke-width="4" stroke-dasharray="10 4"/></g>
+   <text y="62" font-size="9.5" text-anchor="middle" fill="currentColor" font-weight="700">↻ Girá el rollo</text></g>
+  <path class="loose" fill="none" stroke="#f0915a" stroke-width="3"/>
+  <rect class="pz" x="130" y="168" width="160" height="80" rx="10" fill="rgba(127,127,127,.1)" stroke="rgba(127,127,127,.4)" stroke-dasharray="5 4"/><text class="pzt" x="210" y="244" font-size="9" text-anchor="middle" fill="currentColor">Empujá la cinta → hacia el caño</text>
+  <g class="tw" style="display:none"><circle cx="210" cy="206" r="26" fill="rgba(242,185,0,.18)" stroke="#f2b900" stroke-width="2" stroke-dasharray="6 4"/><rect class="twh" x="203" y="180" width="14" height="22" rx="5" fill="#f2b900" stroke="#7a5b00"/><text x="210" y="211" font-size="16" text-anchor="middle" fill="#7a5b00">↻</text></g>
+  <rect x="130" y="152" width="160" height="7" rx="3.5" fill="rgba(127,127,127,.25)"/><rect class="bb" x="130" y="152" width="0" height="7" rx="3.5" fill="#f2b900"/>
+ </svg><p class="cbh"></p>`;
+ const sv=el.querySelector('svg'),q=c=>sv.querySelector(c),h=el.querySelector('.cbh'),pp=q('.pp');sv.style.touchAction='none';
+ const T=pp.getTotalLength?pp.getTotalLength():260,PT=f=>{try{return pp.getPointAtLength(T*Math.max(0,Math.min(1,f)))}catch(e){return {x:50+212*f,y:96}}};
+ q('.cvs').innerHTML=curves.map((k,i)=>{const p=PT(k.c/L);return `<circle class="cv${i}" cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="8" fill="none" stroke="#c53030" stroke-width="2" stroke-dasharray="3 3"/>`}).join('');
+ const stuck=()=>curves.find(k=>!k.ok&&pos>=k.c-.12);
+ const upd=()=>{const s=stuck();q('.rr').setAttribute('transform',`rotate(${(ang*57.3).toFixed(1)})`);
+  q('.pt').setAttribute('stroke-dasharray',`${(T*pos/L).toFixed(1)} 2000`);
+  const P=aimed?PT(pos/L):tip,P2=aimed?PT(Math.max(0,pos/L-.01)):{x:tip.x-10,y:tip.y},a=Math.atan2(P.y-P2.y,P.x-P2.x);q('.tipg').setAttribute('transform',`translate(${P.x.toFixed(1)} ${P.y.toFixed(1)}) rotate(${(a*57.3).toFixed(0)})`);
+  /* cinta suelta entre el rollo y la boca (más larga cuanto más desenrollaste) */
+  const sag=12+slack*9,mx=aimed?50:tip.x,my=aimed?96:tip.y;q('.loose').setAttribute('d',`M${RX+30} ${RY-12} C${RX+60} ${RY+sag} ${mx-10} ${my+sag} ${mx-(aimed?0:14)} ${my}`);
+  curves.forEach((k,i)=>{const c=q('.cv'+i);if(c)c.setAttribute('stroke',k.ok?'#22c55e':'#c53030')});
+  q('.bb').setAttribute('width',160*Math.min(1,bend));q('.bb').setAttribute('fill',bend>.7?'#c53030':'#f2b900');q('.tw').style.display=s&&aimed?'':'none';q('.twh').setAttribute('transform',`rotate(${(twA*57.3).toFixed(0)} 210 206)`);
+  q('.mouth').setAttribute('stroke',aimed?'#22c55e':'#f2b900');
+  q('.tt').textContent=`${pos.toFixed(1)} / ${L} m · cinta suelta ${slack.toFixed(1)} m${s?' · ⚠️ trabado':''}`;
+  h.innerHTML=fin?'¡La punta salió del otro lado!':st==='unspool'&&slack<1.5?'<b>1.</b> Girá el rollo verde con el dedo para <b>desenrollar</b> un poco de cinta.':!aimed?'<b>2.</b> Arrastrá la <b>punta de resorte</b> hasta la boca del caño (el círculo amarillo) y soltala ahí.':s?`<b>Trabado en una curva.</b> No empujes: girá el <b>mango amarillo</b> en círculos para rotar la cinta (${s.tw}/${s.need}) y que la punta pase.`:slack<.2?'Se te acabó la cinta suelta: <b>girá el rollo</b> para desenrollar más.':'<b>3.</b> Arrastrá en el recuadro hacia la derecha para <b>empujar</b> la cinta por el ducto. Cuando se acaba la cinta suelta, desenrollás más.'};
+ const relax=setInterval(()=>{if(!el.isConnected){clearInterval(relax);return}if(act!=='push'&&bend>0){bend=Math.max(0,bend-.07);upd()}},120);
+ const pt=e=>svgPt(sv,e),dist=(p,x,y)=>Math.hypot(p.x-x,p.y-y);
+ sv.onpointerdown=e=>{if(fin)return;const p=pt(e);try{sv.setPointerCapture(e.pointerId)}catch(_){}lx=p.x;lt=performance.now();
+  if(stuck()&&aimed&&dist(p,210,206)<40){act='twist';a0=Math.atan2(p.y-206,p.x-210);return}
+  if(dist(p,RX,RY)<58){act='reel';a0=Math.atan2(p.y-RY,p.x-RX);return}
+  if(!aimed&&dist(p,tip.x,tip.y)<26){act='aim';return}
+  if(aimed&&p.x>=120&&p.y>=150){act='push';return}act=null};
+ sv.onpointerup=sv.onpointercancel=sv.onlostpointercapture=()=>{if(act==='aim'&&!aimed){if(dist(tip,50,96)<11){aimed=true;st='push';msg('¡Punta embocada en el caño!');fxOK()}else{tip={x:30,y:132};msg('La punta no entró: apuntá justo a la boca del caño.')}}act=null;upd()};
+ sv.onpointermove=e=>{if(!act||fin)return;const p=pt(e),n=performance.now(),dt=Math.max(8,n-lt);lt=n;
+  if(act==='reel'){const a=Math.atan2(p.y-RY,p.x-RX);let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;if(slack>=SLMAX){if(Math.abs(d)>.05)msg('Ya tenés bastante cinta suelta: si desenrollás de más se enreda.');return}ang+=d;slack=Math.min(SLMAX,slack+Math.abs(d)*.32);upd();return}
+  if(act==='aim'){if(slack<.6){msg('Primero desenrollá un poco de cinta del rollo.');act=null;return}tip={x:Math.max(12,Math.min(120,p.x)),y:Math.max(60,Math.min(160,p.y))};upd();return}
+  if(act==='twist'){const s=stuck();if(!s){act=null;return}const a=Math.atan2(p.y-206,p.x-210);let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;twA+=d;bend=Math.max(0,bend-Math.abs(d)*.05);
+   const k=Math.floor(Math.abs(twA)/Math.PI);if(k>s.tw){s.tw=k;if(s.tw>=s.need){s.ok=true;twA=0;pos=Math.min(L,s.c+.25);msg('¡La punta pasó la curva! Seguí empujando.');fxOK()}else msg('Rotando la cinta… un poco más.')}upd();return}
+  if(act==='push'){const dx=p.x-lx;lx=p.x;if(dx<=0)return;const s=stuck();
+   if(s){bend+=dx*.0045+Math.max(0,dx/dt-.4)*.05;if(bend>1){err++;CB.kinks++;bend=0;const back=Math.min(pos,1.5);pos-=back;slack+=back;s.tw=0;twA=0;act=null;msg('¡Doblaste la cinta del pasacables! La retirás un poco, la enderezás y volvés a intentar. En las curvas, girá con el mango.');fxBad()}upd();return}
+   if(slack<=0){upd();return}const adv=Math.min(slack,.3,dx/160*L*.12);pos=Math.min(L,pos+adv);slack=Math.max(0,slack-adv);bend=Math.max(0,bend-dx*.002);const s2=stuck();if(s2&&pos>s2.c)pos=s2.c;
+   if(pos>=L){fin=true;clearInterval(relax);upd();const P=PT(1);q('.cvs').insertAdjacentHTML('beforeend',`<circle cx="${P.x}" cy="${P.y}" r="12" fill="none" stroke="#22c55e" stroke-width="3"><animate attributeName="r" from="6" to="20" dur=".6s" repeatCount="2"/></circle>`);setTimeout(o.done,700);return}upd()}};
+ upd();CB.push=()=>{curves.forEach(k=>k.ok=true);aimed=true;pos=L;fin=true;clearInterval(relax);o.done()}}
+/* modelo 3D del pasacables para la maqueta: rollo verde, cinta naranja y punta de resorte */
+function mPasa(){const g=G(),gr=M(0x1f8a5a,{roughness:.55}),or=M(0xf0915a,{roughness:.5}),st=M(0xc9d1d8,{metalness:.85,roughness:.3});
+ const ring=mesh(new THREE.TorusGeometry(.55,.13,12,36),gr,0,.13,0,g);ring.rotation.x=Math.PI/2;ring.scale.z=.7;
+ for(let i=0;i<6;i++){const a=i*Math.PI/3;mesh(cyl(.04,.04,.06,8),gr,Math.cos(a)*.4,.2,Math.sin(a)*.4,g)}
+ const coil=mesh(new THREE.TorusGeometry(.47,.025,6,40),or,0,.2,0,g);coil.rotation.x=Math.PI/2;
+ const tape=new THREE.CatmullRomCurve3([V(.5,.14,.1),V(.8,.06,.25),V(1.15,.04,.2),V(1.45,.05,.05)]);mesh(new THREE.TubeGeometry(tape,20,.022,6,false),or,0,0,0,g);
+ const hel=[];for(let i=0;i<=40;i++){const t=i/40;hel.push(V(1.45+t*.3,.05+Math.sin(t*Math.PI*10)*.018,.05+Math.cos(t*Math.PI*10)*.018))}mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(hel),60,.008,5,false),st,0,0,0,g);
+ const fe=mesh(cyl(.028,.028,.08,10),st,1.79,.05,.05,g);fe.rotation.z=Math.PI/2;return g}
+
+/* atar el drop: gaza y vueltas de cinta */
+function cblTieUI(el,o){let acc=0,a0=null;const need=Math.PI*2*(o.turns||4);
+ const draw=()=>{const q=Math.min(1,acc/need),t=Math.floor(acc/(Math.PI*2));el.innerHTML=cblSvg(160,`<path d="M20 80 H150" stroke="#1d2024" stroke-width="8" stroke-linecap="round"/><path d="M150 80 q26 -26 52 0 q-26 26 -52 0" stroke="#1d2024" stroke-width="6" fill="none"/>
+   <path d="M280 80 H${o.guia?198:214}" stroke="${o.guia?'#e6e1d6':'#f0915a'}" stroke-width="${o.guia?3:4}"/>${o.guia?'':'<path d="M214 80 q-2 -4 -4 0 t-4 0 t-4 0" stroke="#c9d1d8" stroke-width="2" fill="none"/><rect x="198" y="76.5" width="6" height="7" rx="1.5" fill="#d7dde2" stroke="#7d868f"/>'}<circle cx="198" cy="80" r="6" fill="none" stroke="${o.guia?'#e6e1d6':'#7d868f'}" stroke-width="3"/>
+   ${[...Array(Math.min(8,t))].map((_,i)=>`<rect x="${150+i*7}" y="70" width="6" height="20" rx="2" fill="#22272d" stroke="#5b636b"/>`).join('')}
+   <circle cx="175" cy="80" r="44" fill="none" stroke="rgba(127,127,127,.35)" stroke-dasharray="4 5"/><text x="150" y="146" font-size="11" text-anchor="middle" fill="currentColor">Vueltas de cinta: ${t} de ${o.turns||4}</text>`)
+   +`<p class="cbh">Hacé círculos con el dedo alrededor de la gaza para envolverla con cinta aisladora y que no se suelte adentro del caño.</p>`;
+  const sv=el.querySelector('svg');sv.style.touchAction='none';const ang=e=>{const p=svgPt(sv,e);return Math.atan2(p.y-80,p.x-175)};
+  sv.onpointerdown=e=>{a0=ang(e);try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointerup=sv.onpointercancel=()=>{a0=null};
+  sv.onpointermove=e=>{if(a0==null)return;const a=ang(e);let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;const before=Math.floor(acc/(Math.PI*2));acc+=Math.abs(d);if(Math.floor(acc/(Math.PI*2))!==before)draw();if(acc>=need){a0=null;setTimeout(o.done,300)}}};
+ draw();CB.tie=()=>{acc=need;o.done()}}
+/* tirar desde la otra punta, parejo, sin tirones (dibujo fijo que se actualiza) */
+function cblPullUI(el,o){const L=o.len;let pos=0,ten=0,drag=null,fin=false,lt=0;
+ el.innerHTML=cblSvg(150,`<path d="M20 70 H280" stroke="${o.col||'#f08a24'}" stroke-width="16" stroke-linecap="round" opacity=".35"/><path class="dr" d="M280 70 H280" stroke="#1d2024" stroke-width="6"/><path class="gu" d="M20 70 H280" stroke="${o.guia?'#e6e1d6':'#f0915a'}" stroke-width="3"/>
+   <text class="tt" x="150" y="40" font-size="12" text-anchor="middle" fill="currentColor" font-weight="700"></text><text x="20" y="100" font-size="10" fill="currentColor">${o.to}</text><text x="280" y="100" font-size="10" text-anchor="end" fill="currentColor">${o.from}</text>
+   <rect x="20" y="118" width="260" height="8" rx="4" fill="rgba(127,127,127,.25)"/><rect class="tb" x="20" y="118" width="0" height="8" rx="4" fill="#22c55e"/><text x="150" y="140" font-size="9" text-anchor="middle" fill="currentColor">Tensión en la atadura</text>`)
+  +`<p class="cbh">Arrastrá hacia la izquierda, despacio y parejo, para tirar ${o.guia?'de la guía':'del pasacables'}. Si das tirones (la barra se pone roja), la atadura se suelta.</p>`;
+ const sv=el.querySelector('svg'),q=c=>sv.querySelector(c);sv.style.touchAction='none';
+ const upd=()=>{const x=280-260*pos/L;q('.dr').setAttribute('d',`M${x} 70 H280`);q('.gu').setAttribute('d',`M20 70 H${x}`);q('.tt').textContent=`${pos.toFixed(1)} / ${L} m`;q('.tb').setAttribute('width',260*Math.min(1,ten));q('.tb').setAttribute('fill',ten>.75?'#c53030':ten>.5?'#f2b900':'#22c55e')};
+ const relax=setInterval(()=>{if(!el.isConnected){clearInterval(relax);return}if(ten>0){ten=Math.max(0,ten-(drag==null?.1:.03));upd()}},120);
+ sv.onpointerdown=e=>{drag=svgPt(sv,e).x;lt=performance.now();try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointerup=sv.onpointercancel=sv.onlostpointercapture=()=>{drag=null};
+ sv.onpointermove=e=>{if(drag==null||fin)return;const x=svgPt(sv,e).x,dx=drag-x,n=performance.now(),dt=Math.max(8,n-lt);drag=x;lt=n;if(dx<=0)return;const sp=dx/dt;
+  ten=Math.min(1.2,ten+Math.max(0,sp-.35)*.12+dx*.0015);if(ten>1){err++;CB.slips++;ten=0;drag=null;fin=true;clearInterval(relax);msg('¡Diste un tirón y la atadura se soltó adentro del caño! Hay que volver a atar.');fxBad();setTimeout(o.slip,600);return}
+  pos=Math.min(L,pos+Math.min(.35,dx/260*L*.22));if(pos>=L){fin=true;upd();clearInterval(relax);setTimeout(o.done,400);return}upd()};
+ upd();CB.pull=()=>{pos=L;fin=true;clearInterval(relax);o.done()}}
+/* tapas ciegas: abrirlas hasta encontrar el corrugado que sigue */
+function cblTapaUI(el,o){const n=o.n,ok=o.ok;let opened={};const draw=()=>{el.innerHTML=cblSvg(150,`<rect x="10" y="10" width="280" height="130" rx="6" fill="#e9e3d6" stroke="#b9b1a2"/>${[...Array(n)].map((_,i)=>{const x=40+i*(220/Math.max(1,n-1)),y=60+(i%2)*26,op=opened[i];
+   return `<g class="cbt" data-i="${i}" style="cursor:pointer"><rect x="${x-20}" y="${y-20}" width="40" height="40" rx="3" fill="${op?'#cfc7b6':'#fff'}" stroke="#8a857c"/>${op?(i===ok?`<circle cx="${x}" cy="${y}" r="9" fill="#f08a24" stroke="#a85a10" stroke-width="2"/>${o.guia?`<path d="M${x} ${y} q8 10 0 18" stroke="#fff" stroke-width="2" fill="none"/>`:''}`:'<text x="'+x+'" y="'+(y+4)+'" font-size="9" text-anchor="middle" fill="#6b6559">vacía</text>'):`<circle cx="${x-12}" cy="${y-12}" r="2.5" fill="#8a857c"/><circle cx="${x+12}" cy="${y+12}" r="2.5" fill="#8a857c"/>`}</g>`}).join('')}`)
+   +`<p class="cbh">${o.txt} Tocá una tapa ciega para destornillarla y ver si adentro está el corrugado.</p>`;
+  el.querySelectorAll('.cbt').forEach(g=>g.onclick=()=>{const i=+g.dataset.i;if(opened[i])return;opened[i]=1;CB.tapasOpen++;draw();if(i===ok){msg(o.guia?'¡Ahí está el corrugado, y tiene guía! Más fácil.':'Ahí está el corrugado, pero no tiene guía: va con el pasacables.');setTimeout(o.done,700)}else msg('Esa tapa está vacía.')})};draw();CB.tapa=()=>o.done()}
+/* ---------- pasos del modo ---------- */
+const SC=[
+()=>{ttl('Elegí el rollo de drop');camTo(CBX+1.2,CBZ+3,.45,.4,1.0);openPan('Rollo de drop',()=>{$('#pt').textContent='Rollo de drop';cblReelUI($('#pb'),()=>{endPan();msg(`Rollo de drop de ${cblDrop(CB.dropN)} listo.`);nx()})})},
+()=>kitNeed('metro','Para saber cuántos metros cortar tenés que medir el recorrido.',()=>{if(INV.via&&INV.via.metro==='pasos')CB.approx=true;ttl('Medí el recorrido y cortá el drop');camTo(0,0,1.1,.5,.9);openPan('Metros de drop',()=>{$('#pt').textContent='Medir y cortar';cblCutUI($('#pb'),()=>{endPan();nx()})})}),
+()=>{ttl('Abrí la cámara subterránea y elegí el caño');camTo(CBX,CBZ,.5,.5,1.1);openPan('Cámara subterránea',()=>{$('#pt').textContent='Cámara subterránea';cblCamUI($('#pb'),()=>{endPan();msg(`Caño ${CB.pipe?'derecho':'izquierdo'}.`);nx()})})},
+()=>kitNeed('pasa','Para pasar el drop por el caño hace falta un pasacables.',()=>{ttl('Pasá el pasacables por el caño hasta el pilar');camTo((CBX+PIX)/2,CBZ,.7,.5,1.0);const nC=CB.duct==='corrugado'?3:1;
+ openPan('Pasacables',()=>{$('#pt').textContent='Pasacables · '+CB.duct;cblPushUI($('#pb'),{len:CB.dCam,curves:[...Array(nC)].map((_,i)=>Math.round(CB.dCam*(i+1)/(nC+1))),kind:CB.duct==='corrugado'?'corr':'rieg',twist:CB.duct==='corrugado'?2:1,from:'Cámara',to:'Pilar',col:CB.duct==='corrugado'?'#f08a24':'#555',done:()=>{endPan();
+  if(CB.pipe!==CB.side){err++;CB.wrongPipe++;msg(`¡El pasacables salió detrás del pilar del lote ${CB.pair[CB.pipe]}, el vecino! Era el otro caño.`);fxBad();setTimeout(()=>go(2),1600);return}
+  msg(`¡El pasacables salió detrás del pilar del lote ${CB.lot}!`);nx()}})})}),
+()=>kitNeed('cinta','Hay que atar el drop al pasacables con cinta aisladora.',()=>{ttl('Atá el drop al pasacables');camTo(CBX+1,CBZ,.45,.4,1.05);openPan('Atadura',()=>{$('#pt').textContent='Atar el drop al pasacables';cblTieUI($('#pb'),{turns:4,done:()=>{endPan();msg('Drop atado con cinta.');nx()}})})}),
+()=>{ttl('Tirá del pasacables desde el pilar');camTo((CBX+PIX)/2,CBZ,.7,.5,1.0);openPan('Tirar del drop',()=>{$('#pt').textContent='Tirar desde el pilar';cblPullUI($('#pb'),{len:CB.dCam,from:'Pilar',to:'Cámara',col:CB.duct==='corrugado'?'#f08a24':'#555',slip:()=>{endPan();go(si-1)},done:()=>{endPan();CB.dseg[0].visible=true;msg('El drop llegó al pilar.');nx()}})})},
+()=>{ttl('Entrá a la casa: buscá la tapa ciega del corrugado');CB.si=0;cblSeg()}];
+/* tramos dentro de la casa: del pilar a la primera tapa y de tapa en tapa hasta la roseta */
+function cblSeg(){const i=CB.si,len=i===0?CB.dPil:CB.segs[i-1].m,g=i===0?Math.random()<.6:CB.segs[i-1].guia,txt=i===0?`El corrugado viene del pilar (${CB.dPil} m).`:`Seguís desde la tapa ${i} (${len} m).`;
+ if(i>CB.segs.length)return cblFinal();camTo(HSX,HSZ+.5,.7,1.3,.35);ttlB(i===0?'Buscá la tapa ciega de la entrada':`Buscá la tapa ciega que sigue (${i+1} de ${CB.segs.length+1})`);
+ const steps=[['Tapa ciega',(el,n)=>cblTapaUI(el,{n:3,ok:rint(0,2),guia:g,txt,done:n})]];
+ if(!g)steps.push(['Pasacables',(el,n)=>cblPushUI(el,{len,kind:'casa',curves:[Math.max(1,Math.round(len*.4))],twist:1,from:i===0?'Pilar':'Tapa '+i,to:'Tapa '+(i+1),col:'#f08a24',done:n})]);
+ steps.push(['Atar',(el,n)=>cblTieUI(el,{turns:g?2:3,guia:g,done:n})],['Tirar',(el,n)=>cblPullUI(el,{len,guia:g,from:'Tapa '+(i+1),to:i===0?'Pilar':'Tapa '+i,col:'#f08a24',slip:()=>{endPan();msg('Se soltó: volvé a atar y tirar ese tramo.');setTimeout(cblSeg,700)},done:n})]);
+ seqRun(i===0?'Del pilar a la casa':`Tramo ${i+1}`,steps,()=>{if(CB.dseg[i+1])CB.dseg[i+1].visible=true;CB.si++;if(CB.si>CB.segs.length)cblFinal();else{msg('Tramo listo.');setTimeout(cblSeg,600)}})}
+/* final: reserva en la cámara y punta para la roseta */
+function cblFinal(){const left=CB.cut-CB.need;ttlB('Dejá la reserva y cortá lo que sobra');camTo(0,0,1.1,.6,.9);
+ if(left<4){CB.short=true;err++;CB.pen+=80;openPan('Reserva',()=>{$('#pt').textContent='Reserva del drop';$('#pb').innerHTML=`<p class="kres bad">❌ El drop quedó corto: te faltan ${4-left} m para dejar los 3 m de reserva en la cámara y 1 m para la roseta. Vas a tener que hacer un empalme extra (−80 pts).</p><button class="big cbok">Seguir</button>`;$('#pb .cbok').onclick=()=>{endPan();cblDone()}});return}
+ const extra=left-4;CB.waste=extra;if(extra>2)CB.pen+=Math.min(60,(extra-2)*3);
+ kitNeed('alicate','Hay que cortar el drop que sobra.',()=>openPan('Reserva',()=>{$('#pt').textContent='Reserva del drop';$('#pb').innerHTML=`<p>Dejás <b>3 m</b> enrollados en la cámara, junto a la roseta de empalmes, y <b>1 m</b> en la tapa ciega para armar la roseta del cliente.</p><p>${extra?`${extra>1?'Sobran':'Sobra'} <b>${extra} m</b>${extra>2?` (desperdicio: −${Math.min(60,(extra-2)*3)} pts)`:', bien medido'}: ${extra>1?'cortalos':'cortalo'} con el alicate.`:'¡Medido justo! No sobra nada.'}</p><button class="big cbok">${extra?'✂️ Cortar lo que sobra':'Listo'}</button>`;
+  $('#pb .cbok').onclick=()=>{if(extra)snip();endPan();cblDone()}}))}
+function cblDone(){fxOK();msg('¡Drop instalado desde la cámara hasta la casa!');CB.lid&&rotAnim(CB.lid,'z',0,600);setTimeout(end,1200)}
+function cblEnd(p,CO){return `<h2>Cableado terminado</h2><p>Barrio Santa Ana · lote <b>${CB.lot}</b> (pilar ${CB.pair[0]}–${CB.pair[1]})<br>Drop de ${cblDrop(CB.dropN)} · cortaste <b>${CB.cut} m</b> · recorrido ${CB.need} m + 4 m de reserva<br>${CB.short?'<b>❌ Quedó corto</b>':`Desperdicio: <b>${CB.waste} m</b>`}<br>${CB.duct==='corrugado'?'Caño corrugado':'Caño de riego'}${CB.wrongPipe?` · caño equivocado: <b>${CB.wrongPipe}</b>`:''}${CB.kinks?` · guía doblada: <b>${CB.kinks}</b>`:''}${CB.slips?` · ataduras sueltas: <b>${CB.slips}</b>`:''}<br>Tapas ciegas abiertas: <b>${CB.tapasOpen}</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p>`
+ +`<div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`}
+function cblSetup(){cblJob();cblBuild();if(CL)CL.visible=false;if(RSG)RSG.visible=false;if(NSG)NSG.visible=false}
+
 /* ===== cuenta y menú de título ===== */
 const cu=n=>{try{return window.claude&&window.claude.use?window.claude.use(n).catch(()=>null):Promise.resolve(null)}catch(e){return Promise.resolve(null)}};
 const LS={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -2180,7 +2382,7 @@ function nNext(){const m=nq.shift();if(!m){nOn=false;return}nOn=true;if(!m.good)
 /* ===== splitters PLC: botella 1x2/1x4/1x8/1x16 · roseta 1x2/1x4 (con drops de 2, 3 y 4 pelos) ===== */
 const SPLDB={2:3.7,4:7.2,8:10.5,16:13.8};
 const lsGet=(k,d)=>{try{const v=localStorage.getItem(k);return v===null?d:+v}catch(e){return d}},lsSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
-let SPL=0,DROPN=1,SPLB=lsGet('taller_spl_b',0),SPLR=lsGet('taller_spl_r',0),DROPP=lsGet('taller_drop',1),SP=null;
+let SPL=0,DROPN=1,SPLB=lsGet('taller_spl_b',0),SPLR=lsGet('taller_spl_r',0),DROPP=(v=>v===3?2:v)(lsGet('taller_drop',1)),SP=null;
 function renderSpl(){const opts=MODE==='botella'?[0,2,4,8,16]:MODE==='nap'?[2,4,8]:[0,2,4],cur=MODE==='botella'?SPLB:MODE==='nap'?SPLN:SPLR;
  $('#ssel').innerHTML=opts.map(v=>`<button data-s="${v}" aria-pressed="${v===cur}">${v?'1x'+v:'Sin'}</button>`).join('');
  document.querySelectorAll('#ssel button').forEach(b=>b.onclick=()=>{const v=+b.dataset.s;if(MODE==='botella'){SPLB=v;lsSet('taller_spl_b',v)}else if(MODE==='nap'){SPLN=v;lsSet('taller_spl_n',v);napBuild(v)}else{SPLR=v;lsSet('taller_spl_r',v)}renderSpl()});
@@ -2339,6 +2541,12 @@ function wallUI(el,done){const tg={x:150,y:110},s={x:58,y:160,on:false};let m=fa
 
 /* ===== teoría: un "¿por qué?" para cada paso y un manual corto de fibra óptica ===== */
 const TIPS=[
+ [/rollo de drop/,'El drop','El drop plano viene de 1, 2 o 4 pelos: siempre se lleva el que pide la orden. El de 2 o 4 deja pelos de reserva por si hay que agregar otra línea o se rompe uno.'],
+ [/Medí el recorrido/,'Medir antes de cortar','Se mide el recorrido completo y se suma la reserva: unos 3 m enrollados en la cámara, junto a la roseta de empalmes, y 1 m para armar la roseta del cliente. El drop no se puede estirar: si queda corto hay que hacer un empalme extra.'],
+ [/cámara subterránea y elegí el caño/,'Los caños del pilar','En Barrio Santa Ana cada pilar es de dos lotes. Mirando desde la cámara hacia el pilar, el caño de la izquierda va al lote más bajo y el de la derecha al más alto.'],
+ [/pasacables/,'El pasacables','Es una cinta guía semirrígida. Se empuja suave; en las curvas se traba: girarla la ayuda a pasar. Si se empuja con fuerza se dobla y hay que sacarla. El corrugado tiene más roce que el caño de riego.'],
+ [/Atá el drop/,'La atadura','Se hace una gaza con la punta del drop, se engancha en el ojo del pasacables y se envuelve con varias vueltas de cinta aisladora, bien finita para que no se trabe en el caño.'],
+ [/Tirá del pasacables|tapa ciega/,'Tirar parejo','Se tira de manera pareja, sin tirones, mientras alguien acompaña el drop en la otra punta. Si el corrugado ya tiene una guía (un alambre o un hilo), se ata el drop a la guía y es mucho más fácil.'],
  [/Guardá los pelos|Guardá la fibra|vueltas/,'Guardar los pelos','La fibra se guarda en la bandeja sin forzar curvas: radio mínimo de 15 mm para la G.657A2 y 30 mm para la G.652D. Tip de cámara: con ⬇︎ la ves desde arriba, y con dos dedos (o clic derecho) movés la vista para seguir el canal.'],
  [/Tirá de la cinta/,'Cuánta cinta','Cada tira va a medida de la marca de la base: si es corta, la roseta queda floja de un lado; si sobresale, junta polvo y se despega por los bordes. La pared tiene que estar limpia y seca.'],
  [/film/,'El film protector','La doble faz trae un film que tapa el adhesivo. Se saca recién al final, tomándolo de la punta: si tocás el adhesivo con los dedos, la grasa de la piel hace que pegue menos.'],
@@ -2407,7 +2615,25 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=52,NEWS=[
+const VER=57,NEWS=[
+ {v:57,t:'Pasacables de verdad',items:[
+  ['🟢','Pasacables con alma de acero','Ahora es como el real: rollo verde, cinta naranja y punta de resorte con ojal, también en la maqueta 3D y en la camioneta.'],
+  ['🌀','Minijuego nuevo','Girás el rollo para desenrollar cinta, embocás la punta en la boca del caño y la empujás a mano por el ducto. Solo avanza la cinta que desenrollaste, y en cada curva girás el mango para rotar la cinta y que la punta pase. Si empujás trabado, la cinta se dobla.']]},
+ {v:56,t:'Pasacables más controlable',items:[
+  ['🐢','Pasacables más lento','El pasacables avanza de a poco mientras arrastrás, frena en cada curva y te avisa en grande que gires la guía. La fuerza baja sola cuando soltás, así que podés ir por partes.'],
+  ['🪢','Tirar más parejo','Al tirar del drop, la tensión solo sube si das tirones rápidos. Arrastrando tranquilo no se suelta.']]},
+ {v:55,t:'Modo cableado',items:[
+  ['🧵','Modo cableado','Nuevo modo en el menú: cortás los metros de drop justos, abrís la cámara subterránea de Barrio Santa Ana (con su roseta de empalmes) y pasás el pasacables por el caño del lote hasta el pilar.'],
+  ['🧱','Pilar de dos lotes','Cada pilar es compartido, por ejemplo 122–123: mirando hacia el pilar, el caño de la izquierda va al lote más bajo y el de la derecha al más alto. Si elegís mal, la guía sale en el lote del vecino.'],
+  ['🌀','Corrugados y caño de riego','El pasacables se traba en las curvas: girás la guía y empujás suave, o se dobla. Después atás el drop con cinta y tirás parejo, sin tirones.'],
+  ['🏠','Tapas ciegas','Adentro de la casa abrís las tapas ciegas hasta encontrar el corrugado. Si tiene guía, atás el drop y tirás; si no, va de nuevo el pasacables.'],
+  ['🧰','Herramientas nuevas','Pasacables, cinta aisladora y cinta métrica en la camioneta.'],
+  ['➖','Drop de 3 pelos','Se sacó el drop de 3 pelos: quedan 1, 2 y 4.']]},
+ {v:54,t:'Barrios reales en soporte',items:[
+  ['🏘️','Barrios nuevos','Los clientes ahora llaman desde Casas de Santa Ana (manzanas 1 a 8, casas 1 a 24), Santa Ana Joven (UF 1 a 110), Barrio Santa Ana (lotes 1 a 370), Casas de Santa María (Lanín, Fitz Roy, Tronador, Aconcagua, Antofalla y Tupungato, alturas 5600 a 5698), San Rafael (lotes 1 a 320), El Canal (lotes 1 a 80), Villa Marina 1 (lotes 1 a 200), Vilahaus (torres 1 a 4, UF 1 a 140), Studios (UF 1 a 150) y Estudios de la Bahía (UF 100 a 728).'],
+  ['📝','Formulario nuevo','La orden tiene Manzana / Torre y Lote / Casa / UF. En los barrios cerrados y edificios no hay calle: se deja vacía.']]},
+ {v:53,t:'Fusionadora a tu manera',items:[
+  ['🪟','Abrir y cerrar de verdad','El paravientos, las mordazas y la tapa del horno se abren y se cierran cada vez que los tocás, en cualquier paso, con una zona de toque más grande. Si cerrás una mordaza antes de apoyar el pelo, te avisa que la abras.']]},
  {v:52,t:'Fusionadora más cómoda',items:[
   ['🪟','Abrir y cerrar cuando quieras','Tocando el paravientos, cada mordaza o la tapa del horno los abrís o cerrás en cualquier momento. La fusionadora no arranca con SET si algo quedó abierto, y el horno no calienta con la tapa levantada.'],
   ['🖥️','Pantalla más abajo','La pantalla de la fusionadora ahora cuelga adelante, más baja, y ya no tapa los botones.']]},
@@ -2525,8 +2751,9 @@ const itemOn=n=>owns(n)&&TECS[TEC]&&TECS[TEC].n===n;
 const price=x=>itemOn('Alan')?Math.round(x*.85):x;
 function saveAcct(){if(!acct)return;try{if(DB)pref().set(acct).catch(()=>LS.set('taller_cuenta',acct));else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}}
 function playLevel(){const n=(acct&&acct.nivel)||1,pool=n<=1?[6,12]:n===2?[6,12,24]:n===3?[12,24,36]:n===4?[24,36,48]:[24,36,48,48];let job;const sp=Math.random()<.45;
- const rr=Math.random();if(rr>=.3&&rr<.55){setModo('nap');NCAB=[6,12,24][Math.min(2,Math.floor(Math.random()*Math.min(3,n+1)))];SPL=[2,4,8][Math.random()*3|0];DROPN=1;job=`Caja NAP: cable de ${NCAB} pelos · splitter 1x${SPL} conectorizado · conector de campo en el drop`}
- else if(rr<.3){setModo('roseta');SPL=sp?[2,4][Math.random()*2|0]:0;DROPN=SPL?rint(2,4):1;job=`Roseta: drop de ${DROPN} pelo${DROPN>1?'s':''}`+(SPL?` · splitter PLC 1x${SPL}`:' + pigtail SC/APC')+' · tapa y pegado en la pared'}
+ const rr=Math.random();if(rr>=.55&&rr<.7){setModo('cableado');SPL=0;DROPN=1;job='Cableado en Barrio Santa Ana: drop desde la cámara subterránea hasta la casa'}
+ else if(rr>=.3&&rr<.55){setModo('nap');NCAB=[6,12,24][Math.min(2,Math.floor(Math.random()*Math.min(3,n+1)))];SPL=[2,4,8][Math.random()*3|0];DROPN=1;job=`Caja NAP: cable de ${NCAB} pelos · splitter 1x${SPL} conectorizado · conector de campo en el drop`}
+ else if(rr<.3){setModo('roseta');SPL=sp?[2,4][Math.random()*2|0]:0;DROPN=SPL?[2,4][Math.random()*2|0]:1;job=`Roseta: drop de ${DROPN} pelo${DROPN>1?'s':''}`+(SPL?` · splitter PLC 1x${SPL}`:' + pigtail SC/APC')+' · tapa y pegado en la pared'}
  else{const c=pool[Math.random()*pool.length|0];setModo('botella');setCable(c);SPL=sp?[2,4,8,16][Math.random()*4|0]:0;DROPN=1;job=`Botella de ${c} fibras · ${CABS[c].nb} buffer${CABS[c].nb>1?'s':''} de ${CABS[c].per}`+(SPL?` · splitter PLC 1x${SPL}`:'')}
  LEVEL={on:true,n,job};play()}
 function playFree(){LEVEL=null;SPL=MODE==='botella'?SPLB:MODE==='nap'?SPLN:SPLR;DROPN=MODE==='roseta'?DROPP:1;play()}
@@ -2546,7 +2773,7 @@ function buy(k,id,btn){if(!acct)return;const co=acct.coins||0;let pr;
  else{if(owns(id))return;pr=price(ITEMS[id].p);if(co<pr)return;acct.items=Object.assign({},acct.items,{[id]:true})}
  acct.coins=co-pr;saveAcct();ding();renderShop();const s=$('#shop .tbox');s.classList.remove('okf');void s.offsetWidth;s.classList.add('okf')}
 /* monedas al terminar */
-function coinsFor(p){const lvl=!!(LEVEL&&LEVEL.on);let co=Math.round(p/10);const neat=MODE==='nap'?NP.rate==='Prolijo':MODE==='roseta'?R.rate==='Prolijo':!!(W&&W.rates&&W.rates.length&&W.rates.every(r=>r==='Prolijo'));
+function coinsFor(p){const lvl=!!(LEVEL&&LEVEL.on);let co=Math.round(p/10);const neat=MODE==='cableado'?(!CB.short&&CB.waste<=2):MODE==='nap'?NP.rate==='Prolijo':MODE==='roseta'?R.rate==='Prolijo':!!(W&&W.rates&&W.rates.length&&W.rates.every(r=>r==='Prolijo'));
  if(neat)co+=15;if(!reclamos)co+=10;if(itemOn('Federico'))co+=fusN;if(lvl)co=Math.round(co*1.5);if(itemOn('Blas'))co=Math.round(co*1.1);return{co,lvl,upl:lvl&&p>=500,neat}}
 
 /* ===== técnicos (por ahora solo estéticos) ===== */
@@ -2597,13 +2824,13 @@ function tecRender(){$('#tjob').hidden=!LEVEL;if(LEVEL)$('#tjob').innerHTML=`<b>
  document.querySelectorAll('#tsel button').forEach(b=>b.onclick=()=>{TEC=+b.dataset.i;try{localStorage.setItem('taller_tecnico',TEC)}catch(e){}tecRender()})}
 function play(){$('#title').hidden=true;tecRender();$('#tec').hidden=false}
 function startGame(){$('#tec').hidden=true;const c=TECS[TEC];$('#hav').innerHTML=avatar(c)+c.n+(itemOn(c.n)?' '+ITEMS[c.n].ic:'');$('.hud').classList.add('wav');LIVES=LEVEL&&LEVEL.on?3:null;GO=false;dylanSave=false;hearts();
- $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
-const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen+(itemOn('Sebastián')?50:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
+ $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
+const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
 async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b></span></div>`;
- $('#res').innerHTML=tv+(MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
+ $('#res').innerHTML=tv+(MODE==='cableado'?cblEnd(p,CO):MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
  {const s=$('#res .stars');if(s)s.insertAdjacentHTML('beforebegin',invSummary())}
  {const e=$('#res .ptsn'),t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1100);e.textContent=Math.round(p*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)};f()}
  const r=await saveResult(p,{coins:((acct&&acct.coins)||0)+CO.co,nivel:((acct&&acct.nivel)||1)+(CO.upl?1:0)});$('#rec').textContent=(r?'🏆 ¡Récord nuevo! ':'')+(DB?'Guardado en la nube.':'Guardado en este dispositivo.')}
