@@ -174,12 +174,14 @@ button:active:not(:disabled){transform:scale(.96)}
 @media (max-width:380px){.sform{grid-template-columns:1fr}}
 .shelp{font-size:12.5px;color:#5b6b78;margin:0 0 8px}.swarn{color:#c53030;font-size:13px;min-height:1px;margin:6px 0 0}.sempty{font-size:14px;color:#3b4a57;padding:14px 6px;margin:0}
 .sbody .big{margin-top:8px}
+.styping{opacity:.65;font-style:italic}.sfree{display:flex;flex-wrap:wrap;gap:6px}.sfree input{flex:1 1 100%;font:inherit;font-size:15px;padding:10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--fg)}.sfree button{flex:1;margin:0;padding:10px}
 .stbl{overflow:auto;max-width:100%;border:1px solid #d3dbe2;border-radius:8px}.stbl table{border-collapse:collapse;font-size:12px;white-space:nowrap;width:100%}.stbl th{background:#e3eaf0;position:sticky;top:0;text-align:left}.stbl th,.stbl td{padding:6px 8px;border-bottom:1px solid #e3e8ed}.stbl tr.snew td{background:#fff7d6}
 .sest{padding:2px 7px;border-radius:999px;background:#e3eaf0;font-size:11px}.sest.ok{background:#d9fbe5;color:#15803d}.sest.bad{background:#fde2e2;color:#c53030}
 .stecs{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}.stec{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;padding:4px 6px;margin:0;min-width:58px;background:#fff;color:#16222c;border:1.5px solid #c3ced8}.stec[aria-pressed="true"]{border-color:#1f6feb;background:#e6f0ff}.stav svg{width:34px;height:34px;display:block}
 .schat2{display:flex;flex-direction:column;gap:6px;background:#efeae2;border-radius:8px;padding:8px;min-height:90px;max-height:26vh;overflow:auto;margin:4px 0 8px}.schat2 .sm.cl{background:#fff;color:#16222c}.snm{display:block;font-size:11px;color:#1f6feb;margin-bottom:1px}
 .slab{font-size:12px;font-weight:600;color:#3b4a57}.slab select,.smsg{width:100%;font:inherit;font-size:14px;padding:8px;border-radius:8px;border:1.5px solid #c3ced8;background:#fff;color:#16222c;margin-top:2px}.smsg{margin-top:6px;resize:vertical}
 .ssum table{width:100%;font-size:13px;border-collapse:collapse;margin:6px 0}.ssum td{padding:3px 4px;border-bottom:1px solid rgba(127,127,127,.2)}.ssum small{opacity:.7}.ssum p{font-size:13px;margin:6px 0 0}
+#camb{position:absolute;left:10px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;z-index:3}#camb button{width:42px;height:42px;padding:0;margin:0;font-size:19px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,.18);touch-action:manipulation}#camb button[aria-pressed="true"]{background:var(--ac);color:#06202a;border-color:var(--ac)}
 #invb{position:absolute;left:12px;bottom:max(14px,env(safe-area-inset-bottom));padding:8px 11px;font-size:14px;z-index:4;box-shadow:0 6px 18px rgba(0,0,0,.2)}
 .ot{background:rgba(127,127,127,.1);border-radius:12px;padding:8px 10px;margin:0 0 8px;font-size:13px;line-height:1.35}.ot p{margin:4px 0 0}
 .kgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
@@ -226,6 +228,7 @@ button:active:not(:disabled){transform:scale(.96)}
 <div id="pan" hidden><div class="pbox"><div class="ph"><b id="pt"></b><button onclick="closePan()">Ver en 3D</button></div><div id="pb"></div></div></div>
 <button id="po" hidden onclick="openPan()">Abrir menú</button>
 <button id="m2d" hidden onclick="toTwoD()">✋ Volver a 2D</button>
+<div id="camb" hidden role="group" aria-label="Cámara"><button data-c="in" onclick="camCmd('in')" aria-label="Acercar">＋</button><button data-c="out" onclick="camCmd('out')" aria-label="Alejar">－</button><button data-c="top" onclick="camCmd('top')" aria-label="Vista desde arriba" aria-pressed="false">⬇︎</button><button data-c="reset" onclick="camCmd('reset')" aria-label="Volver a la vista del paso">⟲</button></div>
 <button id="invb" hidden onclick="invShow()" aria-label="Ver el bolso de herramientas">🎒 Bolso</button>
 <button id="mb" hidden onclick="$('#mq').hidden=false">☰ Menú</button><button id="tipb" hidden onclick="openTip()" aria-label="Por qué se hace este paso">💡 ¿Por qué?</button><div id="tipp" hidden onclick="if(event.target===this)this.hidden=true"><div role="dialog" aria-labelledby="tph"><h3 id="tph"></h3><p id="tpb"></p><div class="mqb"><button onclick="openTheory()">📘 Toda la teoría</button><button class="big" onclick="$('#tipp').hidden=true">Entendido</button></div></div></div><div id="invp" hidden onclick="if(event.target===this)invClose()"><div role="dialog" aria-labelledby="iph"><h3 id="iph">🎒 Tu bolso</h3><div id="ipb"></div><div class="mqb"><button class="big" onclick="invClose()">Cerrar</button></div></div></div><div id="theo" hidden onclick="if(event.target===this)theoClose()"><div class="tbox" role="dialog" aria-labelledby="tht"><button class="thx" onclick="theoClose()" aria-label="Cerrar la teoría">✕</button><h1 id="tht" style="font-size:26px;margin:0 0 2px">Teoría de fibra óptica</h1><p class="sub" style="margin:0">Lo que hay detrás de cada paso del taller.</p><div id="thb"></div><button class="big thc" onclick="theoClose()">Cerrar</button></div></div>
 <div id="sop" hidden><div class="tbox"><h1 style="font-size:26px">Soporte técnico</h1><p class="sub" style="margin-bottom:8px">Elegí quién atiende el teléfono hoy.</p><div class="tprev" id="soprev"></div><div class="tsel" id="sosel" role="group" aria-label="Operadores de soporte"></div><button class="big" onclick="supGo()">📞 ¡A atender!</button><button class="big alt" onclick="openSShop()">🛒 Tienda de soporte</button><button class="lnk" onclick="$('#sop').hidden=true;$('#title').hidden=false">Volver al menú</button></div></div>
@@ -257,6 +260,7 @@ button:active:not(:disabled){transform:scale(.96)}
  <div id="splw"><h2>Splitter PLC (juego libre)</h2><div class="qrow" id="ssel" role="group" aria-label="Splitter PLC"></div><p class="note" id="snote" style="margin-top:6px"></p></div>
  <div id="dropw" hidden><h2>Drop (cantidad de pelos)</h2><div class="qrow" id="dsel" role="group" aria-label="Pelos del drop"><button data-d="1">1</button><button data-d="2">2</button><button data-d="3">3</button><button data-d="4">4</button></div></div>
  <h2>Herramientas para empalmar</h2><div class="qrow" id="hsel" role="group" aria-label="Herramientas"><button data-v="1">🧊 3D: fusionadora y cleaver</button><button data-v="0">✋ 2D rápido</button></div><p class="note" style="margin-top:6px">En 3D usás la peladora, el cleaver, la fusionadora y su horno como los reales.</p>
+ <h2>Voces</h2><div class="qrow" id="vsel" role="group" aria-label="Voces"><button data-v="1">🔊 Con voces</button><button data-v="0">🔇 Sin voces</button></div><p class="note" style="margin-top:6px">El equipo y los clientes hablan con las voces de tu dispositivo. En soporte, lo que dice cada cliente lo escribe una IA (te pide permiso la primera vez).</p>
  <h2>Calidad gráfica</h2><div class="qrow" id="qsel" role="group" aria-label="Calidad gráfica"><button data-q="alta">Alta</button><button data-q="media">Media</button><button data-q="baja">Baja</button></div><p class="note" style="margin-top:6px">Si el juego va lento o el teléfono se calienta, probá Baja.</p>
  <div id="rk"><h2>Ranking</h2><ol id="rank"></ol></div>
 </div></div>
@@ -529,29 +533,36 @@ const rc=new THREE.Raycaster(),v2=new THREE.Vector2(),rootOf=(o,l)=>{while(o&&!l
 const ray=e=>{const b=cv.getBoundingClientRect();v2.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);rc.setFromCamera(v2,cam);return rc};
 const gnd=(e,y)=>{const p=V(0,0,0);ray(e).ray.intersectPlane(new THREE.Plane(V(0,1,0),-y),p);return p};
 let gr=null,off=null,down=0,lp=null,sp=0,cloth=null,el=.95,tel=.95,tyaw=0,vyaw=0,vel=0,rotP=null,pin=null,lastTap=0,lastXY=null,lastMv=0,stepCam=null;const pts=new Map();
-const clampE=v=>Math.max(.2,Math.min(1.45,v)),SNAP=1.8;
+const clampE=v=>Math.max(.2,Math.min(1.55,v)),SNAP=1.8,ZMIN=.06;
+/* mover la cámara (paneo) en el plano de la mesa según lo que se arrastró en pantalla */
+function panBy(dx,dy){const D=17.2*Math.max(1,1.05/cam.aspect)*ck,s=2*D*Math.tan(cam.fov*Math.PI/360)/Math.max(1,cv.clientHeight),rx=Math.cos(yaw),rz=-Math.sin(yaw),fx=-Math.sin(yaw),fz=-Math.cos(yaw),k=1/Math.max(.45,Math.sin(el));
+ const mx=-rx*dx*s+fx*dy*s*k,mz=-rz*dx*s+fz*dy*s*k,nx=Math.max(-11.5,Math.min(11.5,FX+mx)),nz=Math.max(-8.4,Math.min(8.4,FZ+mz));cx+=nx-FX;cz+=nz-FZ;FX=nx;FZ=nz}
+let panP=null,topPrev=null;
 const near=o=>{const dd=t=>Math.hypot(o.position.x-t.x,o.position.z-t.z),cs=tg.filter(t=>!t.taken&&dd(t)<SNAP).sort((a,b)=>dd(a)-dd(b));return cs.find(t=>t.id!=null&&t.id===o.userData.id)||cs[0]};
 function hi(t){tg.forEach(x=>{if(!x.mk)return;const on=x===t;x.mk.material.color.set(on?0x22c55e:(x.c==null?0xffffff:x.c));x.mk.userData.bs=on?1.35:1})}
-function resetCam(){if(stepCam)camTo(...stepCam);tyaw=0;vyaw=vel=0}
+function resetCam(){if(stepCam)camTo(...stepCam);tyaw=0;vyaw=vel=0;topPrev=null;camBtns()}
 cv.onpointerdown=e=>{if(!playing)return;if(e.isPrimary&&pts.size){pts.clear();pin=null}try{cv.setPointerCapture(e.pointerId)}catch(_){}pts.set(e.pointerId,{x:e.clientX,y:e.clientY});vyaw=vel=0;
  if(pts.size===2){if(gr){back(gr);gr=null;hi(null)}if(FGR){FGR.m.userData.grab=null;FGR=null}down=0;lp=null;rotP=null;const [a,b]=[...pts.values()];pin={d:Math.hypot(a.x-b.x,a.y-b.y),z:zm,mx:(a.x+b.x)/2,my:(a.y+b.y)/2};return}
  if(pts.size>2)return;const r=ray(e);
  if(taps.length){const h=r.intersectObjects(taps,true)[0];if(h){onTap(rootOf(h.object,taps));return}}
+ if(spFree(r))return;
  if(mode){down=1;lp=null;if(MH[mode]&&MH[mode].down)MH[mode].down(e);return}
  const h=r.intersectObjects(drags,true)[0];if(h){gr=rootOf(h.object,drags);const u=gr.userData,hp=gnd(e,u.ph??u.dy??1.5);off=gr.position.clone().sub(hp);return}
  if(FPHYS){const f=fPick(e);if(f){FGR=f;f.m.userData.grab=f.i;f.m.userData.rp.aw=true;return}}
  const now=performance.now();if(lastXY&&now-lastTap<320&&Math.hypot(e.clientX-lastXY.x,e.clientY-lastXY.y)<30){resetCam();lastXY=null;return}
- lastTap=now;lastXY={x:e.clientX,y:e.clientY};rotP={x:e.clientX,y:e.clientY}};
+ lastTap=now;lastXY={x:e.clientX,y:e.clientY};if(e.button===1||e.button===2||e.shiftKey){panP={x:e.clientX,y:e.clientY};return}rotP={x:e.clientX,y:e.clientY}};
 cv.onpointermove=e=>{if(!pts.has(e.pointerId))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
  if(pin&&pts.size>=2){const [a,b]=[...pts.values()],d=Math.hypot(a.x-b.x,a.y-b.y),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
-  zm=Math.max(.12,Math.min(1.6,pin.z*pin.d/Math.max(d,1)));tyaw-=(mx-pin.mx)*.006;tel=clampE(tel+(my-pin.my)*.004);pin.mx=mx;pin.my=my;return}
+  zm=Math.max(ZMIN,Math.min(1.6,pin.z*pin.d/Math.max(d,1)));panBy(mx-pin.mx,my-pin.my);const an=Math.atan2(b.y-a.y,b.x-a.x);if(pin.an!=null){let da=an-pin.an;if(da>Math.PI)da-=2*Math.PI;if(da<-Math.PI)da+=2*Math.PI;tyaw+=da}pin.an=an;pin.mx=mx;pin.my=my;return}
+ if(panP){panBy(e.clientX-panP.x,e.clientY-panP.y);panP={x:e.clientX,y:e.clientY};return}
+ if(FGR||gr)edgePan(e);
  if(FGR){fDrag(e);return}
  if(gr){const u=gr.userData,dy=u.dy??1.5,p=gnd(e,u.ph??dy);gr.position.set(p.x+off.x,dy,p.z+off.z);hi(near(gr));return}
  if(mode&&down){if(mode=='scrub')scrub(e);if(mode=='strip3d')s3move(e);if(mode=='slit')slit(e);if(mode=='wind')wind(e);if(mode=='twind')twind(e);if(mode=='pwind')pwind(e);if(mode=='nwind')nwind(e);if(mode=='bstrip')bstripMove(e);if(MH[mode]&&MH[mode].move)MH[mode].move(e);return}
  if(rotP){const dx=e.clientX-rotP.x,dyy=e.clientY-rotP.y;vyaw=Math.max(-.05,Math.min(.05,-dx*.007));vel=Math.max(-.03,Math.min(.03,dyy*.004));tyaw-=dx*.007;tel=clampE(tel+dyy*.004);rotP={x:e.clientX,y:e.clientY};lastMv=performance.now()}};
 const pUp=e=>{if(!pts.delete(e.pointerId))return;if(pts.size<2)pin=null;
  if(pts.size===1&&!mode&&!gr){const q=[...pts.values()][0];rotP={x:q.x,y:q.y}}
- if(pts.size===0){if(mode&&MH[mode]&&MH[mode].up)MH[mode].up(e);if(!rotP||performance.now()-lastMv>80)vyaw=vel=0;down=0;lp=null;rotP=null;if(FGR){FGR.m.userData.grab=null;FGR.m.userData.rp.aw=true;FGR=null}if(gr){const o=gr;gr=null;drop(o)}}};
+ if(pts.size===0){panP=null;if(mode&&MH[mode]&&MH[mode].up)MH[mode].up(e);if(!rotP||performance.now()-lastMv>80)vyaw=vel=0;down=0;lp=null;rotP=null;if(FGR){FGR.m.userData.grab=null;FGR.m.userData.rp.aw=true;FGR=null}if(gr){const o=gr;gr=null;drop(o)}}};
 cv.onpointerup=pUp;cv.onpointercancel=pUp;cv.addEventListener('lostpointercapture',e=>{if(pts.has(e.pointerId))pUp(e)});
 cv.addEventListener('wheel',e=>{if(!playing)return;e.preventDefault();zoom(e.deltaY*.0015)},{passive:false});
 const back=o=>tw(o,o.userData.home.clone(),280);
@@ -628,7 +639,7 @@ function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('c
   el.querySelectorAll('button').forEach(b=>b.onclick=()=>act(b.dataset.a))};
  const act=a=>{if(a==='arc'){if(fu.gap>25){err++;boss('arc');msg('Fibras muy separadas: el arco no las unió. Acercalas.');return}
    if(fu.gap<5){err++;boss('arc');fu.gap=30;msg('Las fibras chocaron. Se separaron: volvé a acercarlas.');draw();return}
-   {const d=Math.hypot(fu.ox,fu.oy)*.5*.45;last=+(.008+4.34*Math.pow(d/4.6,2)+.03*Math.max(0,fu.aL+fu.aR-.5)+Math.max(0,fu.gap-15)*.004).toFixed(3)}if(itemOn('Jony'))last=+(last*.8).toFixed(3);loss+=last;fusN++;jonyFus(last);if(last>.15)boss('loss',{db:last.toFixed(2)});fuOn=null;
+   {const d=Math.hypot(fu.ox,fu.oy)*.5*.45;last=+(.008+4.34*Math.pow(d/4.6,2)+.03*Math.max(0,fu.aL+fu.aR-.5)+Math.max(0,fu.gap-15)*.004).toFixed(3)}loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});fuOn=null;
    const sv=el.querySelector('svg');if(sv)sv.insertAdjacentHTML('beforeend','<circle class="arcf" cx="150" cy="48" r="42" fill="url(#garc)"/><circle class="arcf" cx="150" cy="152" r="42" fill="url(#garc)"/>');el.querySelectorAll('button').forEach(b=>b.disabled=true);flash3D(0x9fe2ff,4);
    msg('⚡ Arco… pérdida estimada por la fusionadora: '+last.toFixed(2)+' dB'+(last>.15?' (alta: la próxima alineá mejor)':last<=.05?' (excelente)':''));setTimeout(done,650);return}
   const d=a[1]==='+'?1:-1;if(a[0]==='x')fu.ox=Math.max(-12,Math.min(12,fu.ox+d));if(a[0]==='y')fu.oy=Math.max(-12,Math.min(12,fu.oy+d));if(a[0]==='g')fu.gap=Math.max(0,Math.min(80,fu.gap+d*5));draw()};
@@ -812,7 +823,7 @@ const tool=txt=>o=>{msg(txt);setTimeout(()=>back(o),700)};
 const clr=()=>{$('#m2d').hidden=true;T.forEach(m=>scene.remove(m));T=[];drags=[];tg=[];hook=null;onPl=null;mode=null;taps=[];onTap=null;glow.intensity=0;$('#act').hidden=true;panR=null;$('#pan').hidden=true;$('#po').hidden=true};
 const nx=()=>setTimeout(()=>go(si+1),900);
 function go(i){si=i;clr();msg('');S[i]()}
-const ttl=t=>{$('#st').textContent='Paso '+(si+1)+' de '+S.length+(si<2?' · Deslizá el dedo para girar, pellizcá para acercar':'');const e=$('#ti');e.textContent=t;e.classList.remove('tin');void e.offsetWidth;e.classList.add('tin');$('.hp i').style.width=((si+1)/S.length*100)+'%'};
+const ttl=t=>{$('#st').textContent='Paso '+(si+1)+' de '+S.length+(si<2?' · Un dedo gira, dos dedos mueven y acercan':'');const e=$('#ti');e.textContent=t;e.classList.remove('tin');void e.offsetWidth;e.classList.add('tin');$('.hp i').style.width=((si+1)/S.length*100)+'%'};
 
 /* pasos */
 let MODE=(()=>{try{const m=localStorage.getItem('taller_modo');return m==='roseta'||m==='nap'?m:'botella'}catch(e){return 'botella'}})();
@@ -1435,7 +1446,7 @@ function mSplicer(){const g=G(),bl=M(0x2442c4,{metalness:.55,roughness:.35}),bk=
  const key=(k,t,x,z,col,fg)=>{const b=mesh(box(.19,.05,.13),M(col,{roughness:.5}),x,1.49,z);plate(lab(t,hex(col),fg||'#e6eaee',30),.17,.11,x,1.517,z);b.userData.k=k;u.btn[k]=b;return b};
  [[0,-.09],[0,.09],[-.11,0],[.11,0]].forEach(([dx,dz])=>mesh(box(.08,.05,.08),bk,-.7+dx,1.49,.9+dz));mesh(box(.08,.05,.08),M(0x2e5e3a),-.7,1.49,.9);
  key('menu','≡',-.32,.82,0x1d2024);key('pw','⏻',-.08,.82,0xd8dadd,'#333');key('xy','X/Y',.16,.82,0x1d2024);key('arc','ARC',.48,.82,0x1d2024);key('heat','HEAT',.74,.82,0xe8c44a,'#3b2f00');key('reset','RESET',.48,1.0,0x1d2024,'#f28c4a');key('set','SET',.74,1.0,0x1d2024,'#5fd38a');
- {const m=G();m.position.set(0,1.42,D/2-.02);g.add(m);mesh(box(1.5,.85,.09),bk,0,.42,.04,m);u.scr=ctex(256,160,()=>{});const sp=new THREE.Mesh(new THREE.PlaneGeometry(1.3,.74),new THREE.MeshBasicMaterial({map:u.scr}));sp.position.set(0,.44,.09);m.add(sp);m.rotation.x=-.45;u.mon=m;screen(u.scr,'LISTO','idle')}
+ {mesh(box(.34,.08,.66),bk,0,.24,D/2+.3);mesh(box(.5,.12,.12),bk,0,.24,D/2+.6);const m=G();m.position.set(0,.24,D/2+.62);g.add(m);mesh(box(1.5,.85,.09),bk,0,.42,.04,m);u.scr=ctex(256,160,()=>{});const sp=new THREE.Mesh(new THREE.PlaneGeometry(1.3,.74),new THREE.MeshBasicMaterial({map:u.scr}));sp.position.set(0,.44,.09);m.add(sp);m.rotation.x=-.62;u.mon=m;screen(u.scr,'LISTO','idle')}
  PARENT=null;return g}
 /* peladora de 3 agujeros: dos mitades que se cruzan en el tornillo; mangos amarillos */
 function mStripper3(){const g=G(),ye=M(0xf6c400,{roughness:.32}),st=M(0x3a3d42,{metalness:.75,roughness:.45}),u=g.userData;u.h=[];
@@ -1461,7 +1472,7 @@ function buildBench(){BK.case=mCase();scene.add(BK.case);BK.sp=mSplicer();BK.sp.
  BK.str=mStripper3();BK.str.position.copy(SLOT.str);BK.str.rotation.y=Math.PI/2;scene.add(BK.str);BK.sb=mSleeveBox();BK.sb.position.copy(SBP);scene.add(BK.sb)}
 /* herramientas afuera o adentro de la valija, sin animación (pruebas) */
 function toolsInstant(out){BK.lat.forEach(l=>{l.userData.open=out;l.rotation.x=out?-1.3:0});BK.lid.rotation.x=out?-1.62:0;
- if(out){BK.sp.position.set(BKX,0,BKZ);BK.sp.userData.mon.rotation.x=-.45;BK.cb.position.copy(CBP);BK.cb.userData.lid.rotation.x=-2;scene.add(BK.clv);BK.clv.position.copy(CLP);BK.str.position.copy(STP);BK.str.rotation.y=0;BK.out=true;BK.stored=true}}
+ if(out){BK.sp.position.set(BKX,0,BKZ);BK.sp.userData.mon.rotation.x=-.62;BK.cb.position.copy(CBP);BK.cb.userData.lid.rotation.x=-2;scene.add(BK.clv);BK.clv.position.copy(CLP);BK.str.position.copy(STP);BK.str.rotation.y=0;BK.out=true;BK.stored=true}}
 function moveTask(o,to,dy,ph,n,rot){o.userData.home=o.position.clone();o.userData.dy=dy;o.userData.ph=ph;
  task([o],[{x:to.x,z:to.z,y:to.y,id:null,s:.6,my:to.y+.04}],ob=>{ob.position.copy(to);if(rot!=null)ob.rotation.y=rot;setTimeout(n,250);return 'hold'})}
 function runSeq(seq,done){let i=0;const f=()=>{if(i>=seq.length)return done();const s=seq[i++];clrSoft();s(f)};f()}
@@ -1469,7 +1480,7 @@ function clrSoft(){T.forEach(m=>scene.remove(m));T=[];drags=[];tg=[];hook=null;o
 function toolsOut(done){if(TSKIP){toolsInstant(true);return done()}clr();$('#st').textContent='Antes de empezar · sacá las herramientas';
  runSeq([n=>{ttlB('Abrí la valija: soltá las dos trabas');msg('Tocá cada traba de metal.');bCam('case');let k=0;taps=[...BK.lat];onTap=o=>{if(o.userData.open)return;o.userData.open=true;rotAnim(o,'x',-1.3,250);if(++k===2){taps=[];setTimeout(n,350)}}},
   n=>{ttlB('Abrí la tapa de la valija');msg('');const mk=mark(CSX,CSZ+1,0xffffff,CSH+.6,.5);taps=[BK.lid];onTap=()=>{taps=[];scene.remove(mk);rotAnim(BK.lid,'x',-1.62,700,n)}},
-  n=>{ttlB('Sacá la fusionadora y apoyala en la mesa');msg('Arrastrala fuera de la espuma.');bCam('bench');moveTask(BK.sp,V(BKX,0,BKZ),2.4,1.2,()=>{rotAnim(BK.sp.userData.mon,'x',-.45,500);n()})},
+  n=>{ttlB('Sacá la fusionadora y apoyala en la mesa');msg('Arrastrala fuera de la espuma.');bCam('bench');moveTask(BK.sp,V(BKX,0,BKZ),2.4,1.2,()=>{rotAnim(BK.sp.userData.mon,'x',-.62,500);n()})},
   n=>{ttlB('Sacá la cajita del cleaver');moveTask(BK.cb,CBP,1.6,.6,n)},
   n=>{ttlB('Abrí la cajita del cleaver: tocala');bCam('cbox');taps=[BK.cb];onTap=()=>{taps=[];rotAnim(BK.cb.userData.lid,'x',-2.0,500,n)}},
   n=>{ttlB('Sacá el cleaver de su cajita');const c=BK.clv,p=BK.cb.position;scene.add(c);c.position.set(p.x,.08,p.z);moveTask(c,CLP,1.0,.5,n)},
@@ -1543,15 +1554,15 @@ function benchPrep(side,o,done){$('#m2d').hidden=false;const t=BT[side],u=t.user
 function benchFuse(c1,c2,done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,PL=V(BKX-GLC-.03,y,z),PR=V(BKX+GLC+.03,y,z);bCam('splicer');
  const place=(t,p,txt)=>m=>{ttlB(txt);msg('Apoyá el vidrio en la ranura en V: la punta tiene que quedar cerca de los electrodos, sin pasarse.');const u=t.userData;u.home=t.position.clone();u.dy=y+.12;u.ph=y;
   task([t],[{x:p.x,z:p.z,y:p.y,id:null,s:.12,my:y+.01}],ob=>{const e2=tipErr(ob,p,.06);if(e2){err++;msg(e2);return false}ob.position.copy(p);fxOK();setTimeout(m,300);return 'hold'})};
- const clamp=(i,txt)=>m=>{ttlB(txt);msg('');taps=[S.fh[i]];onTap=()=>{taps=[];S.fh[i].userData.open=false;rotAnim(S.fh[i],'x',0,300,m)}};
+ const clamp=(i,txt)=>m=>{if(!S.fh[i].userData.open)return m();ttlB(txt);msg('');taps=[S.fh[i]];onTap=()=>{taps=[];S.fh[i].userData.open=false;rotAnim(S.fh[i],'x',0,300,m)}};
  runSeq([m=>{if(S.hood.userData.open)return m();ttlB('Abrí el paravientos de la fusionadora');msg('Tocá la tapa del centro.');taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=true;rotAnim(S.hood,'x',-1.75,450,m)}},
   m=>{const op=S.fh.filter(f=>!f.userData.open);if(!op.length)return m();ttlB('Abrí las dos mordazas');taps=op;let k=0;onTap=o=>{if(o.userData.open)return;o.userData.open=true;rotAnim(o,'x',-1.9,300);if(++k===op.length){taps=[];setTimeout(m,350)}}},
   place(BT.L,PL,'Acomodá el pelo izquierdo en su ranura'),clamp(0,'Cerrá la mordaza izquierda'),place(BT.R,PR,'Acomodá el pelo derecho en su ranura'),clamp(1,'Cerrá la mordaza derecha'),
-  m=>{ttlB('Cerrá el paravientos');taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=false;rotAnim(S.hood,'x',0,450,m)}},
-  m=>{ttlB('Apretá SET para empezar');msg('La fusionadora limpia las puntas con un arco corto y las alinea.');taps=[S.btn.set];onTap=()=>{taps=[];screen(S.scr,'ALINEANDO','idle');setTimeout(m,500)}},
+  m=>{if(!S.hood.userData.open)return m();ttlB('Cerrá el paravientos');taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=false;rotAnim(S.hood,'x',0,450,m)}},
+  m=>{ttlB('Apretá SET para empezar');msg('La fusionadora limpia las puntas con un arco corto y las alinea.');taps=[S.btn.set];onTap=()=>{if(S.hood.userData.open||S.fh.some(f=>f.userData.open)){msg('La fusionadora no arranca con el paravientos o una mordaza abierta: cerralos primero.');return}taps=[];screen(S.scr,'ALINEANDO','idle');setTimeout(m,500)}},
   m=>{ttlB('Alineá y fusioná en la pantalla');BENCHARC=true;taps=[S.btn.arc];onTap=()=>{if(fuOn)fuOn('arc')};
    openPan('Pantalla de la fusionadora',()=>{$('#pt').textContent='Fusionadora · vistas X e Y';fuseUI($('#pb'),c1,()=>{endPan();taps=[];screen(S.scr,last.toFixed(2)+' dB','arc');tw(BT.L,V(BKX-GLC,y,z),250);tw(BT.R,V(BKX+GLC,y,z),250);setTimeout(()=>{screen(S.scr,'Pérdida '+last.toFixed(2)+' dB','done');BENCHARC=false;m()},500)},c2)})},
-  m=>{ttlB('Abrí el paravientos y las mordazas');msg('');taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=true;rotAnim(S.hood,'x',-1.75,450,()=>{S.fh.forEach(f=>{f.userData.open=true;rotAnim(f,'x',-1.9,300)});setTimeout(m,400)})}}],done)}
+  m=>{ttlB('Abrí el paravientos y las mordazas');msg('');const fin=()=>{S.fh.forEach(f=>{if(!f.userData.open){f.userData.open=true;rotAnim(f,'x',-1.9,300)}});setTimeout(m,400)};if(S.hood.userData.open)return fin();taps=[S.hood];onTap=()=>{taps=[];S.hood.userData.open=true;rotAnim(S.hood,'x',-1.75,450,fin)}}],done)}
 /* horno: termo sobre el empalme, al horno, tapa, HEAT, sacarlo */
 function benchHeat(done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,HP=V(BKX,1.66,BKZ-.95);bCam('splicer');
  runSeq([m=>{ttlB('Pasá el termo sobre el empalme');msg('Deslizá el termo por el pelo hasta que el empalme quede en el medio.');const s=BT.sleeve,t=BT.sleeveOn;if(!s||!t)return m();const [w]=endOf(t,-.5,V(1,0,0));
@@ -1560,11 +1571,18 @@ function benchHeat(done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=
   m=>{if(S.hl.userData.open)return m();ttlB('Abrí la tapa del horno');bCam('heater');taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,400,m)}},
   m=>{ttlB('Llevá el empalme al horno');msg('Apoyalo centrado sobre la marca de posición del termo.');bCam('heater');const s=BT.sleeve;s.userData.home=s.position.clone();s.userData.dy=HP.y+.15;s.userData.ph=HP.y;
    task([s],[{x:HP.x,z:HP.z,y:HP.y,id:null,s:.2,my:HP.y+.02}],ob=>{if(Math.abs(ob.position.x-HP.x)>.15){err++;msg('El termo quedó corrido: centralo en el horno.');return false}ob.position.copy(HP);setTimeout(m,300);return 'hold'})},
-  m=>{ttlB('Cerrá la tapa del horno');taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=false;rotAnim(S.hl,'x',0,350,m)}},
-  m=>{ttlB('Apretá HEAT');msg('');taps=[S.btn.heat];onTap=()=>{taps=[];const HT=(upg('hor')||itemOn('Bruno'))?1200:2400,t0=performance.now(),s=BT.sleeve,s0=s.scale.x;msg('🔥 Calentando el termo…');flash3D(0xff8a2a,1.6,HT);
+  m=>{if(!S.hl.userData.open)return m();ttlB('Cerrá la tapa del horno');taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=false;rotAnim(S.hl,'x',0,350,m)}},
+  m=>{ttlB('Apretá HEAT');msg('');taps=[S.btn.heat];onTap=()=>{if(S.hl.userData.open){msg('Cerrá la tapa del horno antes de calentar.');return}taps=[];const HT=(upg('hor')||itemOn('Bruno'))?1200:2400,t0=performance.now(),s=BT.sleeve,s0=s.scale.x;msg('🔥 Calentando el termo…');flash3D(0xff8a2a,1.6,HT);
     const f=()=>{const q=Math.min(1,(performance.now()-t0)/HT);S.hglow.material.emissiveIntensity=Math.sin(q*Math.PI)*1.6;screen(S.scr,'HEAT 180°C','heat',q);s.scale.set(s0,s0*(1-.5*q),s0*(1-.5*q));if(q<1)return requestAnimationFrame(f);
      S.hglow.material.emissiveIntensity=0;ding();msg('Termo contraído: el empalme quedó protegido.');setTimeout(m,300)};f()}},
-  m=>{ttlB('Abrí el horno y sacá el empalme');taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,350,()=>{tw(BT.sleeve,V(BKX-.6,.12,BKZ+2.0),400,()=>{setTimeout(m,300)})})}}],done)}
+  m=>{ttlB('Abrí el horno y sacá el empalme');const out=()=>tw(BT.sleeve,V(BKX-.6,.12,BKZ+2.0),400,()=>{setTimeout(m,300)});if(S.hl.userData.open){taps=[BT.sleeve];onTap=()=>{taps=[];out()};return}taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,350,out)}}],done)}
+/* tocar el paravientos, una mordaza o la tapa del horno la abre o la cierra en cualquier momento */
+function spParts(){const S=BK&&BK.sp&&BK.sp.userData;return S&&S.hood?[S.hood,...S.fh,S.hl]:[]}
+function spToggle(o){const S=BK.sp.userData,op=!o.userData.open,isFh=S.fh.includes(o),isHood=o===S.hood;
+ if(!op&&drags.length&&(isFh||isHood)){msg('Primero acomodá el pelo en la ranura: después cerrás.');return}
+ o.userData.open=op;rotAnim(o,'x',op?(isHood?-1.75:-1.9):0,isHood?450:320);
+ msg((isHood?'Paravientos ':o===S.hl?'Tapa del horno ':'Mordaza ')+(op?(isHood?'abierto.':'abierta.'):(isHood?'cerrado.':'cerrada.')))}
+function spFree(r){if(!playing||!BK||!BK.out||!BK.sp||!BK.sp.visible)return false;const P=spParts();if(!P.length)return false;const h=r.intersectObjects(P,true)[0];if(!h)return false;spToggle(rootOf(h.object,P));return true}
 function flashPos(){return BENCHARC?V(BKX,SPYF+.1,BKZ+SPZF):null}
 /* ---- power meter con sus botones de verdad: ⏻ prende, λ cambia la longitud de onda, REF guarda referencia, dB muestra la diferencia, LIGHT luz de pantalla, LED linterna ---- */
 function opmPress(o,k){const s=o.st;if(!s)return;
@@ -1870,13 +1888,14 @@ const supLoad=()=>{try{return JSON.parse(localStorage.getItem('taller_planilla')
 const supSave=()=>{try{localStorage.setItem('taller_planilla',JSON.stringify(SU.rows.slice(-200)))}catch(e){}};
 /* sonido del teléfono y voz del cliente */
 function supRing(on){clearInterval(SU&&SU.ringT);if(!on)return;const beep=()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime;[0,.22].forEach(d=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.setValueAtTime(440,t+d);o.frequency.setValueAtTime(480,t+d+.05);g.gain.setValueAtTime(.0001,t+d);g.gain.exponentialRampToValueAtTime(.09,t+d+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d+.18);o.connect(g);g.connect(AC.destination);o.start(t+d);o.stop(t+d+.2)})}catch(e){}try{navigator.vibrate&&navigator.vibrate([300,150,300])}catch(e){}};beep();SU.ringT=setInterval(beep,1600)}
-function supSay(t){if(!SU.voice||!('speechSynthesis' in window))return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/[\u{1F300}-\u{1FAFF}]/gu,''));u.lang='es-AR';u.rate=1.05;const v=speechSynthesis.getVoices().find(v=>/^es/i.test(v.lang));if(v)u.voice=v;speechSynthesis.speak(u)}catch(e){}}
+function supSay(t){speak(t,Object.assign({cut:true},SU&&SU.c&&SU.c.vp||{}))}
+function supTyping(on){const e=$('#schat');if(!e)return;const o=e.querySelector('.styping');if(o)o.remove();if(on){e.insertAdjacentHTML('beforeend','<div class="sm cl styping">✍️ …</div>');e.scrollTop=e.scrollHeight}}
 /* ---------- arranque y salida ---------- */
 function startSupport(){if(!acct)return showLogin();SUPON=true;playing=false;$('#title').hidden=true;$('#sup').hidden=false;
  SU={n:sUpg('turno')?6:4,call:0,pts:0,log:[],rows:supLoad(),pc:'off',tab:'form',voice:(()=>{try{return localStorage.getItem('taller_voz')!=='0'}catch(e){return true}})(),c:null,state:'idle',form:{},missed:0};
- $('#svoice').textContent=SU.voice?'🔊':'🔇';$('#sopav').innerHTML=avatar(SOPS[OP]);$('#dlbar').innerHTML=sUpg('auto')>=1?SBAR.map(b=>`<option value="${b}">`).join(''):'';$('#dlcal').innerHTML=sUpg('auto')>=2?SCAL.map(b=>`<option value="${b}">`).join(''):'';supPc();supInfo();supChat([]);supOpts([]);setTimeout(supNext,1200)}
+ $('#svoice').textContent=VOZ?'🔊':'🔇';$('#sopav').innerHTML=avatar(SOPS[OP]);$('#dlbar').innerHTML=sUpg('auto')>=1?SBAR.map(b=>`<option value="${b}">`).join(''):'';$('#dlcal').innerHTML=sUpg('auto')>=2?SCAL.map(b=>`<option value="${b}">`).join(''):'';supPc();supInfo();supChat([]);supOpts([]);setTimeout(supNext,1200)}
 function supExit(){$('#mq').hidden=false}
-function supVoice(){SU.voice=!SU.voice;$('#svoice').textContent=SU.voice?'🔊':'🔇';try{localStorage.setItem('taller_voz',SU.voice?'1':'0');if(!SU.voice)speechSynthesis.cancel()}catch(e){}}
+function supVoice(){vozSet(!VOZ)}
 function supInfo(){$('#sinfo').textContent=`Llamada ${Math.min(SU.call,SU.n)} de ${SU.n} · ${SU.pts} pts`}
 function supTick(){if(!SU||!SU.c||!SU.c.t0||SU.c.t1)return;const s=Math.floor((Date.now()-SU.c.t0)/1000);$('#stime').textContent=`⏱ ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 setInterval(()=>{if(SUPON)supTick()},500);
@@ -1885,20 +1904,25 @@ function supNext(){if(SU.call>=SU.n)return supEnd();SU.call++;supInfo();const c=
  $('#sphone').classList.add('ring');$('#sphs').textContent=sUpg('cid')?`📳 Llamada de ${c.tel}`:'📳 ¡Suena el teléfono!';$('#stime').textContent='';supChat([]);supAdd('sys','📳 Llamada entrante…');supRing(true);
  supOpts([['📞 Atender',supAnswer,'big']]);SU.ringTO=setTimeout(()=>{if(SU.state!=='ring')return;supRing(false);$('#sphone').classList.remove('ring');SU.missed++;SU.pts-=30;supInfo();
   supChat([{w:'sys',t:'📵 Llamada perdida: el cliente cortó (−30 pts).'}]);SU.state='idle';supOpts([['Esperar la próxima llamada',supNext]])},20000);if(SU.pc==='app'){SU.tab='form';supPc()}}
-function supAnswer(){clearTimeout(SU.ringTO);supRing(false);if(SU.pc==='app'){SU.tab='form';setTimeout(supPc,0)}$('#sphone').classList.remove('ring');SU.state='greet';SU.c.t0=Date.now();$('#sphs').textContent='🟢 En llamada · '+SU.c.d.tel.slice(0,4)+'…';
+function supAnswer(){clearTimeout(SU.ringTO);supRing(false);if(SU.pc==='app'){SU.tab='form';setTimeout(supPc,0)}$('#sphone').classList.remove('ring');SU.state='greet';SU.c.t0=Date.now();{const c=SU.c;c.vp=supVoz(c);c.aiP=supAI(c).then(a=>{c.ai=a;return a})}$('#sphs').textContent='🟢 En llamada · '+SU.c.d.tel.slice(0,4)+'…';
  supAdd('sys','Atendiste. ¿Cómo saludás?');
  supOpts([[`“Soporte técnico, buen día. Te habla ${SOPS[OP].n}, ¿en qué te puedo ayudar?”${sUpg('guion')?' ⭐':''}`,()=>supGreet(15+(sUpg('guion')?5:0))],['“Hola, ¿qué necesitás?”',()=>supGreet(5)],['“¿Sí? ¿Qué pasa?”',()=>supGreet(-10)]])}
 function supGreet(p){const c=SU.c;c.greet=p;c.pts+=p;const me=p>=15?`Soporte técnico, buen día. Te habla ${SOPS[OP].n}, ¿en qué te puedo ayudar?`:p>0?'Hola, ¿qué necesitás?':'¿Sí? ¿Qué pasa?';supAdd('me',me);
- setTimeout(()=>{const o=(p<0?'Uy, qué mala onda… bueno, te cuento. ':'')+srnd(SOPEN[c.d.mot]);supAdd('cl',o);SU.state='talk';supAsk();if(SU.pc==='off')supAdd('sys','💡 Prendé la computadora (⏻) para cargar la orden.')},500)}
-function supQs(){const c=SU.c.d,sp=SSPELL[c.ape];return [['nom','¿Me decís tu nombre y apellido?',`Sí, soy ${c.nom} ${sp?sp.split(',')[0]:c.ape}.${sp?' '+sp.slice(sp.indexOf(',')+2).replace(/^./,m=>m.toUpperCase())+'.':''}`],
+ const go=()=>{const a=c.ai||{},o=p<0?(a.rude||'Uy, qué mala onda… bueno, te cuento. '+srnd(SOPEN[c.d.mot])):(a.open||srnd(SOPEN[c.d.mot]));supTyping(false);supAdd('cl',o);SU.state='talk';supAsk();if(SU.pc==='off')supAdd('sys','💡 Prendé la computadora (⏻) para cargar la orden.')};
+ if(c.aiP&&!c.ai&&SAMP&&SAMPOK){setTimeout(()=>supTyping(true),300);Promise.race([c.aiP,new Promise(r=>setTimeout(r,5000))]).then(go)}else setTimeout(go,500)}
+function supQs(){const a=SU.c.ai||{},q=supQs0();q.forEach(x=>{if(a[x[0]])x[2]=a[x[0]]});return q}
+function supQs0(){const c=SU.c.d,sp=SSPELL[c.ape];return [['nom','¿Me decís tu nombre y apellido?',`Sí, soy ${c.nom} ${sp?sp.split(',')[0]:c.ape}.${sp?' '+sp.slice(sp.indexOf(',')+2).replace(/^./,m=>m.toUpperCase())+'.':''}`],
  ['tel','¿Un teléfono de contacto?',`Anotá: ${c.tel}.`],['bar','¿En qué barrio estás?',`En ${c.bar}.`],['cal','¿Qué calle y altura?',`${c.cal} ${c.alt}.`],
  ['casa','¿Es casa, depto o lote? ¿Qué número?',/^Casa/.test(c.casa)?`Es una casa, la ${c.casa.replace('Casa ','')}.`:/^Depto/.test(c.casa)?`Es un departamento, el ${c.casa.replace('Depto ','')}.`:`Es un lote en un barrio privado, el ${c.casa.replace('Lote ','')}.`]]}
 function supAsk(){const c=SU.c,qs=supQs(),o=qs.filter(q=>!c.asked[q[0]]).map(q=>[q[1],()=>{c.asked[q[0]]=true;supAdd('me',q[1]);setTimeout(()=>{supAdd('cl',q[2]);c.last=q[2];supAsk()},450)}]);
- if(c.last)o.push(['🔁 “¿Me lo repetís, por favor?”',()=>{if(!supItemOn('Ulises'))c.pts-=2;supAdd('me','¿Me lo repetís, por favor?');setTimeout(()=>{supAdd('cl','Sí, claro: '+c.last.replace(/^(Sí, |Anotá: )/,''));supAsk()},400)},'alt']);
- o.push(['✅ Despedirte',supCloseOpts,'alt']);supOpts(o)}
+ if(c.last)o.push(['🔁 “¿Me lo repetís, por favor?”',()=>{if(!supItemOn('Ulises'))c.pts-=2;supAdd('me','¿Me lo repetís, por favor?');setTimeout(()=>{supAdd('cl',((c.ai&&c.ai.rep)||'Sí, claro:')+' '+c.last.replace(/^(Sí, |Anotá: )/,''));supAsk()},400)},'alt']);
+ if(SAMP&&SAMPOK)o.push(['✍️ Preguntar con tus palabras',supFreeUI,'alt']);o.push(['✅ Despedirte',supCloseOpts,'alt']);supOpts(o)}
+function supFreeUI(){const b=$('#sopts');b.innerHTML='<form class="sfree"><input maxlength="160" placeholder="Escribí tu pregunta al cliente…" aria-label="Tu pregunta" autocomplete="off"><button class="big">Enviar</button><button type="button" class="alt">↩ Volver</button></form>';const f=b.querySelector('form'),i=f.querySelector('input');i.focus();
+ f.querySelector('.alt').onclick=supAsk;f.onsubmit=async ev=>{ev.preventDefault();const q=i.value.trim();if(!q)return;b.innerHTML='';const c=SU.c;supAdd('me',q);supTyping(true);const r=await supFree(q);supTyping(false);if(SU.c!==c)return;
+  if(r){supAdd('cl',r.reply);c.last=r.reply;r.reveals.forEach(k=>c.asked[k]=true)}else supAdd('sys','La IA no está disponible ahora: usá las preguntas de la lista.');supAsk()}}
 function supCloseOpts(){const n=SU.c.d.nom;supOpts([[`“Listo, ${n}, ya quedó cargado. En las próximas 48 horas te visita un técnico. ¡Que tengas buen día!”${sUpg('guion')?' ⭐':''}`,()=>supClose(10+(sUpg('guion')?5:0))],['“Hasta luego, seguimos en contacto.”',()=>supClose(5)],['📴 Cortar sin saludar',()=>supClose(-15)],['↩ Volver a preguntar',supAsk,'alt']])}
 function supClose(p){const c=SU.c;c.close=p;c.pts+=p;if(p>-15)supAdd('me',p>=10?`Listo, ${c.d.nom}, ya quedó cargado. En las próximas 48 horas te visita un técnico. ¡Que tengas buen día!`:'Hasta luego, seguimos en contacto.');
- setTimeout(()=>{if(p>-15)supAdd('cl',p>=10?'¡Buenísimo, muchas gracias! Igualmente.':'Dale, muchas gracias. ¡Hasta luego!');supAdd('sys','📴 Llamada terminada. Guardá la orden en la planilla y mandásela a un técnico.');$('#sphs').textContent='Llamada terminada';SU.state='after';
+ setTimeout(()=>{if(p>-15)supAdd('cl',(c.ai&&c.ai.bye)||(p>=10?'¡Buenísimo, muchas gracias! Igualmente.':'Dale, muchas gracias. ¡Hasta luego!'));supAdd('sys','📴 Llamada terminada. Guardá la orden en la planilla y mandásela a un técnico.');$('#sphs').textContent='Llamada terminada';SU.state='after';
   supOpts(SU.c.sent?[]:[['💻 Ir a la computadora',()=>{if(SU.pc==='app'){SU.tab=SU.c.saved?'chat':'form';supPc()}else supAdd('sys','Prendé la computadora con el botón ⏻.')}]]);if(SU.c.sent)supSummary()},500)}
 function supAdd(w,t){SU.chat=SU.chat||[];SU.chat.push({w,t});supChat(SU.chat);if(w==='cl')supSay(t)}
 function supChat(list){if(!list.length)SU.chat=[];$('#schat').innerHTML=(list.length?list:[{w:'sys',t:'Esperando llamadas…'}]).map(m=>`<div class="sm ${m.w}">${sesc(m.t)}</div>`).join('');const e=$('#schat');e.scrollTop=e.scrollHeight}
@@ -2004,14 +2028,14 @@ function sBuy(k,id){if(!acct)return;const co=acct.coins||0,sp=Object.assign({too
 /* ===== Jony: obsesivo con el trabajo. No te deja comer, no te pasa ni el error más chico y siempre te dice qué hiciste mal ===== */
 const JONY={n:'Jony',c:'#15803d',i:'J'};
 let JNY={t:0,food:0};
-const jonyMe=()=>(SUPON?SOPS[OP]:TECS[TEC])&&(SUPON?SOPS[OP]:TECS[TEC]).n==='Jony';
+const jonyMe=()=>!SUPON||(SOPS[OP]&&SOPS[OP].n==='Jony');
 function jony(t,force){if(jonyMe())return;const now=Date.now();if(!force&&now-JNY.t<6500)return;if(nq.length>=3)return;JNY.t=now;nq.push({who:JONY,t,good:true,nag:true});if(!nOn)nNext()}
 const JERR=['Paso «{s}»: error. Error es error, por más chico que sea. No te lo paso.','Lo vi. «{s}» se hace bien a la primera, no a la segunda.','Otro error en «{s}». Anotado. Después lo hablamos.','¿«{s}» y te equivocás? Esto en mi época era despido.','Error en «{s}». Concentrate, que te estoy mirando 👀.','No, no y no. «{s}» tiene un procedimiento y no lo seguiste.'];
-const JFOOD=['¿Eso es un sándwich? Nada de comer hasta que cierres la caja 🥪❌','Vi que sacaste las galletitas. Guardalas. Se come cuando termina la jornada.','El mate después. Ahora empalmás.','¿Almuerzo? El almuerzo es para los que terminaron. Vos no terminaste.','No me digas que tenés hambre. El hambre se pasa trabajando.','¿Te sentaste? Parado se empalma mejor.'];
+const JFOOD=['¿Eso es un sándwich? Nada de comer hasta que termine el turno 🥪❌','Vi que sacaste las galletitas. Guardalas. Se come cuando termina la jornada.','El mate después. Ahora atendés.','¿Almuerzo? El almuerzo es para los que terminaron. Vos no terminaste.','No me digas que tenés hambre. El hambre se pasa trabajando.','¿Te vas al baño? Con el teléfono sonando, ni loco.'];
 const JFUS=['{db} dB. Está bien… pero 0,00 es mejor. Repetilo mentalmente.','{db} dB en ese empalme. Yo lo hubiera hecho en 0,005.','Fusión de {db} dB. Mirá bien el corte la próxima, se notaba un pelito torcido.'];
 function jonyErr(){const s=($('#ti')&&$('#ti').textContent||'este paso').replace(/:.*$/,'').slice(0,46);jony(JERR[Math.random()*JERR.length|0].replace('{s}',s))}
 function jonyFus(db){if(Math.random()<.45)jony(JFUS[Math.random()*JFUS.length|0].replace('{db}',(+db).toFixed(3)))}
-setInterval(()=>{if(!(playing||SUPON)||document.hidden)return;JNY.food+=5;if(JNY.food>=80+Math.random()*40){JNY.food=0;jony(JFOOD[Math.random()*JFOOD.length|0],true)}},5000);
+setInterval(()=>{if(!SUPON||document.hidden)return;JNY.food+=5;if(JNY.food>=80+Math.random()*40){JNY.food=0;jony(JFOOD[Math.random()*JFOOD.length|0],true)}},5000);
 /* al terminar un trabajo de empalme: la lista de todo lo que hiciste mal */
 function jonyEnd(){const L=[],avg=fusN?loss/fusN:0;if(err)L.push(`${err} error${err>1?'es':''}`);if(reclamos)L.push(`${reclamos} reclamo${reclamos>1?'s':''}`);if(fusN&&avg>.005)L.push(`pérdida promedio ${avg.toFixed(3)} dB (se puede menos)`);
  const rr=MODE==='nap'?NP.rate:MODE==='roseta'?R.rate:(W&&W.rates&&W.rates.length&&W.rates.every(r=>r==='Prolijo')?'Prolijo':W&&W.rates&&W.rates.length?'Desprolijo':null);if(rr&&rr!=='Prolijo')L.push(`guardado ${rr.toLowerCase()}`);
@@ -2027,6 +2051,55 @@ function jonySup(c,row){const d=c.d,bad=Object.keys(c.ok).filter(k=>!c.ok[k]),N=
  const s=Math.round((c.t1-c.t0)/1000);if(s>45){jony(`Tardaste ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}. Eso se hace en 45 segundos.`,true);return}
  jony('Perfecta. Por esta vez. No te acostumbres.',true)}
 
+/* ===== voces e IA: el dispositivo lee en voz alta al equipo y a los clientes (cada uno con su voz),
+   y en el modo soporte Claude escribe lo que dice cada cliente según su personalidad ===== */
+let VOZ=(()=>{try{return localStorage.getItem('taller_voces')!=='0'}catch(e){return true}})(),VOICES=[],SAMP=null,SAMPOK=true;
+function vLoad(){try{VOICES=speechSynthesis.getVoices().filter(v=>/^es/i.test(v.lang))}catch(e){VOICES=[]}}
+if('speechSynthesis' in window){vLoad();try{speechSynthesis.addEventListener('voiceschanged',vLoad)}catch(e){}}
+(async()=>{try{if(window.claude&&claude.use)SAMP=await claude.use('sample')}catch(e){SAMP=null}})();
+const VFEM=/female|mujer|paulina|m[oó]nica|helena|sabina|laura|luc[ií]a|elena|isabela|camila|paloma|marisol|google español/i,VMAS=/\bmale\b|hombre|jorge|diego|pablo|juan|carlos|enrique|ra[uú]l|tom[aá]s|alvaro|miguel/i;
+const VPROF={'Julián':{p:1,r:1.06,i:0},'Ulises':{p:.82,r:.95,i:1},'El Pana':{p:.68,r:1.14,i:2},'Jony':{p:1.32,r:1.24,i:3}};
+const FEMN=new Set(['Martina','Sofía','Valentina','Camila','Julieta','Agustina','Florencia','Milagros','Rocío','Abril','Carla','Paula','Lorena','Norma','Graciela']);
+function vPick(i,fem){if(!VOICES.length)return null;const ar=VOICES.filter(v=>/AR|419|US|MX|CO|CL/i.test(v.lang)),pool=ar.length?ar:VOICES,f=pool.filter(v=>VFEM.test(v.name)&&!VMAS.test(v.name)),m=pool.filter(v=>VMAS.test(v.name)),L=fem?(f.length?f:pool):(m.length?m:pool);return L[Math.abs(i)%L.length]}
+const vClean=t=>String(t).replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').replace(/[«»“”"*_]/g,'').replace(/\s+/g,' ').trim();
+function speak(t,o={}){if(!VOZ||!('speechSynthesis' in window)||!t)return;try{if(o.cut)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(vClean(t)),v=vPick(o.i||0,o.fem);u.lang=v?v.lang:'es-AR';if(v)u.voice=v;u.pitch=o.p||1;u.rate=o.r||1;u.volume=1;speechSynthesis.speak(u)}catch(e){}}
+function vozSet(on){VOZ=on;try{localStorage.setItem('taller_voces',on?'1':'0');if(!on)speechSynthesis.cancel()}catch(e){}vozSel();const b=$('#svoice');if(b)b.textContent=on?'🔊':'🔇'}
+function vozSel(){document.querySelectorAll('#vsel button').forEach(b=>{b.setAttribute('aria-pressed',(b.dataset.v==='1')===VOZ);b.onclick=()=>{vozSet(b.dataset.v==='1');if(VOZ)speak('Voces activadas.',{p:1,r:1.05})}})}
+/* voz de cada cliente: según el nombre (mujer u hombre) y un tono propio */
+function supVoz(c){const fem=FEMN.has(c.d.nom);return {fem,p:(fem?1.12:.88)+(Math.random()-.5)*.18,r:.98+Math.random()*.16,i:Math.random()*8|0}}
+/* ---------- IA: el guion del cliente ---------- */
+const SPER=['apurado, contesta corto','muy amable y charlatán','una señora mayor que habla despacio y se va por las ramas','molesto porque ya llamó dos veces','un pibe joven que usa muchas muletillas (tipo, viste, re)','desconfiado, pregunta para qué le piden los datos'];
+async function supAI(c){if(!SAMP||!SAMPOK)return null;const d=c.d;c.per=srnd(SPER);
+ const P=`Sos guionista de un juego argentino donde el jugador atiende el teléfono de soporte técnico de internet por fibra óptica. Escribí lo que dice UN cliente, en español rioplatense con voseo, frases naturales de teléfono, sin emojis.
+Personalidad: ${c.per}. Motivo del llamado: ${d.mot}.
+Datos EXACTOS del cliente (copialos tal cual, sin cambiar ni una letra ni un número): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", calle "${d.cal}", altura "${d.alt}", vivienda "${d.casa}".
+Devolvé SOLO un objeto JSON con estas claves, cada valor una sola intervención de máximo 28 palabras:
+"open": saluda y explica el motivo, sin dar ningún dato personal;
+"rude": reacción corta si el operador lo atiende de mala manera, y después explica el motivo;
+"nom": dice nombre y apellido (si el apellido se presta a confusión, como Giménez/Jiménez, Vázquez, Báez, Pereyra, Suárez o Benítez, aclara cómo se escribe);
+"tel": dicta el teléfono con los números escritos en cifras;
+"bar": dice el barrio;
+"cal": dice la calle y la altura en cifras;
+"casa": dice si es casa, departamento o lote y el número;
+"rep": pide disculpas y repite el último dato más despacio (escribí solo la introducción, por ejemplo "Sí, claro, te repito:");
+"bye": se despide agradecido;
+"byeBad": se despide molesto porque lo despidieron seco.`;
+ try{const j=await SAMP.json(P,{modelTier:'quick'});if(!j||typeof j!=='object')return null;
+  const has=(t,s)=>snorm(t).includes(snorm(s)),dig=(t,s)=>sdig(t).includes(sdig(s)),ok={open:t=>!dig(t,d.tel)&&!has(t,d.cal+' '+d.alt),nom:t=>has(t,d.nom)&&(has(t,d.ape)||has(t,d.ape.slice(1))),tel:t=>dig(t,d.tel),bar:t=>has(t,d.bar),cal:t=>has(t,d.cal)&&dig(t,d.alt),casa:t=>dig(t,d.casa)||has(t,d.casa.split(' ').pop()),rude:()=>1,rep:()=>1,bye:()=>1,byeBad:()=>1},out={};
+  for(const k in ok){const t=j[k];if(typeof t==='string'&&t.length<260&&ok[k](t))out[k]=t.trim()}return Object.keys(out).length?out:null}
+ catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
+/* pregunta libre: el jugador escribe y el cliente contesta en personaje */
+async function supFree(q){const c=SU.c,d=c.d;if(!SAMP||!SAMPOK)return null;const hist=(SU.chat||[]).filter(m=>m.w!=='sys').slice(-10).map(m=>(m.w==='me'?'Operador: ':'Cliente: ')+m.t).join('\n');
+ const P=`Juego argentino de soporte técnico de internet por fibra. Hacé de CLIENTE por teléfono, en español rioplatense con voseo, sin emojis, máximo 35 palabras.
+Personalidad: ${c.per||'normal'}. Motivo: ${d.mot}. Tus datos EXACTOS (si te los piden, decilos tal cual, con números en cifras): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", calle "${d.cal}", altura "${d.alt}", vivienda "${d.casa}". Si te preguntan algo que no tiene que ver, respondé con naturalidad y volvé al tema.
+Conversación hasta ahora:
+${hist}
+Operador: ${q}
+Devolvé SOLO JSON: {"reply": lo que contesta el cliente, "reveals": lista con las claves de los datos que dijiste en esta respuesta, de entre "nom","tel","bar","cal","casa"}`;
+ try{const j=await SAMP.json(P,{modelTier:'quick',cache:false});if(!j||typeof j.reply!=='string')return null;return {reply:j.reply.slice(0,320),reveals:Array.isArray(j.reveals)?j.reveals.filter(k=>['nom','tel','bar','cal','casa'].includes(k)):[]}}
+ catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
+
+vozSel();
 /* ===== cuenta y menú de título ===== */
 const cu=n=>{try{return window.claude&&window.claude.use?window.claude.use(n).catch(()=>null):Promise.resolve(null)}catch(e){return Promise.resolve(null)}};
 const LS={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
@@ -2099,7 +2172,7 @@ function boss(kind,vars={},ch=1){if(kind==='wrongfib'){if(!playing||nq.length>=3
  for(const k in vars)t=t.split('{'+k+'}').join(vars[k]);nq.push({who,t});if(!nOn)nNext()}
 /* buena medición: Julián te felicita (no resta puntos) */
 function praise(p){if(!playing||nq.length>=3)return;nq.push({who:BOSS[0],t:`Sos un chad 🗿 (${p} dBm)`,good:true});if(!nOn)nNext()}
-function nNext(){const m=nq.shift();if(!m){nOn=false;return}nOn=true;if(!m.good){reclamos++;loseLife()}ding();const el=document.createElement('div');el.className='nt';el.setAttribute('role','status');
+function nNext(){const m=nq.shift();if(!m){nOn=false;return}nOn=true;if(!m.good){reclamos++;loseLife()}ding();if(playing||SUPON)setTimeout(()=>speak(m.t,VPROF[m.who.n]||{}),250);const el=document.createElement('div');el.className='nt';el.setAttribute('role','status');
  el.innerHTML=`<div class="av" style="background:${m.who.c}">${m.who.i||m.who.n[0]}</div><div style="flex:1;min-width:0"><div class="hd"><span class="ic"><svg width="10" height="10" viewBox="0 0 24 24"><path fill="#fff" d="M12 3C7 3 3 6.6 3 11c0 2 .8 3.8 2.2 5.2L4 21l5-1.6c1 .4 2 .6 3 .6 5 0 9-3.6 9-8s-4-9-9-9z"/></svg></span>Chat del equipo · ahora<span class="pen"${m.good?' style="color:#15803d"':''}>${m.nag?'😤 sin descuento… por ahora':m.info?'📋 indicación':m.good?'👍':'−'+PEN+' pts'+(LIVES!=null?' · −1 ❤️':'')}</span></div><b>${m.who.n}</b><p>${m.t}</p></div>`;
  const box=$('#notif');box.innerHTML='';box.appendChild(el);requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('on')));
  let gone=false;const close=()=>{if(gone)return;gone=true;el.classList.remove('on');setTimeout(()=>{el.remove();nNext()},380)};el.onclick=close;setTimeout(close,4800)}
@@ -2266,6 +2339,7 @@ function wallUI(el,done){const tg={x:150,y:110},s={x:58,y:160,on:false};let m=fa
 
 /* ===== teoría: un "¿por qué?" para cada paso y un manual corto de fibra óptica ===== */
 const TIPS=[
+ [/Guardá los pelos|Guardá la fibra|vueltas/,'Guardar los pelos','La fibra se guarda en la bandeja sin forzar curvas: radio mínimo de 15 mm para la G.657A2 y 30 mm para la G.652D. Tip de cámara: con ⬇︎ la ves desde arriba, y con dos dedos (o clic derecho) movés la vista para seguir el canal.'],
  [/Tirá de la cinta/,'Cuánta cinta','Cada tira va a medida de la marca de la base: si es corta, la roseta queda floja de un lado; si sobresale, junta polvo y se despega por los bordes. La pared tiene que estar limpia y seca.'],
  [/film/,'El film protector','La doble faz trae un film que tapa el adhesivo. Se saca recién al final, tomándolo de la punta: si tocás el adhesivo con los dedos, la grasa de la piel hace que pegue menos.'],
  [/Mantené apretada/,'Presión sobre la cinta','El adhesivo de la doble faz agarra con presión: apretando unos segundos se aplasta la espuma y toca toda la pared. Si solo la apoyás, se despega con el peso del drop.'],
@@ -2333,7 +2407,17 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=50,NEWS=[
+const VER=52,NEWS=[
+ {v:52,t:'Fusionadora más cómoda',items:[
+  ['🪟','Abrir y cerrar cuando quieras','Tocando el paravientos, cada mordaza o la tapa del horno los abrís o cerrás en cualquier momento. La fusionadora no arranca con SET si algo quedó abierto, y el horno no calienta con la tapa levantada.'],
+  ['🖥️','Pantalla más abajo','La pantalla de la fusionadora ahora cuelga adelante, más baja, y ya no tapa los botones.']]},
+ {v:51,t:'Cámara nueva, voces y clientes con IA',items:[
+  ['🎥','Cámara nueva','Con dos dedos movés la vista por la mesa y girás retorciendo los dedos; pellizcando acercás más que antes. En la computadora: clic derecho o Shift + arrastrar para mover, y la rueda para acercar.'],
+  ['⬇︎','Vista desde arriba','Botones a la izquierda: acercar, alejar, vista desde arriba (ideal para guardar los pelos en la bandeja) y volver a la vista del paso. También con teclado: flechas o WASD, Q/E para girar, + y −, T y R.'],
+  ['🪢','La cámara acompaña','Si arrastrás un pelo o una herramienta hasta el borde de la pantalla, la vista se corre sola.'],
+  ['🗣️','Voces','El equipo te habla en voz alta: Julián, Ulises, El Pana y Jony tienen cada uno su tono. En soporte, cada cliente tiene su propia voz (de hombre o de mujer según el nombre). Se apagan desde el menú o con 🔊.'],
+  ['🤖','Clientes con IA','En soporte, una IA escribe lo que dice cada cliente según su personalidad (apurado, charlatán, una señora que se va por las ramas, molesto…), siempre con sus datos exactos. Y con “✍️ Preguntar con tus palabras” le podés hablar como quieras y te contesta en personaje.'],
+  ['🥦','Jony solo en soporte','Jony ya no está en el modo técnico ni manda mensajes mientras empalmás: ahora está solo en el soporte técnico.']]},
  {v:50,t:'Llegó Jony',items:[
   ['🥦','Jony','Nuevo compañero con rulitos tipo brócoli. Te escribe al chat del equipo por cualquier error, por más chico que sea, no te deja comer y al terminar te repasa todo lo que hiciste mal. Sus mensajes no restan puntos… por ahora.'],
   ['🧑‍🔧','Jony técnico','Se puede elegir como técnico. Su ítem es la lupa de bolsillo: cada fusión pierde un 20% menos.'],
@@ -2434,8 +2518,7 @@ const ITEMS={
  'Dylan':{ic:'🚬',n:'Cigarrillos',d:'Pausa para pensar: el primer reclamo no resta puntos.',p:560},
  'Federico':{ic:'🫓',n:'Tortillas',d:'+1 moneda por cada empalme.',p:520},
  'Sebastián':{ic:'🧴',n:'Perfumes',d:'Buena presencia: +50 puntos al final.',p:560},
- 'Bruno':{ic:'🥤',n:'Gaseosas',d:'Pura energía: el horno y la pinza van el doble de rápido.',p:600},
- 'Jony':{ic:'🔍',n:'Lupa de bolsillo',d:'Detallista hasta el último micrón: cada fusión pierde un 20% menos.',p:620}};
+ 'Bruno':{ic:'🥤',n:'Gaseosas',d:'Pura energía: el horno y la pinza van el doble de rápido.',p:600}};
 const upg=id=>(acct&&acct.tools&&acct.tools[id])||0;
 const owns=n=>!!(acct&&acct.items&&acct.items[n]);
 const itemOn=n=>owns(n)&&TECS[TEC]&&TECS[TEC].n===n;
@@ -2474,8 +2557,7 @@ const TECS=[
  {n:'Dylan',sk:'#5e3a22',hr:'#141414',hs:'short',hat:'cap',hc:'#d63a3a',build:'chubby',beard:'goatee',sh:'#3a3f46',vs:'#f5e53a',bg:'#fff1cf',d:'19 años · gorra · chivita'},
  {n:'Federico',sk:'#6a4128',hr:'#141414',hs:'short',side:1,hat:'helmet',hc:'#ff8a1a',build:'thin',sh:'#2c3640',vs:'#ff7a1a',bg:'#ffe3cf',d:'Patillas largas'},
  {n:'Sebastián',sk:'#c98d5f',hr:'#2a1c14',hs:'neat',hat:null,sh:'#4b2f7a',vs:'#9be23c',bg:'#ece2f7',d:'Sin gorra · bronceado'},
- {n:'Bruno',sk:'#ebc5a8',hr:'#1c1511',hs:'fringe',hat:null,sh:'#1d2a4d',vs:null,collar:'zip',bg:'#d8ecff',d:'21 años · flequillo · campera azul'},
- {n:'Jony',sk:'#e9c3a2',hr:'#2b1b12',hs:'rulos',hat:null,sh:'#1f5130',vs:'#ff7a1a',bg:'#dcfce7',d:'Rulitos tipo brócoli · obsesivo con el trabajo'}];
+ {n:'Bruno',sk:'#ebc5a8',hr:'#1c1511',hs:'fringe',hat:null,sh:'#1d2a4d',vs:null,collar:'zip',bg:'#d8ecff',d:'21 años · flequillo · campera azul'}];
 function avatar(c){const H=c.hr,S=c.sk,B=c.build||'normal',rx=B==='chubby'?26:B==='thin'?20.5:23,ry=B==='chubby'?25:25.5,eL=50-rx-2.5,eR=50+rx+2.5;let back='',front='',over='';
  /* pelo: capa de atrás (detrás de la cara) y capa de adelante */
  if(c.hs==='balding'){back=`<ellipse cx="${eL+3}" cy="42" rx="4.5" ry="9" fill="${H}"/><ellipse cx="${eR-3}" cy="42" rx="4.5" ry="9" fill="${H}"/>`;front=`<path d="M${50-rx+2} 38 Q50 30 ${50+rx-2} 38" fill="none" stroke="${H}" stroke-width="1.5" opacity=".35"/>`}
@@ -2520,7 +2602,7 @@ const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Ma
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
-async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();setTimeout(jonyEnd,900);$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b></span></div>`;
+async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b></span></div>`;
  $('#res').innerHTML=tv+(MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
  {const s=$('#res .stars');if(s)s.insertAdjacentHTML('beforebegin',invSummary())}
  {const e=$('#res .ptsn'),t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1100);e.textContent=Math.round(p*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)};f()}
@@ -2528,7 +2610,13 @@ async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end()
 
 /* cámara: giro suave con inercia; los pasos mueven la cámara con transición */
 function rot(d){tyaw+=d}
-function zoom(d){zm=Math.max(.12,Math.min(1.6,zm+d))}
+function zoom(d){zm=Math.max(ZMIN,Math.min(1.6,zm*(1+d*1.4)))}
+/* al arrastrar un pelo o un objeto cerca del borde, la cámara acompaña */
+function edgePan(e){const b=cv.getBoundingClientRect(),m=Math.min(48,b.width*.08),x=e.clientX-b.left,y=e.clientY-b.top;let dx=0,dy=0;if(x<m)dx=(m-x)*.35;else if(x>b.width-m)dx=-(x-b.width+m)*.35;if(y<m+90)dy=Math.max(0,(m+90-y))*.0;if(y>b.height-m)dy=-(y-b.height+m)*.35;if(dx||dy)panBy(dx,dy)}
+function camCmd(c){if(!playing)return;if(c==='in')zoom(-.18);if(c==='out')zoom(.18);if(c==='top'){if(topPrev==null){topPrev=tel;tel=1.55}else{tel=topPrev;topPrev=null}}if(c==='reset'){topPrev=null;resetCam()}
+ if(c==='l')panBy(60,0);if(c==='r')panBy(-60,0);if(c==='u')panBy(0,60);if(c==='d')panBy(0,-60);if(c==='rl')tyaw+=.12;if(c==='rr')tyaw-=.12;camBtns()}
+function camBtns(){const t=$('#camb [data-c=top]');if(t)t.setAttribute('aria-pressed',topPrev!=null)}
+addEventListener('keydown',e=>{if(!playing||SUPON||fuOn||/INPUT|TEXTAREA|SELECT/.test((e.target||{}).tagName||''))return;const K={ArrowLeft:'l',a:'l',ArrowRight:'r',d:'r',ArrowUp:'u',w:'u',ArrowDown:'d',s:'d',q:'rl',e:'rr','+':'in','=':'in','-':'out',t:'top',r:'reset'}[e.key.length===1?e.key.toLowerCase():e.key];if(!K)return;e.preventDefault();camCmd(K)});
 let DYN=1;function size(){const w=cv.clientWidth,h=cv.clientHeight;ren.setPixelRatio(Math.max(.5,(Q==='baja'?Math.min(devicePixelRatio,1):Math.min(devicePixelRatio,Q==='media'?1.5:2))*DYN));ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
 addEventListener('resize',size);if(window.visualViewport)visualViewport.addEventListener('resize',size);addEventListener('orientationchange',()=>setTimeout(size,300));
 /* calidad gráfica: alta (sombras suaves, resolución completa), media, baja (sin sombras, 30 cuadros) */
@@ -2551,12 +2639,12 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20))ovl=['#theo','#end','#news','#shop','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
  cam.position.set(cx+hr*Math.sin(yaw),cyy+D*Math.sin(el),cz+hr*Math.cos(yaw));cam.lookAt(cx,cyy,cz);
- ups.forEach(([i,m])=>upd(i,m.position));{const tt=performance.now()/1000;for(const m of T)if(m.userData&&m.userData.pulse){const k=Math.sin(tt*5);m.scale.setScalar(m.userData.bs*(1+.09*k));m.material.opacity=.62+.25*k}}if(err!==lastErr){if(err>lastErr&&playing){fxBad();jonyErr()}lastErr=err}if(RSG&&RSG.visible)pcU();if(NSG&&NSG.visible)npU();cabU();bU();FIBS.forEach(m=>{const u=m.userData;if(u.rp){if(u.rp.aw&&m.visible&&(!m.parent||m.parent.visible!==false)){fStep(m);ftube(m)}return}if(!u.w)return;u.t+=1/60;u.w*=.93;if(u.w<.03)u.w=0;if(m.visible)fbuild(m)});if(ren.shadowMap.enabled&&(Q==='alta'||!(frm&2)||!playing))ren.shadowMap.needsUpdate=true;ren.render(scene,cam)}
+ ups.forEach(([i,m])=>upd(i,m.position));{const tt=performance.now()/1000;for(const m of T)if(m.userData&&m.userData.pulse){const k=Math.sin(tt*5);m.scale.setScalar(m.userData.bs*(1+.09*k));m.material.opacity=.62+.25*k}}if(err!==lastErr){if(err>lastErr&&playing)fxBad();lastErr=err}if(RSG&&RSG.visible)pcU();if(NSG&&NSG.visible)npU();cabU();bU();FIBS.forEach(m=>{const u=m.userData;if(u.rp){if(u.rp.aw&&m.visible&&(!m.parent||m.parent.visible!==false)){fStep(m);ftube(m)}return}if(!u.w)return;u.t+=1/60;u.w*=.93;if(u.w<.03)u.w=0;if(m.visible)fbuild(m)});if(ren.shadowMap.enabled&&(Q==='alta'||!(frm&2)||!playing))ren.shadowMap.needsUpdate=true;ren.render(scene,cam)}
 applyQ();loop();
 </script></body></html>
 
