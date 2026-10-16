@@ -59,6 +59,26 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #mq{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);padding:16px;z-index:10}#mq>div{background:var(--card);border-radius:16px;padding:18px;max-width:320px;width:100%}.mqb{display:flex;gap:8px;margin-top:14px}.mqb button{flex:1;margin:0;padding:11px 8px}
 #tec,#sop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .cuh{font-size:16px;margin:14px 0 0}
+#ot{position:absolute;inset:0;z-index:9;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
+#ot .otw{max-width:760px;margin:0 auto}#ot .otbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
+#ot .ottab{display:flex;gap:6px}#ot .ottab button{padding:7px 10px;font-size:14px}#ot .ottab button.on{background:var(--ac);border-color:var(--ac);color:#06202a;font-weight:700}
+#ot .otchat{background:#fff;border-radius:14px;padding:10px;min-height:180px;max-height:42vh;overflow:auto;display:flex;flex-direction:column;gap:6px;border:1px solid #c9d3db}
+#ot .sm{max-width:85%;padding:8px 11px;border-radius:14px;font-size:14.5px;line-height:1.35}#ot .sm.me{align-self:flex-end;background:#0e7490;color:#fff}#ot .sm.cl{align-self:flex-start;background:#eef2f5}#ot .sm.sys{align-self:center;background:transparent;color:#5b6670;font-size:13px;text-align:center}
+#ot .otq{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}#ot .otq button{font-size:13.5px;padding:8px 10px;background:#fff;color:#16222c;border:1.5px solid #9fb2c0}#ot .otq button.done{opacity:.55}#ot .otq .otg{width:100%;text-align:left}
+#ot .otask{display:flex;gap:6px;margin-bottom:10px}#ot .otask input{flex:1;min-width:0;padding:9px;border-radius:10px;border:1.5px solid #9fb2c0;font-size:15px}
+#ot .otnote{display:flex;flex-direction:column;gap:3px;background:#fff8e1;border:1px solid #e8d48a;border-radius:12px;padding:9px 11px;font-size:13.5px;margin-bottom:10px}#ot .otnote button{align-self:flex-start;margin-top:4px;font-size:13px;padding:6px 10px}
+#ot .otp{background:#fdfdfc;color:#2c3a44;border-radius:6px;padding:16px 14px;box-shadow:0 6px 20px rgba(0,0,0,.18);font-size:13.5px}
+#ot .otph{display:flex;align-items:center;gap:10px;justify-content:center;border-bottom:1.5px solid #8a96a0;padding-bottom:8px;margin-bottom:12px}#ot .otph b{display:block;letter-spacing:.12em;font-size:17px}#ot .otph small{color:#6b7780}
+#ot .pill{background:#dcdfe2;border-radius:999px;padding:6px 12px;margin:6px 0;display:flex;align-items:center;gap:6px;flex-wrap:wrap}#ot .otr2{display:grid;grid-template-columns:1fr 1.4fr;gap:6px}#ot .otn{font-family:monospace;font-size:14px;letter-spacing:.05em}
+#ot .oti{flex:1;min-width:60px;border:none;border-bottom:1.5px solid #9aa6b0;background:transparent;font:inherit;font-family:'Segoe Print','Bradley Hand','Comic Sans MS',cursive;color:#1d3a8a;font-size:15px;padding:2px 3px}#ot .oti.osm{flex:0 0 64px;min-width:0}
+#ot label{display:flex;align-items:center;gap:6px;margin:6px 0;color:#4b5761}#ot h4{margin:14px 0 4px;font-size:14.5px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+#ot .otg3{display:grid;grid-template-columns:repeat(3,1fr);gap:0 10px}#ot .otg4{display:grid;grid-template-columns:repeat(4,1fr);gap:0 10px}@media (max-width:520px){#ot .otg3,#ot .otg4{grid-template-columns:1fr 1fr}}
+#ot .ottit{font-weight:400;font-size:13.5px;display:flex;gap:6px;align-items:center}#ot .ottit button{padding:3px 10px;font-size:13px;background:#fff;color:#2c3a44;border:1.5px solid #9aa6b0}#ot .ottit button.on{background:#1d3a8a;color:#fff;border-color:#1d3a8a}
+#ot .otck{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:center}#ot .otc{gap:4px;white-space:nowrap;margin:3px 0}#ot .otc input{width:18px;height:18px;margin:0}#ot .otleg{font-size:12px;color:#55616b;margin:12px 0}
+#ot .otsig{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:520px){#ot .otsig{grid-template-columns:1fr}}#ot .otsig>div{display:flex;flex-direction:column;gap:4px;font-size:12.5px}
+#ot .otsig canvas{position:static;inset:auto;display:block;width:100%;height:auto;aspect-ratio:260/80;border-bottom:1.5px solid #55616b;background:#fff;touch-action:none}#ot .otsig button{font-size:13px;padding:6px 8px}
+#ot .otsk{display:inline-block;background:#fff;border:1px dashed #8a96a0;border-radius:6px;padding:8px 10px;font-family:monospace;font-size:12.5px;margin-top:8px}
+#ot .otres{background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:14px}#ot .otres ul{list-style:none;padding:0;margin:8px 0;columns:2;font-size:13.5px}#ot .otres li.no{color:var(--bad);font-weight:600}#ot .otby{font-style:italic}#ot .otdat{font-size:12.5px;opacity:.85}
 .tsel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
 .tsel button{padding:6px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;font-weight:600;border-radius:14px}
 .tsel button svg{width:100%;max-width:64px;height:auto}
@@ -263,6 +283,7 @@ button:active:not(:disabled){transform:scale(.96)}
  <div id="splw"><h2>Splitter PLC (juego libre)</h2><div class="qrow" id="ssel" role="group" aria-label="Splitter PLC"></div><p class="note" id="snote" style="margin-top:6px"></p></div>
  <div id="dropw" hidden><h2>Drop (cantidad de pelos)</h2><div class="qrow" id="dsel" role="group" aria-label="Pelos del drop"><button data-d="1">1</button><button data-d="2">2</button><button data-d="4">4</button></div></div>
  <h2>Herramientas para empalmar</h2><div class="qrow" id="hsel" role="group" aria-label="Herramientas"><button data-v="1">🧊 3D: fusionadora y cleaver</button><button data-v="0">✋ 2D rápido</button></div><p class="note" style="margin-top:6px">En 3D usás la peladora, el cleaver, la fusionadora y su horno como los reales.</p>
+ <h2>Modo IA</h2><div class="qrow" id="iasel" role="group" aria-label="Modo IA"><button data-v="1">🤖 Con IA</button><button data-v="0">📝 Sin IA</button></div><p class="note" style="margin-top:6px">Con IA, los clientes del soporte y de la orden de trabajo del técnico hablan con frases escritas por una IA y les podés hacer preguntas libres. Sin IA usan frases armadas.</p>
  <h2>Voces</h2><div class="qrow" id="vsel" role="group" aria-label="Voces"><button data-v="1">🔊 Con voces</button><button data-v="0">🔇 Sin voces</button></div><p class="note" style="margin-top:6px">El equipo y los clientes hablan con las voces de tu dispositivo. En soporte, lo que dice cada cliente lo escribe una IA (te pide permiso la primera vez).</p>
  <h2>Calidad gráfica</h2><div class="qrow" id="qsel" role="group" aria-label="Calidad gráfica"><button data-q="alta">Alta</button><button data-q="media">Media</button><button data-q="baja">Baja</button></div><p class="note" style="margin-top:6px">Si el juego va lento o el teléfono se calienta, probá Baja.</p>
  <div id="rk"><h2>Ranking</h2><ol id="rank"></ol></div>
@@ -1058,7 +1079,7 @@ function wind(e){const p=gnd(e,FL+.3),dx=p.x-HC.x,dz=p.z-HC.z,r=Math.hypot(dx,dz
 
 function opmUI(el){if(R.broken)return opmDead(el);const p=R.pw,ok=p>=-25,t0=performance.now();if(!ok)setTimeout(()=>boss('power',{p:p.toFixed(1)}),1300);
  el.innerHTML=`<svg viewBox="0 0 300 150"><rect width="300" height="150" rx="12" fill="#0d1f12"/><text x="16" y="26" font-size="13" fill="#a7d7b5">OPM · λ 1490 nm</text><text class="pv" x="150" y="88" font-size="44" text-anchor="middle" fill="#7CFC9a" font-family="monospace">-40.00</text><text x="150" y="118" font-size="15" text-anchor="middle" fill="#a7d7b5">dBm</text></svg>`
-  +`<p class="ores" style="margin:10px 0 4px;font-size:15px">Midiendo…</p><p style="margin:0;font-size:13px;opacity:.8">En la casa del cliente se acepta entre −8 y −25 dBm.</p><button class="big ofin" disabled>Seguir: conectar el router</button>`;
+  +`<p class="ores" style="margin:10px 0 4px;font-size:15px">Midiendo…</p><p style="margin:0;font-size:13px;opacity:.8">En la casa del cliente se acepta entre −8 y −25 dBm.</p><button class="big ofin" disabled>Seguir: cerrar la roseta</button>`;
  const pv=el.querySelector('.pv'),f=()=>{const q=Math.min(1,(performance.now()-t0)/1200),v=-40+(p+40)*(1-Math.pow(1-q,3))+(q<1?(Math.random()-.5)*.6:0);pv.textContent=v.toFixed(2);opmScreen(v.toFixed(2),'dBm · 1490 nm');
   if(q<1)return requestAnimationFrame(f);if(p>=-18)setTimeout(()=>praise(p.toFixed(2)),1200);el.querySelector('.ores').innerHTML=(ok?`<b>✅ Señal OK.</b> Pérdida en la roseta y el patchcord: ${(R.spl+R.store+.5).toFixed(2)} dB${SPL?` + ${SPLDB[SPL]} dB del splitter 1x${SPL}`:''}.`:`<b>⚠️ Señal baja.</b> Revisá la fusión y el guardado.`)+(R.bud?budHTML(R.bud):'');
   const b=el.querySelector('.ofin');b.disabled=false;b.onclick=()=>{endPan();nx()}};f()}
@@ -1742,7 +1763,7 @@ function coreCut(kind,then){if(INV.cut[kind]||INV.skip){INV.cut[kind]=true;retur
 /* roseta sin doble faz pero con destornillador: se atornilla */
 function rosScrew(){ttl('Atornillá la roseta en la pared');camTo(RX,RZ,.62,.3,1.1);R.screw=true;
  openPan('Pared',()=>{$('#pt').textContent='Atornillar la roseta';$('#pb').innerHTML=`<div class="kmiss">${kIco('dest')}<p>Marcás los dos agujeros, ponés los tarugos y atornillás la roseta.</p></div><button class="big kgo">🪛 Atornillar</button>`;
-  $('#pb .kgo').onclick=()=>{fxOK();endPan();msg('¡Roseta atornillada en la pared!');setTimeout(end,1200)}})}
+  $('#pb .kgo').onclick=()=>{fxOK();endPan();msg('¡Roseta atornillada en la pared!');setTimeout(rosAfter,1200)}})}
 /* el bolso durante el trabajo */
 function invShow(){ptrReset();const b=[...new Set([...INV.has,...INV.got])];
  $('#ipb').innerHTML=`<div class="kbagv">${b.map(k=>`<span>${kIco(k)}<small>${kN(k)}</small></span>`).join('')}</div>`;$('#tipp').hidden=true;$('#invp').hidden=false}
@@ -1851,7 +1872,7 @@ function rwMount(screw,done){const P=RW.p,z0=WZ+1.4,st=V(RWX-3.8,3.2,z0);ttlB('L
 function rosWall3D(){rwBuild();rwShow(true);rwMount(false,()=>{ttlB('Mantené apretada la roseta contra la pared');msg('Apretá la roseta unos segundos para que la cinta agarre bien.');mode='press';let h=null;
  const stop=()=>{if(!h)return;cancelAnimationFrame(h.r);if(!h.ok){msg('Apretá un poco más: la cinta todavía no agarró.');RW.p.position.z=WZ+.012}h=null};
  MH.press={down:e=>{if(h||(!e._f&&!hitObj(e,RW.p)))return;h={t0:performance.now(),ok:false};const f=()=>{const q=Math.min(1,(performance.now()-h.t0)/1400);RW.p.position.z=WZ+.012-.02*Math.sin(q*Math.PI);
-   msg(q<1?`Apretando… ${Math.round(q*100)}%`:'✅ ¡Pegada!');if(q<1){h.r=requestAnimationFrame(f);return}h.ok=true;mode=null;fxOK();RW.p.position.z=WZ+.012;setTimeout(()=>{msg('¡Roseta instalada en la pared!');setTimeout(end,1200)},300)};f()},up:stop};
+   msg(q<1?`Apretando… ${Math.round(q*100)}%`:'✅ ¡Pegada!');if(q<1){h.r=requestAnimationFrame(f);return}h.ok=true;mode=null;fxOK();RW.p.position.z=WZ+.012;setTimeout(()=>{msg('¡Roseta instalada en la pared!');setTimeout(rosAfter,1200)},300)};f()},up:stop};
  RW.press=()=>{h=null;MH.press.down({clientX:0,clientY:0,_f:1})}})}
 /* ---------- tornillos ---------- */
 function mScrew(){const g=G(),st=M(0xb9c0c7,{metalness:.85,roughness:.3}),inn=G();g.add(inn);mesh(cyl(.1,.1,.05,18),st,0,.025,0,inn);mesh(cyl(.04,.025,.36,10),st,0,-.18,0,inn);
@@ -1878,7 +1899,7 @@ function rosScrew3D(){ttl('Atornillá la roseta en la pared');R.screw=true;rwBui
   RW.turn=turn;
   MH.screw={down:e=>{a0=ang(e)},move:e=>{if(a0==null)return;const a=ang(e);let da=a-a0;if(da>Math.PI)da-=2*Math.PI;if(da<-Math.PI)da+=2*Math.PI;a0=a;turn(da)},up:()=>{a0=null}}}
  function putLid(){ttlB('Poné la tapa de la roseta: tocala');camTo(RWX+1,WZ+.6,.7,WTY-.6,.25);tyaw=0;const L=R.lid.clone(true);L.position.set(RWX+3.6,1.0,WZ+1.6);L.rotation.set(Math.PI/2,0,0);scene.add(L);T.push(L);
-  msg('Tornillos puestos. Tocá la tapa para cerrar la roseta.');taps=[L];onTap=()=>{taps=[];onTap=null;const tgt=lw(V(0,.67,0));tw(L,tgt,450,()=>{scene.remove(L);lid.visible=true;fxOK();msg('¡Roseta atornillada en la pared!');setTimeout(end,1200)})}}}
+  msg('Tornillos puestos. Tocá la tapa para cerrar la roseta.');taps=[L];onTap=()=>{taps=[];onTap=null;const tgt=lw(V(0,.67,0));tw(L,tgt,450,()=>{scene.remove(L);lid.visible=true;fxOK();msg('¡Roseta atornillada en la pared!');setTimeout(rosAfter,1200)})}}}
 
 rosScrew=rosScrew3D;
 
@@ -2093,7 +2114,7 @@ function vozSel(){document.querySelectorAll('#vsel button').forEach(b=>{b.setAtt
 function supVoz(c){const fem=FEMN.has(c.d.nom);return {fem,p:(fem?1.12:.88)+(Math.random()-.5)*.18,r:.98+Math.random()*.16,i:Math.random()*8|0}}
 /* ---------- IA: el guion del cliente ---------- */
 const SPER=['apurado, contesta corto','muy amable y charlatán','una señora mayor que habla despacio y se va por las ramas','molesto porque ya llamó dos veces','un pibe joven que usa muchas muletillas (tipo, viste, re)','desconfiado, pregunta para qué le piden los datos'];
-async function supAI(c){if(!SAMP||!SAMPOK)return null;const d=c.d;c.per=srnd(SPER);
+async function supAI(c){if(!IAON||!SAMP||!SAMPOK)return null;const d=c.d;c.per=srnd(SPER);
  const P=`Sos guionista de un juego argentino donde el jugador atiende el teléfono de soporte técnico de internet por fibra óptica. Escribí lo que dice UN cliente, en español rioplatense con voseo, frases naturales de teléfono, sin emojis.
 Personalidad: ${c.per}. Motivo del llamado: ${d.mot}.
 Datos EXACTOS del cliente (copialos tal cual, sin cambiar ni una letra ni un número): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", dirección "${saddr(d)}"${d.cal?'':' (es un barrio cerrado o un edificio: no tiene calle)'}.
@@ -2112,7 +2133,7 @@ Devolvé SOLO un objeto JSON con estas claves, cada valor una sola intervención
   for(const k in ok){const t=j[k];if(typeof t==='string'&&t.length<260&&ok[k](t))out[k]=t.trim()}return Object.keys(out).length?out:null}
  catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
 /* pregunta libre: el jugador escribe y el cliente contesta en personaje */
-async function supFree(q){const c=SU.c,d=c.d;if(!SAMP||!SAMPOK)return null;const hist=(SU.chat||[]).filter(m=>m.w!=='sys').slice(-10).map(m=>(m.w==='me'?'Operador: ':'Cliente: ')+m.t).join('\n');
+async function supFree(q){const c=SU.c,d=c.d;if(!IAON||!SAMP||!SAMPOK)return null;const hist=(SU.chat||[]).filter(m=>m.w!=='sys').slice(-10).map(m=>(m.w==='me'?'Operador: ':'Cliente: ')+m.t).join('\n');
  const P=`Juego argentino de soporte técnico de internet por fibra. Hacé de CLIENTE por teléfono, en español rioplatense con voseo, sin emojis, máximo 35 palabras.
 Personalidad: ${c.per||'normal'}. Motivo: ${d.mot}. Tus datos EXACTOS (si te los piden, decilos tal cual, con números en cifras): nombre "${d.nom}", apellido "${d.ape}", teléfono "${d.tel}", barrio "${d.bar}", dirección "${saddr(d)}". Si te preguntan algo que no tiene que ver, respondé con naturalidad y volvé al tema.
 Conversación hasta ahora:
@@ -2620,7 +2641,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=58,NEWS=[
+const VER=59,NEWS=[
+ {v:59,t:'Orden de trabajo y modo IA',items:[
+  ['📝','Orden de trabajo en papel','Al terminar la roseta completás la orden como la de verdad: fecha, horario de entrada y salida, técnicos responsables, si el cliente es el titular, nombre, apellido, DNI, teléfono, complejo y lote o UF, tareas, materiales (metros de fibra, roseta, UTP, patchcord) y el equipo con su modelo y MAC.'],
+  ['💬','Los datos se los pedís al cliente','Igual que en el soporte: le preguntás con los botones o escribiendo, y el cliente te contesta en voz alta. Los barrios son los mismos del soporte.'],
+  ['✍️','Firmas','El cliente firma con una firma propia que sale de su nombre y apellido, y vos firmás con el dedo.'],
+  ['🔌','Router en la pared','Ahora el router se conecta después de amurar la roseta: patchcord de la roseta al PON, la fuente al toma de la pared, la ficha a Power y On/Off.'],
+  ['🤖','Modo IA','En el menú elegís Con IA o Sin IA. Con IA, los clientes del soporte y de la orden de trabajo hablan con frases escritas por una IA y les podés hacer preguntas libres.']]},
  {v:58,t:'Cuadrillas, router y pinza con VFL',items:[
   ['👷','Elegí tu cuadrilla','Después de elegir el técnico elegís Cuadrilla 1, 2 o 3. La 2 y la 3 usan la fusionadora de siempre; la Cuadrilla 1 tiene una fusionadora automática.'],
   ['🤖','Fusionadora automática','Funda negra, paravientos grande con las mordazas adentro y botones OPEN/CLOSE, SET, RESET y HEAT. Apretás OPEN/CLOSE, apoyás los pelos, la cerrás y empalma sola: limpia, acerca, alinea por núcleo y dispara el arco. El horno se cierra y calienta solo.'],
@@ -2841,7 +2868,7 @@ async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.be
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
 async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b>${MODE!=='cableado'?`<br><small>Cuadrilla ${CUAD}</small>`:''}</span></div>`;
- $('#res').innerHTML=tv+(MODE==='cableado'?cblEnd(p,CO):MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.ont?`<br>Router: <b>${R.ont}</b>`:''}${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
+ $('#res').innerHTML=tv+(MODE==='cableado'?cblEnd(p,CO):MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.ont?`<br>Router: <b>${R.ont}</b>`:''}${R.ot?`<br>Orden de trabajo: <b>${R.ot.ok} de ${R.ot.tot}</b> campos bien`:''}${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
  {const s=$('#res .stars');if(s)s.insertAdjacentHTML('beforebegin',invSummary())}
  {const e=$('#res .ptsn'),t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1100);e.textContent=Math.round(p*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)};f()}
  const r=await saveResult(p,{coins:((acct&&acct.coins)||0)+CO.co,nivel:((acct&&acct.nivel)||1)+(CO.upl?1:0)});$('#rec').textContent=(r?'🏆 ¡Récord nuevo! ':'')+(DB?'Guardado en la nube.':'Guardado en este dispositivo.')}
@@ -3053,9 +3080,9 @@ function rtPanel(next){const ok=!R.broken&&(R.pw??-20)>=-27,rx=R.rtRx??R.pw,led=
  $('#pt').textContent='Router · luces y potencia';
  $('#pb').innerHTML=`<style>.rtbl{animation:rtb .5s steps(2) infinite}@keyframes rtb{50%{fill:#c9ced2}}</style><svg viewBox="0 0 300 92" style="width:100%"><rect x="6" y="8" width="288" height="76" rx="14" fill="#f4f5f3" stroke="#cfd3d6"/><rect x="2" y="30" width="10" height="44" rx="4" fill="#e3e5e2"/><rect x="288" y="30" width="10" height="44" rx="4" fill="#e3e5e2"/>${L.map(([t,c,on,bl],i)=>`<g transform="translate(${44+i*43},38)">${led(t,c,on,bl)}</g>`).join('')}</svg>`
   +`<div class="ot" style="margin-top:8px"><b>${ok?'✅ Router registrado en la OLT':'⚠️ El router no se registró'}</b><p style="margin:4px 0 0">${ok?`<b>PON</b> fija: el router ya habla con la central. <b>LOS</b> apagada: llega luz. La potencia que lee el router es <b>${rx} dBm</b> (el power meter midió ${R.pw} dBm).`:'<b>LOS</b> en rojo: no llega luz suficiente. Revisá el patchcord y la potencia.'}</p></div>`
-  +`<p style="margin:8px 0 0;font-size:13px;opacity:.85">PON titilando = está negociando con la OLT · PON fija = registrado · LOS roja = sin luz. Las luces 2.4G y 5G son el Wi-Fi.</p><button class="big rtgo">Seguir: cerrar la roseta</button>`;
+  +`<p style="margin:8px 0 0;font-size:13px;opacity:.85">PON titilando = está negociando con la OLT · PON fija = registrado · LOS roja = sin luz. Las luces 2.4G y 5G son el Wi-Fi.</p><button class="big rtgo">Seguir: completar la orden de trabajo</button>`;
  $('#pb .rtgo').onclick=()=>{endPan();next()}}
-SR.splice(SR.findIndex(f=>String(f).includes('pico del power meter'))+1,0,()=>{ttl('Conectá el router del cliente');rtStep()});
+
 TIPS.push([/router|PON del router|On\/Off|fuente en Power/i,'El router (ONT)','El router de fibra es la ONT: recibe la luz por el puerto PON y la convierte en internet por cable (LAN) y Wi-Fi. Al prenderlo, la luz PON titila mientras se registra en la OLT y queda fija cuando ya está. Si LOS se pone roja, no le llega luz. El patchcord va de la cupla de la roseta al PON.']);
 
 /* ---------- pinza identificadora con VFL (modelo genérico): cuerpo gris oscuro, cabezal con ranura y gatillo al costado,
@@ -3110,6 +3137,153 @@ function pzVfl(bad){endPan();const gl=[];bad.forEach(n=>{const p=SLT(n),m=new TH
   el.innerHTML=`<svg viewBox="0 0 220 120" style="width:120px;float:left;margin:0 8px 0 0"><g transform="translate(110,95) scale(.85)">${pzSVG({on:true,r:ok?{ok:true,t:base}:{lo:true,t:'LO'},dir:1})}</g></svg>`+el.innerHTML+'<div style="clear:both"></div>'},(itemOn('Bruno')?.5:1)*430)}}))}}
 kT('pinza').d='Encuentra el pelo con señal y trae láser rojo (VFL)';
 KICO.pinza='<rect x="21" y="12" width="22" height="48" rx="4" fill="#3a3e43"/><rect x="19" y="4" width="26" height="10" rx="2" fill="#1b1d20"/><rect x="24" y="16" width="16" height="24" rx="2" fill="#22a35c"/><rect x="26" y="18" width="12" height="7" fill="#d7e6cf"/><circle cx="32" cy="33" r="3" fill="#e03b3b"/><rect x="24" y="43" width="16" height="11" rx="2" fill="#178a4b"/><rect x="28" y="58" width="8" height="4" fill="#f26b21"/><path d="M44 22l7 4-7 3z" fill="#1b1d20"/>';
+
+/*C59*/
+/* ===== V59: modo IA (soporte y técnico), router en la pared con la fuente al toma y orden de trabajo en papel al final de la roseta ===== */
+let IAON=(()=>{try{return localStorage.getItem('taller_ia')!=='0'}catch(e){return true}})();
+function iaSel(){document.querySelectorAll('#iasel button').forEach(b=>{b.setAttribute('aria-pressed',(b.dataset.v==='1')===IAON);b.onclick=()=>{IAON=b.dataset.v==='1';try{localStorage.setItem('taller_ia',IAON?'1':'0')}catch(e){}iaSel()}})}
+const hhmm=d=>{d=new Date(d);return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+/* al empezar la roseta: hora de llegada, compañero de cuadrilla y datos de la obra */
+{const f=startGame;startGame=function(){f();if(MODE!=='roseta')return;const o=TECS.filter((t,i)=>i!==TEC);R.tIn=Date.now();R.partner=srnd(o).n;R.dm0=sint(60,880);R.foM=sint(35,140);
+ R.rtModel=srnd(['ONT-AX18','ONT-GX30','FTTH-W6']);R.rtMac=[0xA4,0x3C,...[0,0,0,0].map(()=>Math.random()*256|0)].map(x=>x.toString(16).toUpperCase().padStart(2,'0')).join(':');
+ setTimeout(()=>info(`Llegaste a la casa a las ${hhmm(R.tIn)}. Hoy vas con ${R.partner} en la Cuadrilla ${CUAD}: anotalo para la orden de trabajo.`,BOSS[0]),1600)}}
+
+/* ---------- router en la pared: mueble, patchcord de la roseta al PON, fuente al toma de la pared, ficha a Power y On/Off ---------- */
+let WR=null;
+function mBrick(){const g=G(),bk=M(0x1b1c1e,{roughness:.55});PARENT=g;mesh(box(.42,.52,.28),bk,0,.26,0);[-1,1].forEach(k=>mesh(cyl(.025,.025,.16,8),M(0xc9ccd0,{metalness:.8,roughness:.3}),k*.09,.36,-.2).rotation.x=Math.PI/2);
+ const p=new THREE.Mesh(new THREE.PlaneGeometry(.3,.12),new THREE.MeshBasicMaterial({map:label('12V 1A','#1b1c1e','#c9ccd0',128,48,22)}));p.position.set(0,.3,.142);g.add(p);
+ const hit=new THREE.Mesh(box(.6,.7,.5),new THREE.MeshBasicMaterial({visible:false}));hit.position.y=.26;g.add(hit);PARENT=null;return g}
+function wrTube(k,pts,r,c){if(WR[k]){WR.g.remove(WR[k]);WR[k].geometry.dispose()}WR[k]=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts),40,r,6,false),M(c,{roughness:.55}));WR.g.add(WR[k])}
+const wrRear=(o,d)=>V(o.position.x+Math.sin(o.rotation.y)*d,o.position.y,o.position.z+Math.cos(o.rotation.y)*d);
+function wrU(){if(!WR||!WR.g||!WR.g.parent)return;const pc=WR.pc,br=WR.brick,pl=WR.plug,key=[pc,br,pl].map(o=>[o.position.x,o.position.y,o.position.z,o.rotation.y].map(v=>v.toFixed(3)).join()).join('|');if(key===WR.key)return;WR.key=key;
+ const A=V(RWX+.92,WTY-2.62,WZ+.28),C=wrRear(pc,.45),onF=C.x>RWX+1.3;
+ wrTube('pcab',[A,V(A.x+.02,Math.min(A.y-.4,1.6),WZ+.45),V(A.x+.04,.75,WZ+.8),V(onF?RWX+1.22:C.x-.3,onF?1.03:.6,(A.z+C.z)/2+.6),V(C.x+(onF?-.1:0),C.y-.02,C.z+.25),C],.035,CYEL);
+ const b0=V(br.position.x,br.position.y+.02,br.position.z+.05),P2=wrRear(pl,.24),up=br.position.y>1.6;
+ wrTube('fcab',up?[b0,V(b0.x,1.4,WZ+.12),V(b0.x-.2,1.03,WZ+.5),V((b0.x+P2.x)/2,1.03,(WZ+.5+P2.z)/2),P2]:[b0,V((b0.x+P2.x)/2,1.04,(b0.z+P2.z)/2+.3),P2],.028,0x161719)}
+{const f=bU;bU=function(){f();wrU()}}
+function wallRouter(done){clr();rwShow(true);if(WR&&WR.g)scene.remove(WR.g);WR={g:G()};scene.add(WR.g);const g=WR.g,wd=M(0x8a6a4c,{roughness:.7,map:TX.wood});
+ mesh(box(4.0,.96,2.8),wd,RWX+3.3,.48,WZ+1.45,g);mesh(box(4.08,.06,2.88),M(0x6f5238,{roughness:.6,map:TX.wood}),RWX+3.3,.99,WZ+1.45,g);
+ R.rt=mRouter();R.rt.position.set(RWX+3.2,1.02,WZ+1.0);g.add(R.rt);rtLed('pw',0);rtLed('pon',0);rtLed('los',0);rtLed('w24',0);rtLed('w5',0);
+ /* conector del patchcord que ya está en la cupla de la roseta (de abajo) y la otra punta suelta sobre el mueble */
+ const up=mSC();up.rotation.x=Math.PI/2;up.position.set(RWX+.92,WTY-2.17,WZ+.28);g.add(up);
+ WR.pc=mSC();WR.pc.position.set(RWX+1.9,1.1,WZ+2.35);WR.pc.rotation.y=-Math.PI/2;g.add(WR.pc);
+ WR.brick=mBrick();WR.brick.position.set(RWX+4.4,1.02,WZ+2.1);g.add(WR.brick);
+ WR.plug=mPlug();WR.plug.position.set(RWX+3.6,1.02,WZ+2.4);WR.plug.rotation.y=-.6;g.add(WR.plug);WR.key=null;wrU();
+ const U=R.rt.userData,P=v=>V(R.rt.position.x+v.x,R.rt.position.y+v.y,R.rt.position.z+v.z),cam=()=>camTo(RWX+2.6,WZ+2.4,.62,1.4,.5);cam();tyaw=0;
+ const drag=(o,txt,hint,t,ph,after)=>m=>{ttlB(txt);msg(hint);cam();o.userData.home=o.position.clone();o.userData.dy=ph+.25;o.userData.ph=ph;
+  task([o],[Object.assign({id:null,s:.35},t)],ob=>{after(ob);fxOK();wrU();setTimeout(m,350);return 'hold'})};
+ const pp=P(U.pon),jp=P(U.jack);
+ runSeq([drag(WR.pc,'Enchufá el patchcord de la roseta en el PON del router','El patchcord ya sale de la cupla de la roseta: llevá la otra punta al puerto verde PON, abajo a la izquierda en la parte de atrás del router.',{x:pp.x,z:pp.z+.26,y:pp.y,mx:pp.x,mz:pp.z+.12,my:pp.y+.05},1.12,o=>{o.rotation.y=0;msg('Patchcord en el puerto PON.')}),
+  drag(WR.brick,'Enchufá la fuente en el toma de la pared','Llevá la fuente de 12 V al tomacorriente de la pared, a la derecha.',{x:RWX+4.6,z:WZ+.2,y:1.78,mx:RWX+4.6,mz:WZ+.25,my:2.0,s:.45},1.3,o=>{o.rotation.y=0;msg('Fuente enchufada en la pared.')}),
+  drag(WR.plug,'Enchufá la ficha de la fuente en Power','Ahora la ficha redonda va al conector Power del router.',{x:jp.x,z:jp.z+.15,y:jp.y-.06,mx:jp.x,mz:jp.z+.1,my:jp.y},1.2,o=>{o.rotation.y=0;msg('Router con corriente.')}),
+  m=>{ttlB('Prendé el router: apretá On/Off');msg('El botón redondo de la izquierda, al lado de Power.');const b=U.onoff,bw=P(b.position),mk=mark(bw.x,bw.z+.25,0xffffff,bw.y+.05,.18);taps=[b];
+   onTap=()=>{taps=[];scene.remove(mk);const z0=b.position.z;b.position.z-=.03;setTimeout(()=>b.position.z=z0,180);rtBoot(m)}},
+  m=>openPan('Router',()=>rtPanel(m))],done)
+ WR.auto=()=>{[[WR.pc,{x:pp.x,y:pp.y,z:pp.z+.26}],[WR.brick,{x:RWX+4.6,y:1.78,z:WZ+.2}],[WR.plug,{x:jp.x,y:jp.y-.06,z:jp.z+.15}]].forEach(([o,t])=>{o.position.set(t.x,t.y,t.z);o.rotation.y=0})}}
+function rtBoot(done){const ok=!R.broken&&(R.pw??-20)>=-27,sp=TSKIP?.25:1,p=R.rt.position;R.rtRx=+((R.pw??-20)-.1-rnd()*.25).toFixed(2);camTo(p.x,p.z+.2,.42,p.y+.4,1.0);
+ rtLed('pw',1);msg('Prendió: luz de POWER fija. Ahora busca la señal de la OLT…');R.rtBl=['pon'];rtBlink();
+ setTimeout(()=>{if(ok){R.rtBl=null;rtLed('pon',1);rtLed('los',0);msg('¡PON fija! El router se registró en la OLT.');ding()}else{R.rtBl=['los'];rtLed('pon',0);msg('LOS titila en rojo: el router no recibe suficiente luz.');err++}},2600*sp);
+ setTimeout(()=>{rtLed('w24',1);rtLed('w5',1)},3300*sp);setTimeout(done,4100*sp)}
+function rosAfter(){wallRouter(()=>otStart(()=>{playing=true;end()}))}
+
+/* ---------- orden de trabajo en papel (modelo genérico) ---------- */
+let OT=null;
+const OREL=['esposa','esposo','hija','hijo','mamá','papá','hermana','hermano'],OTN=['Ernesto','Graciela','Roberto','Norma','Carlos','Silvia','Jorge','Mónica'];
+function otUnit(d){return d.bt==='calle'?`${d.cal} ${d.alt}`:d.bt==='mzc'||d.bt==='torre'?`${d.mz}, ${d.ub}`:d.ub}
+function otTpl(c){const d=c.d,sp=SSPELL[d.ape];return {open:srnd(['¡Buenísimo! ¿Ya anda internet?','Uh, qué rápido. ¿Ya quedó todo listo?','¡Gracias! ¿Ya me puedo conectar al wifi?']),
+ nom:`Sí, ${d.nom} ${sp?sp:d.ape}.`,dni:`Mi DNI es ${d.dni}.`,tel:`Anotá: ${d.tel}.`,tit:d.tit?'Sí, el servicio está a mi nombre.':`No, el titular es mi ${d.rel}, ${d.tnom} ${d.ape}. Yo soy ${d.nom}.`,
+ bar:`Es ${d.bar}.`,dir:d.bt==='calle'?`Estamos en ${d.cal} ${d.alt}.`:d.bt==='mzc'?`${d.mz}, ${d.ub}.`:d.bt==='torre'?`${d.mz}, ${d.ub}.`:`${d.ub}.`,bye:'¡Gracias por todo! Que andes bien.'}}
+async function otAI(c){if(!IAON||!SAMP||!SAMPOK)return null;const d=c.d;
+ const P=`Sos guionista de un juego argentino: un técnico de fibra óptica terminó de instalar internet en la casa de un cliente y le pide los datos para completar la orden de trabajo en papel. Escribí lo que dice el CLIENTE en persona, en español rioplatense con voseo, natural, sin emojis.
+Personalidad: ${c.per}. ${d.tit?'Es el titular del servicio.':`NO es el titular: el titular es su ${d.rel}, ${d.tnom} ${d.ape}.`}
+Datos EXACTOS (copialos tal cual, números en cifras): nombre "${d.nom}", apellido "${d.ape}", DNI "${d.dni}", teléfono "${d.tel}", barrio o complejo "${d.bar}", ubicación "${otUnit(d)}".
+Devolvé SOLO un objeto JSON, cada valor una sola intervención de máximo 28 palabras:
+"open": reacción cuando el técnico le avisa que terminó y que necesita unos datos, sin dar datos personales;
+"nom": dice nombre y apellido; "dni": dicta el DNI; "tel": dicta el teléfono; "tit": dice si es o no el titular (y si no, quién es);
+"bar": dice el barrio o complejo; "dir": dice la ubicación dentro del barrio; "bye": se despide agradecido.`;
+ try{const j=await SAMP.json(P,{modelTier:'quick'});if(!j||typeof j!=='object')return null;const has=(t,s)=>snorm(t).includes(snorm(s)),dig=(t,s)=>sdig(t).includes(sdig(s)),nums=t=>[d.alt,d.mz,d.ub].every(x=>snum(t,x)),
+  ok={open:t=>!dig(t,d.dni)&&!dig(t,d.tel),nom:t=>has(t,d.nom)&&has(t,d.ape),dni:t=>dig(t,d.dni),tel:t=>dig(t,d.tel),tit:t=>d.tit?!/\bno\b/i.test(t):/\bno\b/i.test(t),bar:t=>has(t,d.bar),dir:t=>nums(t)&&(!d.cal||has(t,d.cal)),bye:()=>1},out={};
+  for(const k in ok){const t=j[k];if(typeof t==='string'&&t.length<260&&ok[k](t))out[k]=t.trim()}return Object.keys(out).length?out:null}catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
+async function otFree(q){if(!IAON||!SAMP||!SAMPOK)return null;const c=OT.c,d=c.d,hist=OT.chat.slice(-10).map(m=>(m.w==='me'?'Técnico: ':'Cliente: ')+m.t).join('\n');
+ const P=`Juego argentino: un técnico de fibra terminó de instalar internet y completa la orden de trabajo. Hacé de CLIENTE en persona, rioplatense con voseo, sin emojis, máximo 35 palabras.
+Personalidad: ${c.per}. ${d.tit?'Sos el titular del servicio.':`No sos el titular: el titular es tu ${d.rel}, ${d.tnom} ${d.ape}.`} Tus datos EXACTOS (si te los piden, decilos tal cual, números en cifras): nombre "${d.nom}", apellido "${d.ape}", DNI "${d.dni}", teléfono "${d.tel}", barrio "${d.bar}", ubicación "${otUnit(d)}". Si te preguntan otra cosa, respondé con naturalidad.
+Conversación:
+${hist}
+Técnico: ${q}
+Devolvé SOLO JSON: {"reply": lo que contestás, "reveals": lista de claves de los datos que dijiste, de entre "nom","dni","tel","tit","bar","dir"}`;
+ try{const j=await SAMP.json(P,{modelTier:'quick',cache:false});if(!j||typeof j.reply!=='string')return null;return {reply:j.reply.slice(0,320)}}catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false;return null}}
+/* firma: trazo cursivo pseudoaleatorio a partir del nombre y apellido */
+function sigHash(s){let h=2166136261;for(const ch of s){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function sigPts(name){let s=sigHash(name)||1;const R1=()=>{s^=s<<13;s^=s>>>17;s^=s<<5;return ((s>>>0)%10000)/10000},pts=[];let x=14;const base=58,parts=name.trim().split(/\s+/);
+ parts.forEach((w,wi)=>{const H=24+R1()*14;for(let t=0;t<=1;t+=.06){const a=t*Math.PI*2;pts.push([x+Math.sin(a)*8+t*14,base-H*(.5-.5*Math.cos(a))-(1-t)*4])}x+=20;
+  const n=Math.min(w.length-1,4+(R1()*3|0));for(let i=0;i<n;i++){const amp=5+R1()*9,wid=7+R1()*6,lp=R1()<.25;for(let t=0;t<=1;t+=.12){const a=t*Math.PI;pts.push([x+t*wid+(lp?Math.sin(a*2)*3:0),base-Math.sin(a)*amp-(lp?Math.sin(a)*10:0)])}x+=wid}
+  if(wi<parts.length-1){pts.push([x+6,base+2]);x+=16}});
+ const x1=x+6;for(let t=0;t<=1;t+=.08)pts.push([x1-t*(x1-12)*.9,base+10+Math.sin(t*Math.PI)*6]);return pts}
+function sigDraw(cv,name,anim,cb){const g=cv.getContext('2d'),pts=sigPts(name),W=cv.width,H=cv.height,mx=Math.max(...pts.map(p=>p[0])),k=Math.min(1,(W-10)/mx);g.clearRect(0,0,W,H);g.strokeStyle='#1d3a8a';g.lineWidth=2;g.lineCap=g.lineJoin='round';
+ const draw=n=>{g.clearRect(0,0,W,H);g.beginPath();pts.slice(0,n).forEach(([x,y],i)=>i?g.lineTo(x*k,y):g.moveTo(x*k,y));g.stroke()};if(!anim){draw(pts.length);return cb&&cb()}
+ const t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1300);draw(Math.max(2,Math.round(pts.length*q)));if(q<1)return requestAnimationFrame(f);cb&&cb()};f()}
+function otStart(done){endPan();clr();const d=supClient();d.dni=`${sint(20,46)}.${sint(100,999)}.${sint(100,999)}`;d.tit=Math.random()<.7;d.rel=srnd(OREL);d.tnom=srnd(OTN);
+ const c={d,per:srnd(SPER)};OT={c,done,chat:[],asked:{},greet:false,tab:'cli',f:{},sig:false,tsig:0,tOut:Date.now(),num:'0001 - '+String(sint(1000,99999)).padStart(8,'0'),v:supVoz(c),tpl:otTpl(c),ai:null};
+ playing=false;try{speechSynthesis.cancel()}catch(e){}let el=$('#ot');if(!el){el=document.createElement('div');el.id='ot';document.body.appendChild(el)}el.hidden=false;
+ otAI(c).then(a=>{if(OT&&OT.c===c)OT.ai=a});otRender();ttlB('Completá la orden de trabajo');msg('Pedile los datos al cliente y llená la orden.')}
+const otLine=k=>(OT.ai&&OT.ai[k])||OT.tpl[k];
+function otSay(w,t){OT.chat.push({w,t});if(w==='cl')speak(t,Object.assign({cut:true},OT.v));if(OT.tab==='cli')otRender()}
+function otQs(){const d=OT.c.d;return [['nom','¿Me decís tu nombre y apellido?'],['dni','¿Me pasás tu DNI?'],['tel','¿Un teléfono de contacto?'],['tit','¿Sos el titular del servicio?'],['bar','¿Cómo se llama el barrio o complejo?'],['dir',d.bt==='calle'?'¿Calle y altura?':d.bt==='lote'?'¿Qué número de lote es?':d.bt==='mzc'?'¿Manzana y casa?':d.bt==='torre'?'¿Torre y unidad?':'¿Qué número de UF es?']]}
+function otRender(){const el=$('#ot'),o=OT,f=o.f,inp=(k,ph='',cls='')=>`<input class="oti ${cls}" data-k="${k}" value="${sesc(f[k]||'')}" placeholder="${ph}" autocomplete="off">`,ck=(k,t)=>`<label class="otc"><input type="checkbox" data-k="${k}"${f[k]?' checked':''}> ${t}</label>`;
+ const cli=`<div class="otchat">${o.chat.length?o.chat.map(m=>`<div class="sm ${m.w}">${sesc(m.t)}</div>`).join(''):'<div class="sm sys">El cliente está al lado tuyo. Avisale que terminaste y pedile los datos para la orden.</div>'}${o.typing?'<div class="sm cl">…</div>':''}</div>`
+  +`<div class="otq">${!o.greet?'<button class="otg">👋 “¡Listo, ya quedó instalado! ¿Me das unos datos para la orden de trabajo?”</button>':otQs().map(([k,q])=>`<button data-q="${k}"${o.asked[k]?' class="done"':''}>${q}</button>`).join('')}</div>`
+  +(o.greet?`<form class="otask"><input placeholder="${IAON&&SAMP&&SAMPOK?'Preguntale lo que quieras (IA)…':'Preguntá con los botones'}" ${IAON&&SAMP&&SAMPOK?'':'disabled'}><button>Enviar</button></form>`:'')+`<button class="big otgo2">📝 Ir a la orden</button>`;
+ const tIn=R.tIn||Date.now(),form=`<div class="otnote"><b>📒 Notas de la obra</b><span>🕒 Llegaste a las <b>${hhmm(tIn)}</b> · ahora son las <b>${hhmm(Date.now())}</b></span><span>👷 Cuadrilla ${CUAD}: ${TECS[TEC].n} y ${R.partner||'—'}</span><span>📏 Metraje impreso en el drop: <b>${String(R.dm0||127).padStart(4,'0')} m</b> en la caja NAP · <b>${String((R.dm0||127)+(R.foM||60)).padStart(4,'0')} m</b> al llegar a la roseta</span><button class="otlab">🏷 Ver la etiqueta del router</button></div>`
+  +`<div class="otp"><div class="otph"><svg viewBox="0 0 40 40" width="34"><circle cx="20" cy="20" r="18" fill="none" stroke="#5b6670" stroke-width="3"/><path d="M8 26c8-14 16-14 24 0" stroke="#0e7490" stroke-width="3" fill="none"/><circle cx="20" cy="15" r="3" fill="#0e7490"/></svg><div><b>ORDEN DE TRABAJO</b><small>Servicio de internet por fibra óptica</small></div></div>`
+  +`<div class="otr2"><div class="pill">Fecha: ${inp('fecha','dd/mm/aaaa')}</div><div class="pill">Orden de trabajo: <b class="otn">${o.num}</b></div></div>`
+  +`<div class="pill">Horario: Entrada ${inp('ent','hh:mm','osm')} Salida ${inp('sal','hh:mm','osm')}</div><div class="pill">Responsables técnicos: ${inp('tec','nombres')}</div>`
+  +`<h4>Datos cliente <span class="ottit">Es el titular: <button data-t="1"${f.tit===true?' class="on"':''}>SI</button><button data-t="0"${f.tit===false?' class="on"':''}>NO</button></span></h4>`
+  +`<div class="otg3"><label>Nombre ${inp('nom')}</label><label>Apellido ${inp('ape')}</label><label>DNI ${inp('dni')}</label></div><label>Teléfono ${inp('tel')}</label><label>Complejo ${inp('comp')}</label>`
+  +`<div class="otg4"><label>UF ${inp('uf')}</label><label>LOTE ${inp('lote')}</label><label>OFICINA ${inp('ofi')}</label><label>LOCAL ${inp('loc')}</label></div>`
+  +`<h4>Tareas a realizar</h4><div class="otck">${ck('ret','Retiro de equipo')}${ck('ins','Instalación')}${ck('vis','Visita técnica')}${ck('sc','Sin costo')}${ck('cc','Con costo')}<label>Valor ${inp('val','$','osm')}</label></div><label>Descripción ${inp('desc','qué hiciste')}</label>`
+  +`<h4>Materiales utilizados</h4><div class="otg4"><label>FO/mts ${inp('fo')}</label><label>Rosetas ${inp('ros')}</label><label>UTP/mts ${inp('utp')}</label><label>PatchCord ${inp('pc')}</label></div>`
+  +`<div class="otg3"><label>Equipos instalados ${inp('eq')}</label><label>Modelo ${inp('mod')}</label><label>Mac ${inp('mac')}</label></div><label>Comentarios ${inp('com')}</label>`
+  +`<p class="otleg">El cliente acepta lo detallado en esta orden y deja constancia de que el trabajo quedó terminado. Si la visita tiene costo, se cobra en la próxima factura. El servicio puede tardar hasta 2 horas en activarse.</p>`
+  +`<div class="otsig"><div><canvas class="sgc" width="260" height="80"></canvas><span>Firma / Aclaración cliente${o.sig?`: <b>${sesc(OT.c.d.nom+' '+OT.c.d.ape)}</b>`:''}</span><button class="osg"${o.sig?' disabled':''}>✍️ Pedile la firma al cliente</button></div>`
+  +`<div><canvas class="sgt" width="260" height="80"></canvas><span>Firma / Aclaración técnico: <b>${TECS[TEC].n}</b></span><button class="osc">Borrar mi firma</button></div></div>`
+  +`<button class="big otsend">📤 Entregar la orden</button><p class="otmsg"></p></div>`;
+ el.innerHTML=`<div class="otw"><div class="otbar"><b>📝 Orden de trabajo</b><span class="ottab"${o.res?' hidden':''}><button data-tab="cli"${o.tab==='cli'?' class="on"':''}>💬 Cliente</button><button data-tab="form"${o.tab==='form'?' class="on"':''}>📝 Orden</button></span></div>${o.res||(o.tab==='cli'?cli:form)}</div>`;
+ el.querySelectorAll('.ottab button').forEach(b=>b.onclick=()=>{o.tab=b.dataset.tab;o.res=null;otRender()});
+ if(o.res){const b=el.querySelector('.otfin');if(b)b.onclick=()=>{el.hidden=true;try{speechSynthesis.cancel()}catch(e){}const d=o.done;OT.fin=true;d()};return}
+ if(o.tab==='cli'){const ch=el.querySelector('.otchat');ch.scrollTop=ch.scrollHeight;el.querySelector('.otgo2').onclick=()=>{o.tab='form';otRender()};
+  const g=el.querySelector('.otg');if(g)g.onclick=()=>{o.greet=true;otSay('me','¡Listo, ya quedó instalado! ¿Me das unos datos para la orden de trabajo?');setTimeout(()=>otSay('cl',otLine('open')),500)};
+  el.querySelectorAll('.otq [data-q]').forEach(b=>b.onclick=()=>{const k=b.dataset.q,q=otQs().find(x=>x[0]===k)[1];o.asked[k]=true;otSay('me',q);setTimeout(()=>otSay('cl',otLine(k)),450)});
+  const fm=el.querySelector('.otask');if(fm)fm.onsubmit=async ev=>{ev.preventDefault();const i=fm.querySelector('input'),q=i.value.trim();if(!q)return;otSay('me',q);o.typing=true;otRender();const r=await otFree(q);o.typing=false;otSay('cl',r?r.reply:'Perdón, no te entendí bien. ¿Qué dato necesitás?')};return}
+ el.querySelectorAll('.oti').forEach(i=>i.oninput=()=>{f[i.dataset.k]=i.value});el.querySelectorAll('.otck input[type=checkbox]').forEach(i=>i.onchange=()=>{f[i.dataset.k]=i.checked});
+ el.querySelectorAll('.ottit button').forEach(b=>b.onclick=()=>{f.tit=b.dataset.t==='1';otRender()});
+ el.querySelector('.otlab').onclick=()=>{const m=el.querySelector('.otmsg');m.innerHTML=`<span class="otsk"><b>ONT GPON · Wi-Fi</b><br>Modelo: <b>${R.rtModel}</b><br>S/N: ${String(sigHash(R.rtMac)).slice(0,10)}<br>MAC: <b>${R.rtMac}</b><br>Wi-Fi: CLIENTE-${R.rtMac.slice(-5).replace(':','')}</span>`;m.scrollIntoView({block:'nearest'})};
+ const sc=el.querySelector('.sgc'),st=el.querySelector('.sgt'),nm=OT.c.d.nom+' '+OT.c.d.ape;if(o.sig)sigDraw(sc,nm,false);
+ el.querySelector('.osg').onclick=()=>{o.sig=true;el.querySelector('.osg').disabled=true;sigDraw(sc,nm,true,()=>{const s=el.querySelector('.otsig span');if(s)s.innerHTML=`Firma / Aclaración cliente: <b>${sesc(nm)}</b>`})};
+ const tg=st.getContext('2d');tg.strokeStyle='#1b2430';tg.lineWidth=2;tg.lineCap='round';if(o.tsigImg){const im=new Image();im.onload=()=>tg.drawImage(im,0,0);im.src=o.tsigImg}let dn=null;
+ const pt=e=>{const b=st.getBoundingClientRect();return [(e.clientX-b.left)*st.width/b.width,(e.clientY-b.top)*st.height/b.height]};
+ st.onpointerdown=e=>{dn=pt(e);try{st.setPointerCapture(e.pointerId)}catch(_){}};st.onpointermove=e=>{if(!dn)return;const p=pt(e);tg.beginPath();tg.moveTo(...dn);tg.lineTo(...p);tg.stroke();dn=p;o.tsig++};
+ st.onpointerup=()=>{dn=null;o.tsigImg=st.toDataURL()};el.querySelector('.osc').onclick=()=>{tg.clearRect(0,0,st.width,st.height);o.tsig=0;o.tsigImg=null};
+ el.querySelector('.otsend').onclick=()=>otCheck()}
+/* revisar la orden campo por campo */
+function otCheck(){const o=OT,f=o.f,d=o.c.d,now=new Date(),nm=s=>snorm(s),T=(s,ref)=>{const m=String(s||'').match(/(\d{1,2})\D{0,2}(\d{2})/);if(!m)return false;const a=+m[1]*60+ +m[2],b=new Date(ref),c=b.getHours()*60+b.getMinutes();return Math.abs(a-c)<=6||Math.abs(a-c)>=1434};
+ const fd=(String(f.fecha||'').match(/\d+/g)||[]).map(Number),all=nm([f.comp,f.uf,f.lote,f.ofi,f.loc].join(' ')),allRaw=[f.comp,f.uf,f.lote,f.ofi,f.loc].join(' '),unitF=d.bt==='lote'?f.lote:d.bt==='uf'||d.bt==='torre'?f.uf:allRaw;
+ const tn=nm(f.tec),macN=s=>String(s||'').toUpperCase().replace(/[^0-9A-F]/g,''),n0=s=>String(s||'').trim()===''?0:+sdig(s);
+ const C=[['Fecha',fd[0]===now.getDate()&&fd[1]===now.getMonth()+1&&(fd.length<3||fd[2]===now.getFullYear()||fd[2]===now.getFullYear()%100)],['Hora de entrada',T(f.ent,R.tIn||o.tOut)],['Hora de salida',T(f.sal,Date.now())],
+  ['Técnicos responsables',tn.includes(nm(TECS[TEC].n))&&(!R.partner||tn.includes(nm(R.partner)))],['Es el titular',f.tit===d.tit],['Nombre',nm(f.nom)===nm(d.nom)],['Apellido',nm(f.ape)===nm(d.ape)],['DNI',sdig(f.dni)===sdig(d.dni)],['Teléfono',sdig(f.tel)===sdig(d.tel)],
+  ['Complejo',nm(f.comp).includes(nm(d.bar))&&(!d.cal||nm(f.comp).includes(nm(d.cal))||all.includes(nm(d.cal)))],['UF / Lote',!!sdig(unitF||'')&&[d.alt,d.mz,d.ub].every(x=>snum(allRaw,x))&&(d.bt==='calle'||snum(unitF,d.ub))],
+  ['Tarea: instalación',!!f.ins&&!f.ret],['Descripción',String(f.desc||'').trim().length>=6],['FO / metros',n0(f.fo)===(R.foM||60)],['Rosetas',n0(f.ros)===1],['UTP / metros',n0(f.utp)===0],['PatchCord',n0(f.pc)===1],
+  ['Equipo instalado',/router|ont|modem|módem|onu/i.test(f.eq||'')],['Modelo',macN(f.mod)===macN(R.rtModel)],['MAC',macN(f.mac)===macN(R.rtMac)],['Firma del cliente',!!o.sig],['Tu firma',o.tsig>=15]];
+ const bad=C.filter(x=>!x[1]),pen=bad.length*15;INV.pen+=pen;R.ot={ok:C.length-bad.length,tot:C.length};if(!bad.length){fxOK();setTimeout(()=>info('¡Orden de trabajo perfecta! Así da gusto 👏',BOSS[1]),400)}
+ o.chat.push({w:'me',t:'Listo, firmame acá y ya está.'});speak(otLine('bye'),Object.assign({cut:true},o.v));
+ o.res=`<div class="otres"><h3>${bad.length?`Orden entregada · ${R.ot.ok} de ${R.ot.tot} campos bien`:'✅ ¡Orden perfecta!'}</h3><p class="otby">🗣 “${sesc(otLine('bye'))}”</p><ul>${C.map(([t,ok])=>`<li class="${ok?'ok':'no'}">${ok?'✅':'❌'} ${t}</li>`).join('')}</ul>${pen?`<p><b>−${pen} pts</b> por los campos mal completados.</p>`:'<p>Sin descuentos. ¡Prolijo!</p>'}`
+  +`<p class="otdat">Datos correctos: ${sesc(d.nom)} ${sesc(d.ape)} · DNI ${d.dni} · ${d.tel} · ${sesc(d.bar)} · ${sesc(otUnit(d))} · ${d.tit?'titular':`no titular (${d.rel})`} · FO ${R.foM} m · ${R.rtModel} · ${R.rtMac}</p><button class="big otfin">Terminar</button></div>`;otRender()}
+/* hooks de prueba */
+window.OTauto=()=>{if(!OT)return;const d=OT.c.d,f=OT.f,n=new Date(),u=d.bt==='lote'?'lote':d.bt==='calle'?'comp':'uf';Object.assign(f,{fecha:`${n.getDate()}/${n.getMonth()+1}/${n.getFullYear()}`,ent:hhmm(R.tIn||n),sal:hhmm(n),tec:TECS[TEC].n+' y '+(R.partner||''),tit:d.tit,nom:d.nom,ape:d.ape,dni:d.dni,tel:d.tel,
+ comp:d.bar+(d.bt==='calle'?' '+d.cal+' '+d.alt:d.bt==='mzc'||d.bt==='torre'?' '+d.mz:''),uf:d.bt==='uf'||d.bt==='torre'?d.ub:'',lote:d.bt==='lote'||d.bt==='mzc'?d.ub:'',ins:true,desc:'Instalación de fibra con roseta y ONT',fo:String(R.foM),ros:'1',utp:'0',pc:'1',eq:'Router ONT',mod:R.rtModel,mac:R.rtMac});OT.sig=true;OT.tsig=20;otCheck()};
+TIPS.push([/orden de trabajo/i,'La orden de trabajo','Al terminar se completa la orden con el cliente: fecha, horario de llegada y salida, técnicos, datos del titular, qué se hizo y los materiales (metros de fibra, roseta, patchcord y el equipo con su modelo y MAC). La firma del cliente deja constancia de que el trabajo quedó terminado.'],
+ [/toma de la pared|ficha de la fuente/i,'La fuente del router','La fuente de 12 V va a un tomacorriente cerca del router y la ficha redonda al conector Power. Conviene que el cable no quede tirante ni pase por detrás de muebles que lo pisen.']);
+
+iaSel();
 
 applyQ();loop();
 </script></body></html>
