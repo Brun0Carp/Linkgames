@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -59,6 +58,7 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 .hud{padding-right:92px!important}
 #mq{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);padding:16px;z-index:10}#mq>div{background:var(--card);border-radius:16px;padding:18px;max-width:320px;width:100%}.mqb{display:flex;gap:8px;margin-top:14px}.mqb button{flex:1;margin:0;padding:11px 8px}
 #tec,#sop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
+.cuh{font-size:16px;margin:14px 0 0}
 .tsel{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
 .tsel button{padding:6px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:13px;font-weight:600;border-radius:14px}
 .tsel button svg{width:100%;max-width:64px;height:auto}
@@ -246,6 +246,7 @@ button:active:not(:disabled){transform:scale(.96)}
  <button class="big" onclick="closeShop()">Volver al menú</button></div></div>
 <div id="tec" hidden><div class="tbox"><div id="tjob" class="job" hidden></div><h1 style="font-size:26px">Técnicos</h1><p class="sub" style="margin-bottom:8px">Elegí con quién vas a empalmar.</p>
  <div class="tprev" id="tprev"></div><div class="tsel" id="tsel" role="group" aria-label="Técnicos"></div>
+ <div id="cuadw"><h2 class="cuh">Cuadrilla</h2><div class="qrow" id="cuads" role="group" aria-label="Cuadrilla"></div><p class="note" id="cuadn" style="margin:6px 0 0"></p></div>
  <button class="big" id="tgo" onclick="startGame()">¡A empalmar!</button><button class="lnk" onclick="$('#tec').hidden=true;$('#title').hidden=false">Volver al menú</button></div></div>
 <div id="news" hidden><div class="tbox" role="dialog" aria-labelledby="nwt"><span class="nver" id="nwv"></span><h1 id="nwt" style="font-size:26px;margin:8px 0 2px">Novedades</h1><p class="sub" id="nws" style="margin:0"></p><ul class="nlist" id="nwl"></ul><details class="nold"><summary>Todo lo que se agregó antes</summary><div id="nwo"></div></details><button class="big" onclick="closeNews()">¡Dale, a empalmar!</button></div></div>
 <div id="title"><div class="tbox">
@@ -630,7 +631,7 @@ function cleaveUI(el,c,done,yel){const s={fx:60,closed:false,cut:false},ok=()=>u
 
 /* fusionar (2D, con teclado en la compu): alinear X e Y y dejar el hueco justo */
 let fu=null,fuOn=null;
-function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('clv'))];fu={ox:rint(3,7)*(rnd()<.5?-1:1),oy:rint(2,6)*(rnd()<.5?-1:1),gap:rint(8,14)*5,aL:+(.05+rnd()*amx).toFixed(1),aR:+(.05+rnd()*amx).toFixed(1)};if(upg('fus'))fu.ox=fu.oy=0;
+function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('clv'))];fu={ox:rint(3,7)*(rnd()<.5?-1:1),oy:rint(2,6)*(rnd()<.5?-1:1),gap:rint(8,14)*5,aL:+(.05+rnd()*amx).toFixed(1),aR:+(.05+rnd()*amx).toFixed(1)};if(upg('fus')||AUTOF())fu.ox=fu.oy=0;
  const draw=()=>{const g=fu.gap,w=150-g/2;
   const scr=(lb,off,y)=>`<rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#gscr)"/><rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#ggrid)"/><circle cx="150" cy="${y+48}" r="30" fill="none" stroke="rgba(143,176,198,.18)"/><text x="10" y="${y+16}" font-size="12" fill="#8fb0c6">${lb}</text><line x1="150" y1="${y+6}" x2="150" y2="${y+90}" stroke="#2b5876" stroke-dasharray="3 3"/>`
    +`<rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="url(#ghi)"/><rect x="0" y="${y+46}" width="${w}" height="4" fill="${c}"/><rect x="${150+g/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="${150+g/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="url(#ghi)"/><rect x="${150+g/2}" y="${y+46+off*3}" width="${w}" height="4" fill="${c2}"/>`;
@@ -639,14 +640,14 @@ function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('c
    +`<p style="margin:8px 0 2px;font-size:14px">Hueco <b>${g} µm</b> · X <b>${sg(fu.ox*.5)} µm</b> · Y <b>${sg(fu.oy*.5)} µm</b>${okk?' · ✅ listas':''}</p><p style="margin:0 0 8px;font-size:12.5px;opacity:.85">Ángulo de corte: izq <b style="color:${fu.aL>1?'#e5484d':'inherit'}">${fu.aL}°</b> · der <b style="color:${fu.aR>1?'#e5484d':'inherit'}">${fu.aR}°</b>${fu.aL>1||fu.aR>1?' · alto: suma pérdida':''}</p>`
    +`<div class="fgrid"><button data-a="x-">X ▲</button><button data-a="y-">Y ▲</button><button data-a="g-">◀ Acercar</button><button data-a="x+">X ▼</button><button data-a="y+">Y ▼</button><button data-a="g+">Alejar ▶</button></div>`
    +`<button class="big" data-a="arc">⚡ Disparar arco${DESK?' (Enter)':''}</button><p style="margin:8px 0 0;font-size:13px;opacity:.8">Poné X e Y en 0 y dejá un hueco de 5 a 15 µm. El núcleo mide 9 µm: con 1 µm de desalineación ya se pierden unos 0,2 dB.${DESK?' Teclado: vista X con W/S, acercar A, alejar D · vista Y con ↑/↓, acercar ←, alejar →.':''}</p>`;
-  el.querySelectorAll('button').forEach(b=>b.onclick=()=>act(b.dataset.a))};
+  el.querySelectorAll('button').forEach(b=>b.onclick=()=>act(b.dataset.a));if(AUTOF())el.querySelectorAll('button').forEach(b=>b.disabled=true)};
  const act=a=>{if(a==='arc'){if(fu.gap>25){err++;boss('arc');msg('Fibras muy separadas: el arco no las unió. Acercalas.');return}
    if(fu.gap<5){err++;boss('arc');fu.gap=30;msg('Las fibras chocaron. Se separaron: volvé a acercarlas.');draw();return}
    {const d=Math.hypot(fu.ox,fu.oy)*.5*.45;last=+(.008+4.34*Math.pow(d/4.6,2)+.03*Math.max(0,fu.aL+fu.aR-.5)+Math.max(0,fu.gap-15)*.004).toFixed(3)}loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});fuOn=null;
    const sv=el.querySelector('svg');if(sv)sv.insertAdjacentHTML('beforeend','<circle class="arcf" cx="150" cy="48" r="42" fill="url(#garc)"/><circle class="arcf" cx="150" cy="152" r="42" fill="url(#garc)"/>');el.querySelectorAll('button').forEach(b=>b.disabled=true);flash3D(0x9fe2ff,4);
    msg('⚡ Arco… pérdida estimada por la fusionadora: '+last.toFixed(2)+' dB'+(last>.15?' (alta: la próxima alineá mejor)':last<=.05?' (excelente)':''));setTimeout(done,650);return}
   const d=a[1]==='+'?1:-1;if(a[0]==='x')fu.ox=Math.max(-12,Math.min(12,fu.ox+d));if(a[0]==='y')fu.oy=Math.max(-12,Math.min(12,fu.oy+d));if(a[0]==='g')fu.gap=Math.max(0,Math.min(80,fu.gap+d*5));draw()};
- fuOn=act;draw();if(upg('fus')>=2){msg('🤖 Fusionadora automática: alineando y empalmando…');const it=setInterval(()=>{if(!el.isConnected||fuOn!==act){clearInterval(it);return}if(fu.gap>10){fu.gap-=5;draw()}else{clearInterval(it);act('arc')}},110)}}
+ fuOn=act;draw();if(upg('fus')>=2||AUTOF()){msg(AUTOF()?'🤖 Fusionadora automática de la Cuadrilla 1: alinea por núcleo y empalma sola…':'🤖 Fusionadora automática: alineando y empalmando…');const it=setInterval(()=>{if(!el.isConnected||fuOn!==act){clearInterval(it);return}if(fu.gap>10){fu.gap-=5;draw()}else{clearInterval(it);act('arc')}},110)}}
 const FKEYS={w:'x-',s:'x+',a:'g-',d:'g+',ArrowUp:'y-',ArrowDown:'y+',ArrowLeft:'g-',ArrowRight:'g+',Enter:'arc',' ':'arc'};
 addEventListener('keydown',e=>{if(!fuOn||e.target.tagName==='INPUT')return;const k=FKEYS[e.key.length===1?e.key.toLowerCase():e.key];if(!k)return;e.preventDefault();if(!e.repeat||k!=='arc')fuOn(k)});
 
@@ -671,7 +672,7 @@ function heatUI(el,c,done,c2){c2=c2||c;const s={x:70,ok:false,hot:false};
  const sv=el.querySelector('.hs'),tm=el.querySelector('.tm'),tr=el.querySelector('.tr'),hb=el.querySelector('.hb'),up=()=>tm.setAttribute('transform',`translate(${s.x},70)`);let m=false,x0,s0;
  sv.onpointerdown=e=>{if(s.hot)return;const p=svgPt(sv,e);if(Math.abs(p.x-s.x)<40&&Math.abs(p.y-70)<28){m=true;x0=p.x;s0=s.x;try{sv.setPointerCapture(e.pointerId)}catch(_){}}};
  sv.onpointermove=e=>{if(!m)return;const p=svgPt(sv,e);s.x=Math.max(40,Math.min(260,s0+p.x-x0));up()};
- sv.onpointerup=()=>{if(!m)return;m=false;if(Math.abs(s.x-150)<(upg('hor')?40:14)){s.x=150;s.ok=true;hb.disabled=false;el.querySelector('.hh').textContent='Termo sobre el empalme. Tocá Calentar.'}else{s.ok=false;hb.disabled=true}up()};
+ sv.onpointerup=()=>{if(!m)return;m=false;if(Math.abs(s.x-150)<(upg('hor')?40:14)){s.x=150;s.ok=true;hb.disabled=false;el.querySelector('.hh').textContent=AUTOF()?'Termo en el horno: arranca solo.':'Termo sobre el empalme. Tocá Calentar.';if(AUTOF())setTimeout(()=>hb.onclick&&hb.onclick(),300)}else{s.ok=false;hb.disabled=true}up()};
  hb.onclick=()=>{if(!s.ok||s.hot)return;const HT=(upg('hor')||itemOn('Bruno'))?450:900;s.hot=true;hb.disabled=true;const t0=performance.now();const hg=el.querySelector('.hglow');flash3D(0xff8a2a,2.2,900);const f=()=>{const q=Math.min(1,(performance.now()-t0)/HT);if(hg)hg.setAttribute('opacity',(Math.sin(q*Math.PI)*(.75+.25*Math.random())).toFixed(2));tr.setAttribute('height',22-10*q);tr.setAttribute('y',-11+5*q);tr.setAttribute('fill',`rgba(${232+20*Math.sin(q*Math.PI)|0},${244-90*Math.sin(q*Math.PI)|0},${255-160*Math.sin(q*Math.PI)|0},.9)`);
    if(q<1)return requestAnimationFrame(f);msg('Termo contraído: empalme protegido.');setTimeout(done,350)};f()};
  up()}
@@ -896,13 +897,13 @@ function dHalf(side){const g=G(),j=new THREE.Mesh(sweep([V(0,0,-.5),V(0,0,.5)],h
 function dropGeo(off){const P=dropPath(off),o1=R.dOut.geometry,o2=R.dPr.geometry;R.dOut.geometry=sweep(P,DPROF,{period:.7});R.dPr.geometry=sweep(P,PRIB,{closed:false,period:2.6});o1.dispose();o2.dispose();
  const y1=dropY(ZT+off),y2=dropY(ZE+off);R.dIn.position.y=(y1+y2)/2;R.dIn.rotation.x=-Math.atan2(y2-y1,ZE-ZT);R.dStub.position.y=y2}
 /* patchcord: cuerda con gravedad (verlet) que se apoya en la mesa y pasa por arriba de la roseta y del OPM */
-const PC_N=36,PC_L=3.6,PC_R=.042;
+const PC_N=40,PC_L=5.4,PC_R=.042;
 function pcEnd(o){const dr=V(Math.sin(o.rotation.y),0,Math.cos(o.rotation.y));return [o.position.clone().addScaledVector(dr,.42),dr]}
 function pcInit(){const [a]=pcEnd(R.cA),[b]=pcEnd(R.cB),P=[],O=[],d=b.clone().sub(a),sd=V(-d.z,0,d.x).normalize(),cv=h=>{const q=[];for(let i=0;i<=200;i++){const t=i/200;q.push(a.clone().lerp(b,t).addScaledVector(sd,h*Math.sin(Math.PI*t)))}return q},len=q=>q.reduce((s,p,i)=>i?s+p.distanceTo(q[i-1]):0,0);
  let lo=0,hi=5;for(let k=0;k<40;k++){const h=(lo+hi)/2;len(cv(h))<PC_L?lo=h:hi=h}const q=cv(lo),cum=[0];for(let i=1;i<q.length;i++)cum.push(cum[i-1]+q[i].distanceTo(q[i-1]));
  for(let i=0,j=0;i<PC_N;i++){const L=i/(PC_N-1)*cum[cum.length-1];while(j<cum.length-2&&cum[j+1]<L)j++;const f=(L-cum[j])/((cum[j+1]-cum[j])||1),p=q[j].clone().lerp(q[j+1],f);p.y=.02+PC_R;P.push(p);O.push(p.clone())}
  R.rope={P,O,seg:PC_L/(PC_N-1),still:0,key:''};R.pc=new THREE.Mesh(new THREE.BufferGeometry(),M(CYEL,{roughness:.5}));R.pc.castShadow=true;R.g.add(R.pc);for(let i=0;i<400;i++)ropeStep(true);ropeMesh()}
-const RBOX=()=>[[RX-1.72,RX+1.72,RZ-1.72,RZ+1.72,FL+.58],[RX+3.3-.8,RX+3.3+.8,RZ+3.3-.56,RZ+3.3+.56,.42]];
+const RBOX=()=>[[RX-1.72,RX+1.72,RZ-1.72,RZ+1.72,FL+.58],[RX+3.3-.8,RX+3.3+.8,RZ+3.3-.56,RZ+3.3+.56,.42],...(R.rt?[[RTP.x-RTW/2-.05,RTP.x+RTW/2+.05,RTP.z-RTD/2-.05,RTP.z+RTD/2+.05,.56]]:[])];
 function ropeStep(force){const r=R.rope,[a,da]=pcEnd(R.cA),[b,db]=pcEnd(R.cB),k=[a.x,a.y,a.z,b.x,b.y,b.z].map(v=>v.toFixed(3)).join();if(k!==r.key){r.key=k;r.still=0}
  if(!force&&r.still>45)return false;const P=r.P,O=r.O,n=P.length,s=r.seg,pin=i=>i<2||i>n-3,FLOOR=.02+PC_R,bx=RBOX();let mv=0;
  for(let i=2;i<n-2;i++){const p=P[i],vx=(p.x-O[i].x)*.975,vy=(p.y-O[i].y)*.975,vz=(p.z-O[i].z)*.975;O[i].copy(p);p.x+=vx;p.y+=vy-.0068;p.z+=vz}
@@ -961,26 +962,30 @@ function opmScreen(txt,sub,o=R){const g=o.opmG;if(!g)return;const w=256,h=200,s=
  g.textAlign='left';g.font='16px monospace';if(s.ref!=null)g.fillText('REF '+s.ref.toFixed(2),12,64);if(s.led)g.fillText('LED',12,186);if(s.db)g.fillText('REL',60,186);o.opmT.needsUpdate=true}
 function mRoseta(){const g=G(),w=M(0xdedbd4,{roughness:.75,map:TX.noise,envMapIntensity:.3}),w2=M(0xc9c5bd,{roughness:.8,envMapIntensity:.25}),gr=M(0x2fa84f,{roughness:.45}),dk=M(0x1d2024,{roughness:.9}),ho=M(0x8a857c,{roughness:1});
  PARENT=g;
- /* base y paredes con esquinas redondeadas */
- mesh(ext(rrect(3.4,3.4,.26),FL),w,RX,0,RZ);
+ /* base con el agujero redondo del centro: por ahí se ve la pared */
+ {const s=rrect(3.4,3.4,.26),h=new THREE.Path();h.absarc(0,.1,.5,0,Math.PI*2,true);s.holes.push(h);mesh(ext(s,FL),w,RX,0,RZ)}
+ mesh(cyl(.5,.5,.02,32),M(0x8f877b,{roughness:1,map:TX.noise}),HC.x,.04,HC.z);
  {const s=rrect(3.4,3.4,.26);s.holes.push(rrect(3.18,3.18,.17));mesh(ext(s,.52),w,RX,FL,RZ)}
  {const s=rrect(3.4,3.4,.26);s.holes.push(rrect(3.28,3.28,.2));mesh(ext(s,.03),w2,RX,FL+.52,RZ)}
- /* torretas de tornillo, ranuras de montaje y postes chicos como en la base real */
- [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>{mesh(cyl(.13,.15,.22,18),w2,RX+a*1.3,FL+.11,RZ+b*1.3);mesh(cyl(.045,.045,.01,10),dk,RX+a*1.3,FL+.225,RZ+b*1.3)});
- [[0,1.05,.34,.1],[0,-1.25,.34,.1],[-1.25,-.1,.1,.34],[1.25,-.1,.1,.34]].forEach(([x,z,a,b])=>mesh(ext(rrect(a,b,.05),.005),ho,RX+x,FL+.002,RZ+z));
- [[-.5,-1.3],[.5,-1.3],[-1.3,.55],[1.3,.55]].forEach(([x,z])=>mesh(box(.12,.2,.12),w2,RX+x,FL+.1,RZ+z));
- /* carrete: anillo con pasos a los costados, pestañas que retienen la fibra y 4 nervios en cruz */
- mesh(ext(arcW(0,.56,.64,.36,Math.PI-.36),.36),w2,HC.x,FL,HC.z);mesh(ext(arcW(0,.56,.64,Math.PI+.36,2*Math.PI-.36),.36),w2,HC.x,FL,HC.z);
- for(let i=0;i<6;i++){const a=Math.PI/6+i*Math.PI/3,t=mesh(box(.28,.03,.12),w2,HC.x+Math.cos(a)*.74,FL+.36,HC.z+Math.sin(a)*.74);t.rotation.y=-a}
- [1,3,5,7].forEach(k=>{const a=k*Math.PI/4,t=mesh(box(.22,.24,.06),w2,HC.x+Math.cos(a)*.97,FL+.12,HC.z+Math.sin(a)*.97);t.rotation.y=-a;
-  const c=mesh(box(.1,.03,.2),w2,HC.x+Math.cos(a)*.9,FL+.255,HC.z+Math.sin(a)*.9);c.rotation.y=-a});
- /* soporte del empalme en el centro */
- mesh(box(.72,.06,.34),w2,HC.x,FL+.03,HC.z);[-1,1].forEach(k=>mesh(box(.64,.12,.04),w2,HC.x,FL+.1,HC.z+k*.085));
- /* entrada del drop: pasacable de goma donde estaba la cupla izquierda */
- mesh(cyl(.21,.21,.16,24),dk,XW,YW,RZ+1.66).rotation.x=Math.PI/2;mesh(cyl(.25,.25,.04,24),dk,XW,YW,RZ+1.75).rotation.x=Math.PI/2;
- /* diente para enganchar el drop */
+ /* ventanitas cuadradas en las esquinas, trabas de la tapa y ranuras para los tornillos */
+ [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>{const s=rrect(.22,.22,.03);s.holes.push(rrect(.14,.14,.02));mesh(ext(s,.1),w2,RX+a*1.3,FL,RZ+b*1.3);mesh(ext(rrect(.14,.14,.02),.004),ho,RX+a*1.3,FL+.002,RZ+b*1.3);mesh(box(.1,.18,.05),w2,RX+a*1.47,FL+.09,RZ+b*1.05)});
+ [-1,1].forEach(k=>mesh(ext(rrect(.09,.22,.045),.005),ho,HC.x+k*.66,FL+.002,HC.z+.05));
+ /* dos medios carretes alrededor del agujero, donde se ata la punta del drop */
+ [[.55,Math.PI-.55],[Math.PI+.55,2*Math.PI-.55]].forEach(([a0,a1])=>mesh(ext(arcW(0,.5,.58,a0,a1),.24),w2,HC.x,FL,HC.z));
+ [-1,1].forEach(k=>{mesh(box(.16,.1,.06),w2,HC.x,FL+.22,HC.z+k*.6);mesh(box(.1,.03,.1),w2,HC.x,FL+.27,HC.z+k*.55)});
+ /* 8 pestañas que retienen la fibra: 4 anchas en diagonal y 4 lenguas redondeadas en cruz */
+ [1,3,5,7].forEach(k=>{const a=k*Math.PI/4,c=Math.cos(a),n=Math.sin(a),p=mesh(box(.1,.34,.28),w2,HC.x+c*1.0,FL+.17,HC.z+n*1.0);p.rotation.y=-a;
+  const t=mesh(box(.44,.035,.3),w2,HC.x+c*.82,FL+.355,HC.z+n*.82);t.rotation.y=-a});
+ [0,2,4,6].forEach(k=>{const a=k*Math.PI/4,c=Math.cos(a),n=Math.sin(a),p=mesh(box(.08,.34,.2),w2,HC.x+c*1.42,FL+.17,HC.z+n*1.42);p.rotation.y=-a;
+  const t=mesh(box(.32,.035,.2),w2,HC.x+c*1.28,FL+.355,HC.z+n*1.28);t.rotation.y=-a;mesh(cyl(.1,.1,.035,16),w2,HC.x+c*1.12,FL+.355,HC.z+n*1.12)});
+ /* soporte del empalme en el centro, sobre el agujero */
+ [-1,1].forEach(k=>mesh(box(.08,.05,1.02),w2,HC.x+k*.36,FL+.025,HC.z));
+ mesh(box(.72,.06,.3),w2,HC.x,FL+.03,HC.z);[-1,1].forEach(k=>mesh(box(.64,.12,.04),w2,HC.x,FL+.1,HC.z+k*.085));
+ /* entrada del drop: ranura en la pared de adelante y traba blanca con precinto negro */
+ [RZ+1.708,RZ+1.583].forEach(z=>mesh(box(.42,.2,.01),M(0x2a2d31,{roughness:.9}),XW,YW,z));
+ mesh(box(.1,.34,.14),w2,XW-.27,FL+.17,ZE-.45);
  const tooth=G();tooth.position.set(XW+.27,FL,ZE-.45);g.add(tooth);mesh(box(.1,.34,.14),w2,0,.17,0,tooth);
- const cap=G();cap.position.set(0,.34,0);tooth.add(cap);mesh(box(.3,.05,.14),w2,.12,0,0,cap);cap.rotation.y=.9;tooth.userData.cap=cap;
+ const cap=G();cap.position.set(0,.34,0);tooth.add(cap);mesh(box(.62,.05,.16),w2,.28,0,0,cap);mesh(box(.05,.09,.2),dk,.28,-.01,0,cap);cap.rotation.y=.9;tooth.userData.cap=cap;
  /* cupla SC/APC (la que queda) y pigtail enchufado desde adentro */
  mesh(box(.36,.3,.56),gr,XP,.27,RZ+1.6);mesh(box(.52,.4,.04),gr,XP,.27,RZ+1.72);mesh(box(.16,.12,.02),dk,XP,.27,RZ+1.885);
  const pg=mSC();pg.position.set(XP,.27,RZ+1.12);g.add(pg);
@@ -994,7 +999,7 @@ function mRoseta(){const g=G(),w=M(0xdedbd4,{roughness:.75,map:TX.noise,envMapIn
  const lid=G();lid.position.set(RX+4.1,.04,RZ-1.4);g.add(lid);mesh(new THREE.ExtrudeGeometry(rrect(3.3,3.3,.26),{depth:.16,bevelEnabled:true,bevelThickness:.04,bevelSize:.04,bevelSegments:2,curveSegments:8}).rotateX(-Math.PI/2),w,0,0,0,lid);mesh(box(2.9,.02,2.9),w2,0,.2,0,lid);
  /* OPM y patchcord sobre la mesa */
  const opm=mOPM();opm.position.set(RX+3.3,0,RZ+3.3);g.add(opm);
- const cA=mSC(),cB=mSC();cA.position.set(RX+2.1,.09,RZ+4.3);cB.position.set(RX+.9,.09,RZ+4.8);cB.rotation.y=-Math.PI/2;g.add(cA);g.add(cB);
+ const cA=mSC(),cB=mSC();cA.position.set(RX+2.1,.09,RZ+4.3);cB.position.set(RX+1.6,.09,RZ+6.4);cB.rotation.y=-Math.PI/2;g.add(cA);g.add(cB);
  PARENT=null;g.traverse(o=>{if(!o.isMesh||!o.geometry)return;o.geometry.computeBoundingSphere();const b=o.geometry.boundingSphere;if(b&&b.radius*Math.max(o.scale.x,o.scale.y,o.scale.z)<.3)o.castShadow=false});Object.assign(R,{g,dg,dOut,dPr,dIn,dStub,tooth,ub,dk,opm,cA,cB,lid});R.dOff=null;pcInit();pcU();return g}
 function buildRoseta(){if(RSG)return;RSG=mRoseta();scene.add(RSG)}
 function setModo(m){MODE=m;try{localStorage.setItem('taller_modo',m)}catch(e){}
@@ -1053,7 +1058,7 @@ function wind(e){const p=gnd(e,FL+.3),dx=p.x-HC.x,dz=p.z-HC.z,r=Math.hypot(dx,dz
 
 function opmUI(el){if(R.broken)return opmDead(el);const p=R.pw,ok=p>=-25,t0=performance.now();if(!ok)setTimeout(()=>boss('power',{p:p.toFixed(1)}),1300);
  el.innerHTML=`<svg viewBox="0 0 300 150"><rect width="300" height="150" rx="12" fill="#0d1f12"/><text x="16" y="26" font-size="13" fill="#a7d7b5">OPM · λ 1490 nm</text><text class="pv" x="150" y="88" font-size="44" text-anchor="middle" fill="#7CFC9a" font-family="monospace">-40.00</text><text x="150" y="118" font-size="15" text-anchor="middle" fill="#a7d7b5">dBm</text></svg>`
-  +`<p class="ores" style="margin:10px 0 4px;font-size:15px">Midiendo…</p><p style="margin:0;font-size:13px;opacity:.8">En la casa del cliente se acepta entre −8 y −25 dBm.</p><button class="big ofin" disabled>Seguir: cerrar la roseta</button>`;
+  +`<p class="ores" style="margin:10px 0 4px;font-size:15px">Midiendo…</p><p style="margin:0;font-size:13px;opacity:.8">En la casa del cliente se acepta entre −8 y −25 dBm.</p><button class="big ofin" disabled>Seguir: conectar el router</button>`;
  const pv=el.querySelector('.pv'),f=()=>{const q=Math.min(1,(performance.now()-t0)/1200),v=-40+(p+40)*(1-Math.pow(1-q,3))+(q<1?(Math.random()-.5)*.6:0);pv.textContent=v.toFixed(2);opmScreen(v.toFixed(2),'dBm · 1490 nm');
   if(q<1)return requestAnimationFrame(f);if(p>=-18)setTimeout(()=>praise(p.toFixed(2)),1200);el.querySelector('.ores').innerHTML=(ok?`<b>✅ Señal OK.</b> Pérdida en la roseta y el patchcord: ${(R.spl+R.store+.5).toFixed(2)} dB${SPL?` + ${SPLDB[SPL]} dB del splitter 1x${SPL}`:''}.`:`<b>⚠️ Señal baja.</b> Revisá la fusión y el guardado.`)+(R.bud?budHTML(R.bud):'');
   const b=el.querySelector('.ofin');b.disabled=false;b.onclick=()=>{endPan();nx()}};f()}
@@ -2608,14 +2613,20 @@ const THEORY=()=>`
 <details><summary>Conectores</summary><ul><li><b>APC (verde):</b> pulido a 8°, así la luz reflejada no vuelve al láser. Es el que se usa en FTTH.</li><li><b>UPC (azul):</b> pulido recto. Nunca se conecta un APC con un UPC: se rayan y la pérdida sube muchísimo.</li><li>Antes de conectar, se limpia la punta (férula) con un limpiador: una mota de polvo en un núcleo de 9 µm tapa buena parte de la luz.</li></ul></details>
 <details><summary>Curvaturas</summary><ul><li><b>Macrocurvatura:</b> una vuelta muy cerrada (un pelo doblado, una vuelta apretada en el carrete).</li><li><b>Microcurvatura:</b> pequeñas deformaciones: una tapa que aprieta, un precinto ajustado, gel o tierra que presiona.</li><li>Las dos pierden más a 1550 nm que a 1310 nm, por eso se miden en 1550 para detectarlas.</li></ul></details>
 <details><summary>Caja NAP y conector de campo</summary><ul><li><b>NAP:</b> la caja de la calle. Entra el cable troncal, se empalma un pelo con potencia a la entrada de un splitter conectorizado y cada salida queda en un puerto SC/APC.</li><li><b>Splitter 1x2 / 1x4 / 1x8:</b> 3,7 / 7,2 / 10,5 dB. Con un 1x4 en el nodo y un 1x8 en la NAP se reparten 32 clientes por pelo.</li><li><b>Conector de campo:</b> mecánico, sin fusionadora. Pelás 250 µm, cortás al largo justo, el pelo hace tope contra la fibra pulida de adentro y el gel iguala el índice. Pierde 0,2 a 0,5 dB.</li><li><b>Fibra desnuda:</b> el adaptador del power meter permite medir una punta sin conector.</li></ul></details>
-<details><summary>Herramientas</summary><ul><li><b>Cortadora (cleaver):</b> deja la cara a 90°. Ángulo ideal: menos de 0,5°.</li><li><b>Fusionadora:</b> alinea por núcleo y funde con un arco de más de 1600 °C. Estima la pérdida.</li><li><b>OPM (power meter):</b> mide cuánta luz llega, en dBm.</li><li><b>VFL:</b> láser rojo visible; muestra cortes y curvas en los primeros kilómetros.</li><li><b>OTDR:</b> manda pulsos y "ve" a qué distancia hay un empalme, un conector o un corte.</li></ul></details>`;
+<details><summary>Herramientas</summary><ul><li><b>Cortadora (cleaver):</b> deja la cara a 90°. Ángulo ideal: menos de 0,5°.</li><li><b>Fusionadora:</b> alinea por núcleo y funde con un arco de más de 1600 °C. Estima la pérdida.</li><li><b>OPM (power meter):</b> mide cuánta luz llega, en dBm.</li><li><b>VFL:</b> láser rojo visible; muestra cortes y curvas en los primeros kilómetros.</li><li><b>Pinza identificadora (de tráfico):</b> curva apenas el pelo y lee la luz que se escapa: muestra los dBm y hacia dónde va la señal sin cortar el servicio. Muchas traen láser rojo (VFL) incorporado.</li><li><b>Router (ONT):</b> recibe la fibra en el puerto PON. PON fija = registrado en la OLT; LOS roja = no le llega luz.</li><li><b>OTDR:</b> manda pulsos y "ve" a qué distancia hay un empalme, un conector o un corte.</li></ul></details>`;
 function ptrReset(){try{pts.clear();pin=null;rotP=null;down=0;vyaw=vel=0;if(FGR){FGR.m.userData.grab=null;FGR=null}if(gr){const o=gr;gr=null;back(o);hi(null)}}catch(e){}}
 function openTheory(){ptrReset();try{$('#thb').innerHTML=THEORY()}catch(e){$('#thb').innerHTML='<p>No se pudo cargar la teoría.</p>'}$('#theo').hidden=false;$('#tipp').hidden=true;$('#invp').hidden=true;$('#theo .tbox').scrollTop=0}
 function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=57,NEWS=[
+const VER=58,NEWS=[
+ {v:58,t:'Cuadrillas, router y pinza con VFL',items:[
+  ['👷','Elegí tu cuadrilla','Después de elegir el técnico elegís Cuadrilla 1, 2 o 3. La 2 y la 3 usan la fusionadora de siempre; la Cuadrilla 1 tiene una fusionadora automática.'],
+  ['🤖','Fusionadora automática','Funda negra, paravientos grande con las mordazas adentro y botones OPEN/CLOSE, SET, RESET y HEAT. Apretás OPEN/CLOSE, apoyás los pelos, la cerrás y empalma sola: limpia, acerca, alinea por núcleo y dispara el arco. El horno se cierra y calienta solo.'],
+  ['📶','Router del cliente','Al terminar la roseta y medir con el power meter, pasás el patchcord al puerto PON del router, enchufás la fuente y lo prendés. La luz PON titila y queda fija cuando se registra en la OLT.'],
+  ['🔎','Pinza de tráfico con VFL','Pinza nueva gris con panel verde: la prendés con el botón rojo, pinzás el pelo y lee los dBm con la flecha de la señal. Trae láser rojo: si un pelo falla, prendés el VFL y ves dónde se escapa la luz.'],
+  ['⬜','Roseta nueva','La roseta ahora es como la real: agujero redondo al centro, dos medios carretes, 8 pestañas para guardar la fibra y una traba blanca con precinto para el drop.']]},
  {v:57,t:'Pasacables de verdad',items:[
   ['🟢','Pasacables con alma de acero','Ahora es como el real: rollo verde, cinta naranja y punta de resorte con ojal, también en la maqueta 3D y en la camioneta.'],
   ['🌀','Minijuego nuevo','Girás el rollo para desenrollar cinta, embocás la punta en la boca del caño y la empujás a mano por el ducto. Solo avanza la cinta que desenrollaste, y en cada curva girás el mango para rotar la cinta y que la punta pase. Si empujás trabado, la cinta se dobla.']]},
@@ -2829,8 +2840,8 @@ const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Ma
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
-async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b></span></div>`;
- $('#res').innerHTML=tv+(MODE==='cableado'?cblEnd(p,CO):MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
+async function end(){if(GO)return;if(BK.out&&!BK.stored)return toolsIn(()=>end());if(!INV.skip&&!INV.back)return invReturn(()=>end());$('#invb').hidden=true;const p=score();$('#end').hidden=false;$('#tipb').hidden=true;$('#tipp').hidden=true;const CO=coinsFor(p);const tv=`<div class="eav">${avatar(TECS[TEC])}<span>Técnico<br><b>${TECS[TEC].n}</b>${MODE!=='cableado'?`<br><small>Cuadrilla ${CUAD}</small>`:''}</span></div>`;
+ $('#res').innerHTML=tv+(MODE==='cableado'?cblEnd(p,CO):MODE==='nap'?napEnd(p,CO):MODE==='roseta'?`<h2>Roseta instalada</h2><p>${R.screw?'Tapada y atornillada en la pared':'Tapada, con doble faz y pegada en la pared'}<br>Pérdida de la fusión: <b>${(R.spl||0).toFixed(3)} dB</b><br>Guardado: <b>${R.rate||'—'}</b> (${(R.store||0).toFixed(3)} dB)<br>${SPL?`Splitter PLC 1x${SPL} · drop de ${DROPN} pelo${DROPN>1?'s':''}<br>`:''}Potencia medida: <b>${R.pw} dBm</b>${R.ont?`<br>Router: <b>${R.ont}</b>`:''}${R.redos?`<br>Empalmes rehechos: <b>${R.redos}</b>`:''}<br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`:`<h2>Botella instalada</h2><p>${INSTR?`Instalación: <b>${INSTR}</b><br>`:''}Cable de <b>${NFIB}</b> fibras · empalmes: <b>${fusN}</b><br>${SPL&&SP?`Splitter PLC 1x${SPL} · salidas: <b>${SP.pw.map(x=>x+' dBm').join(' / ')||'—'}</b><br>`:''}${W&&W.rates&&W.rates.length?`Guardado de pelos: <b>${['Apretado','Desprolijo','Aceptable','Prolijo'].find(r=>W.rates.includes(r))}</b> (+${(W.st/Math.max(1,fusN)).toFixed(3)} dB por fibra)<br>`:''}${W&&W.redos?`Pelos rehechos: <b>${W.redos}</b><br>`:''}Pérdida promedio: <b>${(fusN?loss/fusN:0).toFixed(3)} dB</b><br>Errores: <b>${err}</b><br>Reclamos del equipo: <b>${reclamos}</b>${reclamos?` (−${reclamos*PEN} pts)`:''}</p><div class="stars">${[0,1,2].map(i=>`<span class="${p>=[400,650,850][i]?'on':''}" style="animation-delay:${.25+i*.18}s">★</span>`).join('')}</div><p style="font-size:28px;margin:6px 0"><b class="ptsn">0</b> pts</p><p class="coins"><span>🪙 +${CO.co} monedas</span></p>${CO.lvl?`<p style="margin:0 0 6px;font-weight:700">${CO.upl?`⬆️ ¡Subiste al nivel ${LEVEL.n+1}!`:`Nivel ${LEVEL.n}: con 500 pts o más subís de nivel`}</p>`:''}<p id="rec" style="min-height:20px"></p><button class="big" onclick="location.reload()">Volver al menú</button>`);
  {const s=$('#res .stars');if(s)s.insertAdjacentHTML('beforebegin',invSummary())}
  {const e=$('#res .ptsn'),t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1100);e.textContent=Math.round(p*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)};f()}
  const r=await saveResult(p,{coins:((acct&&acct.coins)||0)+CO.co,nivel:((acct&&acct.nivel)||1)+(CO.upl?1:0)});$('#rec').textContent=(r?'🏆 ¡Récord nuevo! ':'')+(DB?'Guardado en la nube.':'Guardado en este dispositivo.')}
@@ -2872,7 +2883,233 @@ function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)retu
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
  cam.position.set(cx+hr*Math.sin(yaw),cyy+D*Math.sin(el),cz+hr*Math.cos(yaw));cam.lookAt(cx,cyy,cz);
  ups.forEach(([i,m])=>upd(i,m.position));{const tt=performance.now()/1000;for(const m of T)if(m.userData&&m.userData.pulse){const k=Math.sin(tt*5);m.scale.setScalar(m.userData.bs*(1+.09*k));m.material.opacity=.62+.25*k}}if(err!==lastErr){if(err>lastErr&&playing)fxBad();lastErr=err}if(RSG&&RSG.visible)pcU();if(NSG&&NSG.visible)npU();cabU();bU();FIBS.forEach(m=>{const u=m.userData;if(u.rp){if(u.rp.aw&&m.visible&&(!m.parent||m.parent.visible!==false)){fStep(m);ftube(m)}return}if(!u.w)return;u.t+=1/60;u.w*=.93;if(u.w<.03)u.w=0;if(m.visible)fbuild(m)});if(ren.shadowMap.enabled&&(Q==='alta'||!(frm&2)||!playing))ren.shadowMap.needsUpdate=true;ren.render(scene,cam)}
+/*C58*/
+/* ===== V58: cuadrillas (la 1 con fusionadora automática), router ONT al final de la roseta y pinza identificadora con VFL ===== */
+let CUAD=(()=>{try{return +(localStorage.getItem('taller_cuad')||2)}catch(e){return 2}})();if(![1,2,3].includes(CUAD))CUAD=2;
+const AUTOF=()=>CUAD===1;
+const CUADD={1:'Fusionadora automática: el paravientos se abre y se cierra con OPEN/CLOSE y al cerrarlo empalma sola. El horno arranca solo.',
+ 2:'Fusionadora con mordazas: cerrás cada mordaza, alineás X e Y en la pantalla y disparás el arco.',3:'Fusionadora con mordazas: cerrás cada mordaza, alineás X e Y en la pantalla y disparás el arco.'};
+function cuadRender(){const w=$('#cuadw');if(!w)return;w.hidden=MODE==='cableado';
+ $('#cuads').innerHTML=[1,2,3].map(n=>`<button data-c="${n}" aria-pressed="${n===CUAD}">Cuadrilla ${n}</button>`).join('');$('#cuadn').textContent=CUADD[CUAD];
+ document.querySelectorAll('#cuads button').forEach(b=>b.onclick=()=>{CUAD=+b.dataset.c;try{localStorage.setItem('taller_cuad',CUAD)}catch(e){}cuadRender()})}
+{const f=tecRender;tecRender=function(){f();cuadRender()}}
+/* cambia la fusionadora de la valija según la cuadrilla */
+function spSwap(){const want=AUTOF()?'auto':'std';if(!BK||!BK.sp||(BK.sp.userData.kind||'std')===want)return;const p=BK.sp.position.clone();scene.remove(BK.sp);
+ BK.sp=want==='auto'?mSplicerAuto():mSplicer();BK.sp.userData.kind=want;BK.sp.position.copy(p);scene.add(BK.sp);BK.sp.userData.mon.rotation.x=BK.out?-.62:0}
+{const f=startGame;startGame=function(){spSwap();f()}}
+
+/* ---------- fusionadora automática (modelo genérico): funda negra, placa gris, paravientos grande con las mordazas adentro,
+   botonera ⏻ OPEN/CLOSE ▲▼ a la izquierda y HEAT RESET SET a la derecha, horno atrás y pantalla abajo ---------- */
+function spAutoScr(t,st,a={}){const g=t.userData.g,w=256,h=160;if(st!=='idle'&&st!=='open')return screen(t,a.title||'',st,a.p||0);
+ g.fillStyle='#0b2747';g.fillRect(0,0,w,h);g.fillStyle='#e6c229';g.fillRect(4,4,48,13);g.fillStyle='#10202c';g.font='bold 10px sans-serif';g.fillText('60mmS',9,14);
+ g.fillStyle='#e8eef3';g.font='bold 12px sans-serif';g.textAlign='center';g.fillText(st==='open'?'ABIERTO':'LISTO',128,15);g.textAlign='left';
+ const tile=(x,y,ww,hh,bg,t1,t2)=>{g.fillStyle=bg;g.fillRect(x,y,ww,hh);g.fillStyle='#0b2747';g.font='9px sans-serif';g.fillText(t1,x+30,y+12);g.font='bold 11px sans-serif';g.fillText(t2,x+30,y+26)};
+ g.fillStyle='#1d4f86';g.fillRect(6,22,124,104);tile(10,26,116,32,'#d4e6f7','Modo de Fusión','8: SM FAST');tile(10,62,116,32,'#ecd98a','Modo de Calefactor','1: 60mm');
+ g.fillStyle='#d4e6f7';g.font='10px sans-serif';g.fillText('Contador de arco: '+(a.n||2144),12,112);
+ g.fillStyle='#1d4f86';g.fillRect(134,22,116,104);tile(138,26,108,32,'#9fd0a9','Cortadora','Manual');tile(138,62,108,32,'#9fd0a9','','+ Cortadora');
+ g.fillStyle='#e6c229';g.fillRect(14,32,12,20);g.fillStyle='#c63d3d';g.fillRect(14,68,12,20);
+ g.fillStyle='#16385e';g.fillRect(0,134,w,26);['⌂','▶','?'].forEach((s,i)=>{g.strokeStyle='#8fb0c6';g.strokeRect(60+i*50,138,36,18);g.fillStyle='#e8eef3';g.font='12px sans-serif';g.textAlign='center';g.fillText(s,78+i*50,151);g.textAlign='left'});t.needsUpdate=true}
+function mSplicerAuto(){const g=G(),u=g.userData,cs=M(0x151617,{roughness:.95,map:TX.noise}),bd=M(0x2b2f34,{roughness:.55}),bk=M(0x101113,{roughness:.55}),tp=M(0x8d949b,{metalness:.5,roughness:.42}),
+ gy=M(0x5d636a,{roughness:.5}),dk=M(0x0b0c0d,{roughness:.8}),wh=M(0xeef1f3,{roughness:.4}),el=M(0xd8dde2,{metalness:.85,roughness:.25}),st=M(0x7d8287,{roughness:.9});PARENT=g;
+ const W=2.4,D=2.6;Object.assign(u,{kind:'auto',auto:true,fh:[],btn:{}});
+ /* funda de cuero con costuras y manija */
+ mesh(box(W+.06,1.02,D+.06),cs,0,.51,0);[-1,1].forEach(k=>{mesh(box(W,.014,.014),st,0,1.0,k*(D/2+.034));mesh(box(.014,.014,D),st,k*(W/2+.034),1.0,0);mesh(box(.07,.22,1.3),cs,k*(W/2+.07),.62,0)});
+ mesh(box(W-.08,.42,D-.08),bd,0,1.2,0);
+ /* rejillas de ventilación en las esquinas de atrás */
+ [-1,1].forEach(k=>{for(let i=0;i<3;i++)mesh(box(.05,.012,.2),dk,k*(.9+i*.08),1.415,-1.12)});
+ /* placa de trabajo gris */
+ mesh(box(W-.26,.05,D-.46),tp,0,1.425,-.02);
+ /* zona de empalme: ranuras en V, electrodos y los soportes de fibra con sus marcas verde y amarilla */
+ mesh(box(.5,.07,.28),dk,0,1.485,SPZF);[-1,1].forEach(k=>{mesh(box(.14,.006,.012),M(0x000000),k*.13,1.522,SPZF);mesh(cyl(.016,.016,.3,8),el,0,SPYF,SPZF+k*.25).rotation.x=Math.PI/2;
+  const tpp=mesh(cyl(0,.016,.06,8),el,0,SPYF,SPZF+k*.07);tpp.rotation.x=-k*Math.PI/2;mesh(box(.16,.12,.14),bk,0,1.5,SPZF+k*.42);
+  mesh(box(.44,.09,.42),gy,k*.6,1.49,SPZF);mesh(box(.3,.02,.07),wh,k*.6,1.545,SPZF);mesh(box(.44,.006,.014),M(0x000000),k*.6,1.556,SPZF);
+  mesh(box(.06,.012,.05),M(0x3ccf6a,{emissive:0x0c3a1a}),k*.5,1.54,SPZF-.15);mesh(box(.06,.012,.05),M(0xf2c200,{emissive:0x3a2c00}),k*.62,1.54,SPZF-.15);
+  mesh(box(.12,.16,.1),bk,k*.6,1.53,SPZF-.27);[-1,1].forEach(j=>mesh(cyl(.025,.025,.12,8),wh,k*.6+j*.12,1.6,SPZF+.12))});
+ /* paravientos grande con las mordazas adentro (bisagra atrás) */
+ {const s=new THREE.Shape();[[0,0],[1.22,0],[1.22,.22],[1.08,.44],[.22,.5],[0,.32]].forEach(([x,y],i)=>i?s.lineTo(x,y):s.moveTo(x,y));
+  const hg=new THREE.ExtrudeGeometry(s,{depth:1.72,bevelEnabled:true,bevelThickness:.03,bevelSize:.03,bevelSegments:2});hg.rotateY(-Math.PI/2);hg.translate(.86,0,0);
+  const h=G();h.position.set(0,1.45,SPZF-.56);g.add(h);mesh(hg,bk,0,0,0,h);
+  [-1,1].forEach(k=>mesh(box(.06,.36,1.0),M(0x2d3136,{roughness:.6}),k*.86,.17,.62,h));for(let i=0;i<4;i++)mesh(box(1.2,.02,.05),M(0x22262a),0,.5,.35+i*.14,h);
+  const pl=plate(lab('FUSIÓN AUTO','#16181b','#e6eaee',30,256,64),.62,.16,0,.512,.58,h);pl.rotation.x=-Math.PI/2+.06;
+  mesh(box(.28,.02,.12),M(0x8fd3ff,{emissive:0x0a3a5a}),.5,.47,1.0,h);
+  const inv=new THREE.MeshBasicMaterial({visible:false}),hb=new THREE.Mesh(new THREE.BoxGeometry(1.8,.56,1.28),inv);hb.position.set(0,.25,.6);h.add(hb);
+  u.hood=h;h.rotation.x=0;h.userData.open=false}
+ /* horno atrás con tapa negra */
+ mesh(box(1.9,.18,.46),dk,0,1.53,-.95);mesh(box(1.5,.02,.16),M(0x55595e,{metalness:.5,roughness:.5}),0,1.625,-.95);
+ const sl=new THREE.Mesh(new THREE.PlaneGeometry(1.7,.12),M(0xffffff,{map:lab('60 mm ─ CALEFACTOR ─ 60 mm','#121417','#e3b341',22,512,40)}));sl.position.set(0,1.53,-.95+.231);g.add(sl);
+ u.hglow=mesh(box(1.4,.012,.08),M(0x331100,{emissive:0xff6a00,emissiveIntensity:0}),0,1.632,-.95);
+ {const h=G();h.position.set(0,1.62,-1.18);g.add(h);mesh(box(1.72,.07,.46),bk,0,.035,.23,h);for(let i=0;i<5;i++)mesh(box(1.5,.012,.03),M(0x24282c),0,.075,.08+i*.075,h);
+  const inv=new THREE.MeshBasicMaterial({visible:false}),hb=new THREE.Mesh(new THREE.BoxGeometry(1.78,.3,.6),inv);hb.position.set(0,.08,.24);h.add(hb);u.hl=h;h.userData.open=false}
+ u.hits=1;
+ /* botoneras */
+ mesh(box(.78,.03,.44),M(0x2a2f35,{roughness:.6}),-.72,1.462,.92);mesh(box(.78,.03,.44),M(0x2a2f35,{roughness:.6}),.72,1.462,.92);
+ const key=(k,t,x,z,w,col,fg,fs=30)=>{const b=mesh(box(w,.05,.13),M(col,{roughness:.5}),x,1.495,z);plate(lab(t,hex(col),fg||'#e6eaee',fs,160,64),w-.02,.11,x,1.522,z);b.userData.k=k;u.btn[k]=b;return b};
+ {const b=mesh(cyl(.07,.07,.05,18),M(0xd8dadd,{roughness:.45}),-.92,1.495,.84);plate(lab('⏻','#d8dadd','#333',40),.1,.1,-.92,1.522,.84);b.userData.k='pw';u.btn.pw=b;mesh(box(.03,.01,.03),M(0x3ccf6a,{emissive:0x1f8a3d}),-.8,1.49,.78)}
+ key('oc','OPEN/CLOSE',-.6,1.02,.34,0x1d2024,'#5fd3c6',24);key('up','▲',-.5,.82,.13,0x1d2024);key('dn','▼',-.5,.96,.13,0x1d2024);
+ key('heat','HEAT',.52,.82,.2,0x1d2024,'#e7a6a6');key('reset','RESET',.82,.82,.24,0x1d2024,'#f08ba8');key('set','SET',.68,1.02,.32,0x14321f,'#5fd38a');
+ /* pantalla abajo, con marco de goma */
+ {mesh(box(.34,.08,.66),bk,0,.24,D/2+.3);mesh(box(.5,.12,.12),bk,0,.24,D/2+.6);const m=G();m.position.set(0,.24,D/2+.62);g.add(m);mesh(box(1.6,.98,.12),bk,0,.46,.04,m);
+  [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>mesh(cyl(.02,.02,.02,8),el,a*.72,.46+b*.42,.11,m).rotation.x=Math.PI/2);
+  u.scr=ctex(256,160,()=>{});const sp=new THREE.Mesh(new THREE.PlaneGeometry(1.34,.8),new THREE.MeshBasicMaterial({map:u.scr}));sp.position.set(0,.46,.105);m.add(sp);m.rotation.x=-.62;u.mon=m;spAutoScr(u.scr,'idle')}
+ PARENT=null;return g}
+const spPress=b=>{if(!b)return;const y=b.position.y;b.position.y=y-.018;setTimeout(()=>b.position.y=y,160)};
+/* tocar el paravientos, OPEN/CLOSE o la tapa del horno en cualquier momento */
+{const P0=spParts,T0=spToggle;spParts=function(){const S=BK&&BK.sp&&BK.sp.userData;if(S&&S.auto)return [S.hood,S.hl,S.btn.oc];return P0()};
+ spToggle=function(o){const S=BK.sp.userData;if(S.auto&&o===S.btn.oc){spPress(o);o=S.hood}T0(o);if(S.auto&&o===S.hood)spAutoScr(S.scr,S.hood.userData.open?'open':'idle')}}
+/* fusión automática: abrir con OPEN/CLOSE, apoyar los pelos, cerrar y la máquina hace todo sola */
+function autoFuseUI(el,c1,c2,S,done){const amx=[1.05,.7,.45][Math.min(2,upg('clv'))],aL=+(.05+rnd()*amx).toFixed(1),aR=+(.05+rnd()*amx).toFixed(1),sp=itemOn('Bruno')?.6:1;
+ let ox=rint(3,7)*(rnd()<.5?-1:1),oy=rint(2,6)*(rnd()<.5?-1:1),gap=70,ph='';const ox0=ox,oy0=oy,t0=performance.now();fuOn=null;
+ const view=(lb,off,y)=>{const w=150-gap/2;return `<rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#gscr)"/><rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#ggrid)"/><text x="10" y="${y+16}" font-size="12" fill="#8fb0c6">${lb}</text><line x1="150" y1="${y+6}" x2="150" y2="${y+90}" stroke="#2b5876" stroke-dasharray="3 3"/>`
+  +`<rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="0" y="${y+46}" width="${w}" height="4" fill="${c1}"/><rect x="${150+gap/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="${150+gap/2}" y="${y+46+off*3}" width="${w}" height="4" fill="${c2}"/>`};
+ const draw=arc=>{el.innerHTML=`<svg viewBox="0 0 300 200">${view('Vista X',Math.round(ox),0)}${view('Vista Y',Math.round(oy),104)}${arc?'<circle class="arcf" cx="150" cy="48" r="42" fill="url(#garc)"/><circle class="arcf" cx="150" cy="152" r="42" fill="url(#garc)"/>':''}</svg>`
+  +`<p style="margin:8px 0 2px;font-size:15px"><b>🤖 ${ph}</b></p><p style="margin:0;font-size:13px;opacity:.85">Hueco <b>${Math.round(gap)} µm</b> · X <b>${(ox*.5).toFixed(1)} µm</b> · Y <b>${(oy*.5).toFixed(1)} µm</b> · corte izq <b>${aL}°</b> der <b>${aR}°</b></p>`
+  +`<p style="margin:6px 0 0;font-size:12.5px;opacity:.75">La fusionadora automática de la Cuadrilla 1 limpia las puntas, las acerca, alinea por núcleo y dispara el arco sola.</p>`};
+ const f=()=>{if(!el.isConnected)return;const t=(performance.now()-t0)/sp;
+  if(t<600){ph='Limpieza con un arco corto';if(!f.c){f.c=1;flash3D(0x9fe2ff,1.2,250);screen(S.scr,'LIMPIEZA','arc')}}
+  else if(t<1500){ph='Avance de las fibras';gap=70-60*(t-600)/900;screen(S.scr,'AVANCE','idle')}
+  else if(t<2600){ph='Alineando por núcleo (X e Y)';const q=(t-1500)/1100;ox=ox0*(1-q);oy=oy0*(1-q);gap=10;screen(S.scr,'ALINEANDO','idle')}
+  else if(t<3100){ph='Midiendo el ángulo de corte';ox=oy=0;screen(S.scr,`IZQ ${aL}° DER ${aR}°`,'idle')}
+  else{last=+(.008+.03*Math.max(0,aL+aR-.5)+rnd()*.012).toFixed(3);loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});ph='⚡ Arco · pérdida estimada '+last.toFixed(2)+' dB';gap=0;draw(true);flash3D(0x9fe2ff,4);
+   screen(S.scr,last.toFixed(2)+' dB','arc');msg('⚡ Fusión automática: pérdida estimada '+last.toFixed(2)+' dB'+(last<=.05?' (excelente)':''));setTimeout(()=>{screen(S.scr,'Pérdida '+last.toFixed(2)+' dB','done');done()},900);return}
+  draw(false);requestAnimationFrame(f)};f()}
+function autoFuse(c1,c2,done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,PL=V(BKX-GLC-.03,y,z),PR=V(BKX+GLC+.03,y,z);bCam('splicer');
+ const hoodTo=(op,cb)=>{S.hood.userData.open=op;spAutoScr(S.scr,op?'open':'idle');rotAnim(S.hood,'x',op?-1.75:0,650,cb)};
+ const oc=(op,txt,hint,m)=>{ttlB(txt);msg(hint);taps=[S.hood,S.btn.oc];onTap=o=>{if(o===S.btn.oc)spPress(o);taps=[];hoodTo(op,m)}};
+ const place=(t,p,txt)=>m=>{ttlB(txt);msg('Apoyá el vidrio en la ranura en V, con la punta cerca de los electrodos. Las mordazas están en la tapa: sujetan el pelo al cerrarla.');const u=t.userData;u.home=t.position.clone();u.dy=y+.12;u.ph=y;
+  task([t],[{x:p.x,z:p.z,y:p.y,id:null,s:.12,my:y+.01}],ob=>{if(!S.hood.userData.open){msg('El paravientos está cerrado: abrilo con OPEN/CLOSE.');return false}const e2=tipErr(ob,p,.06);if(e2){err++;msg(e2);return false}ob.position.copy(p);fxOK();setTimeout(m,300);return 'hold'})};
+ runSeq([m=>{if(S.hood.userData.open)return m();oc(true,'Abrí el paravientos: apretá OPEN/CLOSE','Esta fusionadora abre y cierra el paravientos sola con el botón OPEN/CLOSE (o tocando la tapa).',m)},
+  place(BT.L,PL,'Acomodá el pelo izquierdo en su ranura'),place(BT.R,PR,'Acomodá el pelo derecho en su ranura'),
+  m=>oc(false,'Cerrá el paravientos con OPEN/CLOSE: empalma sola','Al cerrarse, las mordazas de la tapa sujetan los pelos y la fusión arranca sola. No hace falta apretar SET.',m),
+  m=>{ttlB('Fusión automática');BENCHARC=true;taps=[];openPan('Pantalla de la fusionadora',()=>{$('#pt').textContent='Fusionadora automática · vistas X e Y';
+   autoFuseUI($('#pb'),c1,c2,S,()=>{endPan();tw(BT.L,V(BKX-GLC,y,z),250);tw(BT.R,V(BKX+GLC,y,z),250);BENCHARC=false;setTimeout(m,350)})})},
+  m=>{ttlB('El paravientos se abre solo');msg('¡Listo! La fusionadora abrió el paravientos sola.');hoodTo(true,()=>setTimeout(m,300))}],done)}
+/* horno automático: al apoyar el empalme la tapa se cierra sola y arranca a calentar */
+function autoHeat(done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,HP=V(BKX,1.66,BKZ-.95);bCam('splicer');
+ runSeq([m=>{ttlB('Pasá el termo sobre el empalme');msg('Deslizá el termo por el pelo hasta que el empalme quede en el medio.');const s=BT.sleeve,t=BT.sleeveOn;if(!s||!t)return m();const [w]=endOf(t,-.5,V(1,0,0));
+   scene.add(s);s.position.set(w.x,w.y-.09,w.z);s.rotation.set(0,0,0);s.userData.home=s.position.clone();s.userData.dy=y;s.userData.ph=y;
+   task([s],[{x:BKX,z,y:y-.09,id:null,s:.12,my:y}],ob=>{if(Math.abs(ob.position.x-BKX)>.1||Math.abs(ob.position.z-z)>.08){err++;msg('El empalme tiene que quedar en el centro del termo.');return false}ob.position.set(BKX,y-.09,z);BT.joint=true;BT.jdy=.09;setTimeout(m,300);return 'hold'})},
+  m=>{if(S.hl.userData.open)return m();ttlB('Abrí la tapa del horno');bCam('heater');taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,400,m)}},
+  m=>{ttlB('Llevá el empalme al horno');msg('Apoyalo centrado: la tapa se cierra sola y el horno arranca solo.');bCam('heater');const s=BT.sleeve;s.userData.home=s.position.clone();s.userData.dy=HP.y+.15;s.userData.ph=HP.y;
+   task([s],[{x:HP.x,z:HP.z,y:HP.y,id:null,s:.2,my:HP.y+.02}],ob=>{if(Math.abs(ob.position.x-HP.x)>.15){err++;msg('El termo quedó corrido: centralo en el horno.');return false}ob.position.copy(HP);setTimeout(m,300);return 'hold'})},
+  m=>{ttlB('El horno calienta solo');msg('La tapa se cerró sola y arrancó el calefactor de 60 mm.');S.hl.userData.open=false;rotAnim(S.hl,'x',0,450,()=>{const HT=(upg('hor')||itemOn('Bruno'))?900:1700,t0=performance.now(),s=BT.sleeve,s0=s.scale.x;flash3D(0xff8a2a,1.6,HT);
+    const f=()=>{const q=Math.min(1,(performance.now()-t0)/HT);S.hglow.material.emissiveIntensity=Math.sin(q*Math.PI)*1.6;screen(S.scr,'CALEFACTOR 60mm','heat',q);s.scale.set(s0,s0*(1-.5*q),s0*(1-.5*q));if(q<1)return requestAnimationFrame(f);
+     S.hglow.material.emissiveIntensity=0;ding();spAutoScr(S.scr,'idle');msg('Termo contraído: el empalme quedó protegido.');setTimeout(m,300)};f()})},
+  m=>{ttlB('Abrí el horno y sacá el empalme');const out=()=>tw(BT.sleeve,V(BKX-.6,.12,BKZ+2.0),400,()=>{setTimeout(m,300)});taps=[S.hl];onTap=()=>{taps=[];S.hl.userData.open=true;rotAnim(S.hl,'x',-1.9,350,out)}}],done)}
+{const F0=benchFuse,H0=benchHeat;benchFuse=function(c1,c2,done){const S=BK.sp&&BK.sp.userData;return S&&S.auto?autoFuse(c1,c2,done):F0(c1,c2,done)};benchHeat=function(done){const S=BK.sp&&BK.sp.userData;return S&&S.auto?autoHeat(done):H0(done)}}
+
+/* ---------- router ONT del cliente (modelo genérico): blanco, dos antenas, LAN amarillos, TEL, USB, Power, On/Off y PON verde abajo ---------- */
+const RTP=V(RX+3.9,0,RZ+5.1),RTW=2.6,RTD=1.8,RTH=.5;
+function mRouter(){const g=G(),u=g.userData,wh=M(0xf4f5f3,{roughness:.42}),wh2=M(0xe3e5e2,{roughness:.55}),gy=M(0xbfc3c6,{roughness:.6}),dk=M(0x1a1c1e,{roughness:.7}),ye=M(0xf2c400,{roughness:.5}),gr=M(0x2fa84f,{roughness:.45});PARENT=g;
+ mesh(ext(rrect(RTW,RTD,.2),.28),wh2,0,.06,0);mesh(ext(rrect(RTW+.05,RTD+.05,.22),.17),wh,0,.34,0);mesh(ext(rrect(RTW-.1,RTD-.1,.18),.012),wh2,0,.51,0);
+ [[-1,-1],[1,-1],[-1,1],[1,1]].forEach(([a,b])=>mesh(cyl(.07,.07,.07,10),gy,a*(RTW/2-.22),.035,b*(RTD/2-.22)));
+ const zb=RTD/2+.004,vl=(t,x,y,w=.26)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,.075),new THREE.MeshBasicMaterial({map:label(t,'#e3e5e2','#555b60',160,46,26)}));m.position.set(x,y,zb+.002);g.add(m)};
+ /* panel de atrás */
+ mesh(box(RTW-.24,.22,.02),M(0xeceeeb,{roughness:.5}),0,.24,zb);
+ const oo=mesh(cyl(.075,.075,.07,18),M(0xe9e6e0,{roughness:.4}),-.88,.25,zb+.02);oo.rotation.x=Math.PI/2;u.onoff=oo;vl('On/Off',-.88,.11);
+ mesh(box(.18,.18,.03),dk,-.6,.25,zb+.01);mesh(cyl(.035,.035,.04,10),gy,-.6,.25,zb+.02).rotation.x=Math.PI/2;vl('Power',-.6,.11);u.jack=V(-.6,.25,zb);
+ mesh(box(.11,.2,.03),dk,-.36,.25,zb+.01);mesh(box(.07,.13,.035),gy,-.36,.25,zb+.012);vl('USB',-.36,.11,.18);
+ mesh(box(.24,.19,.03),M(0x9aa0a5),-.1,.25,zb+.01);mesh(box(.15,.1,.035),dk,-.1,.24,zb+.013);vl('TEL',-.1,.11,.2);
+ mesh(box(1.1,.21,.03),ye,.62,.25,zb+.01);for(let i=0;i<4;i++){const x=.62+(i-1.5)*.265;mesh(box(.2,.12,.035),M(0xb08a00),x,.245,zb+.013);mesh(box(.08,.03,.036),dk,x,.19,zb+.014);vl('LAN'+(4-i),x,.11,.22)}
+ /* PON: adaptador SC/APC verde abajo a la izquierda */
+ mesh(box(.22,.13,.12),gr,-1.12,.12,zb+.04);mesh(box(.12,.07,.02),dk,-1.12,.12,zb+.1);u.pon=V(-1.12,.12,zb+.1);
+ {const m=new THREE.Mesh(new THREE.PlaneGeometry(.2,.06),new THREE.MeshBasicMaterial({map:label('PON','#e3e5e2','#555b60',96,30,22)}));m.position.set(-1.12,.04,zb+.002);g.add(m)}
+ /* antenas planas con bisagra atrás */
+ u.ant=[-1,1].map(k=>{const a=G();a.position.set(k*(RTW/2+.06),.32,RTD/2-.3);g.add(a);mesh(cyl(.07,.07,.14,12),wh,0,0,0,a).rotation.z=Math.PI/2;
+  const bl=mesh(box(.08,1.8,.26),wh,0,.92,0,a);mesh(cyl(.04,.04,.02,8),gy,0,1.75,.131,a).rotation.x=Math.PI/2;a.rotation.z=-k*.07;return a});
+ /* luces arriba, adelante */
+ u.led={};[['pw','POWER',0x3ccf6a],['pon','PON',0x3ccf6a],['los','LOS',0xff3b3b],['lan','LAN',0x3ccf6a],['w24','2.4G',0x3ccf6a],['w5','5G',0x3ccf6a]].forEach(([k,t,c],i)=>{const x=-.75+i*.3,z=-RTD/2+.28;
+  const l=mesh(cyl(.035,.035,.012,12),new THREE.MeshStandardMaterial({color:0x9aa0a5,emissive:c,emissiveIntensity:0,roughness:.3}),x,.525,z);l.userData.c=c;u.led[k]=l;
+  const p=new THREE.Mesh(new THREE.PlaneGeometry(.26,.07),new THREE.MeshBasicMaterial({map:label(t,'#f4f5f3','#7b8288',128,36,22)}));p.rotation.x=-Math.PI/2;p.position.set(x,.522,z+.1);g.add(p)});
+ {const p=new THREE.Mesh(new THREE.PlaneGeometry(.9,.14),new THREE.MeshBasicMaterial({map:label('GPON · Wi-Fi','#f4f5f3','#a3a9ae',256,40,24)}));p.rotation.x=-Math.PI/2;p.position.set(0,.522,.25);g.add(p)}
+ PARENT=null;g.traverse(o=>{if(o.isMesh)o.castShadow=true});return g}
+function rtLed(k,v){const l=R.rt&&R.rt.userData.led[k];if(l)l.material.emissiveIntensity=v?1.6:0}
+/* fuente de 12 V con su cable: la ficha se arrastra hasta Power */
+function mPlug(){const g=G(),dk=M(0x161719,{roughness:.6});PARENT=g;mesh(box(.12,.12,.24),dk,0,.06,.12);const b=mesh(cyl(.045,.045,.14,12),M(0xc9ccd0,{metalness:.8,roughness:.3}),0,.06,-.07);b.rotation.x=Math.PI/2;
+ const hit=new THREE.Mesh(box(.3,.25,.45),new THREE.MeshBasicMaterial({visible:false}));hit.position.set(0,.08,.08);g.add(hit);PARENT=null;return g}
+function rtCable(){const pl=R.rtPlug,br=R.rtBrick;if(!pl||!br)return;const a=V(pl.position.x+Math.sin(pl.rotation.y)*.24,pl.position.y+.06,pl.position.z+Math.cos(pl.rotation.y)*.24),b=V(br.position.x,.1,br.position.z-.38);
+ const k=[a.x,a.y,a.z].map(v=>v.toFixed(3)).join();if(k===R.rtCk)return;R.rtCk=k;const mid=a.clone().lerp(b,.5);mid.y=Math.min(a.y,b.y)*.5+.03;const m2=a.clone().lerp(mid,.5);m2.y=Math.max(.04,a.y*.6);
+ if(R.rtCab){R.g.remove(R.rtCab);R.rtCab.geometry.dispose()}R.rtCab=new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([a,m2,mid,b]),24,.03,6,false),M(0x161719,{roughness:.6}));R.g.add(R.rtCab)}
+{const f=pcU;pcU=function(){f();if(R.rtPlug)rtCable()}}
+let RTB=null;
+function rtBlink(){if(RTB)return;const f=()=>{if(!R.rtBl||!R.rt){RTB=null;return}const on=Math.floor(performance.now()/260)%2===0;R.rtBl.forEach(k=>rtLed(k,on));RTB=requestAnimationFrame(f)};RTB=requestAnimationFrame(f)}
+function rtStep(){if(!R.rt){R.rt=mRouter();R.rt.position.copy(RTP);R.g.add(R.rt);
+  R.rtBrick=G();const dk=M(0x161719,{roughness:.6});mesh(box(.5,.26,.78),dk,0,.13,0,R.rtBrick);R.rtBrick.position.set(RTP.x+2.0,.02,RTP.z+.2);R.g.add(R.rtBrick);
+  R.rtPlug=mPlug();R.rtPlug.position.set(RTP.x+1.5,.02,RTP.z+1.75);R.rtPlug.rotation.y=-.5;R.g.add(R.rtPlug);R.rtCk=null;rtCable()}
+ const U=R.rt.userData,P=v=>V(RTP.x+v.x,RTP.y+v.y,RTP.z+v.z);camTo(RTP.x-.5,RTP.z+1.6,.6,.3,.85);
+ runSeq([m=>{ttlB('Enchufá el patchcord en el puerto PON del router');msg('Desenchufalo del power meter y llevalo al puerto verde PON, abajo a la izquierda en la parte de atrás del router.');const B=R.cB,pp=P(U.pon);
+   B.userData.home=B.position.clone();B.userData.dy=.3;B.userData.ph=.14;
+   task([B],[{x:pp.x,z:pp.z+.26,y:pp.y,id:null,s:.35,mx:pp.x,mz:pp.z+.12,my:pp.y+.05}],o=>{o.rotation.y=0;R.rtPon=true;R.cBok=false;opmScreen('--','',R);msg('Patchcord en el puerto PON.');fxOK();setTimeout(m,350);return 'hold'})},
+  m=>{ttlB('Enchufá la fuente en Power');msg('Llevá la ficha de la fuente de 12 V al conector Power.');const pl=R.rtPlug,jp=P(U.jack);pl.userData.home=pl.position.clone();pl.userData.dy=.4;pl.userData.ph=.19;
+   task([pl],[{x:jp.x,z:jp.z+.15,y:jp.y-.06,id:null,s:.3,mx:jp.x,mz:jp.z+.1,my:jp.y}],o=>{o.rotation.y=0;fxOK();msg('Fuente enchufada.');setTimeout(m,300);return 'hold'})},
+  m=>{ttlB('Prendé el router: apretá On/Off');msg('El botón redondo de la izquierda, al lado de Power.');const b=U.onoff,bw=P(b.position),mk=mark(bw.x,bw.z+.25,0xffffff,.3,.18);taps=[b];
+   onTap=()=>{taps=[];scene.remove(mk);const z0=b.position.z;b.position.z-=.03;setTimeout(()=>b.position.z=z0,180);rtBoot(m)}},
+  m=>openPan('Router',()=>rtPanel(m))],()=>nx())}
+function rtBoot(done){const ok=!R.broken&&(R.pw??-20)>=-27,sp=TSKIP?.25:1;R.rtRx=+((R.pw??-20)-.1-rnd()*.25).toFixed(2);camTo(RTP.x,RTP.z+.3,.5,.4,1.05);
+ rtLed('pw',1);msg('Prendió: luz de POWER fija. Ahora busca la señal de la OLT…');R.rtBl=['pon'];rtBlink();
+ setTimeout(()=>{if(ok){R.rtBl=null;rtLed('pon',1);rtLed('los',0);msg('¡PON fija! El router se registró en la OLT.');ding()}else{R.rtBl=['los'];rtLed('pon',0);msg('LOS titila en rojo: el router no recibe suficiente luz.');err++}},2600*sp);
+ setTimeout(()=>{rtLed('w24',1);rtLed('w5',1)},3300*sp);setTimeout(done,4100*sp)}
+function rtPanel(next){const ok=!R.broken&&(R.pw??-20)>=-27,rx=R.rtRx??R.pw,led=(t,c,on,bl)=>`<g><circle r="9" fill="${on?c:'#c9ced2'}" ${bl?'class="rtbl"':''} stroke="#9aa0a5"/><text y="24" text-anchor="middle" font-size="10" fill="#5b636b">${t}</text></g>`;
+ const L=[['POWER','#3ccf6a',1],['PON','#3ccf6a',ok],['LOS','#ff3b3b',!ok,!ok],['LAN','#3ccf6a',0],['2.4G','#3ccf6a',1],['5G','#3ccf6a',1]];R.ont=ok?`registrado · Rx ${rx} dBm`:'sin registrar (LOS)';
+ $('#pt').textContent='Router · luces y potencia';
+ $('#pb').innerHTML=`<style>.rtbl{animation:rtb .5s steps(2) infinite}@keyframes rtb{50%{fill:#c9ced2}}</style><svg viewBox="0 0 300 92" style="width:100%"><rect x="6" y="8" width="288" height="76" rx="14" fill="#f4f5f3" stroke="#cfd3d6"/><rect x="2" y="30" width="10" height="44" rx="4" fill="#e3e5e2"/><rect x="288" y="30" width="10" height="44" rx="4" fill="#e3e5e2"/>${L.map(([t,c,on,bl],i)=>`<g transform="translate(${44+i*43},38)">${led(t,c,on,bl)}</g>`).join('')}</svg>`
+  +`<div class="ot" style="margin-top:8px"><b>${ok?'✅ Router registrado en la OLT':'⚠️ El router no se registró'}</b><p style="margin:4px 0 0">${ok?`<b>PON</b> fija: el router ya habla con la central. <b>LOS</b> apagada: llega luz. La potencia que lee el router es <b>${rx} dBm</b> (el power meter midió ${R.pw} dBm).`:'<b>LOS</b> en rojo: no llega luz suficiente. Revisá el patchcord y la potencia.'}</p></div>`
+  +`<p style="margin:8px 0 0;font-size:13px;opacity:.85">PON titilando = está negociando con la OLT · PON fija = registrado · LOS roja = sin luz. Las luces 2.4G y 5G son el Wi-Fi.</p><button class="big rtgo">Seguir: cerrar la roseta</button>`;
+ $('#pb .rtgo').onclick=()=>{endPan();next()}}
+SR.splice(SR.findIndex(f=>String(f).includes('pico del power meter'))+1,0,()=>{ttl('Conectá el router del cliente');rtStep()});
+TIPS.push([/router|PON del router|On\/Off|fuente en Power/i,'El router (ONT)','El router de fibra es la ONT: recibe la luz por el puerto PON y la convierte en internet por cable (LAN) y Wi-Fi. Al prenderlo, la luz PON titila mientras se registra en la OLT y queda fija cuando ya está. Si LOS se pone roja, no le llega luz. El patchcord va de la cupla de la roseta al PON.']);
+
+/* ---------- pinza identificadora con VFL (modelo genérico): cuerpo gris oscuro, cabezal con ranura y gatillo al costado,
+   panel verde con pantalla, flechas, ⏻, linterna y VFL, y el láser rojo abajo con tapita naranja ---------- */
+const PZTEX=()=>ctex(128,420,(g,w,h)=>{g.fillStyle='#34383d';g.fillRect(0,0,w,h);const gr=(y,hh,a,b)=>{const L=g.createLinearGradient(0,y,0,y+hh);L.addColorStop(0,a);L.addColorStop(1,b);g.fillStyle=L;g.fillRect(8,y,w-16,hh)};
+ gr(10,200,'#2fb36a','#1f8e50');g.fillStyle='#c9d4c4';g.fillRect(26,22,76,62);g.fillStyle='#4f5a52';g.font='bold 16px monospace';g.fillText('- - -',38,58);g.font='9px sans-serif';g.fillText('dBm',84,74);
+ g.fillStyle='#e03b3b';g.beginPath();g.moveTo(26,110);g.lineTo(44,100);g.lineTo(44,120);g.fill();g.beginPath();g.moveTo(102,110);g.lineTo(84,100);g.lineTo(84,120);g.fill();g.fillStyle='#8a2a2a';g.beginPath();g.arc(64,110,6,0,7);g.fill();
+ g.fillStyle='#fff';g.font='bold 10px sans-serif';g.textAlign='center';g.fillText('NO SIGNAL',64,138);g.fillStyle='#e03b3b';g.beginPath();g.arc(64,166,17,0,7);g.fill();g.strokeStyle='#fff';g.lineWidth=2.5;g.beginPath();g.arc(64,166,8,-1.1,4.2);g.stroke();g.beginPath();g.moveTo(64,155);g.lineTo(64,165);g.stroke();
+ g.fillStyle='#fff';g.font='9px sans-serif';g.fillText('Fiber Identifier',64,200);gr(230,170,'#22a35c','#0f5f36');[[270,'💡'],[328,'VFL']].forEach(([y,t])=>{g.strokeStyle='#fff';g.lineWidth=2;g.beginPath();g.arc(64,y,18,0,7);g.stroke();g.fillStyle='#fff';g.font='bold 12px sans-serif';g.fillText(t,64,y+4)});
+ g.fillStyle='#f4f6f4';g.fillRect(20,368,88,26);g.fillStyle='#3b4045';g.font='bold 12px sans-serif';g.fillText('FIBER ID',64,386)});
+function mPinza(){const g=G(),bd=M(0x3a3e43,{roughness:.62,map:TX.noise}),dk=M(0x1b1d20,{roughness:.6}),or=M(0xf26b21,{roughness:.5});PARENT=g;
+ mesh(ext(rrect(.44,1.36,.09),.16),bd,0,.02,.2);mesh(ext(rrect(.34,.22,.06),.15),bd,0,.02,-.58);
+ mesh(box(.36,.2,.34),dk,0,.12,-.74);mesh(box(.38,.035,.06),M(0x050505),0,.205,-.74);mesh(box(.32,.07,.3),dk,0,.25,-.74);
+ const tr=mesh(box(.05,.09,.24),dk,.25,.1,-.36);tr.rotation.y=.45;
+ const p=new THREE.Mesh(new THREE.PlaneGeometry(.36,1.18),new THREE.MeshStandardMaterial({map:PZTEX(),roughness:.5}));p.rotation.x=-Math.PI/2;p.position.set(0,.184,.2);g.add(p);
+ mesh(box(.14,.07,.04),or,0,.1,.9);PARENT=null;return g}
+/* dibujo 2D de la pinza: on, lectura, flechas de dirección y luz roja del VFL */
+function pzSVG(st){const on=st.on,r=st.r,lcd=!on?'':r?(r.lo?'LO':r.t):'- - -',ar=on&&r&&!r.lo,ns=on&&(!r||r.lo);
+ return `<g><rect x="-30" y="-92" width="60" height="122" rx="9" fill="#3a3e43" stroke="#202326"/><rect x="-25" y="-86" width="50" height="78" rx="5" fill="#22a35c"/><rect x="-20" y="-81" width="40" height="24" rx="2" fill="${on?'#d7e6cf':'#8a968a'}"/>`
+  +`<text x="0" y="-64" text-anchor="middle" font-size="${lcd.length>5?10:12}" font-family="monospace" font-weight="700" fill="${r&&!r.ok?'#b42318':'#1b2a1e'}">${lcd}</text><text x="17" y="-59" text-anchor="end" font-size="5" fill="#33413a">${on?'dBm':''}</text>`
+  +`<path d="M-19 -47 l8 -5 v10z" fill="${ar&&st.dir<0?'#ff3030':'#7a1f1f'}"/><path d="M19 -47 l-8 -5 v10z" fill="${ar&&st.dir>0?'#ff3030':'#7a1f1f'}"/><circle cx="0" cy="-47" r="3" fill="${ns?'#ff3030':'#7a1f1f'}"/><text x="0" y="-35" text-anchor="middle" font-size="5.5" fill="#fff">NO SIGNAL</text>`
+  +`<circle class="pzpw" cx="0" cy="-21" r="8" fill="#e03b3b" stroke="#fff" stroke-width="1.2" style="cursor:pointer"/><path d="M-3.5 -24 a4.5 4.5 0 1 0 7 0 M0 -27 v5" stroke="#fff" stroke-width="1.4" fill="none"/>`
+  +`<rect x="-25" y="-6" width="50" height="30" rx="4" fill="#178a4b"/><circle cx="-9" cy="9" r="7" fill="none" stroke="#fff"/><text x="-9" y="11.5" text-anchor="middle" font-size="7">💡</text><circle class="pzvfl" cx="10" cy="9" r="7" fill="${st.vfl?'#ff3030':'none'}" stroke="#fff" style="cursor:pointer"/><text x="10" y="11" text-anchor="middle" font-size="5.5" fill="#fff" font-weight="700">VFL</text>`
+  +`<rect x="-22" y="30" width="44" height="22" rx="3" fill="#1b1d20"/><rect x="-24" y="38" width="48" height="5" fill="#050505"/></g>`}
+function panPZ(){const N=NFIB,dots=`<div class="dots" style="flex-wrap:wrap">${[...Array(N).keys()].map(k=>{const r=PZ.res[k];return `<span style="background:${hex(F[k%12][1])};${r?(r.ok?'border-color:#22b573;opacity:1':'border-color:#e5484d;opacity:1;transform:scale(1.25)'):''}"></span>`}).join('')}</div>`;
+ if(PZ.on==null)PZ.on=!!TSKIP;
+ if(PZ.i<PZ.q.length){const n=PZ.q[PZ.i],b=Math.floor(n/NF),j=n%NF,c=hex(FC(b,j)[1]),r=PZ.cur;
+  $('#pt').textContent=`Pinza de tráfico · pelo ${n+1} de ${N}`;
+  $('#pb').innerHTML=dots+`<p style="margin:0 0 6px;font-size:14px">Buffer <b>${F[b][0]}</b> · fibra <b>${FC(b,j)[0]}</b></p>`
+   +`<svg class="pzs" viewBox="0 0 300 190"><rect width="300" height="190" rx="10" fill="url(#gbg)"/><rect x="10" y="155" width="280" height="7" rx="2" fill="${c}" stroke="#33414d" stroke-width=".6"/>`
+   +`<g transform="translate(${r||PZ.busy?150:240},${r||PZ.busy?114:100}) scale(${r||PZ.busy?1:.8})">${pzSVG({on:PZ.on,r,dir:1})}</g>`
+   +`${r?`<text x="60" y="182" text-anchor="middle" font-size="12" fill="${r.ok?'#15803d':'#c53030'}">${r.lo?'Sin tráfico':r.ok?'Hay tráfico ✓':'Pérdida alta'}</text>`:''}${PZ.on?'':'<text x="96" y="60" text-anchor="middle" font-size="13" fill="#0e7490">Prendela con el botón rojo ⏻</text>'}</svg>`
+   +(PZ.on?`<button class="big pzb"${PZ.busy?' disabled':''}>🔎 ${upg('pz')?'Pinzar el buffer '+F[b][0].toLowerCase():'Pinzar el pelo '+(n+1)}${DESK?' (Enter)':''}</button>`:`<button class="big pzon">⏻ Prender la pinza</button>`)
+   +`<p style="margin:6px 0 0;font-size:12.5px;opacity:.8">La pinza curva un poquito el pelo y lee la luz que se escapa: muestra los dBm y la flecha indica hacia dónde va la señal.</p>`;
+  const pw=()=>{PZ.on=true;msg('Pinza prendida: NO SIGNAL hasta que pinces un pelo.');openPan('Pinza de tráfico',panPZ)},sv=$('#pb .pzs');
+  if(!PZ.on){$('#pb .pzon').onclick=pw;sv.onclick=e=>{if(e.target.closest('.pzpw'))pw()};fuOn=a=>{if(a==='arc')pw()};return}
+  const go=()=>pzClamp();$('#pb .pzb').onclick=go;sv.onclick=go;fuOn=a=>{if(a==='arc')pzClamp()};return}
+ const bad=Object.keys(PZ.res).map(Number).filter(k=>!PZ.res[k].ok).sort((a,b)=>a-b);fuOn=null;
+ $('#pt').textContent='Pinza de tráfico · resultado';
+ $('#pb').innerHTML=dots+(bad.length?`<p style="margin:0 0 8px"><b>⚠️ ${bad.length} pelo${bad.length>1?'s':''} sin tráfico o con pérdida alta:</b></p><div class="chips" style="margin-top:0">${bad.map(k=>`<span class="chip" style="background:${hex(F[k%12][1])};cursor:default">${k+1} · ${F[k%12][0]} · ${PZ.res[k].lo?'LO':PZ.res[k].loss.toFixed(2)+' dB'}</span>`).join('')}</div>`
+   +`<div class="mqb" style="margin-top:8px"><button class="pzv">🔴 VFL de la pinza: ver la falla</button><button class="big pzr" style="margin:0">🔁 Rehacer ${bad.length>1?'esos pelos':'ese pelo'}</button></div>`
+  :`<p style="margin:0 0 8px"><b>✅ Todos los pelos tienen tráfico.</b> Ya podés cerrar la bandeja.</p><button class="big pzok">Seguir</button>`);
+ if(!bad.length&&!PZ.chad){const v=Object.values(PZ.res).map(r=>parseFloat(r.t)).filter(x=>!isNaN(x)),avg=v.reduce((a,b)=>a+b,0)/Math.max(1,v.length);if(avg>=-18){PZ.chad=true;setTimeout(()=>praise(avg.toFixed(2)),500)}}
+ if(bad.length){if(!PZ.warned){PZ.warned=true;err++;boss('dead')}$('#pb .pzr').onclick=()=>redoStart(bad);$('#pb .pzv').onclick=()=>pzVfl(bad)}else $('#pb .pzok').onclick=()=>{endPan();if(PZ.tool)scene.remove(PZ.tool);nx()}}
+/* VFL de la pinza: la luz roja se escapa en el empalme malo */
+function pzVfl(bad){endPan();const gl=[];bad.forEach(n=>{const p=SLT(n),m=new THREE.Mesh(new THREE.SphereGeometry(.06,14,10),new THREE.MeshBasicMaterial({color:0xff2020})),lt=new THREE.PointLight(0xff3030,1.6,1.2);
+  m.position.set(p.x,TOP+.12,p.z);lt.position.set(p.x,TOP+.3,p.z);scene.add(m);scene.add(lt);gl.push(m,lt)});const p0=SLT(bad[0]);camTo(p0.x,p0.z,.42,TOP,1.2);
+ msg('Conectaste el VFL de la pinza: la luz roja se escapa justo en el empalme malo.');const t0=performance.now(),f=()=>{const t=(performance.now()-t0)/1000;gl.forEach(o=>{if(o.isMesh)o.scale.setScalar(1+.5*Math.abs(Math.sin(t*6)));else o.intensity=1+Math.abs(Math.sin(t*6))*1.6});
+  if(t<2.6)return requestAnimationFrame(f);gl.forEach(o=>scene.remove(o));camTo(TXc,DZ,MINI?.5:.68,TOP,1.3);openPan('Pinza de tráfico',panPZ)};f()}
+/* buscar el pelo con potencia: la pinza muestra la lectura */
+{const f0=findUI;findUI=function(o){if(o.pick)return f0(o);const live=o.live,base=o.base,oc=o.onCheck;return f0(Object.assign({},o,{onCheck:k=>{oc&&oc(k);setTimeout(()=>{const el=$('#pb .fres');if(!el)return;const ok=k===live;
+  el.innerHTML=`<svg viewBox="0 0 220 120" style="width:120px;float:left;margin:0 8px 0 0"><g transform="translate(110,95) scale(.85)">${pzSVG({on:true,r:ok?{ok:true,t:base}:{lo:true,t:'LO'},dir:1})}</g></svg>`+el.innerHTML+'<div style="clear:both"></div>'},(itemOn('Bruno')?.5:1)*430)}}))}}
+kT('pinza').d='Encuentra el pelo con señal y trae láser rojo (VFL)';
+KICO.pinza='<rect x="21" y="12" width="22" height="48" rx="4" fill="#3a3e43"/><rect x="19" y="4" width="26" height="10" rx="2" fill="#1b1d20"/><rect x="24" y="16" width="16" height="24" rx="2" fill="#22a35c"/><rect x="26" y="18" width="12" height="7" fill="#d7e6cf"/><circle cx="32" cy="33" r="3" fill="#e03b3b"/><rect x="24" y="43" width="16" height="11" rx="2" fill="#178a4b"/><rect x="28" y="58" width="8" height="4" fill="#f26b21"/><path d="M44 22l7 4-7 3z" fill="#1b1d20"/>';
+
 applyQ();loop();
 </script></body></html>
-
-</body></html>
