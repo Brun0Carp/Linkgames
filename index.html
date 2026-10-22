@@ -59,6 +59,14 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #mq{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);padding:16px;z-index:10}#mq>div{background:var(--card);border-radius:16px;padding:18px;max-width:320px;width:100%}.mqb{display:flex;gap:8px;margin-top:14px}.mqb button{flex:1;margin:0;padding:11px 8px}
 #tec,#sop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .cuh{font-size:16px;margin:14px 0 0}
+#mg{position:absolute;inset:0;z-index:8;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
+#mg .mgw{max-width:760px;margin:0 auto}#mg .mgbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
+#mg .mgbar button{padding:7px 10px;font-size:14px}#mg .mgt{font-variant-numeric:tabular-nums;font-weight:700}#mg .mgsub{margin:0 0 8px;font-size:14px;opacity:.85}#mg h3{margin:14px 0 6px;font-size:15px}
+#mg .mggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px}#mg .mgc{display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left;padding:10px;border-radius:14px;background:var(--card);color:var(--fg);border:1.5px solid var(--line)}
+#mg .mgc b{font-size:15px}#mg .mgc span{font-size:12.5px;opacity:.8;line-height:1.3}#mg .mgc .mgi{font-size:24px;opacity:1}#mg .mgc em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--ac);margin-top:auto}
+#mg .mgmsg{background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:12px;padding:8px 10px;font-size:14px;margin:0 0 8px;min-height:20px}
+#mgb{background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:16px;padding:12px;max-width:460px;margin:0 auto}#mgb svg{width:100%;display:block;touch-action:none;background:rgba(127,127,127,.08);border-radius:12px;color:var(--fg)}
+#mg .mgpz svg{max-width:230px;margin:0 auto 8px}#mg .mgres{background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:16px;padding:16px;text-align:center}#mg .mgpts{font-size:30px;margin:4px 0}#mg .mgbt{display:flex;gap:8px;flex-wrap:wrap}#mg .mgbt button{flex:1}
 #ot{position:absolute;inset:0;z-index:9;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
 #ot .otw{max-width:760px;margin:0 auto}#ot .otbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
 #ot .ottab{display:flex;gap:6px}#ot .ottab button{padding:7px 10px;font-size:14px}#ot .ottab button.on{background:var(--ac);border-color:var(--ac);color:#06202a;font-weight:700}
@@ -275,7 +283,7 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -2641,7 +2649,10 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=59,NEWS=[
+const VER=60,NEWS=[
+ {v:60,t:'Minijuegos',items:[
+  ['🎮','Minijuegos sueltos','Nuevo apartado en el menú para jugar solo los minijuegos: pelar, sacar el acrilato, cortar con el cleaver, poner el termo, fusionar, calentar, pinza de tráfico, pasacables, atar y tirar del drop, y la orden de trabajo.'],
+  ['🏆','Récord en cada uno','Cada minijuego te da puntos según el tiempo, los errores y lo bien que lo hiciste, y guarda tu mejor puntaje. No afecta tu partida ni tus monedas.']]},
  {v:59,t:'Orden de trabajo y modo IA',items:[
   ['📝','Orden de trabajo en papel','Al terminar la roseta completás la orden como la de verdad: fecha, horario de entrada y salida, técnicos responsables, si el cliente es el titular, nombre, apellido, DNI, teléfono, complejo y lote o UF, tareas, materiales (metros de fibra, roseta, UTP, patchcord) y el equipo con su modelo y MAC.'],
   ['💬','Los datos se los pedís al cliente','Igual que en el soporte: le preguntás con los botones o escribiendo, y el cliente te contesta en voz alta. Los barrios son los mismos del soporte.'],
@@ -3284,6 +3295,65 @@ TIPS.push([/orden de trabajo/i,'La orden de trabajo','Al terminar se completa la
  [/toma de la pared|ficha de la fuente/i,'La fuente del router','La fuente de 12 V va a un tomacorriente cerca del router y la ficha redonda al conector Power. Conviene que el cable no quede tirante ni pase por detrás de muebles que lo pisen.']);
 
 iaSel();
+
+/*C60*/
+/* ===== V60: Minijuegos sueltos, para practicar cada parte del trabajo sin hacer la obra entera ===== */
+const MGS=[
+ {k:'pelar',ic:'✂️',g:'Empalme',n:'Pelar la fibra',d:'Deslizá la peladora sin quebrar el vidrio.'},
+ {k:'acri',ic:'🟡',g:'Empalme',n:'Sacar el acrilato',d:'Pelá el buffer amarillo de 900 µm del pigtail.'},
+ {k:'cortar',ic:'🔪',g:'Empalme',n:'Cortar con el cleaver',d:'Acomodá la fibra justo sobre la cuchilla.'},
+ {k:'termo',ic:'🧪',g:'Empalme',n:'Poner el termo',d:'Pasá el termo por la fibra antes de pelar.'},
+ {k:'fusion',ic:'⚡',g:'Empalme',n:'Fusionar',d:'Alineá X e Y, dejá el hueco justo y disparás el arco.'},
+ {k:'calentar',ic:'🔥',g:'Empalme',n:'Calentar el termo',d:'Centrá el termo sobre el empalme y calentalo.'},
+ {k:'pinza',ic:'🔎',g:'Herramientas',n:'Pinza de tráfico',d:'Encontrá el pelo con señal en la menor cantidad de intentos.'},
+ {k:'pasa',ic:'🟢',g:'Cableado',n:'Pasacables',d:'Desenrollá, embocá y pasá la cinta por las curvas del caño.'},
+ {k:'atar',ic:'🪢',g:'Cableado',n:'Atar el drop',d:'Envolvé la gaza con cinta aisladora.'},
+ {k:'tirar',ic:'💪',g:'Cableado',n:'Tirar del drop',d:'Tirá parejo, sin tirones, hasta que salga.'},
+ {k:'ot',ic:'📝',g:'Papeles',n:'Orden de trabajo',d:'Pedile los datos al cliente y completá la orden.'}];
+let MG=null;
+const mgBest=()=>{try{return JSON.parse(localStorage.getItem('taller_mg')||'{}')}catch(e){return {}}};
+function openMG(){let el=$('#mg');if(!el){el=document.createElement('div');el.id='mg';document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;mgList()}
+function mgClose(){mgStop();$('#mg').hidden=true;$('#title').hidden=false}
+function mgList(){const b=mgBest(),el=$('#mg'),gs=[...new Set(MGS.map(m=>m.g))];
+ el.innerHTML=`<div class="mgw"><div class="mgbar"><b>🎮 Minijuegos</b><button class="mgx">Volver al menú</button></div><p class="mgsub">Practicá cada parte del trabajo por separado. Cada minijuego guarda tu mejor puntaje.</p>`
+  +gs.map(g=>`<h3>${g}</h3><div class="mggrid">${MGS.filter(m=>m.g===g).map(m=>`<button class="mgc" data-k="${m.k}"><span class="mgi">${m.ic}</span><b>${m.n}</b><span>${m.d}</span><em>${b[m.k]?`🏆 ${b[m.k]} pts`:'Sin jugar'}</em></button>`).join('')}</div>`).join('')+`</div>`;
+ el.querySelector('.mgx').onclick=mgClose;el.querySelectorAll('.mgc').forEach(c=>c.onclick=()=>mgPlay(c.dataset.k))}
+/* aísla el minijuego: guarda y restaura los contadores del juego */
+function mgStop(){if(!MG)return;try{MG.obs&&MG.obs.disconnect()}catch(e){}clearInterval(MG.tick);const s=MG.save;err=s.err;loss=s.loss;fusN=s.fusN;last=s.last;INV.pen=s.pen;CUAD=s.cuad;Object.keys(s.R).forEach(k=>{if(s.R[k]===undefined)delete R[k];else R[k]=s.R[k]});fuOn=null;try{speechSynthesis.cancel()}catch(e){}MG=null}
+function mgPlay(k){mgStop();const m=MGS.find(x=>x.k===k),el=$('#mg'),c=F[rint(0,11)],ch=hex(c[1]),c2=hex(F[rint(0,11)][1]);
+ MG={k,t0:Date.now(),save:{err,loss,fusN,last,pen:INV.pen,cuad:CUAD,R:Object.fromEntries(['tIn','partner','dm0','foM','rtModel','rtMac','ot','pw','broken'].map(x=>[x,R[x]]))},kinks:CB.kinks||0,tries:0,extra:0};
+ el.innerHTML=`<div class="mgw"><div class="mgbar"><b>${m.ic} ${m.n}</b><span class="mgt">⏱ 0:00</span><button class="mgx">← Minijuegos</button></div><p class="mgmsg">${m.d}</p><div id="mgb"></div></div>`;
+ el.querySelector('.mgx').onclick=()=>{mgStop();mgList()};
+ MG.tick=setInterval(()=>{const s=Math.floor((Date.now()-MG.t0)/1000),t=el.querySelector('.mgt');if(t)t.textContent=`⏱ ${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`},500);
+ const mm=el.querySelector('.mgmsg');MG.obs=new MutationObserver(()=>{const t=$('#msg').textContent;if(t)mm.textContent=t});MG.obs.observe($('#msg'),{childList:true,characterData:true,subtree:true});
+ const B=el.querySelector('#mgb'),done=()=>mgDone();
+ if(k==='pelar')stripUI(B,{c:ch,thick:7,inner:glassIn,what:'de la fibra',k:'f',onSlip:()=>{MG.extra+=150},done});
+ else if(k==='acri')stripUI(B,{c:'#f2c200',thick:12,inner:'<rect x="200" y="68" width="80" height="4" fill="#efe9d6" stroke="#b9b29c" stroke-width=".6"/>',what:'del acrilato amarillo',k:'y',onSlip:()=>{MG.extra+=150},done});
+ else if(k==='cortar')cleaveUI(B,ch,done);
+ else if(k==='termo')termoUI(B,ch,done);
+ else if(k==='fusion'){CUAD=2;fuseUI(B,ch,()=>{MG.extra+=Math.round(Math.max(0,last-.02)*2500);done()},c2)}
+ else if(k==='calentar')heatUI(B,ch,done,c2);
+ else if(k==='pinza')mgPinza(B,done);
+ else if(k==='pasa'){const kind=srnd(['corr','rieg']),len=sint(12,22),nC=kind==='corr'?3:2;cblPushUI(B,{len,kind,curves:[...Array(nC)].map((_,i)=>Math.round(len*(i+1)/(nC+1))),twist:kind==='corr'?2:1,from:'Cámara',to:'Pilar',col:'#1d2024',done})}
+ else if(k==='atar')cblTieUI(B,{turns:4,guia:false,done});
+ else if(k==='tirar'){const go=()=>cblPullUI(B,{len:sint(12,22),to:'Pilar',from:'Cámara',col:'#1d2024',guia:false,done,slip:()=>{MG.extra+=100;go()}});go()}
+ else if(k==='ot'){Object.assign(R,{tIn:Date.now()-sint(25,75)*60000,partner:srnd(TECS.filter((t,i)=>i!==TEC)).n,dm0:sint(60,880),foM:sint(35,140),rtModel:srnd(['ONT-AX18','ONT-GX30','FTTH-W6']),pw:-(14+rnd()*6).toFixed(1),
+   rtMac:[0xA4,0x3C,...[0,0,0,0].map(()=>Math.random()*256|0)].map(x=>x.toString(16).toUpperCase().padStart(2,'0')).join(':')});B.innerHTML='<p class="mgsub">Completá la orden de trabajo…</p>';otStart(()=>{MG.extra+=Math.round((1-(R.ot?R.ot.ok/R.ot.tot:0))*1000);done()})}}
+/* pinza de tráfico suelta: 12 pelos de un buffer, uno solo con señal */
+function mgPinza(el,done){const live=rint(0,11),res={},base=-(15+rnd()*6).toFixed(1);let on=false,cur=null;
+ const draw=()=>{el.innerHTML=`<div class="mgpz"><svg viewBox="0 0 220 170"><g transform="translate(110,120)">${pzSVG({on,r:cur,dir:1})}</g></svg><div class="fgr"><b>Buffer azul · 12 pelos</b><div>${F.slice(0,12).map((f,i)=>`<button class="fpel ${res[i]===false?'no':res[i]?'si':''}" data-k="${i}" style="--c:${hex(f[1])}"><i>${i+1}</i><span>${f[0]}</span></button>`).join('')}</div></div></div>`
+  +(on?`<p class="cbh">Tocá un pelo para ponerle la pinza. Intentos: <b>${MG.tries}</b></p>`:`<button class="big mgon">⏻ Prender la pinza</button>`);
+  const b=el.querySelector('.mgon');if(b)b.onclick=()=>{on=true;msg('Pinza prendida: NO SIGNAL hasta que pinces un pelo.');draw()};
+  el.querySelectorAll('.fpel').forEach(x=>x.onclick=()=>{if(!on){msg('Primero prendé la pinza con el botón rojo.');return}const i=+x.dataset.k;if(res[i]!==undefined)return;MG.tries++;const ok=i===live;res[i]=ok;cur=ok?{ok:true,t:String(base)}:{lo:true,t:'LO'};
+   msg(ok?`¡Tráfico! ${base} dBm en el pelo ${F[i][0].toLowerCase()}.`:'Sin tráfico en este pelo.');draw();if(ok){fxOK();MG.extra+=(MG.tries-1)*70;setTimeout(done,900)}})};draw()}
+function mgDone(){if(!MG||MG.fin)return;MG.fin=true;const k=MG.k,m=MGS.find(x=>x.k===k),secs=Math.round((Date.now()-MG.t0)/1000),e=Math.max(0,err-MG.save.err),grace={ot:150,pasa:60,fusion:25,pinza:10}[k]||15,
+  kk=Math.max(0,(CB.kinks||0)-MG.kinks),pts=Math.max(0,Math.round(1000-Math.max(0,secs-grace)*(k==='ot'?2:8)-e*120-kk*120-MG.extra)),best=mgBest(),rec=pts>(best[k]||0);
+ if(rec){best[k]=pts;try{localStorage.setItem('taller_mg',JSON.stringify(best))}catch(_){}}const st=[400,650,850].filter(x=>pts>=x).length,tr=MG.tries,lp=k==='fusion'?last:null,ot=k==='ot'&&R.ot?R.ot:null;mgStop();
+ const el=$('#mg');el.hidden=false;el.innerHTML=`<div class="mgw"><div class="mgbar"><b>${m.ic} ${m.n}</b></div><div class="mgres"><div class="stars">${[0,1,2].map(i=>`<span class="${i<st?'on':''}">★</span>`).join('')}</div><p class="mgpts"><b>${pts}</b> pts</p>${rec?'<p><b>🏆 ¡Récord nuevo!</b></p>':`<p>Tu récord: ${best[k]} pts</p>`}`
+  +`<p>⏱ ${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')} · errores: ${e}${kk?` · dobleces: ${kk}`:''}${lp!=null?` · pérdida: ${lp.toFixed(3)} dB`:''}${ot?` · campos bien: ${ot.ok} de ${ot.tot}`:''}${k==='pinza'?` · intentos: ${tr}`:''}</p>`
+  +`<div class="mgbt"><button class="big mgag">🔁 Otra vez</button><button class="big alt mgls">← Minijuegos</button></div></div></div>`;
+ el.querySelector('.mgag').onclick=()=>mgPlay(k);el.querySelector('.mgls').onclick=mgList;if(st===3)ding()}
+window.MGauto=()=>{if(!MG)return;if(MG.k==='ot')return OTauto();CB.push&&MG.k==='pasa'?CB.push():MG.k==='atar'?CB.tie():MG.k==='tirar'?CB.pull():mgDone()};
 
 applyQ();loop();
 </script></body></html>
