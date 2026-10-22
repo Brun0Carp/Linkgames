@@ -59,6 +59,21 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #mq{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);padding:16px;z-index:10}#mq>div{background:var(--card);border-radius:16px;padding:18px;max-width:320px;width:100%}.mqb{display:flex;gap:8px;margin-top:14px}.mqb button{flex:1;margin:0;padding:11px 8px}
 #tec,#sop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .cuh{font-size:16px;margin:14px 0 0}
+#phb{position:absolute;right:12px;bottom:max(76px,calc(env(safe-area-inset-bottom) + 76px));z-index:11;width:52px;height:52px;border-radius:16px;font-size:26px;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.25);background:var(--card)}
+#phb i{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;border-radius:10px;background:#e5484d;color:#fff;font:700 12px/20px sans-serif;font-style:normal;padding:0 4px}
+#ph{position:absolute;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:12;width:min(360px,calc(100vw - 20px));height:min(640px,calc(100% - 90px));background:#111418;border-radius:28px;padding:10px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
+#ph .phs{display:flex;flex-direction:column;height:100%;background:#ece5dd;border-radius:20px;overflow:hidden;color:#16222c}#ph .phh{display:flex;align-items:center;gap:8px;background:#0e7490;color:#fff;padding:9px 10px}#ph .phh b{flex:1;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ph .phh button{background:transparent;border:none;color:#fff;font-size:18px;padding:2px 8px;box-shadow:none}#ph .phm{margin:0;padding:5px 10px;font-size:12px;color:#55616b;background:#f6f2ec}
+#ph .phl{overflow:auto;flex:1;background:#fff}#ph .phi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid #e6e9ec;border-radius:0;padding:10px;box-shadow:none;color:#16222c}#ph .phi span{flex:1;min-width:0;display:flex;flex-direction:column}#ph .phi small{color:#6b7780;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}#ph .phi i{background:#22c55e;color:#fff;border-radius:10px;min-width:20px;text-align:center;font:700 12px/20px sans-serif;font-style:normal}
+#ph .pha{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none}
+#ph .phc{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:6px}#ph .pmm{align-self:flex-start;max-width:82%;background:#fff;border-radius:10px;padding:6px 9px 4px;font-size:14px;line-height:1.3;box-shadow:0 1px 1px rgba(0,0,0,.08)}#ph .pmm.me{align-self:flex-end;background:#d9fdd3}
+#ph .pmm b{display:block;font-size:12.5px}#ph .pmm em{display:block;text-align:right;font-style:normal;font-size:10.5px;color:#7b8790}#ph .pmm img{width:150px;border-radius:6px;display:block}#ph .phpts{font-weight:700;color:#0e7490}
+#ph .phq{display:flex;flex-wrap:wrap;gap:5px;padding:6px 8px;background:#f6f2ec}#ph .phq button{font-size:12.5px;padding:6px 9px;background:#fff;color:#0e5566;border:1.5px solid #8cc7d3;border-radius:14px}
+#ph .phf{display:flex;gap:6px;padding:7px;background:#f0ebe4}#ph .phf input{flex:1;min-width:0;border-radius:18px;border:1px solid #cfd5da;padding:8px 12px;font-size:14px}#ph .phf button{border-radius:50%;width:38px;height:38px;padding:0;background:#0e7490;color:#fff;border:none}
+#ph .phvf,#ph .phshot{position:relative;flex:1;background:#2a2e33;overflow:hidden;touch-action:none;display:grid;place-items:center}#ph .phvf img,#ph .phshot img{width:62%;box-shadow:0 6px 18px rgba(0,0,0,.5);pointer-events:none}
+#ph .phfr{position:absolute;inset:8% 17%;border:2.5px dashed rgba(255,255,255,.7);border-radius:6px;pointer-events:none}#ph .phfr.ok{border-color:#22c55e;border-style:solid}#ph .phvf.flash::after{content:'';position:absolute;inset:0;background:#fff;animation:phfl .3s ease-out forwards}@keyframes phfl{to{opacity:0}}
+#ph .phcb{display:flex;gap:6px;justify-content:center;padding:6px;background:#1d2024}#ph .phcb button{background:#3a3f45;color:#fff;border:none;width:46px;padding:6px}#ph .phsh{align-self:center;width:58px;height:58px;border-radius:50%;background:#fff;border:5px solid #9aa3ad;margin:8px auto}
+#ph .phs:has(.phvf){background:#1d2024}#ph .phs:has(.phvf) .phm,#ph .phs:has(.phshot) .phm{background:#1d2024;color:#e6eaee}#ot .otph1{width:100%;margin:10px 0 0;font-size:14px}
 #mg{position:absolute;inset:0;z-index:8;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
 #mg .mgw{max-width:760px;margin:0 auto}#mg .mgbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
 #mg .mgbar button{padding:7px 10px;font-size:14px}#mg .mgt{font-variant-numeric:tabular-nums;font-weight:700}#mg .mgsub{margin:0 0 8px;font-size:14px;opacity:.85}#mg h3{margin:14px 0 6px;font-size:15px}
@@ -2649,7 +2664,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=60,NEWS=[
+const VER=61,NEWS=[
+ {v:61,t:'El celular del técnico',items:[
+  ['📱','Celular mientras empalmás','En la botella, la roseta y la NAP tenés un celular abajo a la derecha, con el grupo de tu cuadrilla y los chats privados de Julián, Ulises, El Pana y Jony.'],
+  ['👥','Grupo de la cuadrilla','El grupo se llama según la cuadrilla que elegiste. Ahí te escriben, preguntan cómo vas, piden la potencia y reaccionan a tus fusiones y errores. También quedan los mensajes del equipo que aparecen arriba.'],
+  ['💬','Contestá bien','Respondés con opciones o escribiendo; con el modo IA cada uno te contesta con su personalidad. Responder amable suma puntos, contestar mal resta, y si los dejás en visto mucho rato te reclaman.'],
+  ['🗨️','Muchos mensajes nuevos','Cada uno tiene sus preguntas, chistes, retos y reacciones: Julián con los estados, Ulises con la comida y el fútbol, El Pana apurado por los clientes y Jony que no te deja comer.'],
+  ['📸','Foto de la orden de trabajo','En la roseta, la orden se fotografía con el celular: encuadrás la hoja derecha y completa, sacás la foto y la mandás al grupo.']]},
  {v:60,t:'Minijuegos',items:[
   ['🎮','Minijuegos sueltos','Nuevo apartado en el menú para jugar solo los minijuegos: pelar, sacar el acrilato, cortar con el cleaver, poner el termo, fusionar, calentar, pinza de tráfico, pasacables, atar y tirar del drop, y la orden de trabajo.'],
   ['🏆','Récord en cada uno','Cada minijuego te da puntos según el tiempo, los errores y lo bien que lo hiciste, y guarda tu mejor puntaje. No afecta tu partida ni tus monedas.']]},
@@ -2874,7 +2895,7 @@ function tecRender(){$('#tjob').hidden=!LEVEL;if(LEVEL)$('#tjob').innerHTML=`<b>
 function play(){$('#title').hidden=true;tecRender();$('#tec').hidden=false}
 function startGame(){$('#tec').hidden=true;const c=TECS[TEC];$('#hav').innerHTML=avatar(c)+c.n+(itemOn(c.n)?' '+ITEMS[c.n].ic:'');$('.hud').classList.add('wav');LIVES=LEVEL&&LEVEL.on?3:null;GO=false;dylanSave=false;hearts();
  $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
-const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
+const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
@@ -3257,7 +3278,7 @@ function otRender(){const el=$('#ot'),o=OT,f=o.f,inp=(k,ph='',cls='')=>`<input c
   +`<p class="otleg">El cliente acepta lo detallado en esta orden y deja constancia de que el trabajo quedó terminado. Si la visita tiene costo, se cobra en la próxima factura. El servicio puede tardar hasta 2 horas en activarse.</p>`
   +`<div class="otsig"><div><canvas class="sgc" width="260" height="80"></canvas><span>Firma / Aclaración cliente${o.sig?`: <b>${sesc(OT.c.d.nom+' '+OT.c.d.ape)}</b>`:''}</span><button class="osg"${o.sig?' disabled':''}>✍️ Pedile la firma al cliente</button></div>`
   +`<div><canvas class="sgt" width="260" height="80"></canvas><span>Firma / Aclaración técnico: <b>${TECS[TEC].n}</b></span><button class="osc">Borrar mi firma</button></div></div>`
-  +`<button class="big otsend">📤 Entregar la orden</button><p class="otmsg"></p></div>`;
+  +`<button class="otph1">📸 Sacale una foto con el celular y mandala al grupo</button><button class="big otsend">📤 Entregar la orden</button><p class="otmsg">${o.photo===true?'📸 Foto enviada al grupo.':''}</p></div>`;
  el.innerHTML=`<div class="otw"><div class="otbar"><b>📝 Orden de trabajo</b><span class="ottab"${o.res?' hidden':''}><button data-tab="cli"${o.tab==='cli'?' class="on"':''}>💬 Cliente</button><button data-tab="form"${o.tab==='form'?' class="on"':''}>📝 Orden</button></span></div>${o.res||(o.tab==='cli'?cli:form)}</div>`;
  el.querySelectorAll('.ottab button').forEach(b=>b.onclick=()=>{o.tab=b.dataset.tab;o.res=null;otRender()});
  if(o.res){const b=el.querySelector('.otfin');if(b)b.onclick=()=>{el.hidden=true;try{speechSynthesis.cancel()}catch(e){}const d=o.done;OT.fin=true;d()};return}
@@ -3274,7 +3295,7 @@ function otRender(){const el=$('#ot'),o=OT,f=o.f,inp=(k,ph='',cls='')=>`<input c
  const pt=e=>{const b=st.getBoundingClientRect();return [(e.clientX-b.left)*st.width/b.width,(e.clientY-b.top)*st.height/b.height]};
  st.onpointerdown=e=>{dn=pt(e);try{st.setPointerCapture(e.pointerId)}catch(_){}};st.onpointermove=e=>{if(!dn)return;const p=pt(e);tg.beginPath();tg.moveTo(...dn);tg.lineTo(...p);tg.stroke();dn=p;o.tsig++};
  st.onpointerup=()=>{dn=null;o.tsigImg=st.toDataURL()};el.querySelector('.osc').onclick=()=>{tg.clearRect(0,0,st.width,st.height);o.tsig=0;o.tsigImg=null};
- el.querySelector('.otsend').onclick=()=>otCheck()}
+ el.querySelector('.otsend').onclick=()=>otCheck();el.querySelector('.otph1').onclick=()=>otPhoto()}
 /* revisar la orden campo por campo */
 function otCheck(){const o=OT,f=o.f,d=o.c.d,now=new Date(),nm=s=>snorm(s),T=(s,ref)=>{const m=String(s||'').match(/(\d{1,2})\D{0,2}(\d{2})/);if(!m)return false;const a=+m[1]*60+ +m[2],b=new Date(ref),c=b.getHours()*60+b.getMinutes();return Math.abs(a-c)<=6||Math.abs(a-c)>=1434};
  const fd=(String(f.fecha||'').match(/\d+/g)||[]).map(Number),all=nm([f.comp,f.uf,f.lote,f.ofi,f.loc].join(' ')),allRaw=[f.comp,f.uf,f.lote,f.ofi,f.loc].join(' '),unitF=d.bt==='lote'?f.lote:d.bt==='uf'||d.bt==='torre'?f.uf:allRaw;
@@ -3283,14 +3304,14 @@ function otCheck(){const o=OT,f=o.f,d=o.c.d,now=new Date(),nm=s=>snorm(s),T=(s,r
   ['Técnicos responsables',tn.includes(nm(TECS[TEC].n))&&(!R.partner||tn.includes(nm(R.partner)))],['Es el titular',f.tit===d.tit],['Nombre',nm(f.nom)===nm(d.nom)],['Apellido',nm(f.ape)===nm(d.ape)],['DNI',sdig(f.dni)===sdig(d.dni)],['Teléfono',sdig(f.tel)===sdig(d.tel)],
   ['Complejo',nm(f.comp).includes(nm(d.bar))&&(!d.cal||nm(f.comp).includes(nm(d.cal))||all.includes(nm(d.cal)))],['UF / Lote',!!sdig(unitF||'')&&[d.alt,d.mz,d.ub].every(x=>snum(allRaw,x))&&(d.bt==='calle'||snum(unitF,d.ub))],
   ['Tarea: instalación',!!f.ins&&!f.ret],['Descripción',String(f.desc||'').trim().length>=6],['FO / metros',n0(f.fo)===(R.foM||60)],['Rosetas',n0(f.ros)===1],['UTP / metros',n0(f.utp)===0],['PatchCord',n0(f.pc)===1],
-  ['Equipo instalado',/router|ont|modem|módem|onu/i.test(f.eq||'')],['Modelo',macN(f.mod)===macN(R.rtModel)],['MAC',macN(f.mac)===macN(R.rtMac)],['Firma del cliente',!!o.sig],['Tu firma',o.tsig>=15]];
+  ['Equipo instalado',/router|ont|modem|módem|onu/i.test(f.eq||'')],['Modelo',macN(f.mod)===macN(R.rtModel)],['MAC',macN(f.mac)===macN(R.rtMac)],['Firma del cliente',!!o.sig],['Tu firma',o.tsig>=15],['Foto de la orden al grupo',o.photo===true]];
  const bad=C.filter(x=>!x[1]),pen=bad.length*15;INV.pen+=pen;R.ot={ok:C.length-bad.length,tot:C.length};if(!bad.length){fxOK();setTimeout(()=>info('¡Orden de trabajo perfecta! Así da gusto 👏',BOSS[1]),400)}
  o.chat.push({w:'me',t:'Listo, firmame acá y ya está.'});speak(otLine('bye'),Object.assign({cut:true},o.v));
  o.res=`<div class="otres"><h3>${bad.length?`Orden entregada · ${R.ot.ok} de ${R.ot.tot} campos bien`:'✅ ¡Orden perfecta!'}</h3><p class="otby">🗣 “${sesc(otLine('bye'))}”</p><ul>${C.map(([t,ok])=>`<li class="${ok?'ok':'no'}">${ok?'✅':'❌'} ${t}</li>`).join('')}</ul>${pen?`<p><b>−${pen} pts</b> por los campos mal completados.</p>`:'<p>Sin descuentos. ¡Prolijo!</p>'}`
   +`<p class="otdat">Datos correctos: ${sesc(d.nom)} ${sesc(d.ape)} · DNI ${d.dni} · ${d.tel} · ${sesc(d.bar)} · ${sesc(otUnit(d))} · ${d.tit?'titular':`no titular (${d.rel})`} · FO ${R.foM} m · ${R.rtModel} · ${R.rtMac}</p><button class="big otfin">Terminar</button></div>`;otRender()}
 /* hooks de prueba */
 window.OTauto=()=>{if(!OT)return;const d=OT.c.d,f=OT.f,n=new Date(),u=d.bt==='lote'?'lote':d.bt==='calle'?'comp':'uf';Object.assign(f,{fecha:`${n.getDate()}/${n.getMonth()+1}/${n.getFullYear()}`,ent:hhmm(R.tIn||n),sal:hhmm(n),tec:TECS[TEC].n+' y '+(R.partner||''),tit:d.tit,nom:d.nom,ape:d.ape,dni:d.dni,tel:d.tel,
- comp:d.bar+(d.bt==='calle'?' '+d.cal+' '+d.alt:d.bt==='mzc'||d.bt==='torre'?' '+d.mz:''),uf:d.bt==='uf'||d.bt==='torre'?d.ub:'',lote:d.bt==='lote'||d.bt==='mzc'?d.ub:'',ins:true,desc:'Instalación de fibra con roseta y ONT',fo:String(R.foM),ros:'1',utp:'0',pc:'1',eq:'Router ONT',mod:R.rtModel,mac:R.rtMac});OT.sig=true;OT.tsig=20;otCheck()};
+ comp:d.bar+(d.bt==='calle'?' '+d.cal+' '+d.alt:d.bt==='mzc'||d.bt==='torre'?' '+d.mz:''),uf:d.bt==='uf'||d.bt==='torre'?d.ub:'',lote:d.bt==='lote'||d.bt==='mzc'?d.ub:'',ins:true,desc:'Instalación de fibra con roseta y ONT',fo:String(R.foM),ros:'1',utp:'0',pc:'1',eq:'Router ONT',mod:R.rtModel,mac:R.rtMac});OT.sig=true;OT.tsig=20;OT.photo=true;otCheck()};
 TIPS.push([/orden de trabajo/i,'La orden de trabajo','Al terminar se completa la orden con el cliente: fecha, horario de llegada y salida, técnicos, datos del titular, qué se hizo y los materiales (metros de fibra, roseta, patchcord y el equipo con su modelo y MAC). La firma del cliente deja constancia de que el trabajo quedó terminado.'],
  [/toma de la pared|ficha de la fuente/i,'La fuente del router','La fuente de 12 V va a un tomacorriente cerca del router y la ficha redonda al conector Power. Conviene que el cable no quede tirante ni pase por detrás de muebles que lo pisen.']);
 
@@ -3354,6 +3375,202 @@ function mgDone(){if(!MG||MG.fin)return;MG.fin=true;const k=MG.k,m=MGS.find(x=>x
   +`<div class="mgbt"><button class="big mgag">🔁 Otra vez</button><button class="big alt mgls">← Minijuegos</button></div></div></div>`;
  el.querySelector('.mgag').onclick=()=>mgPlay(k);el.querySelector('.mgls').onclick=mgList;if(st===3)ding()}
 window.MGauto=()=>{if(!MG)return;if(MG.k==='ot')return OTauto();CB.push&&MG.k==='pasa'?CB.push():MG.k==='atar'?CB.tie():MG.k==='tirar'?CB.pull():mgDone()};
+
+/*C61*/
+/* ===== V61: celular del técnico con el grupo de la cuadrilla y los chats privados (Julián, Ulises, El Pana y Jony),
+   y foto de la orden de trabajo con el celular ===== */
+let PH=null,PHB=0;
+const PHP=[BOSS[0],BOSS[1],BOSS[2],JONY];
+const PHPER={'Julián':'jefe de la cuadrilla, tranquilo, claro y prolijo; pide estados, potencias y que se cuiden los materiales',
+ 'Ulises':'compañero bromista y buena onda, siempre hablando de comida, mate y fútbol, pero sabe mucho de empalmes',
+ 'El Pana':'compañero con mucha jerga (mi rey, pana, fiera, de una), siempre apurado porque los clientes lo llaman',
+ 'Jony':'detallista obsesivo y adicto al trabajo, no deja comer a nadie hasta terminar, revisa cada error y pide todo perfecto'};
+const pobra=()=>({botella:'la botella',roseta:'la roseta',nap:'la NAP',cableado:'el cableado'}[MODE]||'la obra');
+const pT=s=>String(s).replace(/\{tu\}/g,TECS[TEC].n).replace(/\{obra\}/g,pobra()).replace(/\{cuad\}/g,CUAD).replace(/\{paso\}/g,($('#ti').textContent||'').toLowerCase().slice(0,60));
+/* preguntas que esperan respuesta: [texto, [buena, normal, mala]] */
+const PASK={
+ 'Julián':[['¿Cómo vas con {obra}? Pasame un estado cuando puedas.',['Vengo bien, ya estoy en: {paso}.','Más o menos, en un rato te digo.','Estoy ocupado, después.']],
+  ['¿Cuánto te falta para terminar {obra}?',['Unos 20 minutos y cierro.','No sé, un rato.','Lo que tarde, tarda.']],
+  ['Cuando midas la potencia mandame el valor por acá, porfa.',['Dale, apenas mida te lo paso.','Ok.','Medila vos si querés.']],
+  ['¿Necesitás algo de la camioneta? Estoy por pasar.',['Unos termos de repuesto, gracias.','No, todo bien.','No me molestes con eso.']],
+  ['¿Limpiaste bien el gel de los buffers? No quiero reclamos después.',['Sí, con quitagel y paños, quedó limpio.','Creo que sí.','Ni idea, ya fue.']],
+  ['Recordá dejar todo guardado en la valija al terminar.',['Sí, todo a su lugar, como siempre.','Ok.','Ya sé, no soy nuevo.']],
+  ['¿Estás usando el cleaver nuevo? Contame cómo corta.',['Corta joya, ángulos bajísimos.','Normal.','Qué importa.']],
+  ['La cuadrilla {cuad} tiene tres trabajos más hoy. ¿Llegás?',['Llego, me organizo y salimos.','Veremos.','Que vaya otro.']],
+  ['¿El cliente está conforme hasta ahora?',['Sí, muy amable, todo tranquilo.','Supongo.','No le pregunté.']],
+  ['¿Anotaste los metros de drop que usaste?',['Sí, lo saco del metraje impreso.','Después lo veo.','No hace falta.']]],
+ 'Ulises':[['¿Almorzamos después de {obra}? Hay unas milangas cerca 🤤',['¡De una! Terminando voy.','Puede ser.','No tengo tiempo para vos.']],
+  ['¿Tenés termos de sobra? Me quedé sin 😅',['Sí, te guardo un par.','Me quedan poquitos.','Arreglate.']],
+  ['Che, ¿viste el partido de anoche?',['¡Sí, qué golazo el del final!','Algo vi.','No me interesa.']],
+  ['¿Querés un mate? Estoy en la camioneta.',['¡Dale, gracias! Termino esto y voy.','Después.','No.']],
+  ['¿Te acordás cuál era el agujero de la peladora para el acrilato?',['El 3, el de 250 µm que deja el vidrio.','Creo que el 2.','Buscalo vos.']],
+  ['Me dijo Jony que estás tardando… ¿todo bien? 😂',['Todo bien, voy prolijo, que no se preocupe.','Sí, normal.','Que se ocupe de lo suyo.']],
+  ['¿Llevaste la cinta métrica o la usé yo?',['La tengo yo, te la devuelvo después.','No sé.','No es mi problema.']],
+  ['Me compré un cleaver nuevo, después te lo muestro. ¿Querés probarlo?',['¡Obvio, quiero ver cómo corta!','Bueno.','Paso.']],
+  ['¿Facturas o medialunas para la merienda? 🥐',['¡Medialunas de manteca!','Lo que haya.','Comé solo.']],
+  ['Che, ¿me pasás la ubicación? Te alcanzo la escalera.',['Te mando la ubicación, gracias genio.','Ya te paso.','No hace falta.']]],
+ 'El Pana':[['Mi rey, ¿cuánto te falta? El cliente me llama cada cinco minutos 😩',['Poquito, pana, ya cierro.','Un rato.','Que espere.']],
+  ['Pana, ¿me prestás la pinza de tráfico después?',['De una, fiera, cuando termine te la llevo.','Si me sobra tiempo.','Comprate una.']],
+  ['¡Fiera! ¿Cómo está quedando {obra}? 🔥',['Quedando joya, pana.','Ahí va.','Qué te importa.']],
+  ['Me llamó el cliente de la otra cuadra, ¿vas vos después o voy yo?',['Voy yo, pasame la dirección.','Fijate vos.','Andá vos, yo no.']],
+  ['¿Tenés batería en la fusionadora, mi rey? La mía está muerta.',['Sí, te presto el cargador después.','Algo tengo.','No.']],
+  ['Pana, ¿qué potencia te dio? Así le digo al cliente.',['Ni bien mida te paso el valor exacto.','Después te digo.','Preguntale a otro.']],
+  ['¿Pasaste por la NAP del barrio? Dicen que hay un puerto con LO.',['No, pero si querés al terminar la reviso.','Ni idea.','No es mío.']],
+  ['Mi rey, ¿me cubrís cinco minutos? Voy a buscar unas empanadas 🥟',['Dale, tranqui, traeme una.','Bueno.','Ni loco.']],
+  ['¡Pana! Me mandó un audio el cliente de 4 minutos, ¿lo escuchás vos? 😂',['Jaja dale, mandámelo.','Después.','Ni en pedo.']],
+  ['¿Te sobra algún patchcord? El mío vino roto.',['Sí, te guardo uno de la camioneta.','Quizás.','No.']]],
+ 'Jony':[['¿Ya terminaste? No vayas a comer nada hasta cerrar {obra}.',['Tranqui, Jony, primero termino.','Todavía no.','Como cuando quiero.']],
+  ['Revisá dos veces el guardado de los pelos. Dos veces.',['Revisado dos veces, quedó prolijo.','Ok.','Ya lo revisé, pesado.']],
+  ['Mandame una foto de la bandeja cuando cierres.',['Dale, ni bien cierre te la mando.','Si me acuerdo.','No mando nada.']],
+  ['¿Pelaste con el agujero correcto? Un error y se quiebra el vidrio.',['Sí, agujero por agujero, como corresponde.','Creo que sí.','No me controles.']],
+  ['¿Cuántos dB te dio la última fusión? Más de 0,05 no me gusta.',['Te paso el valor, quedó bajito.','No me fijé.','No te importa.']],
+  ['No dejes restos de vidrio en la mesa. Todo al descarte.',['Todo al descarte, mesa limpia.','Ok.','Limpiá vos.']],
+  ['Acordate de limpiar el vidrio con alcohol isopropílico antes de cortar.',['Siempre, con alcohol y paño.','Ok.','Ya sé hacer mi trabajo.']],
+  ['¿Pusiste el termo antes de pelar? La otra vez Ulises se olvidó 🙄',['Sí, termo primero, siempre.','Creo que sí.','Dejá de preguntar.']],
+  ['Quiero las órdenes de trabajo completas, sin campos vacíos.',['Completas y con firma, prometido.','Ok.','Ponela vos.']],
+  ['¿El cleaver está limpio? Una mota de polvo y el ángulo se va.',['Limpio y calibrado.','Supongo.','Qué exagerado.']]]};
+/* respuestas a lo que contestaste, según el tono */
+const PREP={
+ 'Julián':{good:['Excelente, {tu}. Así me gusta 👍','Perfecto, gracias por avisar.','Buenísimo. Seguí así de prolijo.','Genial, lo anoto.','Joya, cualquier cosa me escribís.','Bien ahí, {tu}.'],
+  ok:['Ok, avisame cualquier cosa.','Dale.','Bueno, después me contás.','Entendido.','Ok, pero no te cuelgues.'],
+  bad:['Ojo con cómo respondés, {tu}. Somos un equipo.','No me gusta ese tono. Hablamos después.','Bajá un cambio, por favor.','Eso no se contesta así. Queda anotado.']},
+ 'Ulises':{good:['¡Grande! 💪','Jaja sos un crack','¡Eso! Te debo una','Joya, ahí te veo 😄','¡Así se habla, {tu}!','Te banco a muerte'],
+  ok:['Bueno, dale 😅','Ok ok','Jaja bueno','Dale, después vemos'],
+  bad:['Uh, qué mala onda 😒','Bueno, perdón por preguntar…','Ufa, che','Te levantaste con el pie izquierdo, eh']},
+ 'El Pana':{good:['¡Fiera total! 🔥','De una, mi rey 🙌','Sos un genio, pana','¡Eso es trabajo en equipo, fiera!','Te amo, pana 😂','Joya joya'],
+  ok:['Bueno pana, avisame','Dale mi rey','Ok, fiera','Bue, ahí ando'],
+  bad:['Uh, pana, qué carácter 😤','Tranqui, mi rey, no es para tanto','Bueno, me la banco…','Ufff, se enojó el fiera']},
+ 'Jony':{good:['Bien. Pero revisalo de nuevo igual.','Correcto. Así se trabaja.','Ok. Que no se repita lo de la otra vez.','Bien, pero sin comer hasta terminar.','Aceptable. Prolijo, por favor.','Perfecto. Ahora mandame la potencia.'],
+  ok:['"Creo" no me sirve. Quiero certezas.','Ok… lo voy a revisar yo después.','Hmm. Fijate bien.','Eso no es una respuesta.'],
+  bad:['Esto se lo voy a contar a Julián.','Con esa actitud no se trabaja.','Anotado. Muy mal.','No me hables así. Y sin almuerzo hoy.']}};
+const PFOL={'Julián':['¿Me leíste, {tu}?','{tu}, ¿todo bien? No me contestás.','Respondé cuando puedas, porfa.'],'Ulises':['¿Hola? 👀','¿Me dejaste en visto? 😂','Che, contestá jaja'],
+ 'El Pana':['Mi rey, ¿estás? 👀','¡Pana! Contestame que el cliente me mata','¿Hola? ¿Vive el fiera?'],'Jony':['Te escribí hace rato. Responder es parte del trabajo.','¿Hola? El visto se nota.','Sin respuesta. Anotado.']};
+/* mensajes sueltos, sin pregunta */
+const PCHAT={
+ 'Julián':['Buen trabajo hoy, cuadrilla {cuad}. Sigamos así.','Recuerden cargar la orden de trabajo completa.','Hay lluvia a la tarde, guarden bien las valijas.','El barrio Santa Ana tiene tres órdenes pendientes.','Si alguno necesita la escalera grande, está en mi camioneta.','Atención: se están acabando los termos de 60 mm, usen con cuidado.','Mañana entramos a las 8, no se olviden.'],
+ 'Ulises':['Alguien vio mi destornillador? 🪛','Hoy hace un calor terrible 🥵','Quién trae facturas mañana?','Jony me retó por un pelo mal guardado 🙄','Les juro que el cliente me ofreció un asado 🍖','Necesito vacaciones urgente 😂','Se me acaba de cortar el cleaver… no, falsa alarma'],
+ 'El Pana':['Pana, qué día largo 😮‍💨','El cliente me dijo que soy el mejor técnico del barrio 😎','Me perdí en Villa Marina, todas las casas iguales jaja','¿Quién se llevó mi pinza? Aparezcan 😤','Fiera, este barrio es un laberinto','Hoy salgo temprano, mi rey, cúbranme 🙏','Me encontré a un perro en la cámara subterránea 🐶'],
+ 'Jony':['Recordatorio: la pérdida máxima por empalme es 0,05 dB. Mejor 0,02.','Nadie almuerza hasta terminar las órdenes.','El que deje gel en una bandeja la limpia toda de nuevo.','Revisé las órdenes de ayer: dos tenían el DNI mal. Atención.','Hoy quiero ver todas las potencias por acá.','Las valijas se guardan cerradas y trabadas. Las dos trabas.','El cleaver se limpia todos los días. Todos.']};
+/* reacciones a lo que pasa en la obra */
+const PEV={fusGood:[['Jony','0,{db} dB. Eso es trabajo.'],['Julián','Muy buena fusión, {tu}.'],['El Pana','¡Fusión de fiera, pana! 🔥'],['Ulises','Ese empalme está para enmarcar 🖼️']],
+ fusBad:[['Jony','{db} dB… eso se rehace.'],['Julián','La pérdida está alta, revisá el corte.'],['Ulises','Uh, se te fue un poquito esa 😬'],['El Pana','Tranqui pana, a todos nos pasa']],
+ err:[['Jony','Vi un error. Concentración.'],['Ulises','Jaja tranqui, respirá hondo 😅'],['El Pana','Fiera, calma, que sale'],['Julián','Despacio, {tu}. Sin apuro.']],
+ pw:[['Julián','Llegó la potencia: {pw} dBm. Gracias.'],['Jony','{pw} dBm. Aceptable.'],['El Pana','¡{pw} dBm! Le digo al cliente, mi rey 🙌']]};
+const PFREE={'Julián':['Dale, entendido.','Ok, gracias por avisar.','Perfecto, seguimos.','Bien, cualquier cosa me escribís.'],'Ulises':['Jaja dale 😄','¡Grande!','Joya, después hablamos','Ok genio'],'El Pana':['De una, mi rey','¡Fiera!','Dale pana 🙌','Joya joya'],'Jony':['Ok. Concentrate en el trabajo.','Menos chat y más empalme.','Anotado.','Bien. Volvé a trabajar.']};
+const phWho=n=>PHP.find(p=>p.n===n);
+const phGrp=()=>`Instalaciones · Cuadrilla ${CUAD}`;
+function phInit(on){PH={on,chats:{grp:{name:phGrp(),msgs:[],un:0}},open:null,ask:[],cam:null,tNext:Date.now()+rint(25,45)*1000,err0:err,fus0:fusN,pw0:null,ev:0};
+ PHP.forEach(p=>PH.chats[p.n]={name:p.n,msgs:[],un:0});PHB=0;
+ phAdd('grp',{who:'Julián',t:pT(srnd(['Buen día, cuadrilla {cuad}. Hoy arrancamos con {obra}. Cualquier cosa, por acá.','Buenas, gente. {tu} está con {obra}: si necesita algo, lo ayudamos.','Arrancamos, cuadrilla {cuad}. Prolijidad y potencias por el grupo, como siempre.']))},true);
+ phAdd('grp',{who:'Jony',t:pT(srnd(['Y nadie almuerza hasta terminar.','Quiero ver todas las potencias por acá. Todas.','Revisen dos veces cada empalme.']))},true);if(on)phShowB()}
+function phAdd(ch,m,quiet){const c=PH.chats[ch];m.ts=Date.now();c.msgs.push(m);if(c.msgs.length>80)c.msgs.shift();if(!m.me&&PH.open!==ch){c.un++;if(!quiet)phBadge()}if(PH.open===ch)phRender()}
+function phBadge(){const b=$('#phb');if(!b)return;const n=Object.values(PH.chats).reduce((a,c)=>a+c.un,0);b.querySelector('i').textContent=n||'';b.querySelector('i').hidden=!n}
+function phShowB(){let b=$('#phb');if(!b){b=document.createElement('button');b.id='phb';b.innerHTML='📱<i hidden></i>';b.setAttribute('aria-label','Celular');document.body.appendChild(b);b.onclick=()=>phToggle()}phBadge()}
+function phToggle(force){let el=$('#ph');if(!el){el=document.createElement('div');el.id='ph';el.hidden=true;document.body.appendChild(el)}const op=force!=null?force:el.hidden!==false;el.hidden=!op;if(op)phRender();else{PH.open=null;PH.cam=null}}
+/* el chat que te toca contestar: llega como notificación y queda en el celu */
+function phPing(ch,who,t){const p=phWho(who);if(!p)return;nq.push({who:p,t:(ch==='grp'?'👥 ':'🔒 ')+t,good:true,info:true,ph:ch,logged:true});if(!nOn)nNext()}
+function phAsk(){const who=srnd(Object.keys(PASK)),ch=Math.random()<.55?'grp':who,q=srnd(PASK[who]),t=pT(q[0]);
+ const a={who,ch,t,opts:q[1].map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t)}
+function phChatter(){const who=srnd(Object.keys(PCHAT)),t=pT(srnd(PCHAT[who]));phAdd('grp',{who,t});if(Math.random()<.5)phPing('grp',who,t)}
+function phEv(kind,vars={}){if(!PH||!PH.on||Date.now()-PH.ev<20000)return;PH.ev=Date.now();const [who,t0]=srnd(PEV[kind]);let t=pT(t0);Object.keys(vars).forEach(k=>t=t.replace('{'+k+'}',vars[k]));const ch=Math.random()<.7?'grp':who;phAdd(ch,{who,t});if(Math.random()<.4)phPing(ch,who,t)}
+/* contestar: tono bueno / normal / malo */
+function phReply(a,i,txt){if(a.done)return;a.done=true;const tone=['good','ok','bad'][i],late=Date.now()-a.t0>120000;phAdd(a.ch,{who:TECS[TEC].n,me:true,t:txt});
+ const d=tone==='good'?(late?5:10):tone==='ok'?(late?0:5):-20;PHB+=d;setTimeout(()=>{const rt=pT(srnd(PREP[a.who][tone]));phAdd(a.ch,{who:a.who,t:rt+(d?` <small class="phpts">${d>0?'+':''}${d} pts</small>`:'')});if(PH.open===a.ch)speak(rt,VPROF[a.who]||{})},rint(900,1800))}
+async function phFree(ch,q){phAdd(ch,{who:TECS[TEC].n,me:true,t:sesc(q)});const a=PH.ask.find(x=>!x.done&&x.ch===ch),who=a?a.who:ch==='grp'?srnd(PHP).n:ch;let rep=null,tone='ok';
+ if(IAON&&SAMP&&SAMPOK){PH.typing=ch;phRender();const hist=PH.chats[ch].msgs.slice(-8).map(m=>`${m.me?TECS[TEC].n:m.who}: ${String(m.t).replace(/<[^>]+>/g,'')}`).join('\n');
+  const P=`Juego argentino de técnicos de fibra óptica. Chat de WhatsApp ${ch==='grp'?`del grupo "${phGrp()}" (Julián, Ulises, El Pana, Jony y ${TECS[TEC].n})`:`privado entre ${who} y ${TECS[TEC].n}`}. ${TECS[TEC].n} está trabajando en ${pobra()}, paso actual: "${$('#ti').textContent}". Errores hasta ahora: ${err}.
+Respondé como ${who} (${PHPER[who]}), en rioplatense con voseo, estilo chat, máximo 25 palabras, podés usar algún emoji.
+Últimos mensajes:
+${hist}
+Evaluá también el tono del último mensaje de ${TECS[TEC].n}: "bien" si es amable o útil, "mal" si es grosero, "normal" si no.
+Devolvé SOLO JSON: {"reply": texto, "tono": "bien"|"normal"|"mal"}`;
+  try{const j=await SAMP.json(P,{modelTier:'quick',cache:false});if(j&&typeof j.reply==='string'){rep=j.reply.slice(0,240);tone=j.tono==='bien'?'good':j.tono==='mal'?'bad':'ok'}}catch(e){if(e&&(e.code==='not_granted'||e.code==='unavailable'))SAMPOK=false}PH.typing=null}
+ if(a){a.done=true;const d=tone==='good'?10:tone==='ok'?5:-20;PHB+=d;rep=(rep?sesc(rep):pT(srnd(PREP[who][tone])))+` <small class="phpts">${d>0?'+':''}${d} pts</small>`}else if(!rep)rep=pT(srnd(PFREE[who]));else rep=sesc(rep);
+ setTimeout(()=>phAdd(ch,{who,t:rep}),rep?500:1200)}
+/* reloj del celu: preguntas, mensajes sueltos, recordatorios y reacciones */
+setInterval(()=>{if(!PH||!PH.on)return;const b=$('#phb'),ot=$('#ot');if(b)b.hidden=!(playing||(ot&&!ot.hidden));if(!playing||SUPON)return;const now=Date.now();
+ if(now>PH.tNext&&PH.ask.filter(a=>!a.done).length<2){Math.random()<.65?phAsk():phChatter();PH.tNext=now+rint(55,110)*1000}
+ PH.ask.forEach(a=>{if(!a.done&&!a.fol&&now-a.t0>120000){a.fol=true;PHB-=10;const t=pT(srnd(PFOL[a.who]));phAdd(a.ch,{who:a.who,t:t+' <small class="phpts">−10 pts</small>'});phPing(a.ch,a.who,t)}});
+ if(err>PH.err0){PH.err0=err;if(Math.random()<.5)phEv('err')}if(fusN>PH.fus0){PH.fus0=fusN;phEv(last>.06?'fusBad':'fusGood',{db:last.toFixed(2).replace('0.','')})}
+ const pw=(MODE==='roseta'&&R.pw)||(MODE==='nap'&&NP&&NP.pw)||null;if(pw!=null&&pw!==PH.pw0){PH.pw0=pw;PH.ev=0;phEv('pw',{pw})}},1000);
+/* las notificaciones del equipo también quedan en el grupo; tocarlas abre el celu */
+{const f=nNext;nNext=function(){const m=nq[0];if(m&&PH&&PH.on&&!m.logged&&m.who&&phWho(m.who.n))phAdd('grp',{who:m.who.n,t:m.t},true);const ch=m&&m.ph;f();if(m&&PH&&PH.on){const el=$('#notif .nt');if(el)el.addEventListener('click',()=>{phToggle(true);phOpen(ch||'grp')})}}}
+{const f=startGame;startGame=function(){f();if(['botella','roseta','nap'].includes(MODE))phInit(true);else if(PH)PH.on=false}}
+function phOpen(ch){PH.open=ch;PH.cam=null;if(ch)PH.chats[ch].un=0;phBadge();phRender()}
+function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`;
+ if(PH.cam)return phCamR(el);
+ if(!PH.open){el.innerHTML=`<div class="phs"><div class="phh"><b>💬 Chats</b><button class="phx">✕</button></div><div class="phl">`
+  +[['grp',{n:phGrp(),c:'#0e7490',i:'👥'}],...PHP.map(p=>[p.n,p])].map(([k,p])=>{const c=PH.chats[k],l=c.msgs[c.msgs.length-1];return `<button class="phi" data-c="${k}">${av(p)}<span><b>${k==='grp'?phGrp():p.n}</b><small>${l?(l.me?'Vos: ':k==='grp'?l.who+': ':'')+String(l.t).replace(/<[^>]+>/g,'').slice(0,42):k==='grp'?'Julián, Ulises, El Pana, Jony y vos':'Chat privado'}</small></span>${c.un?`<i>${c.un}</i>`:''}</button>`}).join('')+`</div></div>`;
+  el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelectorAll('.phi').forEach(b=>b.onclick=()=>phOpen(b.dataset.c));return}
+ const ch=PH.open,c=PH.chats[ch],pend=PH.ask.filter(a=>!a.done&&a.ch===ch),ia=IAON&&SAMP&&SAMPOK;
+ el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>${ch==='grp'?'👥 '+phGrp():'🔒 '+ch}</b><button class="phx">✕</button></div>${ch==='grp'?`<p class="phm">Julián, Ulises, El Pana, Jony y vos (${me})</p>`:''}<div class="phc">`
+  +c.msgs.map(m=>m.img?`<div class="pmm me"><img src="${m.img}" alt="Foto de la orden de trabajo"><span>${m.t||''}</span></div>`:`<div class="pmm ${m.me?'me':''}">${!m.me&&ch==='grp'?`<b style="color:${(phWho(m.who)||{c:'#555'}).c}">${m.who}</b>`:''}${m.t}<em>${hhmm(m.ts)}</em></div>`).join('')+(PH.typing===ch?'<div class="pmm">escribiendo…</div>':'')+`</div>`
+  +(pend.length?`<div class="phq">${pend[0].opts.map((o,i)=>`<button data-i="${i}">${sesc(o)}</button>`).join('')}</div>`:'')
+  +`<form class="phf"><input placeholder="${ia?'Escribí un mensaje…':'Escribí un mensaje (sin IA: respuestas armadas)'}"><button>➤</button></form></div>`;
+ const cc=el.querySelector('.phc');cc.scrollTop=cc.scrollHeight;el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>phOpen(null);
+ el.querySelectorAll('.phq button').forEach(b=>b.onclick=()=>phReply(pend[0],+b.dataset.i,pend[0].opts[+b.dataset.i]));
+ const f=el.querySelector('.phf');f.onsubmit=e=>{e.preventDefault();const i=f.querySelector('input'),q=i.value.trim();if(!q)return;i.value='';phFree(ch,q)}}
+
+/* ---------- foto de la orden de trabajo con el celular ---------- */
+function otSnap(){const cv=document.createElement('canvas');cv.width=300;cv.height=420;const g=cv.getContext('2d'),f=OT.f,d=OT.c.d;g.fillStyle='#fdfdfc';g.fillRect(0,0,300,420);
+ g.fillStyle='#2c3a44';g.font='bold 15px sans-serif';g.textAlign='center';g.fillText('ORDEN DE TRABAJO',150,26);g.font='10px sans-serif';g.fillText(OT.num,150,42);g.fillRect(20,50,260,1);g.textAlign='left';
+ const L=[['Fecha',f.fecha],['Entrada / salida',(f.ent||'')+' / '+(f.sal||'')],['Técnicos',f.tec],['Titular',f.tit===true?'SI':f.tit===false?'NO':''],['Nombre',(f.nom||'')+' '+(f.ape||'')],['DNI',f.dni],['Teléfono',f.tel],['Complejo',f.comp],['UF / Lote',[f.uf,f.lote].filter(Boolean).join(' · ')],['Tareas',[f.ret&&'Retiro',f.ins&&'Instalación',f.vis&&'Visita'].filter(Boolean).join(', ')],['FO / Rosetas / PC',[f.fo,f.ros,f.pc].map(x=>x||'-').join(' / ')],['Equipo',[f.eq,f.mod].filter(Boolean).join(' ')],['MAC',f.mac]];
+ L.forEach(([k,v],i)=>{const y=70+i*22;g.fillStyle='#6b7780';g.font='10px sans-serif';g.fillText(k+':',20,y);g.fillStyle='#1d3a8a';g.font='italic 13px serif';g.fillText(String(v||'').slice(0,30),112,y);g.fillStyle='#c9ced2';g.fillRect(110,y+4,170,1)});
+ if(OT.sig){g.save();g.translate(20,350);g.scale(.5,.5);g.strokeStyle='#1d3a8a';g.lineWidth=3;g.beginPath();sigPts(d.nom+' '+d.ape).forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.stroke();g.restore()}
+ if(OT.tsigImg){const im=new Image();im.src=OT.tsigImg;try{g.drawImage(im,160,355,130,40)}catch(e){}}g.fillStyle='#55616b';g.fillRect(20,402,120,1);g.fillRect(160,402,120,1);g.font='9px sans-serif';g.fillText('Firma cliente',20,414);g.fillText('Firma técnico',160,414);return cv.toDataURL('image/jpeg',.85)}
+function otPhoto(){if(!PH)phInit(false);PH.cam={img:otSnap(),x:rint(-60,60),y:rint(-50,50),r:rint(-14,14),s:.6+rnd()*.7,shot:null};phToggle(true);phRender()}
+function phCamR(el){const c=PH.cam,ok=Math.abs(c.x)<14&&Math.abs(c.y)<14&&Math.abs(c.r)<2.5&&c.s>.88&&c.s<1.08;
+ if(c.shot){el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Foto</b><button class="phx">✕</button></div><div class="phshot"><img src="${c.shot.img}" style="transform:translate(${c.shot.x}px,${c.shot.y}px) rotate(${c.shot.r}deg) scale(${c.shot.s})" alt="Foto de la orden"></div>`
+  +`<p class="phm">${c.shot.ok?'✅ Se lee toda la orden.':'⚠️ La foto salió torcida o cortada: no se lee bien.'}</p><div class="phq"><button class="phsend">📤 Enviar al grupo</button><button class="phre">🔁 Sacar otra</button></div></div>`;
+  el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>{c.shot=null;phRender()};el.querySelector('.phre').onclick=()=>{Object.assign(c,{x:rint(-60,60),y:rint(-50,50),r:rint(-14,14),s:.6+rnd()*.7,shot:null});phRender()};
+  el.querySelector('.phsend').onclick=()=>{const s=c.shot;PH.cam=null;PH.open='grp';PH.chats.grp.un=0;phAdd('grp',{who:TECS[TEC].n,me:true,img:s.img,t:'Orden de trabajo ✅'});if(OT)OT.photo=s.ok;
+   setTimeout(()=>phAdd('grp',{who:s.ok?'Julián':'Jony',t:s.ok?srnd(['Recibida, {tu}. Prolija 👍','Perfecto, la cargo al sistema.','Joya, se lee todo. Gracias.']).replace('{tu}',TECS[TEC].n):srnd(['Esa foto no se lee. Mandá otra, derecha.','Está cortada. Así no sirve.','Torcida. Otra vez, por favor.'])}),1200);
+   const m=$('#ot .otmsg');if(m)m.innerHTML=s.ok?'📸 Foto enviada al grupo.':'📸 Foto enviada… pero salió mal: sacá otra.';phRender()};return}
+ el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Cámara</b><button class="phx">✕</button></div><div class="phvf"><img src="${c.img}" style="transform:translate(${c.x}px,${c.y}px) rotate(${c.r}deg) scale(${c.s})" alt="Orden de trabajo en el visor"><div class="phfr${ok?' ok':''}"></div></div>`
+  +`<p class="phm">${ok?'✅ Encuadrada: ¡sacá la foto!':'Arrastrá la hoja para centrarla, enderezala y acercala hasta que entre justo en el recuadro.'}</p>`
+  +`<div class="phcb"><button data-a="rl">⟲</button><button data-a="rr">⟳</button><button data-a="zo">−</button><button data-a="zi">+</button></div><button class="phsh" aria-label="Sacar foto"></button></div>`;
+ el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>{PH.cam=null;phRender()};
+ el.querySelectorAll('.phcb button').forEach(b=>b.onclick=()=>{const a=b.dataset.a;if(a==='rl')c.r-=1.5;if(a==='rr')c.r+=1.5;if(a==='zo')c.s=Math.max(.4,c.s-.05);if(a==='zi')c.s=Math.min(1.6,c.s+.05);phRender()});
+ const vf=el.querySelector('.phvf');let dn=null;vf.onpointerdown=e=>{dn=[e.clientX,e.clientY,c.x,c.y];try{vf.setPointerCapture(e.pointerId)}catch(_){}};
+ vf.onpointermove=e=>{if(!dn)return;c.x=dn[2]+e.clientX-dn[0];c.y=dn[3]+e.clientY-dn[1];const im=vf.querySelector('img');im.style.transform=`translate(${c.x}px,${c.y}px) rotate(${c.r}deg) scale(${c.s})`;const k=Math.abs(c.x)<14&&Math.abs(c.y)<14&&Math.abs(c.r)<2.5&&c.s>.88&&c.s<1.08;vf.querySelector('.phfr').classList.toggle('ok',k)};
+ vf.onpointerup=()=>{if(dn){dn=null;phRender()}};
+ el.querySelector('.phsh').onclick=()=>{const k=Math.abs(c.x)<14&&Math.abs(c.y)<14&&Math.abs(c.r)<2.5&&c.s>.88&&c.s<1.08;vf.classList.add('flash');try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),gg=AC.createGain();o.frequency.value=1800;gg.gain.setValueAtTime(.12,t);gg.gain.exponentialRampToValueAtTime(.001,t+.08);o.connect(gg).connect(AC.destination);o.start(t);o.stop(t+.09)}catch(_){}
+  setTimeout(()=>{c.shot={img:c.img,x:c.x,y:c.y,r:c.r,s:c.s,ok:k};phRender()},180)}}
+window.PHauto=()=>{if(PH&&PH.cam){Object.assign(PH.cam,{x:0,y:0,r:0,s:1});PH.cam.shot={img:PH.cam.img,x:0,y:0,r:0,s:1,ok:true};phRender();$('#ph .phsend').click()}};
+{const f=end;end=async function(...a){const r=await f(...a);const e=$('#end');if(e&&!e.hidden&&PH&&PH.on){PH.on=false;const b=$('#phb');if(b)b.hidden=true;phToggle(false);const p=$('#res .stars');if(p&&PHB)p.insertAdjacentHTML('beforebegin',`<p style="margin:4px 0">📱 Chat del equipo: <b>${PHB>0?'+':''}${PHB} pts</b></p>`)}return r}}
+
+/* más mensajes: preguntas según la obra y más charla de cada uno */
+const PASKM={
+ botella:[['Julián','¿Cuántos buffers llevás empalmados en la botella?',['Voy por la mitad, todo prolijo.','Algunos.','No los conté.']],
+  ['Jony','¿Estás guardando los pelos en orden de colores? Azul, naranja, verde, marrón…',['Sí, en orden y sin cruzarlos.','Creo que sí.','Los guardo como quiero.']],
+  ['El Pana','Pana, ¿la botella es la del poste o la de la cámara?',['La de la cámara, fiera, ya la estoy cerrando.','No me acuerdo.','Fijate vos.']],
+  ['Ulises','¿Te alcanzan las bandejas? Yo tengo una de sobra 😉',['¡Sí, alcanzan! Gracias igual.','Creo que sí.','No necesito tu ayuda.']],
+  ['Julián','Antes de cerrar la botella, verificá con la pinza todos los pelos.',['Sí, pelo por pelo con la pinza.','Ok.','Ya fue, cierro así.']],
+  ['Jony','No cierres la botella sin revisar el sellado. Ni una gota de agua.',['Sellado revisado, cero filtraciones.','Ok.','Es lo mismo.']],
+  ['Ulises','Che, ¿el cable de 48 es el negro o el gris? 🤔',['El negro, el de la troncal.','Ni idea.','Buscalo.']],
+  ['El Pana','¡Mi rey! Me dicen que hay un corte en la troncal, ¿es tu botella?',['No, la mía está toda con tráfico, pana.','Puede ser.','No sé ni me importa.']]],
+ roseta:[['Julián','¿Ya fusionaste el drop con el pigtail?',['Sí, quedó con muy poca pérdida.','Estoy en eso.','Dejame trabajar.']],
+  ['Jony','En la roseta, dos vueltas por el carrete. Ni una más ni una menos.',['Dos vueltas exactas, Jony.','Ok.','Las que me salgan.']],
+  ['El Pana','Pana, ¿el cliente ya tiene el router enchufado?',['Todavía no, primero mido y amuro la roseta.','Ahora lo veo.','Que lo enchufe él.']],
+  ['Ulises','¿Doble faz o tornillos? Yo soy team tornillos 🔩',['Depende de la pared, hoy voy con lo que corresponda.','Lo que haya.','Qué te importa.']],
+  ['Julián','Acordate de pedir el DNI del titular para la orden.',['Sí, le pido todos los datos y la firma.','Ok.','Si me acuerdo.']],
+  ['Jony','La foto de la orden tiene que verse derecha y entera. No quiero fotos torcidas.',['Derecha y completa, prometido.','Ok.','Como salga.']],
+  ['Ulises','¿El cliente te ofreció algo? Acá me dieron café 😎',['Jaja sí, un vaso de agua.','No.','No te importa.']],
+  ['El Pana','¿Qué router le pusiste, mi rey? Necesito el modelo para el sistema.',['Ya te paso el modelo y la MAC.','Después.','Buscalo vos.']]],
+ nap:[['Julián','¿Encontraste el pelo con potencia para la NAP?',['Sí, con la pinza lo ubiqué rápido.','Lo estoy buscando.','No me apures.']],
+  ['Jony','El conector de campo se arma con el largo exacto. Medí dos veces.',['Medido dos veces, quedó justo.','Ok.','Lo armo a ojo.']],
+  ['El Pana','Pana, ¿qué puerto le diste al cliente? Así lo anoto.',['Te paso el número de puerto apenas mida.','Ni idea.','Anotalo vos.']],
+  ['Ulises','¿Estás arriba de la escalera? Cuidate eh 🪜',['Sí, con el arnés puesto, tranqui.','Más o menos.','No me molestes.']],
+  ['Julián','¿El splitter conectorizado quedó bien fijado en la caja?',['Sí, firme y con los pigtails ordenados.','Creo que sí.','Quedó como quedó.']],
+  ['Jony','Si el puerto da más de −25 dBm, no lo entregues. Rehacelo.',['Si da mal, lo rehago. Prometido.','Ok.','Lo entrego igual.']],
+  ['Ulises','¿Viste que la NAP de la esquina tiene un nido de pájaros? 🐦',['Jaja sí, lo esquivé con cuidado.','No.','No me importa.']],
+  ['El Pana','¡Fiera! El cliente dice que ya ve la luz verde. ¿Terminaste?',['¡Casi, pana! Mido y listo.','Más o menos.','Que espere.']]]};
+PCHAT['Julián'].push('Gente, revisen que las fusionadoras estén cargadas para mañana.','Buen ritmo hoy. Si terminan temprano, pasamos por el depósito.','Les recuerdo: casco y arnés en los postes, siempre.','Mañana llegan cleavers nuevos para la cuadrilla {cuad}.','Ojo con los perros en Casas de Santa Ana 🐕','Si un cliente pregunta por la velocidad, que haga un test con cable.');
+PCHAT['Ulises'].push('Hoy merendamos con Jony si nos deja 😂','Encontré una moneda en una cámara subterránea, día de suerte 🍀','El mate de la camioneta está lavado, alguien que cebe uno nuevo','Ya sé por qué a Jony le dicen brócoli 🥦 jaja','Me olvidé el almuerzo en casa 😭','Alguien me presta un cargador?');
+PCHAT['El Pana'].push('Mi rey, el cliente me mandó 14 audios 🙃','Hoy me dijeron "el chico de internet" tres veces 😂','Pana, se me cortó el datos, si no contesto es eso','Fiera, en la próxima me toca la roseta a mí','Me tomé un café en la estación de servicio, ya vuelvo ☕','Nuevo récord: 3 instalaciones antes del mediodía 💪');
+PCHAT['Jony'].push('El que termine primero, que revise las bandejas de los demás.','Hoy nadie se toma más de 10 minutos de almuerzo.','Quiero las fotos de todas las órdenes antes de las 18.','Ulises, tu última fusión dio 0,07 dB. Lo vi.','Los paños con quitagel se cambian cada bandeja.','Si ven gel en una bandeja, avisen. Lo limpio yo. Bien.');
+PREP['Julián'].good.push('Gracias, {tu}. Confío en vos.','Muy bien. Eso es trabajar en equipo.');PREP['Ulises'].good.push('¡Sos lo más! 🙌','Te ganaste una medialuna 🥐');PREP['El Pana'].good.push('¡Mi rey, sos crack! 👑','Uff, sos un fenómeno, pana');PREP['Jony'].good.push('Bien. Igual lo voy a revisar.','Correcto. Seguí así, sin distraerte.');
+{const f=phAsk;phAsk=function(){const L=PASKM[MODE];if(!L||Math.random()<.45)return f();const [who,q,op]=srnd(L),ch=Math.random()<.55?'grp':who,t=pT(q),a={who,ch,t,opts:op.map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t)}}
 
 applyQ();loop();
 </script></body></html>
