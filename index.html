@@ -74,6 +74,7 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #ph .phfr{position:absolute;inset:8% 17%;border:2.5px dashed rgba(255,255,255,.7);border-radius:6px;pointer-events:none}#ph .phfr.ok{border-color:#22c55e;border-style:solid}#ph .phvf.flash::after{content:'';position:absolute;inset:0;background:#fff;animation:phfl .3s ease-out forwards}@keyframes phfl{to{opacity:0}}
 #ph .phcb{display:flex;gap:6px;justify-content:center;padding:6px;background:#1d2024}#ph .phcb button{background:#3a3f45;color:#fff;border:none;width:46px;padding:6px}#ph .phsh{align-self:center;width:58px;height:58px;border-radius:50%;background:#fff;border:5px solid #9aa3ad;margin:8px auto}
 #ph .phs:has(.phvf){background:#1d2024}#ph .phs:has(.phvf) .phm,#ph .phs:has(.phshot) .phm{background:#1d2024;color:#e6eaee}#ot .otph1{width:100%;margin:10px 0 0;font-size:14px}
+#ot button:not(.big){background:#fff;color:#1b2430;border-color:#9aa6b0}#ot button:not(.big):disabled{opacity:.6;color:#1b2430}#ot .otsig button,#ot .otnote button,#ot .otph1{font-weight:600}
 #mg{position:absolute;inset:0;z-index:8;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
 #mg .mgw{max-width:760px;margin:0 auto}#mg .mgbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
 #mg .mgbar button{padding:7px 10px;font-size:14px}#mg .mgt{font-variant-numeric:tabular-nums;font-weight:700}#mg .mgsub{margin:0 0 8px;font-size:14px;opacity:.85}#mg h3{margin:14px 0 6px;font-size:15px}
@@ -2664,7 +2665,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=61,NEWS=[
+const VER=62,NEWS=[
+ {v:62,t:'Más charla en el celu',items:[
+  ['🗨️','Muchos mensajes nuevos','Preguntas nuevas en la NAP (¿agarraste bien la entrada o la salida del splitter?), la botella, la roseta y el cableado, que ahora también tiene el celular con sus propias preguntas y reacciones cuando se dobla la cinta o das un tirón.'],
+  ['🗣️','Julián más canchero','Julián ahora te dice "wacho" y "loco".'],
+  ['🔥','Aura','Cuando hacés algo bien (una fusión bajita, buena potencia, la orden perfecta, la foto derecha o el cableado terminado) el grupo te tira "Aura 🔥".'],
+  ['👀','¿Sí o no?','Si en la orden de trabajo te toca una clienta, los chicos te mandan el "¿sí o no?". Contestá con respeto que suma.'],
+  ['📝','Orden más legible','Arreglados los botones de la orden (firma del cliente, foto y etiqueta del router) que con el tema oscuro se veían negros.']]},
  {v:61,t:'El celular del técnico',items:[
   ['📱','Celular mientras empalmás','En la botella, la roseta y la NAP tenés un celular abajo a la derecha, con el grupo de tu cuadrilla y los chats privados de Julián, Ulises, El Pana y Jony.'],
   ['👥','Grupo de la cuadrilla','El grupo se llama según la cuadrilla que elegiste. Ahí te escriben, preguntan cómo vas, piden la potencia y reaccionan a tus fusiones y errores. También quedan los mensajes del equipo que aparecen arriba.'],
@@ -3495,7 +3502,7 @@ setInterval(()=>{if(!PH||!PH.on)return;const b=$('#phb'),ot=$('#ot');if(b)b.hidd
  const pw=(MODE==='roseta'&&R.pw)||(MODE==='nap'&&NP&&NP.pw)||null;if(pw!=null&&pw!==PH.pw0){PH.pw0=pw;PH.ev=0;phEv('pw',{pw})}},1000);
 /* las notificaciones del equipo también quedan en el grupo; tocarlas abre el celu */
 {const f=nNext;nNext=function(){const m=nq[0];if(m&&PH&&PH.on&&!m.logged&&m.who&&phWho(m.who.n))phAdd('grp',{who:m.who.n,t:m.t},true);const ch=m&&m.ph;f();if(m&&PH&&PH.on){const el=$('#notif .nt');if(el)el.addEventListener('click',()=>{phToggle(true);phOpen(ch||'grp')})}}}
-{const f=startGame;startGame=function(){f();if(['botella','roseta','nap'].includes(MODE))phInit(true);else if(PH)PH.on=false}}
+{const f=startGame;startGame=function(){f();if(['botella','roseta','nap'].includes(MODE))phInit(true);else if(PH){PH.on=false;const b=$('#phb');if(b)b.hidden=true}}}
 function phOpen(ch){PH.open=ch;PH.cam=null;if(ch)PH.chats[ch].un=0;phBadge();phRender()}
 function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`;
  if(PH.cam)return phCamR(el);
@@ -3523,7 +3530,7 @@ function phCamR(el){const c=PH.cam,ok=Math.abs(c.x)<14&&Math.abs(c.y)<14&&Math.a
  if(c.shot){el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Foto</b><button class="phx">✕</button></div><div class="phshot"><img src="${c.shot.img}" style="transform:translate(${c.shot.x}px,${c.shot.y}px) rotate(${c.shot.r}deg) scale(${c.shot.s})" alt="Foto de la orden"></div>`
   +`<p class="phm">${c.shot.ok?'✅ Se lee toda la orden.':'⚠️ La foto salió torcida o cortada: no se lee bien.'}</p><div class="phq"><button class="phsend">📤 Enviar al grupo</button><button class="phre">🔁 Sacar otra</button></div></div>`;
   el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>{c.shot=null;phRender()};el.querySelector('.phre').onclick=()=>{Object.assign(c,{x:rint(-60,60),y:rint(-50,50),r:rint(-14,14),s:.6+rnd()*.7,shot:null});phRender()};
-  el.querySelector('.phsend').onclick=()=>{const s=c.shot;PH.cam=null;PH.open='grp';PH.chats.grp.un=0;phAdd('grp',{who:TECS[TEC].n,me:true,img:s.img,t:'Orden de trabajo ✅'});if(OT)OT.photo=s.ok;
+  el.querySelector('.phsend').onclick=()=>{const s=c.shot;PH.cam=null;PH.open='grp';PH.chats.grp.un=0;phAdd('grp',{who:TECS[TEC].n,me:true,img:s.img,t:'Orden de trabajo ✅'});if(OT)OT.photo=s.ok;if(s.ok)setTimeout(()=>aura(true),2600);
    setTimeout(()=>phAdd('grp',{who:s.ok?'Julián':'Jony',t:s.ok?srnd(['Recibida, {tu}. Prolija 👍','Perfecto, la cargo al sistema.','Joya, se lee todo. Gracias.']).replace('{tu}',TECS[TEC].n):srnd(['Esa foto no se lee. Mandá otra, derecha.','Está cortada. Así no sirve.','Torcida. Otra vez, por favor.'])}),1200);
    const m=$('#ot .otmsg');if(m)m.innerHTML=s.ok?'📸 Foto enviada al grupo.':'📸 Foto enviada… pero salió mal: sacá otra.';phRender()};return}
  el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Cámara</b><button class="phx">✕</button></div><div class="phvf"><img src="${c.img}" style="transform:translate(${c.x}px,${c.y}px) rotate(${c.r}deg) scale(${c.s})" alt="Orden de trabajo en el visor"><div class="phfr${ok?' ok':''}"></div></div>`
@@ -3571,6 +3578,70 @@ PCHAT['El Pana'].push('Mi rey, el cliente me mandó 14 audios 🙃','Hoy me dije
 PCHAT['Jony'].push('El que termine primero, que revise las bandejas de los demás.','Hoy nadie se toma más de 10 minutos de almuerzo.','Quiero las fotos de todas las órdenes antes de las 18.','Ulises, tu última fusión dio 0,07 dB. Lo vi.','Los paños con quitagel se cambian cada bandeja.','Si ven gel en una bandeja, avisen. Lo limpio yo. Bien.');
 PREP['Julián'].good.push('Gracias, {tu}. Confío en vos.','Muy bien. Eso es trabajar en equipo.');PREP['Ulises'].good.push('¡Sos lo más! 🙌','Te ganaste una medialuna 🥐');PREP['El Pana'].good.push('¡Mi rey, sos crack! 👑','Uff, sos un fenómeno, pana');PREP['Jony'].good.push('Bien. Igual lo voy a revisar.','Correcto. Seguí así, sin distraerte.');
 {const f=phAsk;phAsk=function(){const L=PASKM[MODE];if(!L||Math.random()<.45)return f();const [who,q,op]=srnd(L),ch=Math.random()<.55?'grp':who,t=pT(q),a={who,ch,t,opts:op.map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t)}}
+
+/*C62*/
+/* ===== V62: más mensajes (NAP, cableado y todo), Julián con "wacho" y "loco", "aura 🔥" cuando hacés algo bien,
+   la pregunta del "¿sí o no?" en la orden y el celular también en el cableado ===== */
+Object.assign(PASKM,{nap:[...PASKM.nap,
+  ['El Pana','Che, ¿agarraste bien la entrada del splitter o la salida del splitter? 👀',['La entrada, pana: el pelo con potencia va a la entrada.','Creo que la salida…','Qué sé yo.']],
+  ['El Pana','Pana, ¿el pelo que fusionaste es el que te pasé o uno cualquiera?',['El que me pasaste, lo verifiqué con la pinza.','Me parece que sí.','Uno cualquiera, total…']],
+  ['Julián','Wacho, ¿probaste el puerto con el power meter antes de cerrar?',['Sí, lo medí con el adaptador de fibra desnuda.','Todavía no.','No hace falta.']],
+  ['Jony','¿El conector de campo quedó con la férula limpia? Una huella y se va la potencia.',['Limpia y sin tocarla con los dedos.','Creo que sí.','No miré.']],
+  ['Ulises','¿Cerraste bien la tapa de la NAP? La última se llenó de agua 💧',['Cerrada y trabada, cero agua.','Ahora la cierro.','Que se moje.']],
+  ['Julián','Loco, ¿cuántos puertos libres le quedan al splitter?',['Te los cuento y te paso el número.','Algunos.','Contalos vos.']],
+  ['El Pana','Mi rey, ¿el drop del cliente es de 1 pelo o de 2?',['De 1 pelo, pana.','Ni idea.','Qué te importa.']],
+  ['Jony','No dobles el pigtail del splitter. Radio mínimo, siempre.',['Lo acomodé con curva suave.','Ok.','Lo doblo como quiero.']],
+  ['Ulises','¿Te acordás de qué color es el pelo 5? Siempre me lo olvido 😅',['Gris: azul, naranja, verde, marrón, gris…','Creo que gris.','Buscalo.']],
+  ['El Pana','¡Pana! ¿Le diste potencia al puerto 3 o al 4? El cliente está preguntando',['Al que me indicaron, ya te confirmo el número.','No sé.','Que espere.']]],
+ botella:[...PASKM.botella,
+  ['El Pana','Pana, ¿los pelos del buffer azul los empalmaste uno a uno o te salteaste alguno?',['Uno a uno y en orden, pana.','Creo que todos.','Me salteé uno, ¿y?']],
+  ['Julián','Wacho, ¿cómo quedó el guardado en la bandeja?',['Prolijo, sin apretar contra la guía.','Más o menos.','Quedó como quedó.']],
+  ['Jony','¿Usaste quitagel en todos los buffers? En todos.',['En todos, con paño limpio.','En casi todos.','Para qué.']],
+  ['Ulises','¿Cuántos termos llevás gastados? Yo voy 30 😂',['Uno por empalme, como corresponde.','Ni idea.','Muchos.']],
+  ['Julián','Loco, ¿el cable entró bien amarrado a la botella?',['Sí, con el elemento central bien ajustado.','Creo que sí.','Ni miré.']]],
+ roseta:[...PASKM.roseta,
+  ['El Pana','Pana, ¿enganchaste el drop en el diente de la roseta?',['Sí, firme, no se sale.','Creo que sí.','Para qué.']],
+  ['Julián','Wacho, ¿la roseta queda a la altura del router o lejos?',['Cerca del router, el patchcord llega justo.','Más o menos.','Lejos, que se arregle.']],
+  ['Jony','¿Le sacaste el acrilato al pigtail con el agujero 2? No con los dientes.',['Con el agujero 2 de la peladora, obvio.','Creo que sí.','Con los dientes, más rápido.']],
+  ['Ulises','¿El cliente tiene mascota? La última vez un gato se comió un patchcord 🐈',['Jaja no, todo tranquilo por acá.','No vi.','Qué importa.']],
+  ['Julián','Loco, sacale foto a la orden y mandala al grupo, porfa.',['Dale, apenas firme el cliente la mando.','Ok.','No mando nada.']]],
+ cableado:[['El Pana','Pana, ¿pasaste el pasacables por el caño de la izquierda o el de la derecha? 👀',['El del lote correcto: izquierda el par, derecha el impar.','No me fijé…','El que estaba más cerca.']],
+  ['Julián','Wacho, ¿cuántos metros de drop cortaste?',['Lo justo: recorrido más 4 metros de reserva.','Más o menos lo que calculé.','Ni idea, a ojo.']],
+  ['Jony','No le des tirones al drop. Parejo, despacio. Parejo.',['Despacio y parejo, Jony.','Ok.','Lo tiro como quiero.']],
+  ['Ulises','¿Está muy embarrada la cámara? Ponete los guantes 🧤',['Un poco, ya me puse los guantes.','Más o menos.','No importa.']],
+  ['Julián','Loco, ¿el caño es corrugado o de riego?',['Te digo: es el que dice la orden, ya lo vi.','No me fijé.','Qué importa.']],
+  ['El Pana','Mi rey, ¿salió el pasacables detrás del pilar o se trabó?',['Salió justo detrás del pilar, pana.','Todavía no.','Se trabó, ¿y?']],
+  ['Jony','¿Ataste bien el drop a la punta? Con cinta, cuatro vueltas mínimo.',['Cuatro vueltas de cinta, bien firme.','Creo que sí.','Con un nudo alcanza.']],
+  ['Ulises','¿La casa tiene corrugado con guía? Si no, suerte 😂',['Ya me fijo en las tapas ciegas.','Ni idea.','Que tenga lo que tenga.']],
+  ['Julián','Wacho, girá la cinta en las curvas, no empujes trabado que se dobla.',['Sí, giro el mango en cada curva.','Ok.','Empujo nomás.']],
+  ['El Pana','Pana, ¿me prestás el pasacables después? El mío está doblado 😩',['Dale fiera, cuando termine te lo llevo.','Si me sobra tiempo.','Comprate uno.']],
+  ['Jony','¿Mediste con la cinta métrica o a pasos? A pasos no me sirve.',['Con la cinta métrica, exacto.','A pasos…','Al ojo.']],
+  ['Ulises','¿Abriste las tapas ciegas en orden? Yo una vez abrí la del vecino 😂',['En orden, desde la primera hasta la roseta.','Más o menos.','La que encontré.']]]});
+PCHAT['Julián'].push('Wacho, buen laburo hoy.','Loco, no se olviden de cargar las fusionadoras.','Wacho, el que termina primero me avisa.','Loco, revisen bien las órdenes antes de mandarlas.','Gente, wacho, mañana hay reunión a las 8.');
+PREP['Julián'].good.push('Wacho, sos un fenómeno.','Loco, así se labura 👍','Bien ahí, wacho.');PREP['Julián'].ok.push('Bueno, loco, avisame.','Ok, wacho.');PREP['Julián'].bad.push('Wacho, bajá un cambio.','Loco, así no se contesta.');
+PFOL['Julián'].push('Wacho, ¿me leíste?','Loco, contestá, porfa.');PFREE['Julián'].push('Dale, wacho.','Joya, loco.');
+PEV.fusGood.push(['El Pana','Aura 🔥'],['Ulises','+1000 de aura 🔥'],['Julián','Wacho, qué empalme. Aura 🔥']);
+PEV.err.push(['Julián','Wacho, tranqui, que sale.'],['El Pana','Pana, respirá, que no pasa nada']);
+PEV.kink=[['Jony','Se te dobló la cinta del pasacables. Girá en las curvas, no empujes.'],['Julián','Wacho, girá el mango en la curva, no la fuerces.'],['El Pana','Uh, pana, se dobló la cinta 😬'],['Ulises','Ese pasacables quedó como un tirabuzón 😂']];
+PEV.slip=[['Jony','Tirón. Se soltó la atadura. Parejo, te dije.'],['Julián','Loco, despacio, que se suelta.'],['El Pana','¡Fiera, sin tirones! 😩'],['Ulises','Uhh, se soltó, volvé a atar 😅']];
+/* aura 🔥 cuando hacés algo bien */
+const AURA=[['El Pana','Aura 🔥'],['Ulises','+1000 de aura 🔥'],['Julián','Wacho, aura pura 🔥'],['El Pana','Mi rey, eso es aura 🔥🔥'],['Ulises','AURA 🔥'],['Jony','…Bien. Aura 🔥. Pero no te relajes.'],['Julián','Loco, qué aura 🔥'],['El Pana','Aura infinita, pana 🔥'],['Ulises','Cuánta aura, por favor 🔥'],['Julián','Aura, wacho 🔥']];
+let AUT=0;function aura(force){if(!PH||(!PH.on&&!force))return;const n=Date.now();if(!force&&n-AUT<25000)return;AUT=n;const [who,t]=srnd(AURA);phAdd('grp',{who,t});phPing('grp',who,t)}
+/* Julián dice "wacho" o "loco" de vez en cuando */
+{const f=phAdd;phAdd=function(ch,m,q){if(m&&!m.me&&m.who==='Julián'&&typeof m.t==='string'&&!/wacho|loco/i.test(m.t)&&!/<img/.test(m.t)&&Math.random()<.35){const p=srnd(['Wacho, ','Loco, ']);m.t=p+m.t.charAt(0).toLowerCase()+m.t.slice(1)}return f(ch,m,q)}}
+/* el celu también en el cableado */
+{const f=startGame;startGame=function(){f();if(MODE==='cableado'){phInit(true);PH.k0=CB.kinks||0;PH.s0=CB.slips||0}}}
+setInterval(()=>{if(!PH||!PH.on||!playing||SUPON)return;
+ if(PH.fa==null)PH.fa=fusN;if(fusN>PH.fa){PH.fa=fusN;if(last<=.03&&Math.random()<.6)aura()}
+ const pw=(MODE==='roseta'&&R.pw)||(MODE==='nap'&&NP&&NP.pw)||null;if(pw!=null&&pw!==PH.pa){PH.pa=pw;if(pw>=-20)setTimeout(()=>aura(),2500)}
+ if(MODE==='cableado'&&CB){if((CB.kinks||0)>(PH.k0||0)){PH.k0=CB.kinks;PH.ev=0;phEv('kink')}if((CB.slips||0)>(PH.s0||0)){PH.s0=CB.slips;PH.ev=0;phEv('slip')}}},1200);
+/* la orden: si la clienta es mujer, el "¿sí o no?" del grupo; y aura si sale perfecta o la foto sale bien */
+{const f=otStart;otStart=function(done){f(done);if(!PH||!OT)return;const d=OT.c.d;if(!FEMN.has(d.nom))return;setTimeout(()=>{if(!OT||OT.fin)return;const who=srnd(['El Pana','Ulises']),ch=Math.random()<.5?'grp':who,
+  t=srnd(['Pana… ¿la clienta, sí o no? 👀','Che, ¿sí o no? 👀','¿Y? ¿Sí o no? 😏','Mi rey, la clienta… ¿sí o no? 👀','¿Sí o no, fiera? 👀']),
+  a={who,ch,t,opts:['Jaja respeto, pana: es una clienta 😂 Estoy laburando.','No sé, estoy con la orden.','Dejá de joder.'],t0:Date.now(),fol:true,done:false};
+  PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t);if(who==='El Pana'&&Math.random()<.6)setTimeout(()=>phAdd('grp',{who:'Jony',t:'Concéntrense en la orden. Nada de "sí o no".'}),3500)},rint(6000,12000))}}
+{const f=otCheck;otCheck=function(){f();if(R.ot&&R.ot.ok===R.ot.tot)setTimeout(()=>aura(true),1200)}}
+{const f=cblDone;cblDone=function(){f();aura()}}
 
 applyQ();loop();
 </script></body></html>
