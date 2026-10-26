@@ -2665,12 +2665,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=62,NEWS=[
+const VER=63,NEWS=[
+ {v:63,t:'El ¿sí o no? es de Julián',items:[['👀','Solo Julián','Ahora el "¿sí o no?" de la orden de trabajo te lo manda solo Julián, por el grupo o por privado.']]},
  {v:62,t:'Más charla en el celu',items:[
   ['🗨️','Muchos mensajes nuevos','Preguntas nuevas en la NAP (¿agarraste bien la entrada o la salida del splitter?), la botella, la roseta y el cableado, que ahora también tiene el celular con sus propias preguntas y reacciones cuando se dobla la cinta o das un tirón.'],
   ['🗣️','Julián más canchero','Julián ahora te dice "wacho" y "loco".'],
   ['🔥','Aura','Cuando hacés algo bien (una fusión bajita, buena potencia, la orden perfecta, la foto derecha o el cableado terminado) el grupo te tira "Aura 🔥".'],
-  ['👀','¿Sí o no?','Si en la orden de trabajo te toca una clienta, los chicos te mandan el "¿sí o no?". Contestá con respeto que suma.'],
+  ['👀','¿Sí o no?','Si en la orden de trabajo te toca una clienta, Julián te manda el "¿sí o no?". Contestá con respeto que suma.'],
   ['📝','Orden más legible','Arreglados los botones de la orden (firma del cliente, foto y etiqueta del router) que con el tema oscuro se veían negros.']]},
  {v:61,t:'El celular del técnico',items:[
   ['📱','Celular mientras empalmás','En la botella, la roseta y la NAP tenés un celular abajo a la derecha, con el grupo de tu cuadrilla y los chats privados de Julián, Ulises, El Pana y Jony.'],
@@ -3636,10 +3637,10 @@ setInterval(()=>{if(!PH||!PH.on||!playing||SUPON)return;
  const pw=(MODE==='roseta'&&R.pw)||(MODE==='nap'&&NP&&NP.pw)||null;if(pw!=null&&pw!==PH.pa){PH.pa=pw;if(pw>=-20)setTimeout(()=>aura(),2500)}
  if(MODE==='cableado'&&CB){if((CB.kinks||0)>(PH.k0||0)){PH.k0=CB.kinks;PH.ev=0;phEv('kink')}if((CB.slips||0)>(PH.s0||0)){PH.s0=CB.slips;PH.ev=0;phEv('slip')}}},1200);
 /* la orden: si la clienta es mujer, el "¿sí o no?" del grupo; y aura si sale perfecta o la foto sale bien */
-{const f=otStart;otStart=function(done){f(done);if(!PH||!OT)return;const d=OT.c.d;if(!FEMN.has(d.nom))return;setTimeout(()=>{if(!OT||OT.fin)return;const who=srnd(['El Pana','Ulises']),ch=Math.random()<.5?'grp':who,
-  t=srnd(['Pana… ¿la clienta, sí o no? 👀','Che, ¿sí o no? 👀','¿Y? ¿Sí o no? 😏','Mi rey, la clienta… ¿sí o no? 👀','¿Sí o no, fiera? 👀']),
-  a={who,ch,t,opts:['Jaja respeto, pana: es una clienta 😂 Estoy laburando.','No sé, estoy con la orden.','Dejá de joder.'],t0:Date.now(),fol:true,done:false};
-  PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t);if(who==='El Pana'&&Math.random()<.6)setTimeout(()=>phAdd('grp',{who:'Jony',t:'Concéntrense en la orden. Nada de "sí o no".'}),3500)},rint(6000,12000))}}
+{const f=otStart;otStart=function(done){f(done);if(!PH||!OT)return;const d=OT.c.d;if(!FEMN.has(d.nom))return;setTimeout(()=>{if(!OT||OT.fin)return;const who='Julián',ch=Math.random()<.5?'grp':who,
+  t=srnd(['Wacho… ¿la clienta, sí o no? 👀','Loco, ¿sí o no? 👀','¿Y? ¿Sí o no? 😏','Wacho, la clienta… ¿sí o no? 👀','¿Sí o no, loco? 👀']),
+  a={who,ch,t,opts:['Jaja respeto, Julián: es una clienta 😂 Estoy laburando.','No sé, estoy con la orden.','Dejá de joder.'],t0:Date.now(),fol:true,done:false};
+  PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t);if(ch==='grp'&&Math.random()<.6)setTimeout(()=>phAdd('grp',{who:'Jony',t:'Concéntrense en la orden. Nada de "sí o no".'}),3500)},rint(6000,12000))}}
 {const f=otCheck;otCheck=function(){f();if(R.ot&&R.ot.ok===R.ot.tot)setTimeout(()=>aura(true),1200)}}
 {const f=cblDone;cblDone=function(){f();aura()}}
 
