@@ -65,7 +65,7 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #ph .phs{display:flex;flex-direction:column;height:100%;background:#ece5dd;border-radius:20px;overflow:hidden;color:#16222c}#ph .phh{display:flex;align-items:center;gap:8px;background:#0e7490;color:#fff;padding:9px 10px}#ph .phh b{flex:1;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #ph .phh button{background:transparent;border:none;color:#fff;font-size:18px;padding:2px 8px;box-shadow:none}#ph .phm{margin:0;padding:5px 10px;font-size:12px;color:#55616b;background:#f6f2ec}
 #ph .phl{overflow:auto;flex:1;background:#fff}#ph .phi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid #e6e9ec;border-radius:0;padding:10px;box-shadow:none;color:#16222c}#ph .phi span{flex:1;min-width:0;display:flex;flex-direction:column}#ph .phi small{color:#6b7780;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}#ph .phi i{background:#22c55e;color:#fff;border-radius:10px;min-width:20px;text-align:center;font:700 12px/20px sans-serif;font-style:normal}
-#ph .pha{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none}
+#ph .phi .pha{width:42px;height:42px;min-width:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;flex:none;overflow:hidden;aspect-ratio:1}#ph .phi .pha svg{width:100%;height:100%;display:block}
 #ph .phc{flex:1;overflow:auto;padding:10px;display:flex;flex-direction:column;gap:6px}#ph .pmm{align-self:flex-start;max-width:82%;background:#fff;border-radius:10px;padding:6px 9px 4px;font-size:14px;line-height:1.3;box-shadow:0 1px 1px rgba(0,0,0,.08)}#ph .pmm.me{align-self:flex-end;background:#d9fdd3}
 #ph .pmm b{display:block;font-size:12.5px}#ph .pmm em{display:block;text-align:right;font-style:normal;font-size:10.5px;color:#7b8790}#ph .pmm img{width:150px;border-radius:6px;display:block}#ph .phpts{font-weight:700;color:#0e7490}
 #ph .phq{display:flex;flex-wrap:wrap;gap:5px;padding:6px 8px;background:#f6f2ec}#ph .phq button{font-size:12.5px;padding:6px 9px;background:#fff;color:#0e5566;border:1.5px solid #8cc7d3;border-radius:14px}
@@ -2665,7 +2665,8 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=63,NEWS=[
+const VER=64,NEWS=[
+ {v:64,t:'Arreglos de pantalla',items:[['📐','Sin imagen estirada','Al abrir y cerrar el celular (o el teclado del teléfono) el juego ya no queda estirado: se reacomoda solo.'],['🧑','Fotos de perfil del celu','En los chats ahora se ven las caras de Julián, Ulises, El Pana y Jony, redondas y sin deformarse.']]},
  {v:63,t:'El ¿sí o no? es de Julián',items:[['👀','Solo Julián','Ahora el "¿sí o no?" de la orden de trabajo te lo manda solo Julián, por el grupo o por privado.']]},
  {v:62,t:'Más charla en el celu',items:[
   ['🗨️','Muchos mensajes nuevos','Preguntas nuevas en la NAP (¿agarraste bien la entrada o la salida del splitter?), la botella, la roseta y el cableado, que ahora también tiene el celular con sus propias preguntas y reacciones cuando se dobla la cinta o das un tirón.'],
@@ -3505,7 +3506,7 @@ setInterval(()=>{if(!PH||!PH.on)return;const b=$('#phb'),ot=$('#ot');if(b)b.hidd
 {const f=nNext;nNext=function(){const m=nq[0];if(m&&PH&&PH.on&&!m.logged&&m.who&&phWho(m.who.n))phAdd('grp',{who:m.who.n,t:m.t},true);const ch=m&&m.ph;f();if(m&&PH&&PH.on){const el=$('#notif .nt');if(el)el.addEventListener('click',()=>{phToggle(true);phOpen(ch||'grp')})}}}
 {const f=startGame;startGame=function(){f();if(['botella','roseta','nap'].includes(MODE))phInit(true);else if(PH){PH.on=false;const b=$('#phb');if(b)b.hidden=true}}}
 function phOpen(ch){PH.open=ch;PH.cam=null;if(ch)PH.chats[ch].un=0;phBadge();phRender()}
-function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`;
+function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>{const o=SOPS.find(x=>x.n===p.n);return o?`<span class="pha pimg" style="background:${o.bg}">${avatar(o)}</span>`:`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`};
  if(PH.cam)return phCamR(el);
  if(!PH.open){el.innerHTML=`<div class="phs"><div class="phh"><b>💬 Chats</b><button class="phx">✕</button></div><div class="phl">`
   +[['grp',{n:phGrp(),c:'#0e7490',i:'👥'}],...PHP.map(p=>[p.n,p])].map(([k,p])=>{const c=PH.chats[k],l=c.msgs[c.msgs.length-1];return `<button class="phi" data-c="${k}">${av(p)}<span><b>${k==='grp'?phGrp():p.n}</b><small>${l?(l.me?'Vos: ':k==='grp'?l.who+': ':'')+String(l.t).replace(/<[^>]+>/g,'').slice(0,42):k==='grp'?'Julián, Ulises, El Pana, Jony y vos':'Chat privado'}</small></span>${c.un?`<i>${c.un}</i>`:''}</button>`}).join('')+`</div></div>`;
@@ -3644,5 +3645,10 @@ setInterval(()=>{if(!PH||!PH.on||!playing||SUPON)return;
 {const f=otCheck;otCheck=function(){f();if(R.ot&&R.ot.ok===R.ot.tot)setTimeout(()=>aura(true),1200)}}
 {const f=cblDone;cblDone=function(){f();aura()}}
 
+/*C64*/
+/* V64: si cambia el tamaño de la pantalla (teclado del teléfono, celu del juego) se reacomoda la cámara para que no quede estirado */
+{let lw=0,lh=0,la=0;setInterval(()=>{const w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;const a=w/h;if(w!==lw||h!==lh||Math.abs(cam.aspect-a)>.01){lw=w;lh=h;size()}},250)}
+document.addEventListener('focusout',()=>[120,450,900,1500].forEach(t=>setTimeout(size,t)));
+{const f=phToggle;phToggle=function(x){f(x);[60,400,900].forEach(t=>setTimeout(size,t))}}
 applyQ();loop();
 </script></body></html>
