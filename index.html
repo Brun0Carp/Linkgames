@@ -74,6 +74,7 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #ph .phfr{position:absolute;inset:8% 17%;border:2.5px dashed rgba(255,255,255,.7);border-radius:6px;pointer-events:none}#ph .phfr.ok{border-color:#22c55e;border-style:solid}#ph .phvf.flash::after{content:'';position:absolute;inset:0;background:#fff;animation:phfl .3s ease-out forwards}@keyframes phfl{to{opacity:0}}
 #ph .phcb{display:flex;gap:6px;justify-content:center;padding:6px;background:#1d2024}#ph .phcb button{background:#3a3f45;color:#fff;border:none;width:46px;padding:6px}#ph .phsh{align-self:center;width:58px;height:58px;border-radius:50%;background:#fff;border:5px solid #9aa3ad;margin:8px auto}
 #ph .phs:has(.phvf){background:#1d2024}#ph .phs:has(.phvf) .phm,#ph .phs:has(.phshot) .phm{background:#1d2024;color:#e6eaee}#ot .otph1{width:100%;margin:10px 0 0;font-size:14px}
+#ph .pchips{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}#ph .pchip{padding:2px 8px;border-radius:10px;background:#5b2a2a;color:#ffd6d6;font-size:11.5px}#ph .pchip.ok{background:#1f5130;color:#c8f7d5}#mg .fpel.on{outline:3px solid var(--ac);outline-offset:1px}#mg .mgpz svg{max-width:340px}
 #ot button:not(.big){background:#fff;color:#1b2430;border-color:#9aa6b0}#ot button:not(.big):disabled{opacity:.6;color:#1b2430}#ot .otsig button,#ot .otnote button,#ot .otph1{font-weight:600}
 #mg{position:absolute;inset:0;z-index:8;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
 #mg .mgw{max-width:760px;margin:0 auto}#mg .mgbar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--card);color:var(--fg);border:1.5px solid var(--line);border-radius:14px;padding:8px 10px;margin-bottom:10px}
@@ -303,7 +304,8 @@ button:active:not(:disabled){transform:scale(.96)}
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
- <div id="napw" hidden><h2>Cable que entra a la NAP</h2><div class="qrow" id="nsel" role="group" aria-label="Cable de la NAP"><button data-c="6">6 pelos</button><button data-c="12">12 pelos</button><button data-c="24">24 pelos</button></div><p class="note" id="nnote" style="margin-top:6px"></p></div>
+ <div id="cblw" hidden><h2>Dónde cableás</h2><div class="qrow" id="cbls" role="group" aria-label="Lugar del cableado"><button data-l="sa">Barrio Santa Ana</button><button data-l="delta">DeltaCenter</button></div><p class="note" id="cbln" style="margin-top:6px"></p></div>
+<div id="napw" hidden><h2>Cable que entra a la NAP</h2><div class="qrow" id="nsel" role="group" aria-label="Cable de la NAP"><button data-c="6">6 pelos</button><button data-c="12">12 pelos</button><button data-c="24">24 pelos</button></div><p class="note" id="nnote" style="margin-top:6px"></p></div>
  <div id="splw"><h2>Splitter PLC (juego libre)</h2><div class="qrow" id="ssel" role="group" aria-label="Splitter PLC"></div><p class="note" id="snote" style="margin-top:6px"></p></div>
  <div id="dropw" hidden><h2>Drop (cantidad de pelos)</h2><div class="qrow" id="dsel" role="group" aria-label="Pelos del drop"><button data-d="1">1</button><button data-d="2">2</button><button data-d="4">4</button></div></div>
  <h2>Herramientas para empalmar</h2><div class="qrow" id="hsel" role="group" aria-label="Herramientas"><button data-v="1">🧊 3D: fusionadora y cleaver</button><button data-v="0">✋ 2D rápido</button></div><p class="note" style="margin-top:6px">En 3D usás la peladora, el cleaver, la fusionadora y su horno como los reales.</p>
@@ -2018,7 +2020,7 @@ function supSaveRow(){const f=SU.form,fv=k=>String(f[k]||'').trim(),miss=['nom',
  SU.rows.push(row);supSave();SU.c.saved=id;SU.selRow=id;SU.msg=null;SU.tab='chat';supPc();if(SU.state==='after')supOpts([])}
 function supPlanH(){const R=SU.rows.slice().reverse();if(!R.length)return '<p class="sempty">La planilla está vacía. Cada orden que guardes queda acá, también para los próximos turnos.</p>';
  return `<div class="stbl"><table><thead><tr><th>#</th><th>Fecha</th><th>Nombre</th><th>Apellido</th><th>Teléfono</th><th>Barrio</th><th>Calle</th><th>Altura</th><th>Mz/Torre</th><th>Lote/Casa/UF</th><th>Motivo</th><th>Técnico</th><th>Estado</th></tr></thead><tbody>${R.map(r=>`<tr${SU.c&&r.id===SU.c.saved?' class="snew"':''}><td>${r.id}</td><td>${sesc(r.fecha)}</td><td>${sesc(r.nom)}</td><td>${sesc(r.ape)}</td><td>${sesc(r.tel)}</td><td>${sesc(r.bar)}</td><td>${sesc(r.cal)}</td><td>${sesc(r.alt)}</td><td>${sesc(r.mz||'')}</td><td>${sesc(r.ub||r.casa||'')}</td><td>${sesc(r.mot)}</td><td>${sesc(r.tec||'—')}</td><td><span class="sest ${r.est==='Enviada'?'ok':r.est==='Con problema'?'bad':''}">${sesc(r.est)}</span></td></tr>`).join('')}</tbody></table></div><p class="shelp">${R.length} orden${R.length>1?'es':''} · se guarda en este dispositivo</p><button class="lnk sclr">Borrar la planilla</button>`}
-const STREP={Blas:b=>`👍 Dale, salgo para ${b}.`,Alan:b=>`¡Voy volando para ${b}! 🚐`,Víctor:b=>`Listo jefe, en camino a ${b} 🌯`,Dylan:b=>`Ok, ahí voy para ${b}.`,Federico:b=>`Recibido. Salgo para ${b}.`,Sebastián:b=>`Perfecto, voy para ${b} 😎`,Bruno:b=>`¡Dale! Voy para ${b} 🥤`};
+const STREP={Blas:b=>`👍 Dale, salgo para ${b}.`,Alan:b=>`¡Voy volando para ${b}! 🚐`,Víctor:b=>`Listo jefe, cebo un mate y salgo para ${b} 🧉`,Dylan:b=>`Ok, ahí voy para ${b}.`,Federico:b=>`Recibido. Salgo para ${b}.`,Sebastián:b=>`Perfecto, voy para ${b} 😎`,Bruno:b=>`¡Dale! Voy para ${b} 🥤`};
 const supTpl=(r,t)=>`Hola ${t}! Nueva orden #${r.id}: ${r.mot||'—'}. Cliente: ${r.nom} ${r.ape}, tel ${r.tel}. Dirección: ${saddr(r)}, barrio ${r.bar}. ¡Gracias!`;
 function supTecH(){const pend=SU.rows.filter(r=>r.est==='Pendiente');if(SU.tec==null)SU.tec=0;
  const r=SU.rows.find(x=>x.id===SU.selRow&&x.est==='Pendiente')||pend[pend.length-1];if(r)SU.selRow=r.id;const t=TECS[SU.tec];
@@ -2665,7 +2667,17 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=64,NEWS=[
+const VER=65,NEWS=[
+ {v:65,t:'Cableado en DeltaCenter',items:[
+  ['🏢','Nuevo lugar: DeltaCenter','En Cableado ahora elegís Barrio Santa Ana o el edificio DeltaCenter, con departamentos, pasillo con cielorraso de durlock y bandeja de aluminio, y un cuarto con la NAP del piso.'],
+  ['🔍','Tapas ciegas del depto','Destornillás las tapas ciegas para ver cuál tiene corrugado. Si donde quiere el cliente no hay (o no llega a la bandeja), le avisás y usás otra.'],
+  ['⬜','Placas de durlock','En el pasillo levantás las placas del cielorraso para ver si el corrugado llega a la bandeja. Cada placa se corre por encima de una vecina; si no hay lugar, la bajás al piso con cuidado de no romperla. Al final van todas a su lugar.'],
+  ['➡️','La flecha','Encintás el drop en la punta de un tramo de caño y lo empujás por arriba de la bandeja, de abertura en abertura (alcanza unas 2 placas), hasta el pase del cuarto de la NAP. Herramienta nueva en la camioneta.'],
+  ['🔎','Pinza con gatillo','En el minijuego de la pinza ahora la prendés manteniendo apretado el gatillo de atrás, abrís la ranura, tensás el pelo para meterlo en la ranura de abajo y soltás para que la pinza lo apriete y lea el tráfico.'],
+  ['💬','Técnicos de otras cuadrillas','En el celular ahora también te escriben por privado los otros técnicos (todos menos el que elegiste): preguntan qué pelos están tomados en tal barrio, qué caño agarrar, qué puerto quedó libre, cuánta reserva dejar y cosas de los cableados. Ayudarlos suma.'],
+  ['🧉','Ítem nuevo de Víctor','El ítem exclusivo de Víctor ahora es un equipo de mate con su bolsa de yerba: el primer error de cada trabajo no cuenta.'],
+  ['📸','Foto de la orden más fácil','La foto se acomoda sola cuando está casi derecha y centrada, y te muestra qué falta: centrar, enderezar o el tamaño. En la compu podés usar la rueda del mouse para acercar y Shift + rueda para girar.'],
+  ['🔌','NAP del piso y roseta','Armás el conector de campo, lo enchufás en el puerto que te pasaron (sin tocar los de otros clientes) y volvés al depto a armar la roseta, conectar el router y completar la orden con la UF.']]},
  {v:64,t:'Arreglos de pantalla',items:[['📐','Sin imagen estirada','Al abrir y cerrar el celular (o el teclado del teléfono) el juego ya no queda estirado: se reacomoda solo.'],['🧑','Fotos de perfil del celu','En los chats ahora se ven las caras de Julián, Ulises, El Pana y Jony, redondas y sin deformarse.']]},
  {v:63,t:'El ¿sí o no? es de Julián',items:[['👀','Solo Julián','Ahora el "¿sí o no?" de la orden de trabajo te lo manda solo Julián, por el grupo o por privado.']]},
  {v:62,t:'Más charla en el celu',items:[
@@ -2782,7 +2794,7 @@ const VER=64,NEWS=[
  {v:37,i:'🔀',t:'Splitters PLC y arreglos',txt:'Splitters 1x2/1x4 en la roseta y 1x2 a 1x16 en la botella. Buscás el pelo con potencia con la pinza de tráfico y lo empalmás donde te indica el equipo. Drops de 2, 3 y 4 pelos con sus colores.'},
  {i:'📏',t:'Tapa del domo y grosor de los cables',txt:'La tapa del domo queda lejos de la bandeja, la fibra es más finita y el cable de 6 es más chico: cuantas más fibras, más grueso.'},
  {i:'❤️',t:'Vidas',txt:'3 vidas en el modo nivel: cada reclamo o mensaje del equipo te saca una.'},
- {i:'🛒',t:'Niveles, monedas y tienda',txt:'Trabajos al azar por nivel (botella o roseta), monedas, herramientas mejores e ítems exclusivos de cada técnico: el chipá de Blas, la tarjeta de Alan, las tortillas rellenas de Víctor, los cigarrillos de Dylan, las tortillas de Federico, los perfumes de Sebastián y las gaseosas de Bruno. Después los precios subieron ×4.'},
+ {i:'🛒',t:'Niveles, monedas y tienda',txt:'Trabajos al azar por nivel (botella o roseta), monedas, herramientas mejores e ítems exclusivos de cada técnico: el chipá de Blas, la tarjeta de Alan, el equipo de mate y la yerba de Víctor, los cigarrillos de Dylan, las tortillas de Federico, los perfumes de Sebastián y las gaseosas de Bruno. Después los precios subieron ×4.'},
  {i:'✨',t:'Animaciones y texturas',txt:'Menús más lindos y animados, mejores texturas y un botón para pelar la fibra de la botella en 3D o en 2D.'},
  {i:'💬',t:'El Pana y Julián',txt:'El Pana es el supervisor ("se me cayó un barrio entero") y los demás te escriben diciendo que los llamó el Pana. Si medís −18 dBm o mejor, Julián te manda "Sos un chad 🗿".'},
  {i:'🔎',t:'Pinza de tráfico',txt:'En la botella revisás cada fibra con la pinza de tráfico y rehacés la que esté mal. Los pelos guardados se ven uno por uno, en orden de colores.'},
@@ -2819,7 +2831,7 @@ const TOOLS=[
 const ITEMS={
  'Blas':{ic:'🧀',n:'Chipá',d:'Energía para la jornada: +10% de monedas.',p:480},
  'Alan':{ic:'💳',n:'Tarjeta de crédito',d:'"Al fin sin deudas". 15% de descuento en la tienda cuando jugás con Alan.',p:600},
- 'Víctor':{ic:'🌯',n:'Tortillas rellenas',d:'Panza llena: el primer error de cada trabajo no cuenta.',p:600},
+ 'Víctor':{ic:'🧉',n:'Equipo de mate con yerba',d:'Mate, termo y su bolsa de yerba: con unos mates arranca tranquilo y el primer error de cada trabajo no cuenta.',p:600},
  'Dylan':{ic:'🚬',n:'Cigarrillos',d:'Pausa para pensar: el primer reclamo no resta puntos.',p:560},
  'Federico':{ic:'🫓',n:'Tortillas',d:'+1 moneda por cada empalme.',p:520},
  'Sebastián':{ic:'🧴',n:'Perfumes',d:'Buena presencia: +50 puntos al final.',p:560},
@@ -2903,7 +2915,7 @@ function tecRender(){$('#tjob').hidden=!LEVEL;if(LEVEL)$('#tjob').innerHTML=`<b>
  document.querySelectorAll('#tsel button').forEach(b=>b.onclick=()=>{TEC=+b.dataset.i;try{localStorage.setItem('taller_tecnico',TEC)}catch(e){}tecRender()})}
 function play(){$('#title').hidden=true;tecRender();$('#tec').hidden=false}
 function startGame(){$('#tec').hidden=true;const c=TECS[TEC];$('#hav').innerHTML=avatar(c)+c.n+(itemOn(c.n)?' '+ITEMS[c.n].ic:'');$('.hud').classList.add('wav');LIVES=LEVEL&&LEVEL.on?3:null;GO=false;dylanSave=false;hearts();
- $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
+ $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){if(CBLOC==='delta'){S=SD;dcSetup();invLoad(()=>go(0));return}S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
 const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
@@ -3263,7 +3275,7 @@ function sigPts(name){let s=sigHash(name)||1;const R1=()=>{s^=s<<13;s^=s>>>17;s^
 function sigDraw(cv,name,anim,cb){const g=cv.getContext('2d'),pts=sigPts(name),W=cv.width,H=cv.height,mx=Math.max(...pts.map(p=>p[0])),k=Math.min(1,(W-10)/mx);g.clearRect(0,0,W,H);g.strokeStyle='#1d3a8a';g.lineWidth=2;g.lineCap=g.lineJoin='round';
  const draw=n=>{g.clearRect(0,0,W,H);g.beginPath();pts.slice(0,n).forEach(([x,y],i)=>i?g.lineTo(x*k,y):g.moveTo(x*k,y));g.stroke()};if(!anim){draw(pts.length);return cb&&cb()}
  const t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/1300);draw(Math.max(2,Math.round(pts.length*q)));if(q<1)return requestAnimationFrame(f);cb&&cb()};f()}
-function otStart(done){endPan();clr();const d=supClient();d.dni=`${sint(20,46)}.${sint(100,999)}.${sint(100,999)}`;d.tit=Math.random()<.7;d.rel=srnd(OREL);d.tnom=srnd(OTN);
+function otStart(done){endPan();clr();const d=Object.assign(supClient(),OTFORCE||{});d.dni=`${sint(20,46)}.${sint(100,999)}.${sint(100,999)}`;d.tit=Math.random()<.7;d.rel=srnd(OREL);d.tnom=srnd(OTN);
  const c={d,per:srnd(SPER)};OT={c,done,chat:[],asked:{},greet:false,tab:'cli',f:{},sig:false,tsig:0,tOut:Date.now(),num:'0001 - '+String(sint(1000,99999)).padStart(8,'0'),v:supVoz(c),tpl:otTpl(c),ai:null};
  playing=false;try{speechSynthesis.cancel()}catch(e){}let el=$('#ot');if(!el){el=document.createElement('div');el.id='ot';document.body.appendChild(el)}el.hidden=false;
  otAI(c).then(a=>{if(OT&&OT.c===c)OT.ai=a});otRender();ttlB('Completá la orden de trabajo');msg('Pedile los datos al cliente y llená la orden.')}
@@ -3466,7 +3478,7 @@ const PEV={fusGood:[['Jony','0,{db} dB. Eso es trabajo.'],['Julián','Muy buena 
  err:[['Jony','Vi un error. Concentración.'],['Ulises','Jaja tranqui, respirá hondo 😅'],['El Pana','Fiera, calma, que sale'],['Julián','Despacio, {tu}. Sin apuro.']],
  pw:[['Julián','Llegó la potencia: {pw} dBm. Gracias.'],['Jony','{pw} dBm. Aceptable.'],['El Pana','¡{pw} dBm! Le digo al cliente, mi rey 🙌']]};
 const PFREE={'Julián':['Dale, entendido.','Ok, gracias por avisar.','Perfecto, seguimos.','Bien, cualquier cosa me escribís.'],'Ulises':['Jaja dale 😄','¡Grande!','Joya, después hablamos','Ok genio'],'El Pana':['De una, mi rey','¡Fiera!','Dale pana 🙌','Joya joya'],'Jony':['Ok. Concentrate en el trabajo.','Menos chat y más empalme.','Anotado.','Bien. Volvé a trabajar.']};
-const phWho=n=>PHP.find(p=>p.n===n);
+const phWho=n=>PHP.find(p=>p.n===n)||(typeof PHT!=='undefined'?PHT.find(p=>p.n===n):null);
 const phGrp=()=>`Instalaciones · Cuadrilla ${CUAD}`;
 function phInit(on){PH={on,chats:{grp:{name:phGrp(),msgs:[],un:0}},open:null,ask:[],cam:null,tNext:Date.now()+rint(25,45)*1000,err0:err,fus0:fusN,pw0:null,ev:0};
  PHP.forEach(p=>PH.chats[p.n]={name:p.n,msgs:[],un:0});PHB=0;
@@ -3506,10 +3518,10 @@ setInterval(()=>{if(!PH||!PH.on)return;const b=$('#phb'),ot=$('#ot');if(b)b.hidd
 {const f=nNext;nNext=function(){const m=nq[0];if(m&&PH&&PH.on&&!m.logged&&m.who&&phWho(m.who.n))phAdd('grp',{who:m.who.n,t:m.t},true);const ch=m&&m.ph;f();if(m&&PH&&PH.on){const el=$('#notif .nt');if(el)el.addEventListener('click',()=>{phToggle(true);phOpen(ch||'grp')})}}}
 {const f=startGame;startGame=function(){f();if(['botella','roseta','nap'].includes(MODE))phInit(true);else if(PH){PH.on=false;const b=$('#phb');if(b)b.hidden=true}}}
 function phOpen(ch){PH.open=ch;PH.cam=null;if(ch)PH.chats[ch].un=0;phBadge();phRender()}
-function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>{const o=SOPS.find(x=>x.n===p.n);return o?`<span class="pha pimg" style="background:${o.bg}">${avatar(o)}</span>`:`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`};
+function phRender(){const el=$('#ph');if(!el||el.hidden)return;const me=TECS[TEC].n,av=p=>{const o=SOPS.find(x=>x.n===p.n)||TECS.find(x=>x.n===p.n);return o?`<span class="pha pimg" style="background:${o.bg}">${avatar(o)}</span>`:`<span class="pha" style="background:${p.c}">${p.i||p.n[0]}</span>`};
  if(PH.cam)return phCamR(el);
  if(!PH.open){el.innerHTML=`<div class="phs"><div class="phh"><b>💬 Chats</b><button class="phx">✕</button></div><div class="phl">`
-  +[['grp',{n:phGrp(),c:'#0e7490',i:'👥'}],...PHP.map(p=>[p.n,p])].map(([k,p])=>{const c=PH.chats[k],l=c.msgs[c.msgs.length-1];return `<button class="phi" data-c="${k}">${av(p)}<span><b>${k==='grp'?phGrp():p.n}</b><small>${l?(l.me?'Vos: ':k==='grp'?l.who+': ':'')+String(l.t).replace(/<[^>]+>/g,'').slice(0,42):k==='grp'?'Julián, Ulises, El Pana, Jony y vos':'Chat privado'}</small></span>${c.un?`<i>${c.un}</i>`:''}</button>`}).join('')+`</div></div>`;
+  +[['grp',{n:phGrp(),c:'#0e7490',i:'👥'}],...PHP.map(p=>[p.n,p]),...PHT.map(p=>[p.n,p])].map(([k,p])=>{const c=PH.chats[k],l=c.msgs[c.msgs.length-1];return `<button class="phi" data-c="${k}">${av(p)}<span><b>${k==='grp'?phGrp():p.n}</b><small>${l?(l.me?'Vos: ':k==='grp'?l.who+': ':'')+String(l.t).replace(/<[^>]+>/g,'').slice(0,42):k==='grp'?'Julián, Ulises, El Pana, Jony y vos':p.tec?'Técnico de otra cuadrilla':'Chat privado'}</small></span>${c.un?`<i>${c.un}</i>`:''}</button>`}).join('')+`</div></div>`;
   el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelectorAll('.phi').forEach(b=>b.onclick=()=>phOpen(b.dataset.c));return}
  const ch=PH.open,c=PH.chats[ch],pend=PH.ask.filter(a=>!a.done&&a.ch===ch),ia=IAON&&SAMP&&SAMPOK;
  el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>${ch==='grp'?'👥 '+phGrp():'🔒 '+ch}</b><button class="phx">✕</button></div>${ch==='grp'?`<p class="phm">Julián, Ulises, El Pana, Jony y vos (${me})</p>`:''}<div class="phc">`
@@ -3650,5 +3662,251 @@ setInterval(()=>{if(!PH||!PH.on||!playing||SUPON)return;
 {let lw=0,lh=0,la=0;setInterval(()=>{const w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;const a=w/h;if(w!==lw||h!==lh||Math.abs(cam.aspect-a)>.01){lw=w;lh=h;size()}},250)}
 document.addEventListener('focusout',()=>[120,450,900,1500].forEach(t=>setTimeout(size,t)));
 {const f=phToggle;phToggle=function(x){f(x);[60,400,900].forEach(t=>setTimeout(size,t))}}
+/*C65*/
+/* ===== V65: DeltaCenter · edificio con cielorraso de durlock y bandeja de aluminio =====
+   depto: tapas ciegas → ¿hay corrugado? · pasillo: levantar/correr placas de durlock → ¿el corrugado llega a la bandeja?
+   drop por la guía del corrugado · flecha encintada por arriba de la bandeja hasta el cuarto de la NAP · conector de campo y puerto
+   · vuelta al depto: roseta, router y orden de trabajo */
+let CBLOC=(()=>{try{return localStorage.getItem('taller_cbloc')||'sa'}catch(e){return 'sa'}})(),DC={},DCG=null,OTFORCE=null;
+function cbLocR(){const w=$('#cblw');if(!w)return;w.hidden=MODE!=='cableado';document.querySelectorAll('#cbls button').forEach(b=>{b.setAttribute('aria-pressed',b.dataset.l===CBLOC);b.onclick=()=>{CBLOC=b.dataset.l;try{localStorage.setItem('taller_cbloc',CBLOC)}catch(e){}cbLocR()}});
+ $('#cbln').textContent=CBLOC==='delta'?'Edificio DeltaCenter: buscás la tapa ciega con corrugado, levantás las placas de durlock del pasillo, pasás el drop por la bandeja de aluminio con una flecha hasta el cuarto de la NAP, armás el conector y después la roseta del depto.':'Barrio Santa Ana: cámara subterránea, caño hasta el pilar y corrugados de las tapas ciegas de la casa.'}
+{const f=setModo;setModo=function(m){f(m);cbLocR();if(DCG)DCG.visible=false}}
+/* herramienta nueva: la flecha */
+KIT.push({k:'flecha',n:'Flecha',a:'la',d:'Tramo de caño para empujar el drop por arriba de la bandeja'});
+KICO.flecha='<g transform="rotate(-35 32 32)"><rect x="4" y="28" width="46" height="8" rx="3" fill="#9aa3ad"/><rect x="4" y="28" width="46" height="8" rx="3" fill="url(#gmet)" opacity=".4"/><path d="M50 26l12 6-12 6z" fill="#f0915a"/><rect x="40" y="26" width="6" height="12" fill="#22272d"/></g>';
+KALT.flecha=[kVan('flecha',40),{t:'Usar un pedazo de caño de riego que sobró en la obra',p:10,ok:true,via:'cano',r:'Encontraste un tramo de caño de riego: sirve de flecha, aunque es más flexible. −10 pts.'},
+ {t:'Empujar el drop a mano por arriba de la bandeja',p:30,r:'❌ El drop solo se dobla y se cae entre las placas: hace falta algo rígido. −30 pts. Elegí otra opción.'}];
+{const f=kitNeeds;kitNeeds=function(){return MODE==='cableado'&&CBLOC==='delta'?['flecha','cinta','valija','cort','opm']:f()}}
+{const f=kitJob;kitJob=function(){return MODE==='cableado'&&CBLOC==='delta'?`Edificio <b>DeltaCenter</b>, piso ${DC.piso}, UF ${DC.uf}. El cliente quiere la roseta en ${DC.want}. Hay que encontrar la tapa ciega con corrugado, verificar que llegue a la bandeja de aluminio del pasillo (sacando placas de durlock), pasar el drop con una flecha por arriba de la bandeja hasta el cuarto de la NAP, armar el conector de campo y después la roseta y el router en el depto.`:f()}}
+
+/* ---------- maqueta 3D: depto, pasillo con cielorraso de durlock y bandeja, cuarto de la NAP ---------- */
+const DCC=7,DCR=2,DTW=1.0,DTD=1.15,DX0=-2.6,DZ0=-1.15,DCY=2.2;
+const dTile=(r,c)=>V(DX0+DTW*(c+.5),DCY,DZ0+DTD*(r+.5));
+function dcBuild(){if(DCG)scene.remove(DCG);DCG=G();scene.add(DCG);PARENT=DCG;const fl=M(0xd9d4ca,{roughness:.9,map:TX.noise}),wl=M(0xece6da,{roughness:.95,map:TX.noise}),al=M(0xc9ced3,{metalness:.75,roughness:.35}),or=M(0xf08a24,{roughness:.6}),wh=M(0xf7f6f2,{roughness:.85,map:TX.noise});
+ mesh(box(15,.1,7),fl,0,.05,0);
+ /* depto (izquierda): paredes bajas y tres tapas ciegas en la pared del fondo */
+ mesh(box(4.4,1.4,.15),wl,-5.2,.75,-3.0);mesh(box(.15,1.4,6),wl,-3.0,.75,0);mesh(box(.15,1.4,6),wl,-7.4,.75,0);
+ DC.tm=[];[-6.6,-5.4,-4.2].forEach((x,i)=>{const t=G();t.position.set(x,.75,-2.92);DCG.add(t);mesh(box(.42,.42,.04),M(0xfafaf7,{roughness:.5}),0,0,0,t);mesh(cyl(.025,.025,.02,8),M(0x9aa3ad),0,.15,.03,t).rotation.x=Math.PI/2;DC.tm.push(t)});
+ const lb=(t,x,y,z,w=1.6)=>{const p=new THREE.Mesh(new THREE.PlaneGeometry(w,w/4),new THREE.MeshBasicMaterial({map:label(t,'#ffffff','#33414d',256,64,26),transparent:true}));p.rotation.x=-Math.PI/2;p.position.set(x,y,z);DCG.add(p);return p};
+ lb(`Depto ${DC.uf}`,-5.2,.12,1.8);lb('Pasillo',.9,.12,2.0,1.2);lb('Cuarto NAP',6.0,.12,2.0);
+ /* pasillo: cielorraso de durlock (placas) y bandeja de aluminio arriba */
+ [-1.25,1.25].forEach(k=>mesh(box(7.2,2.3,.12),wl,DX0+3.5,1.15,k+(k<0?-.06:.06)).material.transparent=false);
+ DC.tiles={};for(let r=0;r<DCR;r++)for(let c=0;c<DCC;c++){const p=dTile(r,c),m=mesh(box(DTW-.04,.04,DTD-.04),wh,p.x,p.y,p.z);m.userData.home=p.clone();DC.tiles[r+','+c]=m}
+ mesh(box(.05,.05,DTD*2),M(0xd8dde2,{metalness:.6}),DX0,DCY,0);for(let c=0;c<=DCC;c++)mesh(box(.03,.05,DTD*2),M(0xd8dde2,{metalness:.6}),DX0+c*DTW,DCY+.01,0);
+ const tz=DZ0+DTD*(DC.tray+.5);DC.trz=tz;mesh(box(DCC*DTW,.05,.5),al,DX0+DCC*DTW/2,DCY+.32,tz);[-1,1].forEach(k=>mesh(box(DCC*DTW,.14,.03),al,DX0+DCC*DTW/2,DCY+.38,tz+k*.25));
+ for(let i=0;i<28;i++)mesh(box(.05,.06,.5),M(0x9aa3ad,{metalness:.6}),DX0+.12+i*.25,DCY+.35,tz);
+ /* corrugado del depto: baja por la pared y sube al cielorraso junto a la puerta */
+ const ct=DC.taps.findIndex(t=>t.cor&&t.reach),cz=DZ0+DTD*(DC.tray+.5);tubeMesh([V(-5.4,.75,-2.85),V(-5.0,1.6,-2.7),V(-3.4,2.1,-1.6),V(DX0+DTW*(DC.cc+.5)-.2,DCY+.2,cz)],.05,or,DCG);
+ /* cuarto de la NAP: pase en la pared y la caja en la pared del fondo */
+ mesh(box(.15,2.3,6),wl,4.55,1.15,0);mesh(box(.16,.3,.3),M(0x2a2d31),4.55,DCY+.25,tz);
+ const nap=G();nap.position.set(6.2,1.35,-2.85);DCG.add(nap);mesh(box(1.1,1.4,.3),M(0x9aa3ad,{roughness:.5}),0,0,0,nap);for(let i=0;i<8;i++)mesh(box(.09,.12,.06),M(0x2fa84f),-.4+i*.115,-.5,.17,nap);
+ const lid=G();lid.position.set(-.55,0,.16);nap.add(lid);mesh(box(1.1,1.4,.06),M(0xb5bcc3,{roughness:.45}),.55,0,0,lid);DC.napLid=lid;DC.nap=nap;
+ PARENT=null;DCG.visible=true}
+function dcTile3D(k,st){const m=DC.tiles[k];if(!m)return;const h=m.userData.home;if(st.open){if(st.on){const [r,c]=st.on.split(',').map(Number),p=dTile(r,c);tw(m,V(p.x+.08,DCY+.05,p.z+.06),300)}else tw(m,V(h.x+.3,.12,h.z>0?1.9:-1.0),350)}else tw(m,h.clone(),300)}
+function dcDrop3D(to){if(DC.dm){DCG.remove(DC.dm);DC.dm=null}const z=DC.trz,y=DCY+.4,x0=DX0+DTW*(DC.cc+.5),x1=to>=DCC?4.9:DX0+DTW*(to+.5);if(x1<=x0+.01)return;DC.dm=tubeMesh([V(x0-.2,DCY+.2,z),V(x0,y,z),V(x1,y,z)],.035,M(0x15181b,{roughness:.6}),DCG)}
+
+/* ---------- datos del trabajo ---------- */
+function dcJob(){const want=['el living, al lado de la tele','el living, junto a la ventana','el dormitorio'],taps=[0,1,2].map(i=>({n:['Living · tele','Living · ventana','Dormitorio'][i],cor:Math.random()<.55,reach:Math.random()<.6,open:false,bad:false}));
+ const ok=rint(0,2);taps[ok].cor=true;taps[ok].reach=true;const piso=rint(1,9),uf=piso*100+rint(1,12);
+ DC={t0:Date.now(),piso,uf,want:want[rint(0,2)],wantI:0,taps,tray:rint(0,1),cc:rint(0,1),st:{},stack:{},phase:'find',pos:0,opened:0,broken:0,pen:0,tapI:null,port:rint(0,7),tm:[],busyPorts:[]};
+ DC.wantI=want.indexOf(DC.want);if(DC.wantI<0)DC.wantI=0;const occ=new Set();while(occ.size<3){const p=rint(0,7);if(p!==DC.port)occ.add(p)}DC.busyPorts=[...occ];DC.pos=DC.cc}
+function dcSetup(){CB={kinks:0,slips:0,pen:0,loc:'delta'};dcJob();dcBuild();if(CL)CL.visible=false;if(RSG)RSG.visible=false;if(NSG)NSG.visible=false;if(CBG)CBG.visible=false}
+
+/* ---------- depto: tapas ciegas ---------- */
+function dcTapasUI(el,done){const T=DC.taps,draw=()=>{el.innerHTML=cblSvg(170,`<rect x="10" y="10" width="280" height="150" rx="6" fill="#ece6da" stroke="#b9b1a2"/><rect x="10" y="140" width="280" height="20" fill="#a98f6f"/>
+   ${T.map((t,i)=>{const x=40+i*90;return `<g data-i="${i}" style="cursor:pointer"><rect x="${x}" y="50" width="56" height="56" rx="3" fill="${t.open?'#3b4148':'#fafaf7'}" stroke="#9aa3ad" stroke-width="1.5"/>
+    ${t.open?(t.cor?`<circle cx="${x+28}" cy="78" r="13" fill="#f08a24"/><circle cx="${x+28}" cy="78" r="6" fill="#3b2a1a"/><path d="M${x+28} 78 l6 -14" stroke="#e6e1d6" stroke-width="2"/>`:`<text x="${x+28}" y="82" text-anchor="middle" font-size="9" fill="#e6eaee">sin caño</text>`):`<circle cx="${x+10}" cy="60" r="2" fill="#9aa3ad"/><circle cx="${x+46}" cy="96" r="2" fill="#9aa3ad"/>`}
+    ${t.bad?`<text x="${x+28}" y="124" text-anchor="middle" font-size="9" fill="#c53030">no llega</text>`:''}<text x="${x+28}" y="40" text-anchor="middle" font-size="10" fill="#33414d" font-weight="${i===DC.wantI?700:400}">${t.n}${i===DC.wantI?' ★':''}</text></g>`}).join('')}`)
+  +`<p class="cbh">★ Ahí quiere el cliente la roseta. Tocá una tapa ciega para destornillarla y ver si tiene corrugado. Si no tiene (o no llega a la bandeja), probá otra y avisale al cliente.</p><div class="dcsel">${T.map((t,i)=>t.open&&t.cor&&!t.bad?`<button class="big alt" data-u="${i}">Usar ${t.n}</button>`:'').join('')}</div>`;
+  el.querySelectorAll('svg [data-i]').forEach(g=>g.onclick=()=>{const i=+g.dataset.i,t=T[i];if(t.open)return;t.open=true;DC.tapsOpen=(DC.tapsOpen||0)+1;rotAnim(DC.tm[i],'z',.6,300);
+   msg(t.cor?`Tapa ${t.n}: ¡tiene corrugado, con guía adentro!`:`Tapa ${t.n}: no tiene corrugado, es solo una caja.`);if(!t.cor&&i===DC.wantI)setTimeout(()=>info('Si la tapa que quiere el cliente no tiene corrugado, explicale y buscá otra.',BOSS[0]),500);draw()});
+  el.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>{DC.tapI=+b.dataset.u;done()})};draw()}
+
+/* ---------- pasillo: placas de durlock, bandeja y flecha ---------- */
+function dcContent(r,c){const t=r===DC.tray,cor=c===DC.cc&&((DC.taps[DC.tapI]||{}).reach?r===DC.tray:r!==DC.tray);return {tray:t,cor,wall:c===DCC-1&&t}}
+function dcCeilUI(el,phase,done){DC.phase=phase;if(phase==='find'){DC.res=null;Object.keys(DC.st).forEach(k=>{if(DC.st[k].open){const [r,cc]=k.split(',').map(Number),ct=dcContent(r,cc);if(ct.cor)DC.res=ct.tray?'ok':'no'}})}const X=c=>14+c*38,Y=r=>36+r*58,w=36,h=56,K=(r,c)=>r+','+c,me=TECS[TEC].n;let drag=null,tip=null;
+ const draw=()=>{const tk=DC.tapI!=null?DC.taps[DC.tapI]:{reach:true},reach=Math.min(DCC-1,DC.pos+2);let s='';
+  for(let r=0;r<DCR;r++)for(let c=0;c<DCC;c++){const k=K(r,c),st=DC.st[k]||{},x=X(c),y=Y(r);
+   if(st.open){const ct=dcContent(r,c);s+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#3b4148"/>`;
+    if(ct.tray)s+=`<rect x="${x}" y="${y+18}" width="${w}" height="20" fill="#c9ced3"/>${[0,1,2,3].map(i=>`<rect x="${x+4+i*9}" y="${y+24}" width="4" height="8" fill="#8a9299"/>`).join('')}`;
+    if(ct.cor)s+=`<path d="M${x+18} ${y+h} Q${x+18} ${y+30} ${x+(ct.tray?14:18)} ${y+(ct.tray?28:22)}" stroke="#f08a24" stroke-width="7" fill="none"/>${ct.tray?'':`<text x="${x+18}" y="${y+12}" text-anchor="middle" font-size="7" fill="#ffb4a8">no llega</text>`}`;
+    if(ct.wall)s+=`<rect x="${x+w-8}" y="${y}" width="8" height="${h}" fill="#b5532f"/><rect x="${x+w-8}" y="${y+20}" width="8" height="16" fill="#1d2024"/>`;
+    if(ct.tray&&DC.passed!=null&&c>=DC.cc&&c<=DC.passed)s+=`<rect x="${c===DC.cc?x+14:x}" y="${y+27}" width="${c===DC.cc?w-14:w}" height="3" fill="#15181b"/>`}
+   else s+=`<rect x="${x+1}" y="${y+1}" width="${w-2}" height="${h-2}" fill="#f7f6f2" stroke="#c9ced3"/>`;
+   if(DC.stack[k])s+=`<rect x="${x+5}" y="${y+5}" width="${w-6}" height="${h-6}" fill="#efede7" stroke="#9aa3ad" stroke-width="1.2" filter="url(#fsh)"/>`;
+   s+=`<rect class="dct" data-k="${k}" x="${x}" y="${y}" width="${w}" height="${h}" fill="transparent" style="cursor:pointer"/>`}
+  if(phase==='pass'){const fy=Y(DC.tray)+28,x0=X(DC.pos)+18,tx=tip??x0+30;s+=`<line x1="${x0-6}" y1="${fy}" x2="${tx}" y2="${fy}" stroke="#9aa3ad" stroke-width="5" stroke-linecap="round"/><path d="M${tx} ${fy-6} l10 6 -10 6z" fill="#f0915a"/><rect x="${tx-10}" y="${fy-5}" width="7" height="10" fill="#22272d"/><circle class="dcf" cx="${tx+4}" cy="${fy}" r="14" fill="rgba(240,145,90,.18)" stroke="#f0915a" stroke-dasharray="3 3" style="cursor:grab"/>
+   <rect x="${X(DC.pos)}" y="${Y(DC.tray)-4}" width="${X(reach)+w-X(DC.pos)}" height="3" fill="#22c55e" opacity=".7"/>`}
+  const head=phase==='find'?`Abrí placas cerca de la puerta del depto para ver si el corrugado de ${tk?'la tapa elegida':'tu depto'} llega a la bandeja de aluminio.`:phase==='pass'?`Abrí placas por arriba de la bandeja (la flecha alcanza 2 placas) y arrastrá la flecha de abertura en abertura hasta el pase del cuarto de la NAP.`:'Volvé a poner todas las placas de durlock en su lugar: tocá cada una.';
+  el.innerHTML=cblSvg(166,`<text x="14" y="22" font-size="9" fill="currentColor">🚪 Puerta depto ${DC.uf}</text><text x="286" y="22" font-size="9" fill="currentColor" text-anchor="end">Cuarto NAP ➜</text>${s}<text x="150" y="160" font-size="9" text-anchor="middle" fill="currentColor">Placas abiertas: ${DC.opened}${DC.broken?` · rotas: ${DC.broken}`:''}</text>`)
+   +`<p class="cbh">${head}</p>${phase==='find'&&DC.res?`<p class="kres ${DC.res==='ok'?'':'bad'}">${DC.res==='ok'?'✅ El corrugado llega a la bandeja: por acá pasa el drop.':'❌ Ese corrugado termina antes: no llega a la bandeja. Hay que probar otra tapa ciega.'}</p><button class="big dcok">${DC.res==='ok'?'Seguir':'Volver al depto'}</button>`:''}`;
+  const sv=el.querySelector('svg');sv.style.touchAction='none';
+  sv.querySelectorAll('.dct').forEach(rc=>rc.onclick=()=>tap(rc.dataset.k));
+  const ok=el.querySelector('.dcok');if(ok)ok.onclick=()=>{const r=DC.res;DC.res=null;if(r!=='ok'){DC.taps[DC.tapI].bad=true;DC.tapI=null}done(r==='ok')};
+  if(phase==='pass'){const f=sv.querySelector('.dcf');f.onpointerdown=e=>{drag=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}e.stopPropagation()};
+   sv.onpointermove=e=>{if(!drag)return;const p=svgPt(sv,e),lo=X(DC.pos)+18,hi=X(reach)+w-4;tip=Math.max(lo,Math.min(hi,p.x));if(p.x>hi+10&&!drag.warn){drag.warn=1;msg('La flecha no llega más lejos: alcanza unas 2 placas. Abrí una más cerca.')}draw()};
+   sv.onpointerup=()=>{if(!drag)return;drag=null;const c=Math.floor((tip-14)/38);tip=null;if(c<=DC.pos){draw();return}
+    const st=DC.st[K(DC.tray,c)]||{};if(!st.open){err++;msg('Ahí la placa está cerrada: no podés agarrar la flecha. Abrí esa placa (o una más cerca) para recibirla.');fxBad();draw();return}
+    DC.pos=c;DC.passed=c;dcDrop3D(c);fxOK();if(c===DCC-1){msg('¡La flecha llegó al pase del cuarto de la NAP! El drop pasó por arriba de la bandeja.');DC.passed=DCC;dcDrop3D(DCC);draw();setTimeout(()=>done(true),900)}else{msg(`Agarraste la flecha en la placa ${c+1}. Seguí empujando.`);draw()}}}};
+ const tap=k=>{const st=DC.st[k]||{},[r,c]=k.split(',').map(Number);
+  if(phase==='close'){if(!st.open){if(DC.stack[k]){const src=DC.stack[k];msg('Primero devolvé a su lugar la placa que está encima.');tap(src);return}return}const on=st.on;if(on)delete DC.stack[on];DC.st[k]={open:false};dcTile3D(k,{open:false});
+   const left=Object.values(DC.st).filter(s=>s.open).length;msg(left?`Placa en su lugar. Faltan ${left}.`:'¡Todas las placas en su lugar! El pasillo quedó como estaba.');draw();if(!left)setTimeout(()=>done(true),700);return}
+  if(st.open)return;if(DC.stack[k]){const src=DC.stack[k];delete DC.stack[k];DC.st[src].on=null;dcTile3D(src,DC.st[src]);msg('Bajaste al piso la placa que estaba encima. Ahora podés abrir esta.');draw();return}
+  /* correrla por encima de una vecina cerrada; si no hay, bajarla al piso (puede romperse) */
+  const cand=[K(1-r,c),K(r,c+1),K(r,c-1)].filter(n=>{const [a,b]=n.split(',').map(Number);return b>=0&&b<DCC&&!(DC.st[n]||{}).open&&!DC.stack[n]});
+  let on=null;if(cand.length){on=cand[0];DC.stack[on]=k}else if(Math.random()<.1){DC.broken++;DC.pen+=20;err++;msg('Se partió una esquina de la placa al bajarla: −20 pts. Cuidado con el durlock.');fxBad()}
+  DC.st[k]={open:true,on};DC.opened++;dcTile3D(k,DC.st[k]);
+  const ct=dcContent(r,c);if(phase==='find'){if(ct.cor){DC.res=ct.tray?'ok':'no';msg(ct.tray?'¡Ahí está! El corrugado del depto desemboca en la bandeja.':'Asoma el corrugado del depto… pero termina adentro del tabique, lejos de la bandeja.')}
+   else msg(ct.tray?(ct.wall?'Bandeja y el pase al cuarto de la NAP.':'Bandeja de aluminio… pero no está el corrugado.'):'Solo cables viejos y el entramado del techo.')}
+  else if(phase==='pass')msg(ct.tray?(on?'Placa corrida por encima de la de al lado: ves la bandeja.':'Placa bajada: ves la bandeja.'):'Esa placa no está debajo de la bandeja.');
+  draw()};
+ draw()}
+/* encintar el drop en la punta de la flecha */
+function dcTieUI(el,done){let acc=0,a0=null;const need=Math.PI*2*4;const draw=()=>{const t=Math.floor(acc/(Math.PI*2));el.innerHTML=cblSvg(160,`<path d="M20 80 H160" stroke="#1d2024" stroke-width="8" stroke-linecap="round"/>
+   <rect x="150" y="74" width="130" height="12" rx="4" fill="#9aa3ad"/><path d="M280 72 l12 8 -12 8z" fill="#f0915a"/>${[...Array(Math.min(8,t))].map((_,i)=>`<rect x="${150+i*7}" y="70" width="6" height="20" rx="2" fill="#22272d" stroke="#5b636b"/>`).join('')}
+   <circle cx="175" cy="80" r="44" fill="none" stroke="rgba(127,127,127,.35)" stroke-dasharray="4 5"/><text x="150" y="146" font-size="11" text-anchor="middle" fill="currentColor">Vueltas de cinta: ${t} de 4</text>`)
+  +`<p class="cbh">Encintá la punta del drop a la flecha: hacé círculos con el dedo alrededor del empalme del drop y el caño. Si queda flojo, se suelta arriba de la bandeja.</p>`;
+  const sv=el.querySelector('svg');sv.style.touchAction='none';const ang=e=>{const p=svgPt(sv,e);return Math.atan2(p.y-80,p.x-175)};
+  sv.onpointerdown=e=>{a0=ang(e);try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointerup=sv.onpointercancel=()=>{a0=null};
+  sv.onpointermove=e=>{if(a0==null)return;const a=ang(e);let d=a-a0;if(d>Math.PI)d-=2*Math.PI;if(d<-Math.PI)d+=2*Math.PI;a0=a;const b=Math.floor(acc/(Math.PI*2));acc+=Math.abs(d);if(Math.floor(acc/(Math.PI*2))!==b)draw();if(acc>=need){a0=null;setTimeout(done,300)}}};draw();DC.tie=()=>{acc=need;done()}}
+/* puertos de la NAP del piso */
+function dcPortUI(el,done){const draw=()=>{el.innerHTML=cblSvg(130,`<rect x="16" y="16" width="268" height="100" rx="8" fill="#9aa3ad"/><text x="150" y="34" text-anchor="middle" font-size="10" fill="#1d2024">Splitter 1x8 · NAP del piso ${DC.piso}</text>
+  ${[...Array(8).keys()].map(i=>{const x=30+i*32,busy=DC.busyPorts.includes(i);return `<g data-p="${i}" style="cursor:pointer"><rect x="${x}" y="50" width="26" height="34" rx="3" fill="#2fa84f"/><rect x="${x+7}" y="58" width="12" height="16" fill="${busy?'#f2c200':'#1d2024'}"/>${busy?`<rect x="${x+9}" y="74" width="8" height="26" fill="#f2c200"/>`:''}<text x="${x+13}" y="108" text-anchor="middle" font-size="10" fill="#1d2024">${i+1}</text></g>`}).join('')}`)
+  +`<p class="cbh">📩 Te pasaron el <b>puerto ${DC.port+1}</b>. Los que tienen patchcord amarillo son de otros clientes. Tocá el puerto para enchufar el conector.</p>`;
+  el.querySelectorAll('[data-p]').forEach(g=>g.onclick=()=>{const p=+g.dataset.p;if(p!==DC.port){err++;msg(DC.busyPorts.includes(p)?`El puerto ${p+1} es de otro cliente: no lo toques.`:`El puerto ${p+1} está libre, pero te asignaron el ${DC.port+1}.`);fxBad();if(DC.busyPorts.includes(p))boss('wrongfib');return}
+   msg(`Conector enchufado en el puerto ${DC.port+1}.`);fxOK();setTimeout(done,500)})};draw()}
+
+/* ---------- pasos de DeltaCenter ---------- */
+const SD=[
+()=>{ttl('Leé la orden: DeltaCenter');camTo(0,0,1.25,1.2,.85);openPan('Orden de trabajo',()=>{$('#pt').textContent='📋 DeltaCenter';$('#pb').innerHTML=`<div class="ot"><b>📋 Orden de trabajo · DeltaCenter</b><p>Piso <b>${DC.piso}</b> · <b>UF ${DC.uf}</b>. Drop de 1 pelo. El cliente quiere la roseta en <b>${DC.want}</b>.</p></div><p class="cbh">En el edificio no hay caños: los departamentos tienen tapas ciegas con corrugados que suben al cielorraso de durlock del pasillo, donde corre una bandeja de aluminio hasta el cuarto de la NAP del piso.</p><button class="big dcgo">Entrar al depto</button>`;$('#pb .dcgo').onclick=()=>{endPan();nx()}})},
+()=>{ttl('Buscá la tapa ciega con corrugado');camTo(-5.2,-1.6,.55,.8,.55);openPan('Tapas ciegas',()=>{$('#pt').textContent=`Depto ${DC.uf} · tapas ciegas`;dcTapasUI($('#pb'),()=>{endPan();const t=DC.taps[DC.tapI];msg(`Vas con la tapa ${t.n}.`);if(DC.tapI!==DC.wantI)info(`Avisale al cliente que la roseta va en ${t.n.toLowerCase()}: donde quería no hay corrugado que sirva.`,BOSS[0]);nx()})})},
+()=>{ttl('Pasillo: ¿el corrugado llega a la bandeja?');camTo(.9,0,.8,2.3,1.2);openPan('Cielorraso del pasillo',()=>{$('#pt').textContent='Placas de durlock · buscar el corrugado';dcCeilUI($('#pb'),'find',ok=>{endPan();if(ok){nx();return}msg('Volvé al depto y probá otra tapa ciega.');setTimeout(()=>go(1),600)})})},
+()=>kitNeed('cinta','Hay que atar el drop a la guía del corrugado con cinta.',()=>{ttl('Atá el drop a la guía del corrugado y tirá desde el pasillo');camTo(-3.5,-1.4,.7,1.2,.7);
+ seqRun('Corrugado del depto',[['Atar',(el,n)=>cblTieUI(el,{turns:2,guia:true,done:n})],['Tirar',(el,n)=>cblPullUI(el,{len:rint(5,8),guia:true,from:'Pasillo',to:'Depto',col:'#f08a24',slip:()=>{endPan();msg('Se soltó: volvé a atar.');setTimeout(()=>go(si),600)},done:n})]],()=>{msg('El drop asomó por el corrugado arriba de la bandeja.');nx()})}),
+()=>kitNeed('flecha','Para pasar el drop por arriba de la bandeja hace falta una flecha.',()=>kitNeed('cinta','Hay que encintar el drop a la flecha.',()=>{ttl('Encintá el drop en la punta de la flecha');camTo(dTile(DC.tray,DC.cc).x,DC.trz,.45,DCY,1.1);openPan('Flecha',()=>{$('#pt').textContent='Encintar el drop';dcTieUI($('#pb'),()=>{endPan();msg('Drop encintado en la flecha.');nx()})})})),
+()=>{ttl('Pasá el drop con la flecha por arriba de la bandeja');camTo(.9,0,.8,2.3,1.2);DC.pos=DC.cc;DC.passed=DC.cc;openPan('Cielorraso del pasillo',()=>{$('#pt').textContent='Bandeja de aluminio · flecha';dcCeilUI($('#pb'),'pass',()=>{endPan();nx()})})},
+()=>{ttl('Volvé a poner las placas de durlock');camTo(.9,0,.8,2.3,1.2);openPan('Cielorraso del pasillo',()=>{$('#pt').textContent='Placas de durlock · cerrar';dcCeilUI($('#pb'),'close',()=>{endPan();nx()})})},
+()=>{ttl('Cuarto de la NAP: abrí la caja');camTo(6.2,-1.6,.55,1.3,.45);info(`El cliente de la UF ${DC.uf} va en el puerto ${DC.port+1} de la NAP del piso ${DC.piso}.`,BOSS[2]);const mk=mark(6.2,-2.5,0xffffff,2.2,.4);taps=[DC.nap];
+ onTap=()=>{taps=[];scene.remove(mk);rotAnim(DC.napLid,'y',-1.9,600,()=>{msg('NAP abierta: splitter 1x8 conectorizado.');nx()})}},
+()=>{ttl('Armá el conector de campo en la punta del drop');camTo(6.2,-1.6,.45,1.3,.6);NP.cbad=0;NP.cslip=0;NP.bow=null;
+ seqRun('Conector de campo',[['Pelar el drop',(el,n)=>{stripUI(el,{c:'#1d2024',thick:16,inner:dropInSvg,what:'del drop',k:'cd',onSlip:()=>{NP.cslip+=.05},done:()=>{msg('Cubierta fuera: cortá los refuerzos al ras.');n()}})}],
+  ['Guía',(el,n)=>guideUI(el,n)],['Pelar el pelo',(el,n)=>{stripUI(el,{c:'#1f6feb',thick:7,inner:glassIn,pre:guideSvg,what:'del pelo, justo donde termina la guía',k:'cf',onSlip:()=>{NP.cslip+=.08},done:n})}],
+  ['Cortar',(el,n)=>cleaveUI(el,'#1f6feb',n)],['Enrosque',(el,n)=>capUI(el,n)],['Meter el pelo',(el,n)=>insUI(el,n)],['Perillita',(el,n)=>leverUI(el,n)],['Enroscar',(el,n)=>screwUI(el,n)]],
+  ()=>{DC.cl=+Math.min(1.4,.16+Math.abs((NP.bow||11)-11)*.012+(NP.cbad||0)*.08+(NP.cslip||0)+rnd()*.06).toFixed(2);msg(`¡Conector armado! Pérdida estimada: ${DC.cl.toFixed(2)} dB.`);if(DC.cl>.6)boss('loss',{db:DC.cl.toFixed(2)},.7);nx()})},
+()=>{ttl(`Enchufá el drop en el puerto ${DC.port+1}`);camTo(6.2,-1.6,.45,1.3,.6);openPan('NAP del piso',()=>{$('#pt').textContent=`NAP · piso ${DC.piso}`;dcPortUI($('#pb'),()=>{endPan();rotAnim(DC.napLid,'y',0,600);nx()})})},
+()=>{ttl('Volvé al depto: armá la roseta');deltaToRoseta()}];
+/* del pasillo al depto: sigue la roseta completa, el router y la orden */
+function deltaToRoseta(){endPan();clr();INV.pen+=(CB.pen||0)+(DC.pen||0)+Math.max(0,DC.opened-7)*5;CB.pen=0;DC.route=3+(DCC-DC.cc)*1.2+2+rint(1,3);DC.route=Math.round(DC.route);MODE='roseta';if(DCG)DCG.visible=false;buildRoseta();RSG.visible=true;
+ const o=TECS.filter((t,i)=>i!==TEC);Object.assign(R,{tIn:DC.t0,partner:srnd(o).n,dm0:sint(60,880),foM:DC.route,rtModel:srnd(['ONT-AX18','ONT-GX30','FTTH-W6']),rtMac:[0xA4,0x3C,...[0,0,0,0].map(()=>Math.random()*256|0)].map(x=>x.toString(16).toUpperCase().padStart(2,'0')).join(':')});
+ OTFORCE={bar:'DeltaCenter',bt:'uf',ub:`UF ${DC.uf}`,cal:'',alt:'',mz:''};S=SR;msg('Ya en el depto: ahora la roseta, el router y la orden de trabajo.');
+ kitNeed('valija','Para la roseta necesitás la fusionadora.',()=>toolsOut(()=>go(0)))}
+/* fin: resumen de DeltaCenter arriba del de la roseta */
+{const f=end;end=async function(...a){const r=await f(...a);const e=$('#end');if(e&&!e.hidden&&DC&&DC.route&&!DC.sum){DC.sum=1;const p=$('#res h2');if(p)p.insertAdjacentHTML('afterend',`<p style="margin:2px 0 6px"><b>DeltaCenter</b> · piso ${DC.piso} · UF ${DC.uf}<br>Tapa ciega: ${DC.taps[DC.tapI]?.n||'—'}${DC.tapI!==DC.wantI?' (no era la que quería el cliente)':''} · tapas abiertas: ${DC.tapsOpen||0}<br>Placas de durlock abiertas: ${DC.opened}${DC.broken?` · rotas: ${DC.broken}`:''} · drop por la bandeja: ${DC.route} m<br>Conector en la NAP: puerto ${DC.port+1} · ${DC.cl!=null?DC.cl.toFixed(2)+' dB':'—'}</p>`)}return r}}
+/* el celu: preguntas propias del edificio */
+PASKM.delta=[['Julián','Wacho, ¿encontraste el corrugado en el cielorraso?',['Sí, llega justo a la bandeja.','Lo estoy buscando.','No me apures.']],
+ ['Jony','Las placas de durlock que movés, después van a su lugar. Todas.',['Todas en su lugar, prometido.','Ok.','Que las ponga el encargado.']],
+ ['El Pana','Pana, ¿encintaste bien el drop a la flecha? Si se suelta arriba es un drama 😩',['Cuatro vueltas de cinta, fiera.','Creo que sí.','Se suelta y listo.']],
+ ['Ulises','¿Te abrió el encargado el cuarto de la NAP? A mí me tuvo 20 minutos esperando 😂',['Sí, ya me dio la llave.','Todavía no.','Qué sé yo.']],
+ ['Julián','Loco, ¿la bandeja tiene lugar o está llena de cables?',['Tiene lugar, paso por arriba sin problema.','Más o menos.','Ni miré.']],
+ ['El Pana','Mi rey, ¿qué puerto de la NAP del piso te dieron?',['El que me pasaron, ya lo tengo anotado.','No sé.','Elegí uno.']],
+ ['Jony','No rompas las placas. Se levantan de a una, con cuidado.',['Con cuidado y de a una, Jony.','Ok.','Si se rompe, se rompe.']],
+ ['Ulises','¿La tapa ciega que quería el cliente tenía corrugado?',['Te cuento: la revisé y uso la que llega a la bandeja.','No sé.','Qué importa.']],
+ ['Julián','Wacho, la flecha alcanza dos placas. No abras de más que se ensucia todo.',['Abro solo las necesarias.','Ok.','Abro todas, más fácil.']],
+ ['El Pana','¡Pana! El de seguridad pregunta quién está en el pasillo 👮',['Decile que soy yo, el técnico de internet.','Ahora le aviso.','Que no moleste.']]];
+{const f=phAsk;phAsk=function(){if(MODE==='cableado'&&CBLOC==='delta'&&Math.random()<.6){const [who,q,op]=srnd(PASKM.delta),ch=Math.random()<.55?'grp':who,t=pT(q),a={who,ch,t,opts:op.map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(ch,{who,t,ask:a});phPing(ch,who,t);return}return f()}}
+
+cbLocR();
+/*C65b*/
+/* ===== V65: foto de la orden más fácil de encuadrar (también en PC) ===== */
+const camOk=c=>Math.abs(c.x)<20&&Math.abs(c.y)<20&&Math.abs(c.r)<2.6&&c.s>.86&&c.s<1.12;
+function camSnap(c){if(Math.abs(c.x)<34&&Math.abs(c.y)<34){c.x=0;c.y=0}if(Math.abs(c.r)<3.1)c.r=0;if(Math.abs(c.s-1)<.1)c.s=1}
+const camNew=c=>Object.assign(c,{x:rint(-60,60),y:rint(-50,50),r:rint(-14,14),s:.6+rnd()*.7,shot:null});
+function phCamR(el){const c=PH.cam,ok=camOk(c),cen=Math.abs(c.x)<20&&Math.abs(c.y)<20,der=Math.abs(c.r)<2.6,tam=c.s>.86&&c.s<1.12;
+ if(c.shot){el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Foto</b><button class="phx">✕</button></div><div class="phshot"><img src="${c.shot.img}" style="transform:translate(${c.shot.x}px,${c.shot.y}px) rotate(${c.shot.r}deg) scale(${c.shot.s})" alt="Foto de la orden"></div>`
+  +`<p class="phm">${c.shot.ok?'✅ Se lee toda la orden.':'⚠️ La foto salió torcida o cortada: no se lee bien.'}</p><div class="phq"><button class="phsend">📤 Enviar al grupo</button><button class="phre">🔁 Sacar otra</button></div></div>`;
+  el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>{c.shot=null;phRender()};el.querySelector('.phre').onclick=()=>{camNew(c);phRender()};
+  el.querySelector('.phsend').onclick=()=>{const s=c.shot;PH.cam=null;PH.open='grp';PH.chats.grp.un=0;phAdd('grp',{who:TECS[TEC].n,me:true,img:s.img,t:'Orden de trabajo ✅'});if(OT)OT.photo=s.ok;if(s.ok)setTimeout(()=>aura(true),2600);
+   setTimeout(()=>phAdd('grp',{who:s.ok?'Julián':'Jony',t:s.ok?srnd(['Recibida, {tu}. Prolija 👍','Perfecto, la cargo al sistema.','Joya, se lee todo. Gracias.']).replace('{tu}',TECS[TEC].n):srnd(['Esa foto no se lee. Mandá otra, derecha.','Está cortada. Así no sirve.','Torcida. Otra vez, por favor.'])}),1200);
+   const m=$('#ot .otmsg');if(m)m.innerHTML=s.ok?'📸 Foto enviada al grupo.':'📸 Foto enviada… pero salió mal: sacá otra.';phRender()};return}
+ const chip=(on,t,h)=>`<span class="pchip${on?' ok':''}">${on?'✓':'✗'} ${t}${on?'':' · '+h}</span>`;
+ el.innerHTML=`<div class="phs"><div class="phh"><button class="phb">‹</button><b>📷 Cámara</b><button class="phx">✕</button></div><div class="phvf"><img src="${c.img}" style="transform:translate(${c.x}px,${c.y}px) rotate(${c.r}deg) scale(${c.s})" alt="Orden de trabajo en el visor"><div class="phfr${ok?' ok':''}"></div></div>`
+  +`<p class="phm pchips">${chip(cen,'Centrada','arrastrala')}${chip(der,'Derecha',c.r>0?'girá ⟲':'girá ⟳')}${chip(tam,'Tamaño',c.s<1?'acercá +':'alejá −')}</p>`
+  +`<p class="phm">${ok?'✅ Encuadrada: ¡sacá la foto!':'Arrastrá la hoja, enderezala con ⟲ ⟳ y acercala o alejala. En la compu: la rueda del mouse acerca y Shift + rueda gira.'}</p>`
+  +`<div class="phcb"><button data-a="rl">⟲</button><button data-a="rr">⟳</button><button data-a="zo">−</button><button data-a="zi">+</button></div><button class="phsh" aria-label="Sacar foto"></button></div>`;
+ el.querySelector('.phx').onclick=()=>phToggle(false);el.querySelector('.phb').onclick=()=>{PH.cam=null;phRender()};
+ el.querySelectorAll('.phcb button').forEach(b=>b.onclick=()=>{const a=b.dataset.a;if(a==='rl')c.r-=1.5;if(a==='rr')c.r+=1.5;if(a==='zo')c.s=Math.max(.4,c.s-.05);if(a==='zi')c.s=Math.min(1.6,c.s+.05);camSnap(c);phRender()});
+ const vf=el.querySelector('.phvf'),im=vf.querySelector('img'),upd=()=>{im.style.transform=`translate(${c.x}px,${c.y}px) rotate(${c.r}deg) scale(${c.s})`;vf.querySelector('.phfr').classList.toggle('ok',camOk(c))};let dn=null;
+ vf.onpointerdown=e=>{e.preventDefault();dn=[e.clientX,e.clientY,c.x,c.y];try{vf.setPointerCapture(e.pointerId)}catch(_){}};
+ vf.onpointermove=e=>{if(!dn)return;c.x=dn[2]+e.clientX-dn[0];c.y=dn[3]+e.clientY-dn[1];upd()};
+ vf.onpointerup=vf.onpointercancel=()=>{if(dn){dn=null;camSnap(c);phRender()}};
+ vf.ondragstart=e=>e.preventDefault();
+ vf.onwheel=e=>{e.preventDefault();const d=e.deltaY>0?-1:1;if(e.shiftKey)c.r+=d*1.5;else c.s=Math.max(.4,Math.min(1.6,c.s+d*.05));clearTimeout(vf.wt);upd();vf.wt=setTimeout(()=>{camSnap(c);phRender()},250)};
+ el.querySelector('.phsh').onclick=()=>{const k=camOk(c);vf.classList.add('flash');try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const t=AC.currentTime,o=AC.createOscillator(),gg=AC.createGain();o.frequency.value=1800;gg.gain.setValueAtTime(.12,t);gg.gain.exponentialRampToValueAtTime(.001,t+.08);o.connect(gg).connect(AC.destination);o.start(t);o.stop(t+.09)}catch(_){}
+  setTimeout(()=>{c.shot={img:c.img,x:c.x,y:c.y,r:c.r,s:c.s,ok:k};phRender()},180)}}
+
+/* ===== V65: minijuego de la pinza de tráfico con gatillo y pelo tensado en la ranura ===== */
+function mgPinza(el,done){const live=rint(0,11),res={},base=-(15+rnd()*6).toFixed(1),A={x:22,y:204},SY=204,L=262;
+ let on=false,open=false,sel=null,H=null,cur=null,clamped=false,hold=null,drag=false,warned=false;
+ const tens=()=>H?Math.hypot(H.x-A.x,H.y-A.y)/L:0,inSlot=()=>!!H&&tens()>=.93&&Math.abs(H.y-SY)<10&&H.x>262;
+ const fiber=()=>{if(sel==null)return'';const c=hex(F[sel][1]),t=tens(),mx=(A.x+H.x)/2,my=(A.y+H.y)/2+Math.max(0,(1-t))*150;
+  let d=`M${A.x} ${A.y} Q${mx} ${my} ${H.x} ${H.y}`;if(clamped)d=`M${A.x} ${A.y} L206 ${SY} Q224 ${SY+9} 242 ${SY} L${H.x} ${H.y}`;
+  return `<path d="${d}" stroke="${c}" stroke-width="4" fill="none" stroke-linecap="round"/><circle class="pzh" cx="${H.x}" cy="${H.y}" r="15" fill="rgba(14,116,144,.15)" stroke="#0e7490" stroke-dasharray="3 3" style="cursor:grab"/><text x="${H.x}" y="${H.y+27}" text-anchor="middle" font-size="8" fill="currentColor">✋ tirá</text>`};
+ const dev=()=>{const lcd=!on?'':cur?(cur.lo?'LO':cur.t):'- - -',jaw=open?14:0;
+  return `<g><rect x="196" y="14" width="60" height="170" rx="9" fill="#3a3e43" stroke="#202326"/><rect x="201" y="20" width="50" height="96" rx="5" fill="#22a35c"/><rect x="206" y="26" width="40" height="26" rx="2" fill="${on?'#d7e6cf':'#7d887d'}"/>
+   <text x="226" y="44" text-anchor="middle" font-size="${lcd.length>5?10:12}" font-family="monospace" font-weight="700" fill="${cur&&!cur.ok?'#b42318':'#1b2a1e'}">${lcd}</text>
+   <path d="M207 64 l8 -5 v10z" fill="${on&&cur&&cur.ok?'#7a1f1f':'#7a1f1f'}"/><path d="M245 64 l-8 -5 v10z" fill="${on&&cur&&cur.ok?'#ff3030':'#7a1f1f'}"/><circle cx="226" cy="64" r="3" fill="${on&&(!cur||cur.lo)?'#ff3030':'#7a1f1f'}"/><text x="226" y="80" text-anchor="middle" font-size="5.5" fill="#fff">NO SIGNAL</text>
+   <circle cx="226" cy="98" r="8" fill="#e03b3b" stroke="#fff" stroke-width="1.2"/><rect x="201" y="122" width="50" height="40" rx="4" fill="#178a4b"/><text x="226" y="146" text-anchor="middle" font-size="7" fill="#fff" font-weight="700">VFL · 💡</text>
+   <rect x="200" y="184" width="52" height="${14}" fill="#1b1d20"/><rect x="200" y="${208+jaw}" width="52" height="16" fill="#1b1d20"/><rect x="196" y="198" width="60" height="${10+jaw}" fill="rgba(0,0,0,.25)"/>
+   <g class="pztr" style="cursor:pointer"><path d="M256 70 q24 20 10 70 l-8 -2 q8 -40 -6 -60z" fill="${hold?'#f0915a':'#2b2f34'}" stroke="#111" transform="rotate(${open||hold?-8:0} 256 70)"/><rect x="250" y="60" width="40" height="100" fill="transparent"/></g>
+   <text x="276" y="176" text-anchor="middle" font-size="8" fill="currentColor">gatillo</text></g>`};
+ const step=()=>!on?'1. Mantené apretado el gatillo de atrás para prender la pinza.':sel==null?'2. Elegí un pelo de abajo.':clamped?'Leyendo… tocá el gatillo para abrir la pinza y probar otro pelo.':!open?'3. Tocá el gatillo para abrir la ranura de la pinza.':!inSlot()?'4. Tensá el pelo: arrastrá la mano hacia la derecha, por la ranura de abajo, hasta que quede derecho.':'5. Tocá el gatillo para soltarlo: la pinza aprieta el pelo y lee el tráfico.';
+ const draw=()=>{el.innerHTML=`<div class="mgpz"><svg viewBox="0 0 300 250"><rect width="300" height="250" rx="10" fill="url(#gbg)"/><rect x="6" y="190" width="20" height="28" rx="4" fill="#2f7de1"/><text x="16" y="232" text-anchor="middle" font-size="7" fill="currentColor">buffer</text>${dev()}${fiber()}
+   <text x="150" y="244" text-anchor="middle" font-size="9" fill="currentColor">${on?(H?`Tensión del pelo: ${Math.round(tens()*100)}%`:''):'Pinza apagada'}</text></svg>
+   <div class="fgr"><b>Buffer azul · 12 pelos</b><div>${F.slice(0,12).map((f,i)=>`<button class="fpel ${res[i]===false?'no':res[i]?'si':''}${sel===i?' on':''}" data-k="${i}" style="--c:${hex(f[1])}"><i>${i+1}</i><span>${f[0]}</span></button>`).join('')}</div></div></div>`
+  +`<p class="cbh"><b>${step()}</b> Intentos: ${MG.tries}</p>`;
+  const sv=el.querySelector('svg');sv.style.touchAction='none';
+  const tr=sv.querySelector('.pztr');tr.onpointerdown=e=>{e.stopPropagation();if(!on){hold=setTimeout(()=>{hold=null;on=true;msg('¡Pinza prendida! NO SIGNAL hasta que apriete un pelo.');fxOK();draw()},900);hold.t=1;draw();return}trig()};
+  tr.onpointerup=tr.onpointerleave=()=>{if(hold&&!on){clearTimeout(hold);hold=null;msg('Mantenelo apretado un segundo para que prenda.');draw()}};
+  const h=sv.querySelector('.pzh');if(h)h.onpointerdown=e=>{if(clamped){msg('El pelo está apretado en la pinza: abrila con el gatillo para moverlo.');return}drag=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}e.stopPropagation()};
+  sv.onpointermove=e=>{if(!drag)return;const p=svgPt(sv,e);let x=Math.max(30,Math.min(292,p.x)),y=Math.max(150,Math.min(240,p.y));
+   if(!open&&x>190&&Math.abs(y-SY)<16){x=190;if(!warned){warned=true;msg('La ranura está cerrada: abrila con el gatillo antes de meter el pelo.')}}
+   const d=Math.hypot(x-A.x,y-A.y);if(d>L*1.04){const k=L*1.04/d;x=A.x+(x-A.x)*k;y=A.y+(y-A.y)*k;if(!H.tight){H.tight=1;msg('¡Cuidado! Si lo tirás más, el pelo se corta.')}}H={x,y,tight:H&&H.tight};draw()};
+  sv.onpointerup=()=>{drag=false};
+  el.querySelectorAll('.fpel').forEach(b=>b.onclick=()=>{if(!on){msg('Primero prendé la pinza: mantené apretado el gatillo de atrás.');return}if(clamped){msg('Abrí la pinza con el gatillo antes de cambiar de pelo.');return}const i=+b.dataset.k;if(res[i]!==undefined)return;sel=i;H={x:120,y:208};cur=null;warned=false;msg(`Pelo ${F[i][0].toLowerCase()}: tensalo y llevalo a la ranura.`);draw()})};
+ const trig=()=>{if(clamped){clamped=false;open=true;cur=null;sel=null;H=null;msg('Pinza abierta: elegí otro pelo.');draw();return}
+  if(!open){open=true;msg('Ranura abierta.');draw();return}
+  open=false;if(sel==null||!inSlot()){msg(sel==null?'Cerraste la pinza vacía.':'El pelo no quedó tenso dentro de la ranura: no lo apretó.');draw();return}
+  clamped=true;MG.tries++;const ok=sel===live;res[sel]=ok;cur=ok?{ok:true,t:String(base)}:{lo:true,t:'LO'};msg(ok?`¡Tráfico! ${base} dBm en el pelo ${F[sel][0].toLowerCase()}.`:'Sin tráfico en este pelo.');draw();
+  if(ok){fxOK();MG.extra+=(MG.tries-1)*70;setTimeout(done,1100)}};
+ draw();MG.pzAuto=()=>{on=true;sel=live;open=true;H={x:280,y:SY};trig()}}
+window.MGauto=(f=>()=>{if(MG&&MG.k==='pinza'&&MG.pzAuto)return MG.pzAuto();return f()})(window.MGauto);
+{const m=MGS.find(x=>x.k==='pinza');if(m)m.d='Prendela con el gatillo, tensá el pelo en la ranura y apretalo para leer el tráfico.'}
+/*C65c*/
+/* ===== V65: los técnicos de las otras cuadrillas también te escriben por privado (cableados, pelos tomados, puertos…) ===== */
+const PHT=[];
+const PTB=()=>srnd([...SBARR.map(b=>b.n),'DeltaCenter']),PTP=()=>F[rint(0,11)][0].toLowerCase(),PTBU=()=>F[rint(0,3)][0].toLowerCase();
+const PTASK=[
+ ()=>{const b=PTB(),p1=PTP(),p2=PTP(),bu=PTBU();return [`Che {tu}, ¿sabés qué pelos están tomados en la NAP de ${b}? Voy para allá.`,[`Fijate en la planilla: tomados el ${p1} y el ${p2} del buffer ${bu}. Igual pinzá antes de cortar.`,'Ni idea, preguntale a Julián.','Arreglate.']]},
+ ()=>{const b=PTB(),p=PTP(),bu=PTBU();return [`¿El pelo ${p} del buffer ${bu} en ${b} está tomado? No quiero cortarle el servicio a nadie 😬`,['Pinzalo con la pinza de tráfico: si tiene tráfico, está tomado. No lo cortes.','Creo que está libre…','Cortalo y listo.']]},
+ ()=>{const l=rint(2,368);return [`{tu}, en Santa Ana, ¿el lote ${l} qué caño agarra en la cámara?`,[`El ${l%2?'derecho: los impares van a la derecha':'izquierdo: los pares van a la izquierda'} del pilar compartido.`,'El primero que veas.','Probá los dos.']]},
+ ()=>['¿Cuántos metros de reserva dejás cuando cableás?',['3 m enrollados en la cámara y 1 m en la tapa ciega para la roseta.','Unos metros, a ojo.','Lo que sobre.']],
+ ()=>{const b=PTB();return [`¿En ${b} el drop va por corrugado o por caño de riego?`,['Depende del lote: fijate en la orden y en la cámara antes de pasar el pasacables.','Por cualquiera.','Ni idea.']]},
+ ()=>{const b=PTB(),pt=rint(1,8);return [`¿Qué puerto quedó libre en la NAP de ${b}? Tengo un alta ahí.`,[`El ${pt} estaba libre; los que tienen patchcord amarillo son de otros clientes.`,'Fijate vos.','Enchufá en cualquiera.']]},
+ ()=>['¿Cuántas vueltas de cinta le das al drop en la punta del pasacables?',['Cuatro vueltas bien firmes, así no se suelta en las curvas.','Una o dos.','Con un nudo alcanza.']],
+ ()=>{const p=rint(1,9);return [`En DeltaCenter, ¿la bandeja del piso ${p} tiene lugar para otro drop?`,['Sí, pasé por arriba con la flecha sin problema. Volvé a poner las placas.','Creo que sí.','Ni miré.']]},
+ ()=>['Che, ¿me prestás el pasacables mañana? El mío se dobló en una curva 😩',['Dale, pasá a buscarlo. Girá en las curvas, eh.','Si no lo uso…','No.']],
+ ()=>{const b=PTB();return [`¿La NAP de ${b} es la de 8 o la de 16 puertos?`,['La de 8: splitter 1x8 conectorizado. Te paso el puerto si querés.','Ni idea.','Qué importa.']]},
+ ()=>{const b=PTB(),bu=PTBU();return [`En la botella de ${b} dicen que el buffer ${bu} tiene pelos cruzados. ¿Lo viste?`,['Sí: verificá con la pinza pelo por pelo antes de fusionar.','No sé.','No es mi problema.']]},
+ ()=>['¿Qué agujero de la peladora va para el acrilato del pigtail?',['El 2, el de 900 µm. El 3 es para el de 250.','El 1.','Probá.']],
+ ()=>{const b=PTB();return [`¿Me pasás la ubicación de la cámara de ${b}? No la encuentro 😅`,['Ya te la mando por acá. Está frente al pilar compartido.','Preguntale a otro.','Buscala.']]},
+ ()=>['¿Vos medís en 1490 o en 1310 cuando terminás la roseta?',['En 1490 nm, la de bajada de GPON.','En 1310.','Da igual.']]];
+const PTCHAT=[()=>`Terminé un cableado en ${PTB()}: ${rint(20,60)} metros de drop 💪`,()=>`En ${PTB()} la cámara estaba inundada 🌊 Llevé botas.`,()=>`Ojo: en la NAP de ${PTB()} el pelo ${PTP()} ya está tomado.`,()=>`En DeltaCenter el de seguridad no me dejaba subir 😂`,
+ ()=>`Me tocó una botella de 48 en ${PTB()}… deseame suerte 😩`,()=>`¿Alguien tiene termos de 60 mm? Me quedé sin.`,()=>`Hoy rompí una placa de durlock en DeltaCenter, no le digan a Jony 🤫`,()=>`El pasacables nuevo es una maravilla, pasa todas las curvas 🔥`];
+const PTREP={good:['¡Gracias, genio! 🙌','Joya, me salvaste.','Sos un crack, te debo una.','Buenísimo, así no le corto el servicio a nadie.','¡Grande! Te paso un mate cuando nos crucemos 🧉'],ok:['Bueno, veo.','Ok, gracias igual.','Dale, pregunto.'],bad:['Uh, qué mala onda 😒','Bueno… gracias por nada.','Ok, me arreglo solo.']};
+const PTFOL=['¿Estás? 👀','Che, ¿me leíste?','Cuando puedas me contestás, porfa.'];
+{const f=phInit;phInit=function(on){f(on);PHT.splice(0);TECS.forEach((t,i)=>{if(i!==TEC)PHT.push({n:t.n,c:t.sh||'#555',tec:true})});
+ PHT.forEach(p=>{PH.chats[p.n]={name:p.n,msgs:[],un:0};PREP[p.n]=PTREP;PFOL[p.n]=PTFOL;PFREE[p.n]=['Dale, gracias.','Joya 👍','Ok, después hablamos.'];PHPER[p.n]=`técnico de otra cuadrilla (${(TECS.find(t=>t.n===p.n)||{}).d||'compañero'}), buena onda, pregunta cosas de cableados y de pelos tomados en los barrios`})}}
+{const f=phAsk;phAsk=function(){if(PHT.length&&Math.random()<.35&&PHT.some(x=>!PH.ask.some(a=>!a.done&&a.ch===x.n))){const p=srnd(PHT.filter(x=>!PH.ask.some(a=>!a.done&&a.ch===x.n))),[q,op]=srnd(PTASK)(),t=pT(q),a={who:p.n,ch:p.n,t,opts:op.map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(p.n,{who:p.n,t,ask:a});phPing(p.n,p.n,t);return}return f()}}
+setInterval(()=>{if(!PH||!PH.on||!playing||SUPON||!PHT.length)return;if(!PH.tcT)PH.tcT=Date.now()+rint(60,120)*1000;if(Date.now()<PH.tcT)return;PH.tcT=Date.now()+rint(80,160)*1000;const p=srnd(PHT),t=srnd(PTCHAT)();phAdd(p.n,{who:p.n,t});if(Math.random()<.4)phPing(p.n,p.n,t)},3000);
 applyQ();loop();
 </script></body></html>
