@@ -166,6 +166,15 @@ button:active:not(:disabled){transform:scale(.96)}
 #m2d{position:absolute;left:50%;transform:translateX(-50%);bottom:max(14px,env(safe-area-inset-bottom));padding:10px 16px;font-weight:700;z-index:4;box-shadow:0 6px 18px rgba(0,0,0,.2)}
 #m2d:active{transform:translateX(-50%) scale(.96)}
 .m3 button{font-size:13px}
+#wt{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
+#wt .tbox{max-width:560px;width:100%;position:relative}#wt .tbox.okf{animation:okf .7s ease-out}#wt h2{font-size:17px;margin:14px 0 6px}
+.wcl{display:flex;gap:12px;align-items:center;margin-bottom:8px}.wdial{width:104px;height:104px;flex:none}
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}@media(max-width:520px){.wgrid{grid-template-columns:1fr}}
+.wbar{display:flex;align-items:center;gap:8px;font-size:13px}.wbar span{flex:0 0 auto;min-width:104px}.wbar i{flex:1;height:9px;border-radius:9px;background:rgba(128,140,150,.25);overflow:hidden}.wbar i b{display:block;height:100%;border-radius:9px;transition:width .3s}.wbar em{font-style:normal;font-weight:700;min-width:36px;text-align:right}
+.wrub{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,24,38,.55);z-index:2}.wrub .tbox{max-width:420px}.wrub svg{width:100%;touch-action:none;background:#eef3f6;border-radius:10px;cursor:grab}
+.wst{margin:6px 0 0;font-size:12px;opacity:.85}.wblur svg{filter:blur(var(--wb))}
+#wtoast{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translate(-50%,-140%);max-width:min(92vw,520px);background:#1b2430;color:#fff;padding:10px 14px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:40;transition:transform .35s;pointer-events:none}#wtoast.on{transform:translate(-50%,0)}
+.wbd{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#e5484d;color:#fff;font-size:12px;margin-left:4px}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -311,7 +320,7 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -689,7 +698,7 @@ function cleaveUI(el,c,done,yel){const s={fx:60,closed:false,cut:false},ok=()=>u
 
 /* fusionar (2D, con teclado en la compu): alinear X e Y y dejar el hueco justo */
 let fu=null,fuOn=null;
-function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('clv'))];fu={ox:rint(3,7)*(rnd()<.5?-1:1),oy:rint(2,6)*(rnd()<.5?-1:1),gap:rint(8,14)*5,aL:+(.05+rnd()*amx).toFixed(1),aR:+(.05+rnd()*amx).toFixed(1)};if(upg('fus')||AUTOF())fu.ox=fu.oy=0;
+function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('clv'))];fu={ox:rint(3,7)*(rnd()<.5?-1:1),oy:rint(2,6)*(rnd()<.5?-1:1),gap:rint(8,14)*5,aL:+(.05+rnd()*amx+wAng()).toFixed(1),aR:+(.05+rnd()*amx+wAng()).toFixed(1)};if(upg('fus')||AUTOF())fu.ox=fu.oy=0;
  const draw=()=>{const g=fu.gap,w=150-g/2;
   const scr=(lb,off,y)=>`<rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#gscr)"/><rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#ggrid)"/><circle cx="150" cy="${y+48}" r="30" fill="none" stroke="rgba(143,176,198,.18)"/><text x="10" y="${y+16}" font-size="12" fill="#8fb0c6">${lb}</text><line x1="150" y1="${y+6}" x2="150" y2="${y+90}" stroke="#2b5876" stroke-dasharray="3 3"/>`
    +`<rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="url(#ghi)"/><rect x="0" y="${y+46}" width="${w}" height="4" fill="${c}"/><rect x="${150+g/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="${150+g/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="url(#ghi)"/><rect x="${150+g/2}" y="${y+46+off*3}" width="${w}" height="4" fill="${c2}"/>`;
@@ -701,7 +710,7 @@ function fuseUI(el,c,done,c2){c2=c2||c;const amx=[1.05,.7,.45][Math.min(2,upg('c
   el.querySelectorAll('button').forEach(b=>b.onclick=()=>act(b.dataset.a));if(AUTOF())el.querySelectorAll('button').forEach(b=>b.disabled=true)};
  const act=a=>{if(a==='arc'){if(fu.gap>25){err++;boss('arc');msg('Fibras muy separadas: el arco no las unió. Acercalas.');return}
    if(fu.gap<5){err++;boss('arc');fu.gap=30;msg('Las fibras chocaron. Se separaron: volvé a acercarlas.');draw();return}
-   {const d=Math.hypot(fu.ox,fu.oy)*.5*.45;last=+(.008+4.34*Math.pow(d/4.6,2)+.03*Math.max(0,fu.aL+fu.aR-.5)+Math.max(0,fu.gap-15)*.004).toFixed(3)}loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});fuOn=null;
+   {const d=Math.hypot(fu.ox,fu.oy)*.5*.45;last=+(.008+4.34*Math.pow(d/4.6,2)+.03*Math.max(0,fu.aL+fu.aR-.5)+Math.max(0,fu.gap-15)*.004).toFixed(3)}last=wFuse(last);loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});fuOn=null;
    const sv=el.querySelector('svg');if(sv)sv.insertAdjacentHTML('beforeend','<circle class="arcf" cx="150" cy="48" r="42" fill="url(#garc)"/><circle class="arcf" cx="150" cy="152" r="42" fill="url(#garc)"/>');el.querySelectorAll('button').forEach(b=>b.disabled=true);flash3D(0x9fe2ff,4);
    msg('⚡ Arco… pérdida estimada por la fusionadora: '+last.toFixed(2)+' dB'+(last>.15?' (alta: la próxima alineá mejor)':last<=.05?' (excelente)':''));setTimeout(done,650);return}
   const d=a[1]==='+'?1:-1;if(a[0]==='x')fu.ox=Math.max(-12,Math.min(12,fu.ox+d));if(a[0]==='y')fu.oy=Math.max(-12,Math.min(12,fu.oy+d));if(a[0]==='g')fu.gap=Math.max(0,Math.min(80,fu.gap+d*5));draw()};
@@ -2678,7 +2687,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=66,NEWS=[
+const VER=67,NEWS=[
+ {v:67,t:'Desgaste y taller de mantenimiento',items:[
+  ['🔪','La cuchilla se gasta','La cortadora tiene una cuchilla circular de 16 posiciones. Cada posición rinde unos 60 cortes: después el ángulo de corte sube (y suma pérdida) y, si la seguís usando, el corte sale astillado y hay que repetirlo.'],
+  ['⚡','Electrodos y lentes','Cada arco deja residuo de sílice en los electrodos, descalibra el arco y gasta su vida útil. Las lentes se ensucian (más con lluvia) y la imagen de la fusionadora se ve borrosa. Todo suma pérdida en las fusiones.'],
+  ['🔧','Taller de mantenimiento','Nuevo botón en el menú: gastá monedas para rotar o cambiar la cuchilla, limpiar los electrodos con el bastoncillo (frotando), calibrar el arco, cambiar electrodos y limpiar lentes. Las dos fusionadoras (la de mano y la automática de la Cuadrilla 1) se gastan por separado.'],
+  ['📱','Avisos','Mientras trabajás te aparecen avisos de desgaste y Jony te escribe al celular para que hagas el service.']]},
  {v:66,t:'Guardia nocturna',items:[
   ['🚨','Modo Guardia nocturna','Nuevo botón en el menú: te salta una alerta de falla crítica al azar (troncal cortada por un camión, cable mordido por roedores, botella inundada, acometida cortada por el viento, roseta quemada por un rayo o NAP arrancada) y tenés que resolverla contra reloj.'],
   ['🚐','Kit de emergencia','Antes de salir tenés 30 segundos para cargar conectores, termos, alcohol isopropílico y paños. Si te faltan, volvés a la camioneta (+2 min y −40 pts por cada vez); si llevás de más, tardás en salir.'],
@@ -2973,7 +2987,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -3053,7 +3067,7 @@ const spPress=b=>{if(!b)return;const y=b.position.y;b.position.y=y-.018;setTimeo
 {const P0=spParts,T0=spToggle;spParts=function(){const S=BK&&BK.sp&&BK.sp.userData;if(S&&S.auto)return [S.hood,S.hl,S.btn.oc];return P0()};
  spToggle=function(o){const S=BK.sp.userData;if(S.auto&&o===S.btn.oc){spPress(o);o=S.hood}T0(o);if(S.auto&&o===S.hood)spAutoScr(S.scr,S.hood.userData.open?'open':'idle')}}
 /* fusión automática: abrir con OPEN/CLOSE, apoyar los pelos, cerrar y la máquina hace todo sola */
-function autoFuseUI(el,c1,c2,S,done){const amx=[1.05,.7,.45][Math.min(2,upg('clv'))],aL=+(.05+rnd()*amx).toFixed(1),aR=+(.05+rnd()*amx).toFixed(1),sp=itemOn('Bruno')?.6:1;
+function autoFuseUI(el,c1,c2,S,done){const amx=[1.05,.7,.45][Math.min(2,upg('clv'))],aL=+(.05+rnd()*amx+wAng()).toFixed(1),aR=+(.05+rnd()*amx+wAng()).toFixed(1),sp=itemOn('Bruno')?.6:1;
  let ox=rint(3,7)*(rnd()<.5?-1:1),oy=rint(2,6)*(rnd()<.5?-1:1),gap=70,ph='';const ox0=ox,oy0=oy,t0=performance.now();fuOn=null;
  const view=(lb,off,y)=>{const w=150-gap/2;return `<rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#gscr)"/><rect x="0" y="${y}" width="300" height="96" rx="8" fill="url(#ggrid)"/><text x="10" y="${y+16}" font-size="12" fill="#8fb0c6">${lb}</text><line x1="150" y1="${y+6}" x2="150" y2="${y+90}" stroke="#2b5876" stroke-dasharray="3 3"/>`
   +`<rect x="0" y="${y+38}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="0" y="${y+46}" width="${w}" height="4" fill="${c1}"/><rect x="${150+gap/2}" y="${y+38+off*3}" width="${w}" height="20" rx="3" fill="#9fd8ff"/><rect x="${150+gap/2}" y="${y+46+off*3}" width="${w}" height="4" fill="${c2}"/>`};
@@ -3065,7 +3079,7 @@ function autoFuseUI(el,c1,c2,S,done){const amx=[1.05,.7,.45][Math.min(2,upg('clv
   else if(t<1500){ph='Avance de las fibras';gap=70-60*(t-600)/900;screen(S.scr,'AVANCE','idle')}
   else if(t<2600){ph='Alineando por núcleo (X e Y)';const q=(t-1500)/1100;ox=ox0*(1-q);oy=oy0*(1-q);gap=10;screen(S.scr,'ALINEANDO','idle')}
   else if(t<3100){ph='Midiendo el ángulo de corte';ox=oy=0;screen(S.scr,`IZQ ${aL}° DER ${aR}°`,'idle')}
-  else{last=+(.008+.03*Math.max(0,aL+aR-.5)+rnd()*.012).toFixed(3);loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});ph='⚡ Arco · pérdida estimada '+last.toFixed(2)+' dB';gap=0;draw(true);flash3D(0x9fe2ff,4);
+  else{last=+(.008+.03*Math.max(0,aL+aR-.5)+rnd()*.012).toFixed(3);last=wFuse(last);loss+=last;fusN++;if(last>.15)boss('loss',{db:last.toFixed(2)});ph='⚡ Arco · pérdida estimada '+last.toFixed(2)+' dB';gap=0;draw(true);flash3D(0x9fe2ff,4);
    screen(S.scr,last.toFixed(2)+' dB','arc');msg('⚡ Fusión automática: pérdida estimada '+last.toFixed(2)+' dB'+(last<=.05?' (excelente)':''));setTimeout(()=>{screen(S.scr,'Pérdida '+last.toFixed(2)+' dB','done');done()},900);return}
   draw(false);requestAnimationFrame(f)};f()}
 function autoFuse(c1,c2,done){$('#m2d').hidden=false;const S=BK.sp.userData,y=SPYF,z=BKZ+SPZF,PL=V(BKX-GLC-.03,y,z),PR=V(BKX+GLC+.03,y,z);bCam('splicer');
@@ -3983,5 +3997,106 @@ function guardFinish(){const g=GUARD;if(!g||g.fin||!g.t0)return;g.fin=true;const
 {const f=coinsFor;coinsFor=function(p){const o=f(p);if(GUARD&&GUARD.fin)o.co=Math.round(o.co*1.5);return o}}
 
 window.GDauto=()=>{if(!GUARD)return;GUARD.kit={conectores:2,termos:fusN+30,alcohol:3,panos:9}};
+/*C67*/
+/* ===== V67: desgaste de herramientas + taller de mantenimiento ===== */
+const WN=60;/* cortes que aguanta cada una de las 16 posiciones de la cuchilla */
+const WDEF=()=>({pos:1,cuts:0,tot:0,blades:1,fus:{m:{res:0,cal:0,life:0,lens:0},a:{res:0,cal:0,life:0,lens:0}},warn:{}});
+let WEAR=(()=>{try{const w=JSON.parse(localStorage.getItem('taller_wear')||'null');if(w&&w.fus){const d=WDEF();return Object.assign(d,w,{fus:{m:Object.assign(d.fus.m,w.fus.m),a:Object.assign(d.fus.a,w.fus.a)},warn:w.warn||{}})}}catch(e){}return WDEF()})();
+function wSave(){try{localStorage.setItem('taller_wear',JSON.stringify(WEAR))}catch(e){}}
+function wK(){return (typeof CUAD!=='undefined'&&CUAD===1)?'a':'m'}
+function wFu(k){return WEAR.fus[k||wK()]}
+function wBf(){return WEAR.cuts/WN}/* 0 = filo nuevo, 1 = posición agotada */
+function wAng(){const f=wBf();return f<.55?0:Math.min(1.6,(f-.55)*2.2)*(.6+rnd()*.5)}
+function wSt(k){const u=wFu(k);return{res:u.res/70,cal:u.cal/140,life:u.life/500,lens:u.lens}}
+function wLossOf(k){const s=wSt(k);return Math.max(0,s.res-.5)*.05+Math.max(0,s.cal-.6)*.04+Math.max(0,s.life-.85)*.15+Math.max(0,s.lens-.35)*.08}
+function wFuse(l){const k=wK(),u=wFu(k),s=wSt(k);let x=wLossOf(k);
+ if((s.life>1||s.res>2)&&Math.random()<.22){x+=.12;setTimeout(()=>wToast('⚡ Arco inestable: los electrodos están muy gastados y salió una burbuja en el empalme (+0,12 dB).'),700)}
+ u.res++;u.cal++;u.life++;u.lens=Math.min(1,u.lens+.012+((typeof GUARD!=='undefined'&&GUARD&&GUARD.t0&&!GUARD.fin&&GUARD.env&&GUARD.env.rain)?.03:0));wSave();setTimeout(wWarn,1200);
+ return +(l+x).toFixed(3)}
+/* aviso flotante (no pisa el mensaje del paso) */
+function wToast(t){let e=$('#wtoast');if(!e){e=document.createElement('div');e.id='wtoast';document.body.appendChild(e)}e.textContent=t;e.classList.remove('on');void e.offsetWidth;e.classList.add('on');clearTimeout(wToast.t);wToast.t=setTimeout(()=>e.classList.remove('on'),4800)}
+const WWARN={
+ b1:['🔪 La cuchilla de la cortadora empieza a perder filo: los ángulos de corte suben.','Che {tu}, ¿hace cuánto no rotás la cuchilla? Los ángulos te van a salir feos.'],
+ b2:['🔪 Posición de cuchilla agotada: rotala en el 🔧 Taller de mantenimiento.','{tu}, rotá la cuchilla que así te van a salir cortes astillados 😬'],
+ b3:['🔪 Usaste las 16 posiciones: hay que cambiar la cuchilla.','La cuchilla ya dio las 16 vueltas, wacho. Cambiala en el taller.'],
+ e1:['⚡ Residuo de sílice en los electrodos: limpialos con el bastoncillo.','Limpiá los electrodos, que con la sílice pegada el arco sale débil.'],
+ c1:['⚡ El arco está descalibrado: hacé la calibración de arco.','¿Calibraste el arco? Las pérdidas te están subiendo.'],
+ l1:['⚡ Los electrodos están al final de su vida útil: cambialos.','Esos electrodos ya están para cambiar, {tu}.'],
+ n1:['🔍 Lentes y espejos sucios: la imagen de la fusionadora se ve borrosa.','Limpiá las lentes de la fusionadora que ni se ve la fibra 😂']};
+function wNeeds(){const f=wBf(),o=[];if(f>=1)o.push(WEAR.pos>=16?'b3':'b2');else if(f>=.55)o.push('b1');
+ ['m','a'].forEach(k=>{const s=wSt(k);if(s.res>=1)o.push('e1'+k);if(s.cal>=1)o.push('c1'+k);if(s.life>=.85)o.push('l1'+k);if(s.lens>=.35)o.push('n1'+k)});return o}
+function wWarn(){const k=wK(),nd=wNeeds().filter(x=>x.length===2||x.endsWith(k));let said=false;
+ nd.forEach(x=>{const b=x.slice(0,2);if(WEAR.warn[x]||said)return;WEAR.warn[x]=1;said=true;wToast(WWARN[b][0]);
+  try{if(typeof PH!=='undefined'&&PH&&PH.on&&PH.chats&&PH.chats['Jony']){const t=pT(WWARN[b][1]);phAdd('Jony',{who:'Jony',t});phPing('Jony','Jony',t)}}catch(e){}});
+ if(said)wSave()}
+function wClr(...ks){ks.forEach(k=>Object.keys(WEAR.warn).forEach(x=>{if(x.startsWith(k))delete WEAR.warn[x]}))}
+/* línea de estado dentro de la cortadora y la fusionadora */
+const wPct=v=>Math.max(0,Math.round((1-Math.min(1,v))*100));
+function wBladeTxt(){const f=wBf();return `🔪 Cuchilla: posición <b>${WEAR.pos}/16</b> · filo <b style="color:${f>=1?'#e5484d':f>=.55?'#e0a100':'inherit'}">${wPct(f)}%</b>${f>=1?' · rotala en el taller':''}`}
+function wFusTxt(){const s=wSt(),c=v=>v>=1?'#e5484d':v>=.6?'#e0a100':'inherit';return `⚡ Electrodos <b style="color:${c(s.res)}">${wPct(s.res)}%</b> limpios · arco <b style="color:${c(s.cal)}">${wPct(s.cal)}%</b> calibrado · vida <b style="color:${c(s.life/.85)}">${wPct(s.life)}%</b> · 🔍 lentes <b style="color:${c(s.lens/.35*.6)}">${wPct(s.lens)}%</b>`}
+function wWatch(el,txt){const add=()=>{if(!el.isConnected)return mo.disconnect();if(!el.querySelector('.wst'))el.insertAdjacentHTML('beforeend',`<p class="wst">${txt()}</p>`)};const mo=new MutationObserver(add);mo.observe(el,{childList:true});add();
+ const b=Math.max(0,wSt().lens-.3)*4;el.classList.toggle('wblur',b>0);el.style.setProperty('--wb',b.toFixed(2)+'px');return()=>{mo.disconnect();el.classList.remove('wblur')}}
+{const f=cleaveUI;cleaveUI=function(el,c,done,yel){const r=f(el,c,()=>{WEAR.cuts++;WEAR.tot++;wSave();const k=wBf();
+  if(k>1.1&&Math.random()<Math.min(.55,.2+(k-1.1)*1.5)){err++;msg('🔪 La cuchilla gastada dejó el corte astillado (con labio). Limpiá y volvé a cortar · rotá la cuchilla en el taller.');setTimeout(()=>{if(el.isConnected)cleaveUI(el,c,done,yel)},1100);return}
+  wWarn();done()},yel);if(el.isConnected&&!el.querySelector('.wst'))el.insertAdjacentHTML('beforeend',`<p class="wst">${wBladeTxt()}</p>`);return r}}
+{const f=fuseUI;fuseUI=function(el,c,done,c2){const off=wWatch(el,wFusTxt);return f(el,c,()=>{off();done()},c2)}}
+{const f=autoFuseUI;autoFuseUI=function(el,c1,c2,S,done){const off=wWatch(el,wFusTxt);return f(el,c1,c2,S,()=>{off();done()})}}
+
+/* ===== panel de service ===== */
+const WSV={
+ rot:{n:'Rotar cuchilla',ic:'🔄',p:15,d:'Girás la cuchilla circular a la posición siguiente: filo nuevo.'},
+ bla:{n:'Cambiar cuchilla',ic:'🔪',p:180,d:'Cuchilla nueva: vuelve a la posición 1 de 16.'},
+ cle:{n:'Limpiar electrodos',ic:'🧽',p:10,d:'Con bastoncillo y alcohol: sacás el residuo de sílice.'},
+ cal:{n:'Calibrar arco',ic:'🎯',p:25,d:'Arco de prueba: la fusionadora ajusta la potencia sola.'},
+ ele:{n:'Cambiar electrodos',ic:'⚡',p:120,d:'Par de electrodos nuevos (después hay que calibrar el arco).'},
+ len:{n:'Limpiar lentes y espejos',ic:'🔍',p:12,d:'Hisopo con alcohol en las lentes y los espejos: imagen nítida.'}};
+function openWT(){let el=$('#wt');if(!el){el=document.createElement('div');el.id='wt';el.hidden=true;document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;wtRender()}
+function closeWT(){$('#wt').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
+function wBar(v,lbl){const p=wPct(v),c=p<=0?'#e5484d':p<40?'#e0a100':'#22b573';return `<div class="wbar"><span>${lbl}</span><i><b style="width:${p}%;background:${c}"></b></i><em>${p}%</em></div>`}
+function wDial(){const f=wBf();let g='';for(let i=0;i<16;i++){const a0=(i/16)*Math.PI*2-Math.PI/2,a1=((i+1)/16)*Math.PI*2-Math.PI/2-.06,P=(a,r)=>[60+r*Math.cos(a),60+r*Math.sin(a)].map(v=>v.toFixed(1)).join(','),
+  st=i+1<WEAR.pos?'#8a96a0':i+1===WEAR.pos?(f>=1?'#e5484d':f>=.55?'#e0a100':'#22b573'):'#dfe7ee';
+  g+=`<path d="M${P(a0,52)} A52,52 0 0 1 ${P(a1,52)} L${P(a1,34)} A34,34 0 0 0 ${P(a0,34)}Z" fill="${st}" stroke="#33414d" stroke-width=".8"/>`}
+ return `<svg viewBox="0 0 120 120" class="wdial">${g}<circle cx="60" cy="60" r="30" fill="#c9d3db" stroke="#33414d"/><circle cx="60" cy="60" r="7" fill="#33414d"/></svg>`}
+function wtRender(){const el=$('#wt'),co=(typeof acct!=='undefined'&&acct&&acct.coins)||0,f=wBf(),pr=k=>price(WSV[k].p);
+ const card=(k,dis,why,ex)=>{const s=WSV[k],p=pr(k);return `<div class="scard"><div class="sic">${s.ic}</div><div class="stx"><b>${s.n}</b><span>${why||s.d}</span></div><button class="buy" data-w="${k}"${ex?` data-x="${ex}"`:''} ${dis||co<p?'disabled':''}>🪙 ${p}</button></div>`};
+ const fus=(k,t)=>{const s=wSt(k);return `<h2>${t}</h2><div class="wgrid">${wBar(s.res,'Electrodos limpios')}${wBar(s.cal,'Calibración del arco')}${wBar(s.life,'Vida de los electrodos')}${wBar(s.lens,'Lentes y espejos')}</div>
+  <p class="note" style="margin:2px 0 8px">Pérdida extra por desgaste en cada fusión: <b>${wLossOf(k).toFixed(3)} dB</b> · ${wFu(k).life} arcos con estos electrodos</p>
+  ${card('cle',wFu(k).res===0,'',k)}${card('cal',wFu(k).cal===0,'',k)}${card('ele',wFu(k).life===0,'',k)}${card('len',wFu(k).lens===0,'',k)}`};
+ el.innerHTML=`<div class="tbox"><div class="shd"><h1 style="font-size:24px;margin:0">🔧 Taller de mantenimiento</h1><span class="cbal">🪙 <b>${co}</b></span></div>
+ <p class="sub" style="margin:4px 0 10px">Las herramientas se gastan con el uso. Si no les hacés el service, los cortes salen con ángulo y las fusiones pierden más.</p>${co||acct?'':'<p class="note">Iniciá sesión para gastar monedas.</p>'}
+ <h2>🔪 Cortadora (cleaver)</h2><div class="wcl">${wDial()}<div><p style="margin:0 0 4px">Posición <b>${WEAR.pos} de 16</b> · ${WEAR.cuts} cortes en esta posición (rinde ~${WN})</p>${wBar(f,'Filo de la posición')}
+  <p class="note" style="margin:4px 0 0">Ángulo extra estimado: <b>+${(f<.55?0:Math.min(1.6,(f-.55)*2.2)*.85).toFixed(2)}°</b> · ${WEAR.tot} cortes en total · cuchilla n.º ${WEAR.blades}</p></div></div>
+ ${card('rot',WEAR.pos>=16||WEAR.cuts===0,WEAR.pos>=16?'Ya usaste las 16 posiciones: cambiá la cuchilla.':'')}${card('bla',WEAR.pos===1&&WEAR.cuts===0)}
+ ${fus('m','⚡ Fusionadora de mano (Cuadrilla 2 y 3)')}${fus('a','🤖 Fusionadora automática (Cuadrilla 1)')}
+ <button class="big" onclick="closeWT()">Volver al menú</button></div>`;
+ el.querySelectorAll('.buy').forEach(b=>b.onclick=()=>wService(b.dataset.w,b.dataset.x))}
+function wPay(k){if(typeof acct==='undefined'||!acct)return false;const p=price(WSV[k].p);if((acct.coins||0)<p)return false;acct.coins-=p;saveAcct();return true}
+function wService(k,fk){if(!wPay(k))return;const u=fk?wFu(fk):null;
+ const fin=t=>{wSave();ding();wtRender();wToast(t);const s=$('#wt .tbox');if(s){s.classList.remove('okf');void s.offsetWidth;s.classList.add('okf')}};
+ if(k==='rot'){WEAR.pos=Math.min(16,WEAR.pos+1);WEAR.cuts=0;wClr('b');return fin(`🔄 Cuchilla rotada a la posición ${WEAR.pos}/16.`)}
+ if(k==='bla'){WEAR.pos=1;WEAR.cuts=0;WEAR.blades++;wClr('b');return fin('🔪 Cuchilla nueva colocada.')}
+ if(k==='cal')return wCal(()=>{u.cal=0;wClr('c1'+fk);fin('🎯 Arco calibrado.')});
+ if(k==='ele'){u.life=0;u.res=0;u.cal=Math.max(u.cal,140);wClr('l1'+fk,'e1'+fk);return fin('⚡ Electrodos nuevos. Ahora calibrá el arco.')}
+ if(k==='cle')return wRub('Limpiá los electrodos con el bastoncillo','elec',()=>{u.res=0;wClr('e1'+fk);fin('🧽 Electrodos limpios.')});
+ if(k==='len')return wRub('Limpiá las lentes y los espejos con el hisopo','lens',()=>{u.lens=0;wClr('n1'+fk);fin('🔍 Lentes y espejos limpios.')})}
+/* mini-tarea: frotar con el bastoncillo (ida y vuelta) */
+function wRub(t,kind,done){const el=$('#wt');let n=0,lx=null,dir=0;const N=10;
+ const art=kind==='elec'?`<rect x="20" y="70" width="110" height="16" rx="8" fill="#9aa6b0"/><polygon points="130,70 150,78 130,86" fill="#7b8790"/><rect x="190" y="70" width="110" height="16" rx="8" fill="#9aa6b0"/><polygon points="190,70 170,78 190,86" fill="#7b8790"/><g class="wdirt">${[...Array(8)].map((_,i)=>`<circle cx="${140+((i*7)%22)-6}" cy="${72+((i*5)%14)}" r="${2+(i%3)}" fill="#e8e2c8"/>`).join('')}</g>`
+  :`<circle cx="160" cy="78" r="44" fill="#a9c7de" stroke="#33414d" stroke-width="2"/><circle cx="160" cy="78" r="30" fill="#cfe6f7"/><g class="wdirt">${[...Array(10)].map((_,i)=>`<circle cx="${130+((i*13)%60)}" cy="${52+((i*17)%52)}" r="${3+(i%4)}" fill="#8a7a5a" opacity=".55"/>`).join('')}</g>`;
+ const box=document.createElement('div');box.className='wrub';box.innerHTML=`<div class="tbox"><h2 style="margin:0 0 6px">${t}</h2><p class="note" style="margin:0 0 8px">Pasá el bastoncillo de un lado a otro (arrastrá ida y vuelta) hasta que quede limpio.</p>
+  <svg viewBox="0 0 320 160">${art}<g class="wswab"><rect x="-4" y="-60" width="8" height="70" rx="3" fill="#f3efe4" stroke="#b9ab8a"/><ellipse cx="0" cy="12" rx="9" ry="13" fill="#fff" stroke="#c9bfa8"/></g></svg>
+  <div class="wbar"><span>Limpieza</span><i><b class="wp" style="width:0%"></b></i><em class="wpe">0%</em></div><button class="lnk">Cancelar</button></div>`;
+ el.appendChild(box);const sv=box.querySelector('svg'),sw=box.querySelector('.wswab'),dt=box.querySelector('.wdirt');let fin=false;
+ const mv=e=>{if(fin)return;const p=svgPt(sv,e);sw.setAttribute('transform',`translate(${p.x.toFixed(0)},${(p.y).toFixed(0)})`);if(e.buttons===0&&e.pointerType==='mouse')return;
+  if(lx!==null){const d=Math.sign(p.x-lx);if(Math.abs(p.x-lx)>1.5&&d&&d!==dir){if(dir!==0)n++;dir=d}}lx=p.x;const k=Math.min(1,n/N);box.querySelector('.wp').style.width=(k*100)+'%';box.querySelector('.wpe').textContent=Math.round(k*100)+'%';dt.setAttribute('opacity',(1-k).toFixed(2));
+  if(k>=1){fin=true;setTimeout(()=>{box.remove();done()},350)}};
+ sv.onpointermove=mv;sv.onpointerdown=e=>{lx=null;try{sv.setPointerCapture(e.pointerId)}catch(_){};mv(e)};
+ box.querySelector('.lnk').onclick=()=>{fin=true;box.remove();if(acct){acct.coins+=price(WSV[kind==='elec'?'cle':'len'].p);saveAcct()}wtRender()}}
+function wCal(done){const el=$('#wt'),box=document.createElement('div');box.className='wrub';box.innerHTML=`<div class="tbox"><h2 style="margin:0 0 6px">🎯 Calibración de arco</h2><p class="note" style="margin:0 0 8px">Arco de prueba sobre dos fibras: la fusionadora mide cuánto se funden y ajusta la potencia.</p><svg viewBox="0 0 320 120"><rect width="320" height="120" rx="8" fill="#0d2233"/><rect x="0" y="50" width="150" height="16" fill="#9fd8ff"/><rect x="170" y="50" width="150" height="16" fill="#9fd8ff"/><circle class="arcf" cx="160" cy="58" r="30" fill="url(#garc)"/></svg><p class="wcp" style="font-weight:700;margin:8px 0 0">Arco de prueba 1/3…</p></div>`;
+ el.appendChild(box);let i=1;const t=setInterval(()=>{i++;const p=box.querySelector('.wcp');if(i<=3)p.textContent=`Arco de prueba ${i}/3… potencia ${(100+rint(-6,6))}%`;else{clearInterval(t);p.textContent='✅ Arco calibrado: potencia ajustada.';setTimeout(()=>{box.remove();done()},700)}},700)}
+function wBadge(){const b=$('.wtbtn');if(!b)return;const n=wNeeds().filter(x=>!x.startsWith('b1')).length;b.innerHTML='🔧 Taller de mantenimiento'+(n?` <span class="wbd">${n}</span>`:'')}
+{const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{wBadge()}catch(e){}return r}}
+setTimeout(()=>{try{wBadge()}catch(e){}},500);
+
 applyQ();loop();
 </script></body></html>
