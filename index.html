@@ -187,6 +187,16 @@ button:active:not(:disabled){transform:scale(.96)}
 .otrep{background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;border:2px solid #22b573}.otrep h3{margin:0 0 4px;color:#159a5f}.otrep p{margin:4px 0;font-size:13.5px}
 .otbx{background:#fff;border-radius:12px;padding:8px}#res .otsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(34,181,115,.12);border:1.5px solid rgba(34,181,115,.5);font-size:14px;text-align:left}
 @media(max-width:480px){.otab{font-size:11px}.otab th:nth-child(3),.otab td:nth-child(3){display:none}}
+#prg{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
+#prg .tbox{max-width:600px;width:100%}#prg h2{font-size:17px;margin:14px 0 6px}
+.prrk{display:flex;gap:12px;align-items:center;padding:10px;border:1.5px solid var(--line);border-radius:14px;background:var(--bg)}.prav{position:relative;width:64px;height:64px;flex:none;border-radius:16px;overflow:hidden;background:#cfe8ff}.prav svg{width:100%;height:100%}.prav i{position:absolute;right:-2px;bottom:-4px;font-style:normal;font-size:24px}
+.prbar{height:10px;border-radius:10px;background:rgba(128,140,150,.25);overflow:hidden;margin:4px 0 2px}.prbar i{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#22b573,#f2b900)}
+.prch.dn{opacity:.75;border-color:#22b573}.prbg{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.prb{border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center;background:var(--bg);opacity:.6;filter:grayscale(1)}.prb.on{opacity:1;filter:none;border-color:#f2b900;background:linear-gradient(180deg,#fff9e0,var(--bg))}
+.prb i{display:block;font-style:normal;font-size:28px}.prb b{display:block;font-size:13px;margin:2px 0}.prb span{display:block;font-size:11px;opacity:.8}
+.prrl{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;margin-bottom:6px;border:1.5px solid var(--line);opacity:.6}.prrl.ok{opacity:1}.prrl.cur{border-color:#f2b900;background:rgba(242,185,0,.1)}.prrl>span{font-size:24px}
+#rkchip{display:inline-block;margin-left:6px;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(242,185,0,.18);border:1px solid rgba(242,185,0,.5);vertical-align:middle}
+.prsum{margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(242,185,0,.1);border:1.5px solid rgba(242,185,0,.5);text-align:left;font-size:13.5px}.prsum p{margin:4px 0}.prtop{display:flex;justify-content:space-between}.prup{font-weight:700;color:#159a5f}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -332,7 +342,7 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt prbtn" onclick="openPR()">🏅 Desafíos y logros</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -2699,7 +2709,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=68,NEWS=[
+const VER=69,NEWS=[
+ {v:69,t:'Desafíos diarios, insignias y rangos',items:[
+  ['🎯','Desafíos del día','Cada día aparecen 3 desafíos nuevos (por ejemplo: instalá 3 rosetas, terminá una roseta en menos de 8 minutos, hacé una fusión de 0,015 dB, certificá con el OTDR o resolvé una guardia dentro del SLA). Cada uno da monedas y XP, y si completás los 3 abrís un cofre.'],
+  ['📶','Rangos','Con la XP subís de rango: Aprendiz → Técnico Junior → Oficial Empalmador → Especialista Core → Maestro de la Fibra. Cada rango tiene bonificaciones: descuentos en la tienda y el taller, más minutos de SLA en las guardias y más monedas.'],
+  ['🎖️','Insignias','16 insignias para desbloquear: Mano de cirujano, Guardián nocturno, Ojo de OTDR, Pulpo, Vertical, Racha de 3 días y más. Cada una suma 50 XP.'],
+  ['🏅','Panel nuevo','Botón «Desafíos y logros» en el menú, tu rango al lado de tu nombre y el resumen de XP, desafíos e insignias al terminar cada trabajo.']]},
  {v:68,t:'Certificación con OTDR',items:[
   ['📈','OTDR al terminar','Cuando terminás una roseta o una NAP podés certificar el enlace: conectás una bobina de lanzamiento de 150 m y el OTDR dibuja la traza (dB contra distancia) hasta la OLT de la central, con su tabla de eventos.'],
   ['🗺️','Topología','Arriba ves el esquema del enlace: OTDR → bobina → roseta → drop → NAP 1x8 → botella → troncal → OLT, con los metros de cada tramo, para ubicar cada evento.'],
@@ -2887,7 +2902,7 @@ const ITEMS={
 const upg=id=>(acct&&acct.tools&&acct.tools[id])||0;
 const owns=n=>!!(acct&&acct.items&&acct.items[n]);
 const itemOn=n=>owns(n)&&TECS[TEC]&&TECS[TEC].n===n;
-const price=x=>itemOn('Alan')?Math.round(x*.85):x;
+const price=x=>Math.round((itemOn('Alan')?x*.85:x)*(1-(typeof rkDisc==='function'?rkDisc():0)));
 function saveAcct(){if(!acct)return;try{if(DB)pref().set(acct).catch(()=>LS.set('taller_cuenta',acct));else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}}
 function playLevel(){const n=(acct&&acct.nivel)||1,pool=n<=1?[6,12]:n===2?[6,12,24]:n===3?[12,24,36]:n===4?[24,36,48]:[24,36,48,48];let job;const sp=Math.random()<.45;
  const rr=Math.random();if(rr>=.55&&rr<.7){setModo('cableado');SPL=0;DROPN=1;job='Cableado en Barrio Santa Ana: drop desde la cámara subterránea hasta la casa'}
@@ -3005,7 +3020,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -3970,7 +3985,7 @@ const GEV=[
 const GKIT=[['conectores','🔌','Conectores de campo'],['termos','🧪','Protectores de empalme (termos)'],['alcohol','🧴','Alcohol isopropílico (frascos)'],['panos','🧻','Paños sin pelusa']];
 let GUARD=null;
 function openGuard(){const ev=srnd(GEV),n=ev.fib?srnd(ev.fib):1,env={night:true,rain:Math.random()<.65,wind:Math.random()<.45};
- GUARD={ev,n,env,kit:{conectores:0,termos:0,alcohol:0,panos:0},t0:null,sla:ev.sla*60,pts:0,fin:false,short:{},miss:0};
+ GUARD={ev,n,env,kit:{conectores:0,termos:0,alcohol:0,panos:0},t0:null,sla:ev.sla*60+(typeof rkSla==='function'?rkSla()*60:0),pts:0,fin:false,short:{},miss:0};
  let el=$('#gd');if(!el){el=document.createElement('div');el.id='gd';document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;
  el.innerHTML=`<div class="gdw"><div class="gdal">🚨 ALERTA DE GUARDIA · ${hhmm(Date.now())}</div><div class="gdc"><span class="gdi">${ev.ic}</span><div><b>${ev.t}</b><p>${ev.d}</p><p class="gdb">📋 ${ev.brief(n)}</p></div></div>`
   +`<div class="gdenv">${env.night?'<span>🌙 Noche: trabajás con linterna frontal</span>':''}${env.rain?'<span>🌧️ Lluvia: la humedad sube la pérdida de las fusiones</span>':''}${env.wind?'<span>💨 Viento: te tiembla el pulso en los trabajos de precisión</span>':''}<span>⏱ SLA: ${ev.sla} min</span></div>`
@@ -4239,6 +4254,112 @@ function otdSum(){if(!OTD||!OTD.fin||OTD.skip||OTD.mg||$('#end').hidden||$('#res
 MGS.push({k:'otdr',ic:'📈',g:'Herramientas',n:'Certificación OTDR',d:'Leé la traza, diagnosticá los eventos, corregí las fallas y certificá el enlace.'});
 {const f=mgPlay;mgPlay=function(k){const r=f(k);if(k==='otdr'){const B=$('#mgb');const kind=Math.random()<.5?'nap':'roseta',src={spl:null,rate:'Prolijo'};
   OTD={cont:()=>mgDone(),kind,sc:otdBuild(kind,src,true),lam:1310,zoom:false,st:'con',pts:0,tries:0,cur:null,sel:null,fixN:0,mist:0,mg:true,el:B};otdRender()}return r}}
+
+/*C69*/
+/* ===== V69: desafíos diarios, insignias y rangos de la cuadrilla ===== */
+const PRDEF=()=>({xp:0,day:'',ch:[],dc:{},badges:{},st:{},streak:0,lastDay:'',chest:''});
+let PRG=(()=>{try{const p=JSON.parse(localStorage.getItem('taller_prog')||'null');if(p)return Object.assign(PRDEF(),p)}catch(e){}return PRDEF()})(),PRT0=0,PRDONE=false;
+function prSave(){try{localStorage.setItem('taller_prog',JSON.stringify(PRG))}catch(e){}}
+const prDay=(d=new Date())=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+function prHash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function prRng(seed){let s=seed||1;return()=>{s=Math.imul(s^(s>>>15),2246822507)^Math.imul(s^(s>>>13),3266489909);s^=s>>>16;return (s>>>0)/4294967296}}
+/* rangos con bonificaciones pasivas */
+const RANKS=[
+ {n:'Aprendiz',xp:0,ic:'🔰',disc:0,sla:0,coin:0,b:'Sin bonificaciones todavía.'},
+ {n:'Técnico Junior',xp:300,ic:'🥉',disc:.05,sla:0,coin:0,b:'5% de descuento en la tienda y en el taller.'},
+ {n:'Oficial Empalmador',xp:1000,ic:'🥈',disc:.10,sla:1,coin:.05,b:'10% de descuento · +1 min de SLA en las guardias · +5% de monedas.'},
+ {n:'Especialista Core',xp:2500,ic:'🥇',disc:.15,sla:2,coin:.10,b:'15% de descuento · +2 min de SLA · +10% de monedas.'},
+ {n:'Maestro de la Fibra',xp:5000,ic:'💎',disc:.20,sla:3,coin:.15,b:'20% de descuento · +3 min de SLA · +15% de monedas.'}];
+function rkIdx(xp){let i=0;RANKS.forEach((r,k)=>{if((xp==null?PRG.xp:xp)>=r.xp)i=k});return i}
+const rk=()=>RANKS[rkIdx()],rkDisc=()=>rk().disc,rkSla=()=>rk().sla,rkCoin=()=>rk().coin;
+/* desafíos: plantillas con parámetros (semilla = fecha) */
+const PCH=[
+ {id:'ros',f:r=>{const n=r<.5?2:3;return{t:`Instalá ${n} rosetas hoy`,n,co:20*n+20,xp:40*n}},cnt:c=>c.mode==='roseta'},
+ {id:'nap',f:r=>{const n=r<.6?1:2;return{t:`Armá ${n} caja${n>1?'s':''} NAP hoy`,n,co:40*n,xp:60*n}},cnt:c=>c.mode==='nap'},
+ {id:'fast',f:r=>{const m=r<.5?8:10;return{t:`Terminá una roseta en menos de ${m} minutos`,m,co:60,xp:90}},ok:(c,p)=>c.mode==='roseta'&&c.secs<p.m*60},
+ {id:'noerr',f:()=>({t:'Terminá un trabajo sin ningún error',co:50,xp:80}),ok:c=>c.err===0},
+ {id:'spl',f:r=>{const x=r<.5?.02:.015;return{t:`Lográ una fusión de ${x.toFixed(3).replace('.',',')} dB o menos`,x,co:50,xp:80}},ok:(c,p)=>c.spl!=null&&c.spl<=p.x},
+ {id:'pw',f:r=>{const x=r<.5?17:18;return{t:`Medí una potencia mejor que −${x} dBm en el cliente`,x,co:40,xp:60}},ok:(c,p)=>c.pw!=null&&c.pw>-p.x},
+ {id:'bot',f:r=>{const n=r<.5?24:36;return{t:`Instalá una botella de ${n} fibras o más`,n,co:90,xp:140}},ok:(c,p)=>c.mode==='instalacion'&&c.nfib>=p.n},
+ {id:'cbl',f:r=>{const w=r<.5?1:2;return{t:`Hacé un cableado con ${w} m de desperdicio o menos`,w,co:50,xp:80}},ok:(c,p)=>c.mode==='cableado'&&c.waste!=null&&c.waste<=p.w},
+ {id:'otdr',f:()=>({t:'Certificá un enlace con el OTDR',co:60,xp:100}),ok:c=>c.otdr},
+ {id:'gd',f:()=>({t:'Resolvé una guardia nocturna dentro del SLA',co:80,xp:120}),ok:c=>c.guard==='ok'},
+ {id:'neat',f:()=>({t:'Dejá un trabajo con guardado Prolijo y sin reclamos',co:40,xp:60}),ok:c=>c.neat&&!c.recl},
+ {id:'ot',f:()=>({t:'Completá la orden de trabajo sin un solo error',co:50,xp:70}),ok:c=>c.ot&&c.ot.ok===c.ot.tot},
+ {id:'mg',f:()=>({t:'Sacá 3 estrellas en un minijuego',co:30,xp:50}),mg:true},
+ {id:'pts',f:r=>{const x=r<.5?800:900;return{t:`Hacé ${x} puntos o más en un trabajo`,x,co:50,xp:80}},ok:(c,p)=>c.p>=p.x}];
+function prRoll(){const d=prDay();if(PRG.day===d)return;const R0=prRng(prHash(d+'·taller')),pool=PCH.slice(),ch=[];
+ while(ch.length<3&&pool.length){const k=Math.floor(R0()*pool.length),t=pool.splice(k,1)[0],p=t.f(R0());ch.push(Object.assign({id:t.id,c:0,done:false},p))}
+ PRG.day=d;PRG.ch=ch;PRG.dc={};prSave()}
+function prTpl(id){return PCH.find(t=>t.id===id)}
+/* insignias */
+const BADGES=[
+ {id:'ros1',ic:'🏠',n:'Primera roseta',d:'Instalá tu primera roseta.',ok:s=>s.roseta>=1},
+ {id:'nap1',ic:'📦',n:'Primera NAP',d:'Armá tu primera caja NAP.',ok:s=>s.nap>=1},
+ {id:'bot1',ic:'🍾',n:'Primera botella',d:'Instalá tu primera botella.',ok:s=>s.instalacion>=1},
+ {id:'cbl1',ic:'🧵',n:'Primer cableado',d:'Terminá tu primer cableado.',ok:s=>s.cableado>=1},
+ {id:'ros10',ic:'🏘️',n:'Barrio conectado',d:'Instalá 10 rosetas.',ok:s=>s.roseta>=10},
+ {id:'b48',ic:'🐙',n:'Pulpo',d:'Instalá una botella de 48 fibras.',ok:s=>s.b48>=1},
+ {id:'surg',ic:'🩺',n:'Mano de cirujano',d:'Hacé una fusión de 0,010 dB o menos.',ok:s=>s.surg>=1},
+ {id:'zero5',ic:'🎯',n:'Cero errores',d:'Terminá 5 trabajos sin errores.',ok:s=>s.zero>=5},
+ {id:'fast',ic:'⚡',n:'Rápido y prolijo',d:'Terminá una roseta en menos de 6 minutos.',ok:s=>s.fast>=1},
+ {id:'gd3',ic:'🌙',n:'Guardián nocturno',d:'Resolvé 3 guardias dentro del SLA.',ok:s=>s.gdok>=3},
+ {id:'otdr5',ic:'📈',n:'Ojo de OTDR',d:'Certificá 5 enlaces con el OTDR.',ok:s=>s.otdr>=5},
+ {id:'dc',ic:'🏢',n:'Vertical',d:'Terminá una instalación en DeltaCenter.',ok:s=>s.dc>=1},
+ {id:'svc5',ic:'🔧',n:'Herramientas al día',d:'Hacé 5 services en el taller de mantenimiento.',ok:s=>s.svc>=5},
+ {id:'ch10',ic:'🏅',n:'Cumplidor',d:'Completá 10 desafíos diarios.',ok:s=>s.chd>=10},
+ {id:'str3',ic:'🔥',n:'Racha de 3 días',d:'Completá al menos un desafío 3 días seguidos.',ok:()=>PRG.streak>=3},
+ {id:'p950',ic:'🌟',n:'Trabajo perfecto',d:'Hacé 950 puntos o más en un trabajo.',ok:s=>s.p950>=1}];
+function prInc(k,n=1){PRG.st[k]=(PRG.st[k]||0)+n}
+function prBadges(){const nw=[];BADGES.forEach(b=>{if(!PRG.badges[b.id]&&b.ok(PRG.st)){PRG.badges[b.id]=Date.now();PRG.xp+=50;nw.push(b)}});return nw}
+function prStreak(){const d=prDay();if(PRG.lastDay===d)return;const y=new Date();y.setDate(y.getDate()-1);PRG.streak=PRG.lastDay===prDay(y)?PRG.streak+1:1;PRG.lastDay=d}
+/* evaluación: un trabajo terminado o un minijuego */
+function prEval(ctx){prRoll();const out={ch:[],co:0,xp:0,badges:[],rk0:rkIdx()};
+ PRG.ch.forEach(c=>{if(c.done)return;const t=prTpl(c.id);let hit=false;
+  if(ctx.mg){if(t.mg&&ctx.mg>=850)hit=true}
+  else if(t.cnt){if(t.cnt(ctx)){c.c++;if(c.c>=c.n)hit=true}}
+  else if(t.ok&&t.ok(ctx,c))hit=true;
+  if(hit){c.done=true;out.ch.push(c);out.co+=c.co;out.xp+=c.xp;prInc('chd');prStreak()}});
+ if(out.ch.length&&PRG.ch.every(c=>c.done)&&PRG.chest!==PRG.day){PRG.chest=PRG.day;out.chest=true;out.co+=100;out.xp+=100}
+ if(!ctx.mg)out.xp+=Math.max(10,Math.round((ctx.p||0)/20));PRG.xp+=out.xp;out.badges=prBadges();out.rk1=rkIdx();
+ if(out.co&&typeof acct!=='undefined'&&acct){acct.coins=(acct.coins||0)+out.co;saveAcct()}
+ prInc('coins',out.co);prSave();return out}
+function prCtx(){const m=MODE,c={mode:m,secs:PRT0?(Date.now()-PRT0)/1000:9999,err,recl:reclamos,p:score(),neat:false,otdr:!!(typeof OTD!=='undefined'&&OTD&&OTD.fin&&!OTD.skip&&!OTD.mg)};
+ try{c.neat=coinsFor(c.p).neat}catch(e){}
+ if(m==='roseta'){c.spl=R.spl;c.pw=R.pw!=null?+R.pw:null;c.ot=R.ot||null}else if(m==='nap'){c.spl=NP.spl0;c.pw=NP.pw!=null?+NP.pw:null}
+ else if(m==='instalacion'||m==='botella'){c.mode='instalacion';c.nfib=typeof NFIB!=='undefined'?NFIB:0;c.spl=fusN?loss/fusN:null}else if(m==='cableado'){c.waste=CB&&CB.waste}
+ if(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin)c.guard=GUARD.late?'late':'ok';return c}
+function prAfterEnd(){if(PRDONE||$('#end').hidden||(typeof SUPON!=='undefined'&&SUPON))return;PRDONE=true;const c=prCtx();
+ prInc(c.mode);if(c.err===0)prInc('zero');if(c.spl!=null&&c.spl<=.01&&c.mode!=='cableado')prInc('surg');if(c.mode==='roseta'&&c.secs<360)prInc('fast');if(c.guard==='ok')prInc('gdok');if(c.otdr)prInc('otdr');
+ if(c.mode==='instalacion'&&c.nfib>=48)prInc('b48');if(c.p>=950)prInc('p950');if(($('#res').innerText||'').includes('DeltaCenter'))prInc('dc');
+ const o=prEval(c);prShow($('#res'),o)}
+function prShow(host,o){if(!host)return;const r=RANKS[o.rk1],nx=RANKS[o.rk1+1],pc=nx?Math.min(100,(PRG.xp-r.xp)/(nx.xp-r.xp)*100):100;
+ const h=`<div class="prsum"><div class="prtop"><b>${r.ic} ${r.n}</b><span>+${o.xp} XP</span></div><div class="prbar"><i style="width:${pc.toFixed(0)}%"></i></div><small>${PRG.xp} XP${nx?` · faltan ${nx.xp-PRG.xp} para ${nx.n}`:' · rango máximo'}</small>
+  ${o.rk1>o.rk0?`<p class="prup">⬆️ ¡Ascendiste a <b>${r.n}</b>! ${r.b}</p>`:''}${o.ch.map(c=>`<p>🎯 Desafío cumplido: <b>${c.t}</b> · +${c.co} 🪙 +${c.xp} XP</p>`).join('')}${o.chest?'<p>🎁 ¡Completaste los 3 desafíos del día! Cofre: +100 🪙 +100 XP</p>':''}${o.badges.map(b=>`<p>${b.ic} Insignia nueva: <b>${b.n}</b> (+50 XP)</p>`).join('')}</div>`;
+ const btn=host.querySelector('button.big');if(btn)btn.insertAdjacentHTML('beforebegin',h);else host.insertAdjacentHTML('beforeend',h);if(o.ch.length||o.badges.length||o.rk1>o.rk0)setTimeout(()=>{try{ding()}catch(e){}},900)}
+{const f=end;end=function(){const r=f.apply(this,arguments);try{prAfterEnd()}catch(e){console.warn(e)}return r}}
+{const f=startGame;startGame=function(){PRT0=Date.now();PRDONE=false;return f.apply(this,arguments)}}
+{const f=mgDone;mgDone=function(){const was=MG&&!MG.fin,k=MG&&MG.k;const r=f.apply(this,arguments);if(was){try{const m=($('#mg').innerText||'').match(/(\d+)\s*pts/),pts=m?+m[1]:0;if(pts>=850||PRG.ch.some(c=>c.id==='mg'&&!c.done)){const o=prEval({mg:pts,mode:'mg'});if(o.ch.length||o.badges.length)prShow($('#mg .mgw'),o)}}catch(e){}}return r}}
+{const f=wService;wService=function(k,fk){const co=acct&&acct.coins;const r=f.apply(this,arguments);if(acct&&acct.coins!==co){prInc('svc');prBadges();prSave()}return r}}
+{const f=coinsFor;coinsFor=function(p){const r=f(p);if(rkCoin())r.co=Math.round(r.co*(1+rkCoin()));return r}}
+/* panel de desafíos y logros */
+function openPR(){prRoll();let el=$('#prg');if(!el){el=document.createElement('div');el.id='prg';el.hidden=true;document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;prRender()}
+function closePR(){$('#prg').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
+function prRender(){const el=$('#prg'),i=rkIdx(),r=RANKS[i],nx=RANKS[i+1],pc=nx?Math.min(100,(PRG.xp-r.xp)/(nx.xp-r.xp)*100):100,now=new Date(),mid=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1),left=Math.max(0,mid-now),hh=Math.floor(left/3600000),mm=Math.floor(left%3600000/60000);
+ el.innerHTML=`<div class="tbox"><div class="shd"><h1 style="font-size:24px;margin:0">🏅 Desafíos y logros</h1><span class="cbal">🔥 <b>${PRG.streak||0}</b> día${PRG.streak===1?'':'s'}</span></div>
+ <div class="prrk"><div class="prav">${typeof avatar==='function'?avatar(TECS[TEC]||TECS[0]):''}<i>${r.ic}</i></div><div style="flex:1;min-width:0"><b style="font-size:19px">${r.n}</b><div class="prbar"><i style="width:${pc.toFixed(0)}%"></i></div><small>${PRG.xp} XP${nx?` · ${nx.xp-PRG.xp} XP para ${nx.ic} ${nx.n}`:' · rango máximo'}</small><p class="note" style="margin:4px 0 0">${r.b}</p></div></div>
+ <h2>🎯 Desafíos de hoy <small style="font-weight:500;opacity:.7">· cambian en ${hh} h ${mm} min</small></h2>
+ ${PRG.ch.map(c=>`<div class="scard prch ${c.done?'dn':''}"><div class="sic">${c.done?'✅':'🎯'}</div><div class="stx"><b>${c.t}</b>${c.n?`<span>${Math.min(c.c,c.n)} de ${c.n}</span>`:''}<span class="own">+${c.co} 🪙 · +${c.xp} XP</span></div>${c.done?'<span class="okt">✓ Hecho</span>':''}</div>`).join('')}
+ <p class="note" style="margin:2px 0 8px">🎁 Si completás los 3 desafíos del día ganás un cofre: +100 🪙 y +100 XP.${PRG.chest===PRG.day?' <b>¡Ya lo abriste hoy!</b>':''}</p>
+ <h2>🎖️ Insignias <small style="font-weight:500;opacity:.7">${Object.keys(PRG.badges).length} de ${BADGES.length}</small></h2><div class="prbg">${BADGES.map(b=>`<div class="prb ${PRG.badges[b.id]?'on':''}" title="${b.d}"><i>${PRG.badges[b.id]?b.ic:'🔒'}</i><b>${b.n}</b><span>${b.d}</span></div>`).join('')}</div>
+ <h2>📶 Rangos</h2>${RANKS.map((x,k)=>`<div class="prrl ${k===i?'cur':''} ${k<=i?'ok':''}"><span>${x.ic}</span><div><b>${x.n}</b> <small>${x.xp} XP</small><br><small>${x.b}</small></div></div>`).join('')}
+ <p class="note">Ganás XP con cada trabajo terminado (según tus puntos), con los desafíos y con las insignias (+50 XP cada una).</p>
+ <button class="big" onclick="closePR()">Volver al menú</button></div>`}
+function prChip(){const pn=$('#pn');if(!pn)return;let c=$('#rkchip');if(!c){c=document.createElement('span');c.id='rkchip';pn.insertAdjacentElement('afterend',c)}const r=rk();c.textContent=r.ic+' '+r.n;
+ const b=$('.prbtn');if(b){prRoll();const n=PRG.ch.filter(x=>!x.done).length;b.innerHTML='🏅 Desafíos y logros'+(n?` <span class="wbd" style="background:#22b573">${n}</span>`:'')}}
+{const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{prChip()}catch(e){}return r}}
+setTimeout(()=>{try{prChip()}catch(e){}},600);
+window.PRauto=(n)=>{PRG.xp+=n||0;prSave();prChip()};
 
 applyQ();loop();
 </script></body></html>
