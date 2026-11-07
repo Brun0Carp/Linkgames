@@ -59,6 +59,17 @@ input{width:100%;font:inherit;padding:12px 14px;border-radius:12px;border:2px so
 #mq{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);padding:16px;z-index:10}#mq>div{background:var(--card);border-radius:16px;padding:18px;max-width:320px;width:100%}.mqb{display:flex;gap:8px;margin-top:14px}.mqb button{flex:1;margin:0;padding:11px 8px}
 #tec,#sop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .cuh{font-size:16px;margin:14px 0 0}
+#gd{position:absolute;inset:0;z-index:8;overflow:auto;background:radial-gradient(120% 90% at 50% 0%,#2a0f14,#07090f);color:#eef2f6;padding:14px 12px max(16px,env(safe-area-inset-bottom))}
+#gd .gdw{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:10px}#gd .gdal{background:#b42318;color:#fff;font-weight:800;letter-spacing:.04em;border-radius:12px;padding:10px 12px;animation:gdp 1s infinite alternate}@keyframes gdp{to{background:#7a1610}}
+#gd .gdc{display:flex;gap:12px;background:#151b24;border:1px solid #3a2a2e;border-radius:14px;padding:12px}#gd .gdi{font-size:40px}#gd .gdc b{font-size:17px}#gd .gdc p{margin:6px 0 0;font-size:14px;opacity:.9}#gd .gdb{background:#1d2633;border-radius:10px;padding:8px 10px;font-size:14px;margin:0}
+#gd .gdenv{display:flex;flex-wrap:wrap;gap:6px}#gd .gdenv span{background:#1d2633;border:1px solid #2f3b4b;border-radius:999px;padding:5px 10px;font-size:13px}#gd .note{color:#c9d3dc}
+#gd .gdbar{height:8px;background:#1d2633;border-radius:6px;overflow:hidden}#gd .gdbar i{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#ef4444);transition:width .9s linear}
+#gd .gdrow{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#151b24;border:1px solid #2f3b4b;border-radius:12px;padding:8px 10px;font-size:14.5px}#gd .gdq{display:flex;align-items:center;gap:6px}#gd .gdq b{min-width:28px;text-align:center;font-size:17px}#gd .gdq button{padding:6px 10px;min-width:38px;background:#243042;color:#fff;border-color:#3a4a60}
+#gdt{position:absolute;left:12px;bottom:max(78px,calc(env(safe-area-inset-bottom) + 78px));z-index:11;background:#151b24;color:#fff;border:1.5px solid #3a4a60;border-radius:12px;padding:7px 11px;font:700 14px/1.2 system-ui,sans-serif;font-variant-numeric:tabular-nums;box-shadow:0 6px 18px rgba(0,0,0,.3)}#gdt.warn{background:#7a4a00;border-color:#f59e0b}#gdt.late{background:#7a1610;border-color:#ef4444;animation:gdp 1s infinite alternate}
+#grain{position:absolute;inset:0;z-index:9;pointer-events:none}
+body.gnight .pbox{-webkit-mask-image:radial-gradient(circle 150px at var(--mx,50%) var(--my,45%),#000 55%,rgba(0,0,0,.3) 100%);mask-image:radial-gradient(circle 150px at var(--mx,50%) var(--my,45%),#000 55%,rgba(0,0,0,.3) 100%)}
+#res .gdsum{background:#151b24;color:#eef2f6;border-radius:12px;padding:10px 12px;margin:6px 0 10px;font-size:14px;line-height:1.45;text-align:left}#res .gdsum .bad{color:#ff8a80;font-weight:700}#res .gdsum .ok{color:#7ee2a8;font-weight:700}
+.gdbtn{border-color:#b42318!important}
 #phb{position:absolute;right:12px;bottom:max(76px,calc(env(safe-area-inset-bottom) + 76px));z-index:11;width:52px;height:52px;border-radius:16px;font-size:26px;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.25);background:var(--card)}
 #phb i{position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;border-radius:10px;background:#e5484d;color:#fff;font:700 12px/20px sans-serif;font-style:normal;padding:0 4px}
 #ph{position:absolute;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:12;width:min(360px,calc(100vw - 20px));height:min(640px,calc(100% - 90px));background:#111418;border-radius:28px;padding:10px;box-shadow:0 18px 50px rgba(0,0,0,.45)}
@@ -300,7 +311,7 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -631,7 +642,7 @@ let panR=null,panT='';
 function openPan(t,r){if(t){panT=t;panR=r}if(!panR)return;$('#pt').textContent=panT;const was=$('#pan').hidden;$('#pan').hidden=false;if(was){const b=$('.pbox');b.classList.remove('in');void b.offsetWidth;b.classList.add('in')}$('#po').hidden=true;fitPan();panR()}
 function closePan(){$('#pan').hidden=true;if(panR)$('#po').hidden=false}
 function endPan(){$('#pan').hidden=true;panR=null;$('#po').hidden=true}
-const svgPt=(s,e)=>{const b=s.getBoundingClientRect(),vb=s.viewBox.baseVal;return{x:(e.clientX-b.left)/b.width*vb.width,y:(e.clientY-b.top)/b.height*vb.height}};
+const svgPt=(s,e)=>{const b=s.getBoundingClientRect(),vb=s.viewBox.baseVal,j=(typeof GUARD!=='undefined'&&GUARD&&GUARD.t0&&!GUARD.fin&&GUARD.env.wind)?performance.now()/1000:null;return{x:(e.clientX-b.left)/b.width*vb.width+(j!=null?Math.sin(j*9)*3.2+Math.sin(j*23)*1.4:0),y:(e.clientY-b.top)/b.height*vb.height+(j!=null?Math.cos(j*11)*2.6:0)}};
 const dotsH=(n,i,col)=>`<div class="dots">${Array.from({length:n},(_,k)=>`<span style="background:${hex(col(k))}" class="${k<i?'ok':k===i?'cur':''}"></span>`).join('')}</div>`;
 
 /* pelar (2D): soltar la peladora en la marca y deslizar hasta la punta. Sirve para fibras y para buffers */
@@ -2667,7 +2678,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=65,NEWS=[
+const VER=66,NEWS=[
+ {v:66,t:'Guardia nocturna',items:[
+  ['🚨','Modo Guardia nocturna','Nuevo botón en el menú: te salta una alerta de falla crítica al azar (troncal cortada por un camión, cable mordido por roedores, botella inundada, acometida cortada por el viento, roseta quemada por un rayo o NAP arrancada) y tenés que resolverla contra reloj.'],
+  ['🚐','Kit de emergencia','Antes de salir tenés 30 segundos para cargar conectores, termos, alcohol isopropílico y paños. Si te faltan, volvés a la camioneta (+2 min y −40 pts por cada vez); si llevás de más, tardás en salir.'],
+  ['⏱','SLA','Un reloj de SLA abajo a la izquierda: terminar a tiempo da +150 pts; pasarte resta según cuánto te pasaste. La guardia paga ×1.5 monedas.'],
+  ['🌙','Noche, lluvia y viento','De noche baja la luz y trabajás con linterna frontal (también en los minijuegos solo ves bien donde apuntás). La lluvia sube la pérdida de cada fusión y el viento te hace temblar el pulso en los trabajos de precisión.']]},
  {v:65,t:'Cableado en DeltaCenter',items:[
   ['🏢','Nuevo lugar: DeltaCenter','En Cableado ahora elegís Barrio Santa Ana o el edificio DeltaCenter, con departamentos, pasillo con cielorraso de durlock y bandeja de aluminio, y un cuarto con la NAP del piso.'],
   ['🔍','Tapas ciegas del depto','Destornillás las tapas ciegas para ver cuál tiene corrugado. Si donde quiere el cliente no hay (o no llega a la bandeja), le avisás y usás otra.'],
@@ -2916,7 +2932,7 @@ function tecRender(){$('#tjob').hidden=!LEVEL;if(LEVEL)$('#tjob').innerHTML=`<b>
 function play(){$('#title').hidden=true;tecRender();$('#tec').hidden=false}
 function startGame(){$('#tec').hidden=true;const c=TECS[TEC];$('#hav').innerHTML=avatar(c)+c.n+(itemOn(c.n)?' '+ITEMS[c.n].ic:'');$('.hud').classList.add('wav');LIVES=LEVEL&&LEVEL.on?3:null;GO=false;dylanSave=false;hearts();
  $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){if(CBLOC==='delta'){S=SD;dcSetup();invLoad(()=>go(0));return}S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
-const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
+const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin?GUARD.pts:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
@@ -3908,5 +3924,64 @@ const PTFOL=['¿Estás? 👀','Che, ¿me leíste?','Cuando puedas me contestás,
  PHT.forEach(p=>{PH.chats[p.n]={name:p.n,msgs:[],un:0};PREP[p.n]=PTREP;PFOL[p.n]=PTFOL;PFREE[p.n]=['Dale, gracias.','Joya 👍','Ok, después hablamos.'];PHPER[p.n]=`técnico de otra cuadrilla (${(TECS.find(t=>t.n===p.n)||{}).d||'compañero'}), buena onda, pregunta cosas de cableados y de pelos tomados en los barrios`})}}
 {const f=phAsk;phAsk=function(){if(PHT.length&&Math.random()<.35&&PHT.some(x=>!PH.ask.some(a=>!a.done&&a.ch===x.n))){const p=srnd(PHT.filter(x=>!PH.ask.some(a=>!a.done&&a.ch===x.n))),[q,op]=srnd(PTASK)(),t=pT(q),a={who:p.n,ch:p.n,t,opts:op.map(pT),t0:Date.now(),fol:false,done:false};PH.ask.push(a);phAdd(p.n,{who:p.n,t,ask:a});phPing(p.n,p.n,t);return}return f()}}
 setInterval(()=>{if(!PH||!PH.on||!playing||SUPON||!PHT.length)return;if(!PH.tcT)PH.tcT=Date.now()+rint(60,120)*1000;if(Date.now()<PH.tcT)return;PH.tcT=Date.now()+rint(80,160)*1000;const p=srnd(PHT),t=srnd(PTCHAT)();phAdd(p.n,{who:p.n,t});if(Math.random()<.4)phPing(p.n,p.n,t)},3000);
+/*C66*/
+/* ===== V66: Guardia nocturna · emergencias contrarreloj con clima =====
+   GEV: catálogo de eventos (JSON) · GUARD: estado de la guardia en curso · kit de emergencia contrarreloj ·
+   SLA en el HUD · noche con linterna frontal, lluvia y viento que dificultan la precisión */
+const GEV=[
+ {id:'troncal',ic:'🚚',t:'Corte de troncal por choque de camión',d:'Un camión se llevó puesto el poste y cortó la troncal. Hay que reempalmar el cable en una botella nueva.',mode:'botella',fib:[12,24],sla:14,brief:n=>`Troncal de ${n} fibras: ${n} empalmes.`},
+ {id:'roedor',ic:'🐀',t:'Roedores en la cámara: cable mordido',d:'Los roedores mordieron el cable en la cámara subterránea. Botella nueva y a empalmar todos los pelos.',mode:'botella',fib:[6,12],sla:10,brief:n=>`Cable de ${n} fibras mordido: ${n} empalmes.`},
+ {id:'inund',ic:'🌊',t:'Cámara inundada: botella con agua',d:'Entró agua en la botella y los empalmes dan LO. Hay que rehacerlos en una botella seca.',mode:'botella',fib:[6,12],sla:11,brief:n=>`Botella de ${n} fibras con agua: ${n} empalmes.`},
+ {id:'viento',ic:'🌪️',t:'Temporal de viento: acometida cortada',d:'El viento cortó el drop de un cliente con servicio crítico (trabaja desde casa). Roseta nueva y a medir.',mode:'roseta',sla:7,brief:()=>'Acometida de 1 pelo: 1 empalme en la roseta.'},
+ {id:'rayo',ic:'⚡',t:'Descarga eléctrica: roseta quemada',d:'Un rayo quemó la roseta y el router del cliente. Roseta nueva, router nuevo y a certificar la potencia.',mode:'roseta',sla:8,brief:()=>'Roseta nueva: 1 empalme drop–pigtail.'},
+ {id:'nap',ic:'📦',t:'NAP arrancada por el temporal',d:'La caja NAP del poste quedó colgando: hay que rearmarla, fusionar el splitter y el conector de campo del cliente.',mode:'nap',fib:[6,12],sla:10,brief:n=>`NAP de ${n} pelos: 1 empalme al splitter y 1 conector de campo.`}];
+const GKIT=[['conectores','🔌','Conectores de campo'],['termos','🧪','Protectores de empalme (termos)'],['alcohol','🧴','Alcohol isopropílico (frascos)'],['panos','🧻','Paños sin pelusa']];
+let GUARD=null;
+function openGuard(){const ev=srnd(GEV),n=ev.fib?srnd(ev.fib):1,env={night:true,rain:Math.random()<.65,wind:Math.random()<.45};
+ GUARD={ev,n,env,kit:{conectores:0,termos:0,alcohol:0,panos:0},t0:null,sla:ev.sla*60,pts:0,fin:false,short:{},miss:0};
+ let el=$('#gd');if(!el){el=document.createElement('div');el.id='gd';document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;
+ el.innerHTML=`<div class="gdw"><div class="gdal">🚨 ALERTA DE GUARDIA · ${hhmm(Date.now())}</div><div class="gdc"><span class="gdi">${ev.ic}</span><div><b>${ev.t}</b><p>${ev.d}</p><p class="gdb">📋 ${ev.brief(n)}</p></div></div>`
+  +`<div class="gdenv">${env.night?'<span>🌙 Noche: trabajás con linterna frontal</span>':''}${env.rain?'<span>🌧️ Lluvia: la humedad sube la pérdida de las fusiones</span>':''}${env.wind?'<span>💨 Viento: te tiembla el pulso en los trabajos de precisión</span>':''}<span>⏱ SLA: ${ev.sla} min</span></div>`
+  +`<p class="note">Tenés 30 segundos para cargar el stock de emergencia en la camioneta. Si te falta algo, volvés a buscarlo y perdés tiempo; si llevás de más, tardás en salir.</p><button class="big gdk">🚐 Preparar el kit de emergencia</button><button class="big alt gdx">Volver al menú</button></div>`;
+ el.querySelector('.gdx').onclick=()=>{el.hidden=true;GUARD=null;$('#title').hidden=false};el.querySelector('.gdk').onclick=()=>guardKit()}
+function guardKit(){const el=$('#gd'),g=GUARD,T=30;let left=T,tm=null;const draw=()=>{el.innerHTML=`<div class="gdw"><div class="gdal">🚐 Kit de emergencia · <b class="gdtm">${left}s</b></div><div class="gdbar"><i style="width:${left/T*100}%"></i></div><p class="gdb">📋 ${g.ev.brief(g.n)}</p>`
+  +GKIT.map(([k,ic,n])=>`<div class="gdrow"><span>${ic} ${n}</span><span class="gdq"><button data-k="${k}" data-d="-1">−</button><b>${g.kit[k]}</b><button data-k="${k}" data-d="1">+</button><button data-k="${k}" data-d="5">+5</button></span></div>`).join('')
+  +`<button class="big gdgo">🚨 Salir a la guardia</button></div>`;
+  el.querySelectorAll('.gdq button').forEach(b=>b.onclick=()=>{const k=b.dataset.k;g.kit[k]=Math.max(0,Math.min(60,g.kit[k]+ +b.dataset.d));draw()});el.querySelector('.gdgo').onclick=go};
+ const go=()=>{clearInterval(tm);el.hidden=true;guardLaunch()};tm=setInterval(()=>{left--;if(left<=0){msg('¡Se acabó el tiempo! Salís con lo que cargaste.');go();return}const t=el.querySelector('.gdtm'),b=el.querySelector('.gdbar i');if(t)t.textContent=left+'s';if(b)b.style.width=left/T*100+'%'},1000);draw()}
+function guardLaunch(){const g=GUARD,ev=g.ev;LEVEL=null;setModo(ev.mode);if(ev.mode==='botella'){setCable(g.n);SPL=0;DROPN=1}else if(ev.mode==='nap'){NCAB=g.n;SPL=[4,8][rint(0,1)];DROPN=1}else{SPL=0;DROPN=1}play()}
+/* arranque: SLA, clima y aviso del grupo */
+{const f=startGame;startGame=function(){f();if(!GUARD||GUARD.t0)return;GUARD.t0=Date.now();guardEnv(true);guardHud();
+ setTimeout(()=>{if(typeof PH!=='undefined'&&PH&&PH.on){const t=`Wacho, guardia: ${GUARD.ev.t.toLowerCase()}. Tenés ${GUARD.ev.sla} minutos de SLA. Avisá cualquier cosa.`;phAdd('grp',{who:'Julián',t});phPing('grp','Julián',t)}},2500)}}
+function guardHud(){let h=$('#gdt');if(!h){h=document.createElement('div');h.id='gdt';document.body.appendChild(h)}h.hidden=false;clearInterval(guardHud.t);
+ guardHud.t=setInterval(()=>{if(!GUARD||!GUARD.t0||GUARD.fin){h.hidden=true;return}const used=(Date.now()-GUARD.t0)/1000+(GUARD.extra||0),rest=GUARD.sla-used,a=Math.abs(rest),s=`${Math.floor(a/60)}:${String(Math.floor(a%60)).padStart(2,'0')}`;
+  h.className=rest<0?'late':rest<60?'warn':'';h.innerHTML=`🚨 ${GUARD.ev.ic} SLA ${rest<0?'vencido +'+s:s}`;
+  /* stock: cada fusión gasta un termo, cada conector de campo un conector */
+  const need={termos:fusN,conectores:(MODE==='nap'&&NP&&NP.cl!=null)?1:0};Object.keys(need).forEach(k=>{const miss=need[k]-GUARD.kit[k];if(miss>(GUARD.short[k]||0)){GUARD.short[k]=miss;GUARD.extra=(GUARD.extra||0)+120;GUARD.pts-=40;
+   msg(`¡Te quedaste sin ${k==='termos'?'termos':'conectores'}! Fuiste a la camioneta a buscar: +2 min y −40 pts.`);if(typeof info==='function')info(`Llevá stock de sobra la próxima: te faltó ${k==='termos'?'un termo':'un conector'}.`,BOSS[0])}})},500)}
+/* clima: noche (luces bajas + linterna que sigue a la cámara), lluvia en pantalla y viento en el pulso */
+let GLAMP=null,GLIT=null;
+function guardEnv(on){const hl=scene.children.find(o=>o.isHemisphereLight);if(!GLIT)GLIT={hl:hl?hl.intensity:.55,dl:dl.intensity,bg:scene.background.clone()};
+ if(on&&GUARD.env.night){if(hl)hl.intensity=.12;dl.intensity=.12;scene.background=new THREE.Color(0x05080d);if(!GLAMP){GLAMP=new THREE.SpotLight(0xfff2d0,2.4,26,.42,.55,1.2);scene.add(GLAMP);scene.add(GLAMP.target)}GLAMP.visible=true;document.body.classList.add('gnight')}
+ else{if(hl)hl.intensity=GLIT.hl;dl.intensity=GLIT.dl;scene.background=GLIT.bg;if(GLAMP)GLAMP.visible=false;document.body.classList.remove('gnight')}
+ let rc=$('#grain');if(on&&GUARD.env.rain){if(!rc){rc=document.createElement('canvas');rc.id='grain';document.body.appendChild(rc)}rc.hidden=false;rainLoop()}else if(rc)rc.hidden=true}
+{const f=bU;bU=function(){f();if(GLAMP&&GLAMP.visible){GLAMP.position.copy(cam.position);GLAMP.target.position.set(cx,cyy,cz)}}}
+function rainLoop(){const rc=$('#grain');if(!rc||rc.hidden)return;const w=rc.width=innerWidth,h=rc.height=innerHeight,g=rc.getContext('2d'),N=Math.round(w*h/9000),dr=[...Array(N)].map(()=>[Math.random()*w,Math.random()*h,8+Math.random()*14]);
+ const wx=GUARD&&GUARD.env.wind?4:1.2;const f=()=>{if(rc.hidden||!GUARD||GUARD.fin){g.clearRect(0,0,w,h);return}g.clearRect(0,0,w,h);g.strokeStyle='rgba(180,205,230,.42)';g.lineWidth=1.2;g.beginPath();dr.forEach(d=>{g.moveTo(d[0],d[1]);g.lineTo(d[0]-wx,d[1]+d[2]);d[1]+=d[2]*1.2;d[0]-=wx*.5;if(d[1]>h){d[1]=-20;d[0]=Math.random()*w}if(d[0]<0)d[0]=w});g.stroke();requestAnimationFrame(f)};f()}
+/* linterna en los paneles: todo oscuro salvo un círculo de luz donde apuntás */
+document.addEventListener('pointermove',e=>{if(!document.body.classList.contains('gnight'))return;const b=$('.pbox');if(!b)return;const r=b.getBoundingClientRect();b.style.setProperty('--mx',(e.clientX-r.left)+'px');b.style.setProperty('--my',(e.clientY-r.top)+'px')},{passive:true});
+/* precisión: con viento el pulso tiembla en todos los minijuegos; con lluvia la humedad sube la pérdida de las fusiones */
+{const f=fuseUI;fuseUI=function(el,c,done,c2){return f(el,c,()=>{if(GUARD&&GUARD.t0&&!GUARD.fin&&GUARD.env.rain){const x=+(.004+rnd()*.022).toFixed(3);last+=x;loss+=x;msg(`🌧️ La humedad sumó ${x.toFixed(3)} dB a la fusión.`)}done()},c2)}}
+/* fin de la guardia: SLA, stock y clima */
+function guardFinish(){const g=GUARD;if(!g||g.fin||!g.t0)return;g.fin=true;const used=(Date.now()-g.t0)/1000+(g.extra||0),late=Math.max(0,used-g.sla);g.used=used;g.late=late;
+ const need={termos:fusN,conectores:MODE==='nap'?1:0,alcohol:Math.max(1,Math.ceil(fusN/24)),panos:Math.max(1,Math.ceil(fusN/6))};g.need=need;
+ ['alcohol','panos'].forEach(k=>{if(g.kit[k]<need[k]){g.pts-=25*(need[k]-g.kit[k]);g.short[k]=need[k]-g.kit[k]}});const over=Object.keys(need).reduce((a,k)=>a+Math.max(0,g.kit[k]-need[k]-3),0);g.over=over;g.pts-=Math.min(60,over*3);
+ g.pts+=late?-Math.min(300,Math.round(late/60*40)):150;guardEnv(false);const h=$('#gdt');if(h)h.hidden=true}
+{const f=end;end=async function(...a){if(GUARD&&GUARD.t0&&!GUARD.fin)guardFinish();const r=await f(...a);const e=$('#end');if(e&&!e.hidden&&GUARD&&GUARD.fin&&!GUARD.sum){GUARD.sum=1;const g=GUARD,mm=s=>`${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,'0')}`,h2=$('#res h2');
+  if(h2)h2.insertAdjacentHTML('beforebegin',`<div class="gdsum"><b>🚨 Guardia nocturna · ${g.ev.t}</b><br>${g.env.rain?'🌧️ ':''}${g.env.wind?'💨 ':''}🌙 Tiempo: <b>${mm(g.used)}</b> de ${g.ev.sla}:00 · ${g.late?`<span class="bad">SLA vencido por ${mm(g.late)}</span>`:'<span class="ok">dentro del SLA (+150)</span>'}<br>`
+   +`Stock: ${GKIT.map(([k,ic])=>`${ic} ${g.kit[k]}/${g.need[k]}${g.short[k]?' ⚠️':''}`).join(' · ')}${g.over?` · de más: ${g.over}`:''}<br>Ajuste de guardia: <b>${g.pts>0?'+':''}${g.pts} pts</b> · monedas ×1.5</div>`)}return r}}
+{const f=coinsFor;coinsFor=function(p){const o=f(p);if(GUARD&&GUARD.fin)o.co=Math.round(o.co*1.5);return o}}
+
+window.GDauto=()=>{if(!GUARD)return;GUARD.kit={conectores:2,termos:fusN+30,alcohol:3,panos:9}};
 applyQ();loop();
 </script></body></html>
