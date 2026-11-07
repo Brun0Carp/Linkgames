@@ -175,6 +175,18 @@ button:active:not(:disabled){transform:scale(.96)}
 .wst{margin:6px 0 0;font-size:12px;opacity:.85}.wblur svg{filter:blur(var(--wb))}
 #wtoast{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translate(-50%,-140%);max-width:min(92vw,520px);background:#1b2430;color:#fff;padding:10px 14px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:40;transition:transform .35s;pointer-events:none}#wtoast.on{transform:translate(-50%,0)}
 .wbd{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:#e5484d;color:#fff;font-size:12px;margin-left:4px}
+#otdr{position:absolute;inset:0;z-index:9;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(14px,env(safe-area-inset-bottom))}
+#otdr .odw{max-width:760px;margin:0 auto}.othd{display:flex;justify-content:space-between;align-items:center;font-size:18px;margin:4px 0 8px}.otpts{font-size:14px;font-weight:800;background:#fff;border:1.5px solid #c9d3db;border-radius:999px;padding:4px 10px}
+.ottp{width:100%;max-width:560px;display:block;margin:0 auto 6px}.otscr{background:#0d2233;border-radius:12px;padding:6px;border:3px solid #ffb21a}.otsv{width:100%;display:block;touch-action:none;cursor:crosshair}
+.otctl{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}.otseg{display:flex;border:1.5px solid #33414d;border-radius:10px;overflow:hidden}.otseg button{border:0;border-radius:0;padding:7px 10px;background:#fff;color:#16222c;font-weight:700;font-size:13px}.otseg button.on{background:#1b2430;color:#fff}
+.otab{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0;background:#fff;border-radius:10px;overflow:hidden}.otab th,.otab td{padding:6px 5px;border-bottom:1px solid #dfe5ea;text-align:left}.otab th{background:#1b2430;color:#fff;font-size:11.5px}.otab tr.sel td{background:#fff6d6}
+.otdg,.otfx{padding:5px 8px;font-size:12px;font-weight:700;background:#fff;color:#16222c;border:1.5px solid #9aa6b0;border-radius:8px;white-space:nowrap}.otdg.on{background:#ffe9e9;border-color:#e5484d}.otfx{background:#fff7d6;border-color:#f2b900}
+.otok{color:#159a5f;font-weight:800}.otbad{color:#e5484d;font-weight:800}.otmut{opacity:.6}.otm{font-size:13.5px;margin:6px 0}.otsum2{font-size:12.5px;margin:6px 0 0;opacity:.85}
+.otbtns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.otbtns .big{flex:1}.odsk{padding:12px 16px}.otno{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13px}.otno input{width:auto;margin:0;flex:none}
+.otcon svg{width:100%;max-width:420px;display:block;margin:0 auto}.otmic svg{width:220px;display:block;margin:0 auto}.otmb{width:100%;max-width:360px;display:block;margin:0 auto;touch-action:none}
+.otrep{background:#fff;border-radius:12px;padding:10px 12px;margin-bottom:8px;border:2px solid #22b573}.otrep h3{margin:0 0 4px;color:#159a5f}.otrep p{margin:4px 0;font-size:13.5px}
+.otbx{background:#fff;border-radius:12px;padding:8px}#res .otsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(34,181,115,.12);border:1.5px solid rgba(34,181,115,.5);font-size:14px;text-align:left}
+@media(max-width:480px){.otab{font-size:11px}.otab th:nth-child(3),.otab td:nth-child(3){display:none}}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2687,7 +2699,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=67,NEWS=[
+const VER=68,NEWS=[
+ {v:68,t:'Certificación con OTDR',items:[
+  ['📈','OTDR al terminar','Cuando terminás una roseta o una NAP podés certificar el enlace: conectás una bobina de lanzamiento de 150 m y el OTDR dibuja la traza (dB contra distancia) hasta la OLT de la central, con su tabla de eventos.'],
+  ['🗺️','Topología','Arriba ves el esquema del enlace: OTDR → bobina → roseta → drop → NAP 1x8 → botella → troncal → OLT, con los metros de cada tramo, para ubicar cada evento.'],
+  ['🔍','Encontrá las fallas','Marcá en la tabla qué evento es un empalme con mucha pérdida (más de 0,10 dB), una macrocurvatura (compará 1310 y 1550 nm) o un conector sucio (más de 0,50 dB o mucha reflectancia), con el metro exacto. Si tu guardado no quedó prolijo o tu fusión salió alta, aparece en la traza.'],
+  ['🔧','Corregí y re-certificá','Rehacé el empalme (cleaver y fusionadora), agrandá el rulo del guardado o limpiá el conector con el microscopio y el limpiador de un click. Después medís otra vez y sale el informe de certificación. Cada falla bien diagnosticada y corregida suma puntos; los diagnósticos errados restan.'],
+  ['🎮','Minijuego OTDR','También está en Minijuegos para practicar la lectura de trazas.']]},
  {v:67,t:'Desgaste y taller de mantenimiento',items:[
   ['🔪','La cuchilla se gasta','La cortadora tiene una cuchilla circular de 16 posiciones. Cada posición rinde unos 60 cortes: después el ángulo de corte sube (y suma pérdida) y, si la seguís usando, el corte sale astillado y hay que repetirlo.'],
   ['⚡','Electrodos y lentes','Cada arco deja residuo de sílice en los electrodos, descalibra el arco y gasta su vida útil. Las lentes se ensucian (más con lluvia) y la imagen de la fusionadora se ve borrosa. Todo suma pérdida en las fusiones.'],
@@ -2946,7 +2964,7 @@ function tecRender(){$('#tjob').hidden=!LEVEL;if(LEVEL)$('#tjob').innerHTML=`<b>
 function play(){$('#title').hidden=true;tecRender();$('#tec').hidden=false}
 function startGame(){$('#tec').hidden=true;const c=TECS[TEC];$('#hav').innerHTML=avatar(c)+c.n+(itemOn(c.n)?' '+ITEMS[c.n].ic:'');$('.hud').classList.add('wav');LIVES=LEVEL&&LEVEL.on?3:null;GO=false;dylanSave=false;hearts();
  $('#title').hidden=true;$('.hud').hidden=false;$('.ctl').hidden=false;$('#mb').hidden=false;$('#tipb').hidden=false;playing=true;yaw=tyaw=0;if(MODE==='cableado'){if(CBLOC==='delta'){S=SD;dcSetup();invLoad(()=>go(0));return}S=SC;cblSetup();invLoad(()=>go(0));return}S=MODE==='roseta'?SR:MODE==='nap'?(napSetup(),SN):SB;invLoad(()=>kitNeed('valija','Vas a empezar a empalmar y necesitás la fusionadora.',()=>toolsOut(()=>go(0))))}
-const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin?GUARD.pts:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
+const score=()=>{const avg=fusN?loss/fusN:0;return Math.max(0,Math.round(1000-Math.max(0,err-(itemOn('Víctor')?1:0))*15-Math.max(0,reclamos-(itemOn('Dylan')?1:0))*PEN-avg*4000-INV.pen-(MODE==='cableado'?CB.pen||0:0)+(itemOn('Sebastián')?50:0)+(typeof PHB==='number'?PHB:0)+(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin?GUARD.pts:0)+(typeof OTD!=='undefined'&&OTD&&OTD.fin&&!OTD.mg?OTD.pts:0)+(roll.startsWith('Perfecto')?200:roll==='Prolijo'?100:0)))};
 async function saveResult(p,extra={}){if(!acct)return false;const rec=p>(acct.best||0);
  acct=Object.assign({},acct,{partidas:(acct.partidas||0)+1,best:Math.max(acct.best||0,p),last:p,lastRoll:roll,tec:TECS[TEC].n,updated:Date.now()},extra);
  try{if(DB)await pref().set(acct);else LS.set('taller_cuenta',acct)}catch(e){LS.set('taller_cuenta',acct)}return rec}
@@ -2987,7 +3005,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -3418,7 +3436,7 @@ function mgPinza(el,done){const live=rint(0,11),res={},base=-(15+rnd()*6).toFixe
   const b=el.querySelector('.mgon');if(b)b.onclick=()=>{on=true;msg('Pinza prendida: NO SIGNAL hasta que pinces un pelo.');draw()};
   el.querySelectorAll('.fpel').forEach(x=>x.onclick=()=>{if(!on){msg('Primero prendé la pinza con el botón rojo.');return}const i=+x.dataset.k;if(res[i]!==undefined)return;MG.tries++;const ok=i===live;res[i]=ok;cur=ok?{ok:true,t:String(base)}:{lo:true,t:'LO'};
    msg(ok?`¡Tráfico! ${base} dBm en el pelo ${F[i][0].toLowerCase()}.`:'Sin tráfico en este pelo.');draw();if(ok){fxOK();MG.extra+=(MG.tries-1)*70;setTimeout(done,900)}})};draw()}
-function mgDone(){if(!MG||MG.fin)return;MG.fin=true;const k=MG.k,m=MGS.find(x=>x.k===k),secs=Math.round((Date.now()-MG.t0)/1000),e=Math.max(0,err-MG.save.err),grace={ot:150,pasa:60,fusion:25,pinza:10}[k]||15,
+function mgDone(){if(!MG||MG.fin)return;MG.fin=true;const k=MG.k,m=MGS.find(x=>x.k===k),secs=Math.round((Date.now()-MG.t0)/1000),e=Math.max(0,err-MG.save.err),grace={ot:150,pasa:60,fusion:25,pinza:10,otdr:120}[k]||15,
   kk=Math.max(0,(CB.kinks||0)-MG.kinks),pts=Math.max(0,Math.round(1000-Math.max(0,secs-grace)*(k==='ot'?2:8)-e*120-kk*120-MG.extra)),best=mgBest(),rec=pts>(best[k]||0);
  if(rec){best[k]=pts;try{localStorage.setItem('taller_mg',JSON.stringify(best))}catch(_){}}const st=[400,650,850].filter(x=>pts>=x).length,tr=MG.tries,lp=k==='fusion'?last:null,ot=k==='ot'&&R.ot?R.ot:null;mgStop();
  const el=$('#mg');el.hidden=false;el.innerHTML=`<div class="mgw"><div class="mgbar"><b>${m.ic} ${m.n}</b></div><div class="mgres"><div class="stars">${[0,1,2].map(i=>`<span class="${i<st?'on':''}">★</span>`).join('')}</div><p class="mgpts"><b>${pts}</b> pts</p>${rec?'<p><b>🏆 ¡Récord nuevo!</b></p>':`<p>Tu récord: ${best[k]} pts</p>`}`
@@ -4097,6 +4115,130 @@ function wCal(done){const el=$('#wt'),box=document.createElement('div');box.clas
 function wBadge(){const b=$('.wtbtn');if(!b)return;const n=wNeeds().filter(x=>!x.startsWith('b1')).length;b.innerHTML='🔧 Taller de mantenimiento'+(n?` <span class="wbd">${n}</span>`:'')}
 {const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{wBadge()}catch(e){}return r}}
 setTimeout(()=>{try{wBadge()}catch(e){}},500);
+
+/*C68*/
+/* ===== V68: certificación del enlace con OTDR (traza dB vs distancia, tabla de eventos, fallas, corrección y re-certificación) ===== */
+let OTD=null;
+const OTDL=150,otR=(a,b)=>a+rnd()*(b-a),OTDX={ok:'✅ Normal',spl:'🔥 Empalme alto',macro:'🌀 Macrocurva',dirty:'🧼 Conector sucio'},OTDK=['ok','spl','macro','dirty'];
+function otdOn(){try{return localStorage.getItem('taller_otdr')!=='0'}catch(e){return true}}
+function otdConn(d,lb,dirty,base){const l=dirty?otR(.7,1.25):(base||otR(.18,.32));return{d,k:'r',lb,fault:dirty?'dirty':null,l13:l,l15:l+(dirty?otR(.03,.1):otR(0,.03)),rf:dirty?otR(-33,-27):otR(-55,-46)}}
+function otdBuild(kind,src,force){const L=OTDL,ev=[],drop=rint(45,180),dist=rint(320,900),trunk=rint(1800,5200);
+ let dirty=Math.random()<.3,macro=(!!src.rate&&src.rate!=='Prolijo')||Math.random()<.15,spl=src.spl!=null?+src.spl:+otR(.01,.04).toFixed(3);
+ if(force||(!dirty&&!macro&&spl<=.1&&Math.random()<.7)){const t=srnd(['dirty','macro','spl']);if(t==='dirty')dirty=true;else if(t==='macro')macro=true;else spl=+otR(.12,.3).toFixed(3)}
+ const S=(d,lb,v)=>({d,k:'n',lb,fault:v>.1?'spl':null,l13:v,l15:Math.max(0,v+otR(-.008,.008))}),M=d=>({d,k:'n',lb:kind==='nap'?'Guardado de pelos en la bandeja':'Guardado en el carrete de la roseta',fault:'macro',l13:otR(.1,.19),l15:otR(.65,1.1)}),
+  SP=d=>{const l=otR(10.2,10.7);return{d,k:'n',lb:'Splitter 1x8 de la NAP',fault:null,l13:l,l15:l+otR(.1,.3)}};
+ if(kind==='nap'){ev.push(otdConn(L,'Conector de campo (puerto de la NAP)',dirty,src.cl));ev.push(SP(L+.5));ev.push(S(L+otR(1.6,2.2),'Empalme de la NAP (entrada del splitter)',spl));if(macro)ev.push(M(L+otR(2.9,3.7)))}
+ else{ev.push(otdConn(L,'Cupla de la roseta',dirty));ev.push(S(L+otR(1.5,2.1),'Empalme de la roseta (pigtail)',spl));if(macro)ev.push(M(L+otR(3,3.8)));ev.push(otdConn(L+4.5+drop,'Conector del drop en la NAP',false));ev.push(SP(L+5+drop))}
+ const lst=ev[ev.length-1].d;ev.push(S(lst+dist,'Empalme en la botella',+otR(.02,.06).toFixed(3)));ev.push({d:lst+dist+trunk,k:'e',lb:'Fin: OLT en la central',fault:null,l13:0,l15:0,rf:otR(-18,-14)});
+ ev.forEach(e=>{e.d=+e.d.toFixed(1);e.dg='ok'});return{kind,ev,drop,dist,trunk,spl0:spl}}
+/* traza: retrodispersión − atenuación − eventos + picos reflectivos + ruido */
+function otdVal(o,lam,d){const a=(lam===1310?.35:.21)/1000;let v=-a*d;for(const e of o.ev){if(e.k==='e'&&d>e.d+.6)return null;if(d>e.d)v-=(lam===1310?e.l13:e.l15)*Math.min(1,(d-e.d)/.35)}return v}
+function otdNz(d,lam,amp){const x=Math.sin(d*12.9898+lam*.0137)*43758.5453;return (x-Math.floor(x)-.5)*2*amp}
+function otdSamp(o,lam,d0,d1,N,nf){const bw=(d1-d0)/N,out=[],end=o.ev[o.ev.length-1];let lastV=0;
+ for(let i=0;i<=N;i++){const d=d0+bw*i;let v=otdVal(o,lam,d);
+  if(v===null){v=lastV-13+otdNz(d,lam,1.4*nf)}else{lastV=v;v+=otdNz(d,lam,(.012+.0035*Math.exp(d/1400))*nf)}
+  if(d<9)v+=13*Math.pow(1-d/9,1.6);
+  for(const e of o.ev){if(e.rf==null)continue;const x=d-e.d,w=1;if(x>=-bw&&x<w+bw)v+=Math.max(1.5,(e.rf+62)/2.8)*Math.max(0,1-Math.max(0,x)/w)}
+  out.push([d,v])}return out}
+function otdView(){const o=OTD.sc,L=OTDL;return OTD.zoom?[L-5,L+(o.kind==='nap'?5:6)]:[0,o.ev[o.ev.length-1].d*1.07]}
+function otdSVG(nf){const o=OTD.sc,lam=OTD.lam,[d0,d1]=otdView(),N=OTD.zoom?420:620,P=otdSamp(o,lam,d0,d1,N,nf==null?1:nf);
+ let bmx=-Infinity,bmn=Infinity,amn=Infinity;P.forEach(p=>{const v=otdVal(o,lam,p[0]);if(v!=null){bmx=Math.max(bmx,v);bmn=Math.min(bmn,v)}amn=Math.min(amn,p[1])});const Z=OTD.zoom;let mx=Z?+(bmx+.8).toFixed(1):Math.ceil(bmx+4),mn=Z?+(bmn-.8).toFixed(1):Math.floor(amn-1);
+ const X=d=>36+(d-d0)/(d1-d0)*296,Y=v=>12+(mx-v)/(mx-mn)*150,km=!OTD.zoom;let g='';
+ for(let i=0;i<=4;i++){const d=d0+(d1-d0)*i/4,v=mx-(mx-mn)*i/4;g+=`<line x1="${X(d)}" y1="12" x2="${X(d)}" y2="162" stroke="#1d3a50"/><text x="${X(d)}" y="174" font-size="8.5" fill="#8fb0c6" text-anchor="middle">${km?(d/1000).toFixed(2)+' km':d.toFixed(1)+' m'}</text>`
+  +`<line x1="36" y1="${Y(v)}" x2="332" y2="${Y(v)}" stroke="#1d3a50"/><text x="32" y="${Y(v)+3}" font-size="8.5" fill="#8fb0c6" text-anchor="end">${v.toFixed(Z?1:0)}</text>`}
+ let mk='';o.ev.forEach((e,i)=>{if(e.d<d0||e.d>d1)return;const x=X(e.d);mk+=`<line x1="${x}" y1="22" x2="${x}" y2="162" stroke="#f2b900" stroke-dasharray="2 3" opacity=".7"/><circle cx="${x}" cy="20" r="7" fill="#f2b900"/><text x="${x}" y="23" font-size="8.5" font-weight="700" text-anchor="middle" fill="#1b2430">${i+1}</text>`});
+ const pts=P.map(p=>X(p[0]).toFixed(1)+','+Y(p[1]).toFixed(1)).join(' ');
+ const cu=OTD.cur!=null&&OTD.cur>=d0&&OTD.cur<=d1?(()=>{const v=otdVal(o,lam,OTD.cur),x=X(OTD.cur);return `<line x1="${x}" y1="12" x2="${x}" y2="162" stroke="#ff5d8f"/><rect x="${Math.min(x+4,250)}" y="134" width="80" height="24" rx="4" fill="#ff5d8f"/><text x="${Math.min(x+4,250)+40}" y="149" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">${km?(OTD.cur/1000).toFixed(3)+' km':OTD.cur.toFixed(1)+' m'} · ${v==null?'ruido':v.toFixed(2)+' dB'}</text>`})():'';
+ OTD.ax={X0:36,W:296,d0,d1};
+ return `<svg class="otsv" viewBox="0 0 340 182"><rect width="340" height="182" rx="8" fill="#071a2b"/>${g}<text x="36" y="9" font-size="8" fill="#8fb0c6">dB</text>${mk}<clipPath id="otclp"><rect x="36" y="12" width="296" height="150"/></clipPath><polyline clip-path="url(#otclp)" points="${pts}" fill="none" stroke="#4ade80" stroke-width="1.2" stroke-linejoin="round"/>${cu}</svg>`}
+function otdTopo(){const o=OTD.sc,nap=o.kind==='nap',n=(x,t,s,hi)=>`<g transform="translate(${x},30)"><rect x="-26" y="-16" width="52" height="32" rx="7" fill="${hi?'#fff3c4':'#fff'}" stroke="${hi?'#f2b900':'#33414d'}" stroke-width="${hi?2.5:1.2}"/><text y="-1" font-size="9.5" font-weight="700" text-anchor="middle" fill="#16222c">${t}</text><text y="10" font-size="7.5" text-anchor="middle" fill="#55636e">${s}</text></g>`,
+  l=(x1,x2,t,c)=>`<line x1="${x1}" y1="30" x2="${x2}" y2="30" stroke="${c||'#2563eb'}" stroke-width="3"/><text x="${(x1+x2)/2}" y="58" font-size="8" text-anchor="middle" fill="#33414d">${t}</text>`;
+ const xs=nap?[30,110,190,270]:[28,92,156,220,294];
+ const body=nap?n(xs[0],'OTDR','bobina',false)+l(56,84,'150 m','#f2b900')+n(xs[1],'NAP','1x8',true)+l(136,164,o.dist+' m')+n(xs[2],'Botella','empalme')+l(216,244,(o.trunk/1000).toFixed(1)+' km')+n(xs[3],'OLT','central')
+  :n(xs[0],'OTDR','bobina')+l(54,66,'150 m','#f2b900')+n(xs[1],'Roseta','tu trabajo',true)+l(118,130,o.drop+' m','#1d2024')+n(xs[2],'NAP','1x8')+l(182,194,o.dist+' m')+n(xs[3],'Botella','empalme')+l(246,268,(o.trunk/1000).toFixed(1)+' km')+n(xs[4],'OLT','central');
+ return `<svg class="ottp" viewBox="0 0 330 64">${body}</svg>`}
+function otdTable(){const o=OTD.sc,lam=OTD.lam,st=OTD.st;
+ return `<table class="otab"><thead><tr><th>#</th><th>Distancia</th><th>Tipo</th><th>Pérdida ${lam}</th><th>Reflect.</th><th>${(st==='cert'||st==='rep')?'Resultado':'Diagnóstico'}</th></tr></thead><tbody>${o.ev.map((e,i)=>{const l=lam===1310?e.l13:e.l15,tp=e.k==='r'?'Reflectivo':e.k==='e'?'Fin de fibra':'No reflectivo';
+  let c='';if(e.k==='e')c='—';else if(st==='cert'||st==='rep'){const ok=e.k==='r'?l<=.5&&e.rf<=-35:e.lb.startsWith('Splitter')?l<=11:l<=.1;c=ok?'<span class="otok">PASA</span>':'<span class="otbad">FALLA</span>'}
+  else if(st==='fix'&&e.fault&&!e.fixed)c=`<button class="otfx" data-i="${i}">🔧 Corregir</button>`;else if(st==='fix'&&e.fault)c='<span class="otok">✅ Corregido</span>';else if(st==='fix')c='<span class="otmut">Normal</span>';
+  else c=`<button class="otdg ${e.dg!=='ok'?'on':''}" data-i="${i}">${OTDX[e.dg]}</button>${OTD.hint&&e.fault&&e.dg!==e.fault?' ⚠️':''}`;
+  return `<tr${OTD.sel===i?' class="sel"':''}><td><b>${i+1}</b></td><td>${e.d.toFixed(1)} m</td><td>${tp}</td><td>${e.k==='e'?'—':l.toFixed(e.lb.startsWith('Splitter')?2:3)+' dB'}</td><td>${e.rf!=null?e.rf.toFixed(1)+' dB':'—'}</td><td>${c}</td></tr>`}).join('')}</tbody></table>`}
+function otdTot(lam){const o=OTD.sc,e=o.ev[o.ev.length-1];return o.ev.reduce((a,x)=>a+(lam===1310?x.l13:x.l15),0)+(lam===1310?.35:.21)*(e.d-OTDL)/1000}
+function otdStart(cont,host){const k=MODE==='nap'?'nap':'roseta',src=k==='nap'?{spl:NP.spl0,rate:NP.rate,cl:NP.cl}:{spl:R.spl,rate:R.rate};
+ OTD={cont,kind:k,sc:otdBuild(k,src),lam:1310,zoom:false,st:'pre',pts:0,tries:0,cur:null,sel:null,fixN:0,mist:0,mg:!!host,t0:Date.now()};
+ let el=host;if(!el){let ov=$('#otdr');if(!ov){ov=document.createElement('div');ov.id='otdr';document.body.appendChild(ov)}ov.hidden=false;ov.innerHTML='<div class="odw"></div>';el=ov.querySelector('.odw')}
+ OTD.el=el;if(host)OTD.st='con';otdRender()}
+function otdMsg(t){OTD.m=t;const p=OTD.el&&OTD.el.querySelector('.otm');if(p)p.textContent=t}
+function otdRender(){const o=OTD.sc,el=OTD.el,st=OTD.st;if(!el)return;
+ const head=`<div class="othd"><b>📈 Certificación OTDR</b>${OTD.mg?'':`<span class="otpts">${OTD.pts>=0?'+':''}${OTD.pts} pts</span>`}</div>`;
+ if(st==='pre'){el.innerHTML=head+otdTopo()+`<p>Antes de cerrar podés certificar el enlace: conectás el OTDR con una <b>bobina de lanzamiento de 150 m</b> en la ${o.kind==='nap'?'salida de la NAP':'roseta'} y leés la traza hasta la central. Si aparece una falla (empalme con mucha pérdida, macrocurvatura o conector sucio), la corregís y volvés a medir.</p>
+   <div class="otbtns"><button class="big otgo">📈 Certificar (suma puntos)</button><button class="odsk">Saltar</button></div><label class="otno"><input type="checkbox"> No volver a preguntar</label>`;
+  el.querySelector('.otgo').onclick=()=>{OTD.st='con';otdRender()};el.querySelector('.odsk').onclick=()=>{if(el.querySelector('.otno input').checked)try{localStorage.setItem('taller_otdr','0')}catch(e){}otdFinish(true)};return}
+ if(st==='con'){el.innerHTML=head+otdTopo()+`<div class="otcon"><svg viewBox="0 0 300 90"><rect x="8" y="20" width="70" height="50" rx="8" fill="#ffb21a" stroke="#33414d"/><rect x="16" y="28" width="40" height="28" rx="3" fill="#071a2b"/><polyline points="18,50 26,32 30,40 40,42 54,44" fill="none" stroke="#4ade80" stroke-width="1.5"/><circle cx="68" cy="45" r="4" fill="#2563eb"/>
+   <circle cx="150" cy="45" r="26" fill="#d9e2e8" stroke="#33414d"/><circle cx="150" cy="45" r="10" fill="#fff" stroke="#33414d"/><text x="150" y="84" font-size="9" text-anchor="middle">bobina 150 m</text>
+   <path class="otcb" d="M72,45 C100,45 110,45 124,45" stroke="#f2b900" stroke-width="3" fill="none"/><path class="otcb2" d="M176,45 C210,45 230,45 ${OTD.linked?262:186},45" stroke="#f2b900" stroke-width="3" fill="none"/><rect x="262" y="30" width="30" height="30" rx="6" fill="#fff" stroke="#33414d"/><text x="277" y="49" font-size="8" text-anchor="middle">${o.kind==='nap'?'NAP':'Roseta'}</text></svg></div>
+   <p class="otm">${OTD.linked?'Bobina conectada. Medí en 1310 y 1550 nm.':'1) Limpiá y conectá la bobina de lanzamiento entre el OTDR y la '+(o.kind==='nap'?'salida de la NAP':'roseta')+'.'}</p>
+   <div class="otbtns">${OTD.linked?'<button class="big otme">▶ Medir 1310/1550 nm</button>':'<button class="big otln">🔌 Conectar la bobina</button>'}</div>`;
+  const b1=el.querySelector('.otln'),b2=el.querySelector('.otme');if(b1)b1.onclick=()=>{OTD.linked=true;ding();otdRender()};if(b2)b2.onclick=()=>otdAcq('diag');return}
+ if(st==='acq'){el.innerHTML=head+`<div class="otscr">${otdSVG(OTD.nf)}</div><p class="otm">⏳ Midiendo y promediando… ${Math.round((1-OTD.nf/4)*100)}%</p>`;return}
+ if(st==='rep'){const t13=otdTot(1310),t15=otdTot(1550),e=o.ev[o.ev.length-1];el.innerHTML=head+`<div class="otrep"><h3>✅ Enlace certificado</h3><p><b>Informe OTDR</b> · ${new Date().toLocaleDateString('es-AR')} · técnico ${TECS[TEC].n} · Cuadrilla ${CUAD}</p>
+   <p>Desde la ${o.kind==='nap'?'NAP':'roseta'} hasta la OLT: <b>${((e.d-OTDL)/1000).toFixed(3)} km</b><br>Pérdida total: <b>${t13.toFixed(2)} dB</b> en 1310 · <b>${t15.toFixed(2)} dB</b> en 1550<br>Eventos: <b>${o.ev.length}</b> · fallas corregidas: <b>${OTD.fixN}</b><br>Umbrales: empalme ≤ 0,10 dB · conector ≤ 0,50 dB y reflectancia ≤ −35 dB</p></div>
+   <div class="otscr">${otdSVG(.6)}</div>${otdTable()}<div class="otbtns"><button class="big otend">Continuar</button></div>`;el.querySelector('.otend').onclick=()=>otdFinish(false);return}
+ /* diag / fix / cert */
+ el.innerHTML=head+otdTopo()+`<div class="otctl"><div class="otseg">${[1310,1550].map(l=>`<button data-l="${l}" class="${OTD.lam===l?'on':''}">${l} nm</button>`).join('')}</div><div class="otseg">${[['0','Enlace completo'],['1','Zona de trabajo']].map(([z,t])=>`<button data-z="${z}" class="${+OTD.zoom===+z?'on':''}">${t}</button>`).join('')}</div></div>
+  <div class="otscr">${otdSVG(.6)}</div><p class="otsum2">Pérdida total: <b>${otdTot(OTD.lam).toFixed(2)} dB</b> en ${OTD.lam} nm · tocá la traza para poner el cursor</p>${otdTable()}
+  <p class="otm">${OTD.m||(st==='diag'?'Revisá cada evento y marcá las fallas tocando “Diagnóstico”. Tip: compará 1310 y 1550 nm (la macrocurvatura pierde mucho más en 1550) y fijate los umbrales: empalme ≤ 0,10 dB · conector ≤ 0,50 dB con reflectancia ≤ −35 dB. Un splitter 1x8 pierde ~10,5 dB: es normal.':'Corregí cada falla y después volvé a medir.')}</p>
+  <div class="otbtns">${st==='diag'?'<button class="big otan">🔍 Analizar diagnóstico</button>':st==='fix'?`<button class="big otre" ${o.ev.some(e=>e.fault&&!e.fixed)?'disabled':''}>📈 Re-certificar</button>`:''}</div>`;
+ el.querySelectorAll('[data-l]').forEach(b=>b.onclick=()=>{OTD.lam=+b.dataset.l;otdRender()});el.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{OTD.zoom=b.dataset.z==='1';otdRender()});
+ el.querySelectorAll('.otdg').forEach(b=>b.onclick=()=>{const e=o.ev[+b.dataset.i];e.dg=OTDK[(OTDK.indexOf(e.dg)+1)%OTDK.length];OTD.sel=+b.dataset.i;OTD.cur=e.d;otdRender()});
+ el.querySelectorAll('.otfx').forEach(b=>b.onclick=()=>otdFix(+b.dataset.i));
+ const sv=el.querySelector('.otsv');sv.onpointerdown=e=>{const p=svgPt(sv,e),a=OTD.ax;if(p.x<a.X0||p.x>a.X0+a.W)return;OTD.cur=a.d0+(p.x-a.X0)/a.W*(a.d1-a.d0);OTD.sel=null;otdRender()};
+ const an=el.querySelector('.otan');if(an)an.onclick=otdAnalyze;const re=el.querySelector('.otre');if(re)re.onclick=()=>otdAcq('rep')}
+function otdAcq(next){OTD.st='acq';OTD.nf=4;OTD.cur=null;otdRender();const t=setInterval(()=>{OTD.nf=Math.max(.6,OTD.nf*.62);if(OTD.nf>.62){otdRender();return}clearInterval(t);
+ if(next==='rep'){OTD.st='rep';OTD.pts+=80;ding();try{aura()}catch(e){}}else{OTD.st='diag';OTD.m=''}otdRender()},300)}
+function otdAnalyze(){const o=OTD.sc;OTD.tries++;const bad=o.ev.filter(e=>e.k!=='e'&&e.dg!==(e.fault||'ok')).length,nf=o.ev.filter(e=>e.fault).length;
+ if(bad){OTD.pts-=15*bad;OTD.mist+=bad;err++;if(OTD.mg)MG.extra+=120*bad;
+  if(OTD.tries>=2){OTD.hint=true;o.ev.forEach(e=>{if(e.k!=='e')e.dg=e.fault||'ok'});otdMsg(`Había ${bad} diagnóstico${bad>1?'s':''} mal. Te marqué las fallas (⚠️): ahora corregilas.`);OTD.st=nf?'fix':'cert';if(!nf)return otdAcq('rep');return otdRender()}
+  otdMsg(`❌ Hay ${bad} diagnóstico${bad>1?'s':''} que no coincide${bad>1?'n':''} con la traza (−${15*bad} pts). Revisá y volvé a analizar.`);return otdRender()}
+ if(!nf){OTD.pts+=20;otdMsg('✅ Diagnóstico correcto: no hay fallas en el enlace.');return otdAcq('rep')}
+ OTD.pts+=40*nf;try{fxOK()}catch(e){}OTD.st='fix';otdMsg(`✅ ¡Bien leída la traza! ${nf} falla${nf>1?'s':''} para corregir.`);otdRender()}
+/* correcciones */
+function otdFix(i){const o=OTD.sc,e=o.ev[i],el=OTD.el,back=()=>{e.fixed=true;OTD.fixN++;OTD.pts+=20;otdMsg(`🔧 Corregido: ${e.lb} a ${e.d.toFixed(1)} m. ${o.ev.some(x=>x.fault&&!x.fixed)?'Seguí con la próxima falla.':'Ahora re-certificá.'}`);otdRender()};
+ const top=`<div class="othd"><b>🔧 ${e.lb} · ${e.d.toFixed(1)} m</b></div>`;
+ if(e.fault==='dirty'){let n=rint(6,9),dots=[...Array(n)].map(()=>[otR(-30,30),otR(-30,30),otR(2,5)]);
+  const draw=()=>{el.innerHTML=top+`<p>Desconectá el conector y miralo con el microscopio de fibra. Limpialo con el limpiador de un click hasta que el núcleo quede limpio.</p><div class="otmic"><svg viewBox="-60 -60 120 120"><circle r="58" fill="#0b0f14"/><circle r="44" fill="#6f7f8c"/><circle r="40" fill="#8796a2"/><circle r="5" fill="#cfe9ff"/>${dots.map(d=>`<circle cx="${d[0].toFixed(1)}" cy="${d[1].toFixed(1)}" r="${d[2].toFixed(1)}" fill="#3a2f22" opacity=".85"/>`).join('')}</svg></div>
+   <p class="otm">${dots.length?`Suciedad: ${dots.length} partícula${dots.length>1?'s':''}`:'✅ Cara del conector limpia'}</p><div class="otbtns">${dots.length?'<button class="big otcl">🖊️ Limpiador de un click</button>':'<button class="big otok2">🔌 Volver a conectar</button>'}</div>`;
+   const c=el.querySelector('.otcl');if(c)c.onclick=()=>{dots=dots.filter(()=>Math.random()<.45);if(dots.length===n)dots.pop();n=dots.length;draw()};
+   const k=el.querySelector('.otok2');if(k)k.onclick=()=>{Object.assign(e,{l13:otR(.18,.3),rf:otR(-55,-47)});e.l15=e.l13+otR(0,.03);if(o.kind==='nap'&&!OTD.mg)NP.cl=+e.l13.toFixed(2);back()}};return draw()}
+ if(e.fault==='macro'){let r=otR(5,8);el.innerHTML=top+`<p>La fibra quedó con una curva muy cerrada en el guardado. Arrastrá el punto amarillo para agrandar el rulo: el radio tiene que quedar entre <b>15 y 30 mm</b> y adentro de la bandeja.</p>
+   <svg class="otmb" viewBox="0 0 200 140"><rect x="10" y="10" width="180" height="120" rx="12" fill="#e8edf1" stroke="#33414d"/><circle cx="100" cy="70" r="${15*1.9}" fill="none" stroke="#22b573" stroke-dasharray="3 3"/><circle cx="100" cy="70" r="${30*1.9}" fill="none" stroke="#22b573" stroke-dasharray="3 3"/>
+   <path class="odp" stroke="#1f6feb" stroke-width="3"/><circle class="odc" cx="100" cy="70" fill="none" stroke-width="3"/><circle class="oth" cy="70" r="7" fill="#f2b900" stroke="#33414d"/></svg>
+   <p class="otm"></p><div class="otbtns"><button class="big otok2">✅ Listo, cerrá la bandeja</button></div>`;
+  const sv=el.querySelector('.otmb'),q=c=>el.querySelector(c);let drag=false;
+  const up=()=>{const ok=r>=15&&r<=30,R1=(r*1.9).toFixed(1);q('.odp').setAttribute('d',`M10,${70+r*1.9} L100,${70+r*1.9}`);q('.odc').setAttribute('r',R1);q('.odc').setAttribute('stroke',ok?'#1f6feb':'#e5484d');q('.oth').setAttribute('cx',(100+r*1.9).toFixed(1));
+   q('.otm').innerHTML=`Radio: <b>${r.toFixed(1)} mm</b> ${ok?'✅':r<15?'· muy cerrado':'· se sale de la bandeja'}`;q('.otok2').disabled=!ok};
+  const mv=ev=>{if(!drag)return;const p=svgPt(sv,ev);r=Math.max(3,Math.min(34,Math.hypot(p.x-100,p.y-70)/1.9));up()};
+  sv.onpointerdown=ev=>{drag=true;try{sv.setPointerCapture(ev.pointerId)}catch(_){}mv(ev)};sv.onpointermove=mv;sv.onpointerup=()=>{drag=false};up();
+  q('.otok2').onclick=()=>{e.l13=otR(.005,.02);e.l15=e.l13+otR(0,.01);if(!OTD.mg){if(o.kind==='nap')NP.store=e.l13;else R.store=+e.l13.toFixed(3)}back()};return}
+ if(e.fault==='spl'){const fin=nl=>{const old=e.l13;e.l13=nl;e.l15=Math.max(0,nl+otR(-.006,.006));if(!OTD.mg){loss+=nl-(o.spl0||0);if(o.kind==='nap')NP.spl0=nl;else R.spl=nl}o.spl0=nl;
+   if(nl>.1){e.fixed=false;OTD.pts-=10;otdMsg(`El empalme rehecho dio ${nl.toFixed(3)} dB: sigue alto. Volvé a hacerlo.`);e.fault='spl';return otdRender()}back()};
+  el.innerHTML=top+`<p>Cortá el empalme viejo, poné un termo nuevo, pelá, limpiá y cortá con el cleaver. Después volvé a fusionar.</p><div class="otbx"></div>`;const bx=el.querySelector('.otbx'),col='#1f6feb';
+  cleaveUI(bx,col,()=>{if(typeof AUTOF==='function'&&AUTOF()){let q=0;const t=setInterval(()=>{q+=.1;bx.innerHTML=`<p class="otm">🤖 Fusión automática… ${Math.min(100,Math.round(q*100))}%</p>`;if(q>=1){clearInterval(t);const nl=wFuse(+(.008+rnd()*.016).toFixed(3));msg('⚡ Fusión automática: '+nl.toFixed(3)+' dB');fin(nl)}},180)}
+   else fuseUI(bx,col,()=>{const nl=last;loss-=nl;fusN--;fin(nl)})});return}}
+function otdFinish(skip){if(!OTD)return;OTD.fin=true;OTD.skip=skip;if(skip)OTD.pts=0;const ov=$('#otdr');if(ov&&!OTD.mg)ov.hidden=true;const c=OTD.cont;OTD.cont=null;if(c)c()}
+/* test / automático */
+window.OTDauto=()=>{if(!OTD)return;if(OTD.st==='pre'){OTD.st='con';otdRender()}OTD.linked=true;const o=OTD.sc;o.ev.forEach(e=>{if(e.k!=='e')e.dg=e.fault||'ok'});OTD.st='diag';otdAnalyze();if(OTD.st==='fix'){o.ev.forEach(e=>{if(e.fault&&!e.fixed){e.fixed=true;OTD.fixN++;OTD.pts+=20;if(e.fault==='spl'){e.l13=.02;e.l15=.02}else if(e.fault==='macro'){e.l13=.01;e.l15=.015}else{e.l13=.22;e.l15=.24;e.rf=-50}}});otdAcq('rep')}};
+/* fin de partida: certificación antes del resultado */
+{const f=end;end=function(){const want=!GO&&(MODE==='roseta'||MODE==='nap')&&!(typeof MG!=='undefined'&&MG&&!MG.fin)&&!(typeof SUPON!=='undefined'&&SUPON)&&otdOn()&&$('#end').hidden;
+ if(want&&!(OTD&&OTD.fin)){if(OTD&&!OTD.mg)return;return otdStart(()=>end())}
+ const r=f.apply(this,arguments);try{otdSum()}catch(e){}return r}}
+function otdSum(){if(!OTD||!OTD.fin||OTD.skip||OTD.mg||$('#end').hidden||$('#res .otsum'))return;const h=$('#res h2');if(!h)return;
+ h.insertAdjacentHTML('beforebegin',`<div class="otsum"><b>📈 Certificación OTDR: ✅ enlace certificado</b><br>Pérdida total ${otdTot(1310).toFixed(2)} dB (1310) · fallas corregidas: <b>${OTD.fixN}</b>${OTD.mist?` · diagnósticos errados: ${OTD.mist}`:''} · <b>${OTD.pts>=0?'+':''}${OTD.pts} pts</b></div>`)}
+{const f=startGame;startGame=function(){OTD=null;return f.apply(this,arguments)}}
+/* minijuego OTDR */
+MGS.push({k:'otdr',ic:'📈',g:'Herramientas',n:'Certificación OTDR',d:'Leé la traza, diagnosticá los eventos, corregí las fallas y certificá el enlace.'});
+{const f=mgPlay;mgPlay=function(k){const r=f(k);if(k==='otdr'){const B=$('#mgb');const kind=Math.random()<.5?'nap':'roseta',src={spl:null,rate:'Prolijo'};
+  OTD={cont:()=>mgDone(),kind,sc:otdBuild(kind,src,true),lam:1310,zoom:false,st:'con',pts:0,tries:0,cur:null,sel:null,fixN:0,mist:0,mg:true,el:B};otdRender()}return r}}
 
 applyQ();loop();
 </script></body></html>
