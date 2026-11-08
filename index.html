@@ -247,6 +247,13 @@ button:active:not(:disabled){transform:scale(.96)}
 .ptst2{color:#f2b900;font-size:13px;white-space:nowrap}.ptst2 i{font-style:normal;opacity:.25}.ptin{flex:1;min-width:0}.ptin b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ptin small{opacity:.7;font-size:12px}
 .ptpt{text-align:right}.ptpt b{display:block;font-size:17px}.ptpt small{font-size:11px;opacity:.6}.ptbt{display:flex;gap:8px;margin-top:8px}.ptbt .big{flex:1;margin:0}
 .ptdel{display:block;margin:10px auto 0;background:none;border:0;color:#e5484d;font-weight:700;font-size:13px;padding:6px}
+#sprt{position:absolute;right:16px;top:54px;z-index:5;display:flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;background:rgba(10,22,34,.82);color:#fff;font-variant-numeric:tabular-nums;font-size:14px;pointer-events:none;box-shadow:0 4px 12px rgba(0,0,0,.2)}#sprt b{font-weight:800;letter-spacing:.3px}#sprt.fin{background:#16a34a}
+#tipb{top:92px!important}.qbtn{font-size:13px!important;font-weight:800}
+#res .srbox{margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(15,23,42,.06);border:1.5px solid rgba(100,116,139,.35);text-align:left;font-size:13.5px}.srh{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap}
+.srrec{font-weight:800;color:#fff;background:#16a34a;border-radius:999px;padding:2px 8px;font-size:12px}.srpos{font-size:12px;font-weight:700;opacity:.75}
+.srg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.srg div{border-radius:10px;padding:6px;background:rgba(127,127,127,.1);text-align:center}.srg small{display:block;font-size:11px;opacity:.7}.srg b{font-size:17px;font-variant-numeric:tabular-nums}.srg .srf{background:rgba(22,163,74,.15)}
+.srl{margin:4px 0;padding-left:18px}.srl li{margin:2px 0}.srtop{list-style:none;margin:6px 0 0;padding:0}.srtop li{padding:3px 6px;border-radius:8px;font-variant-numeric:tabular-nums}.srtop li.me{background:rgba(242,185,0,.2);font-weight:700}.srtop small{opacity:.65}
+.srrk{border:1.5px solid var(--line);border-radius:12px;padding:6px 10px;margin-bottom:8px}.srrk summary{font-weight:700;cursor:pointer}.srrow{display:flex;flex-wrap:wrap;gap:4px 10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px}.srrow b{flex:1 0 100%}.srrow span{font-variant-numeric:tabular-nums}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2759,7 +2766,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=72,NEWS=[
+const VER=73,NEWS=[
+ {v:73,t:'Rendimiento y speedrun',items:[
+  ['⚙️','Calidad en el juego','Nuevo botón ⚙️ en la columna de la cámara para cambiar al instante entre Alta, Media y Baja sin salir del trabajo.'],
+  ['📱','Optimización para celulares','En Media y Baja las fibras, cables y drops se arman con menos polígonos (LOD), y en Baja no hay sombras. Si tu equipo no llega a mover el juego fluido, la calidad baja sola (salvo que la hayas elegido vos). La física de las fibras no cambia.'],
+  ['⏱️','Cronómetro','Mientras trabajás ves un cronómetro arriba a la derecha, con décimas de segundo.'],
+  ['🏁','Speedrun','Al terminar ves el desglose: tiempo de ejecución, pérdida de inserción promedio, potencia del OPM y penalizaciones por cortes malos, fibras rotas, radios de curvatura no cumplidos y otros errores. Tus 5 mejores tiempos de cada categoría (roseta, NAP, botellas por cantidad de pelos, cableado, guardias) se guardan, y los ves en «Mis partidas».']]},
  {v:72,t:'Historial de partidas',items:[
   ['📂','Mis partidas','Cada trabajo (roseta, NAP, botella, cableado, guardia y niveles) y cada minijuego se guarda en este dispositivo con todos sus datos: puntos, estrellas, errores, pérdidas, potencia, OTDR, academia y más. Botón «Mis partidas» en el menú, con filtros y estadísticas.'],
   ['🧾','Formato estándar','Las partidas usan un formato fijo («taller-partida/1») documentado en el repositorio de GitHub, así cuando llegue el multijugador todos los datos se pueden juntar igual.'],
@@ -4672,6 +4684,53 @@ function ptImport(txt){try{const j=JSON.parse(txt),L=Array.isArray(j)?j:j.partid
   L.forEach(x=>{if(x&&x.schema===PT_SCHEMA&&x.id&&!have.has(x.id)){a.push(x);have.add(x.id);n++}});a.sort((p,q)=>String(p.fecha).localeCompare(String(q.fecha)));ptSaveAll(a);ptRender();wToast(n?`⬆️ Se importaron ${n} partida${n>1?'s':''}.`:'No había partidas nuevas en ese archivo.')}
  catch(e){wToast('❌ Ese archivo no es un historial de partidas válido.')}}
 setTimeout(()=>{try{ptSync()}catch(e){}},2500);
+
+/*C73*/
+/* ===== V73: calidad gráfica rápida en el HUD + LOD de tubos + baja automática por rendimiento, y cronómetro / récords de speedrun ===== */
+/* LOD: todos los tubos (fibras, cables, drops) se generan con menos segmentos en Media y Baja */
+{const TG=THREE.TubeGeometry;THREE.TubeGeometry=function(path,ts,r,rs,closed){const k=Q==='baja'?.5:Q==='media'?.75:1,kr=Q==='baja'?.6:Q==='media'?.85:1;return new TG(path,Math.max(4,Math.round((ts||64)*k)),r,Math.max(3,Math.round((rs||8)*kr)),closed)};THREE.TubeGeometry.prototype=TG.prototype}
+const QLOCK=(()=>{try{return localStorage.getItem('taller_calidad')!==null}catch(e){return false}})();let QUSER=QLOCK,QNEXT=null;
+const QN={alta:'Alta',media:'Media',baja:'Baja'},QI={alta:'A',media:'M',baja:'B'};
+function qSet(q,user){Q=q;if(user){QUSER=true;try{localStorage.setItem('taller_calidad',q)}catch(e){}}applyQ();qBtn()}
+function qBtn(){const b=$('#qbtn');if(b){b.textContent='⚙️'+QI[Q];b.title='Calidad gráfica: '+QN[Q]+' (tocá para cambiar)';b.setAttribute('aria-label','Calidad gráfica '+QN[Q])}}
+(()=>{const c=$('#camb');if(!c)return;const b=document.createElement('button');b.id='qbtn';b.className='qbtn';b.onclick=()=>{const L=['alta','media','baja'],n=L[(L.indexOf(Q)+1)%3];qSet(n,true);wToast(`⚙️ Calidad gráfica: ${QN[n]}${n==='baja'?' · sin sombras, menos polígonos':n==='media'?' · sombras simples':' · sombras suaves y más detalle'}`)};c.appendChild(b);qBtn()})();
+document.querySelectorAll('#qsel button').forEach(b=>b.addEventListener('click',()=>{QUSER=true;qBtn()}));
+/* si el equipo no da más, baja la calidad sola (solo si no la elegiste vos) */
+{let t=performance.now(),S=0,N=0,bad=0;const tick=()=>{requestAnimationFrame(tick);const n=performance.now(),dt=n-t;t=n;if(!playing||document.hidden||dt>300)return;S+=dt;if(++N<120)return;const av=S/N;S=0;N=0;
+ if(av>34&&DYN<=.61&&!QUSER&&Q!=='baja'){if(++bad>=3&&!QNEXT){bad=0;QNEXT=Q==='alta'?'media':'baja';wToast(`⚙️ Tu equipo va justo: en el próximo trabajo bajo la calidad a ${QN[QNEXT]} (o cambiala ya con el botón ⚙️).`)}}else bad=0};requestAnimationFrame(tick)}
+/* ---- cronómetro ---- */
+const SRN={t0:0,stop:0,on:false};
+(()=>{const e=document.createElement('div');e.id='sprt';e.hidden=true;e.innerHTML='<span>⏱</span><b>0:00.0</b>';document.body.appendChild(e)})();
+const srFmt=ms=>{ms=Math.max(0,ms);const m=Math.floor(ms/60000),s=Math.floor(ms%60000/1000),d=Math.floor(ms%1000/100);return `${m}:${String(s).padStart(2,'0')}.${d}`};
+{const f=startGame;startGame=function(){if(QNEXT&&!QUSER){qSet(QNEXT,false);QNEXT=null}const r=f.apply(this,arguments);SRN.t0=Date.now();SRN.stop=0;SRN.on=true;SRN.done=false;const e=$('#sprt');if(e){e.hidden=false;e.classList.remove('fin')}return r}}
+setInterval(()=>{const e=$('#sprt');if(!e||!SRN.on)return;const show=playing&&$('#end').hidden&&!(typeof SUPON!=='undefined'&&SUPON);e.hidden=!show&&!SRN.stop;if(!SRN.stop)e.querySelector('b').textContent=srFmt(Date.now()-SRN.t0)},100);
+/* ---- récords ---- */
+const srAll=()=>{const a=LS.get('taller_speedrun');return a&&typeof a==='object'?a:{}};
+function srKey(){const m=MODE,tx=$('#res').innerText||'';if(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin)return {k:'guardia:'+(GUARD.ev&&GUARD.ev.id),n:'🚨 Guardia · '+(GUARD.ev&&GUARD.ev.t||'')};
+ if(m==='botella'){const ins=(tx.match(/Instalación:\s*([^\n/]+)/)||[])[1];const it=ins?(/aére|poste/i.test(ins)?'aérea':'subterránea'):'';return {k:`botella:${NFIB}${it?':'+it:''}`,n:`🍾 Botella de ${NFIB} pelos${it?' · '+it:''}`}}
+ if(m==='cableado'){const dc=typeof CBLOC!=='undefined'&&CBLOC==='delta';return {k:'cableado:'+(dc?'delta':'sa'),n:'🧵 Cableado · '+(dc?'DeltaCenter':'Santa Ana')}}
+ if(m==='roseta'){const dc=tx.includes('DeltaCenter');return {k:'roseta'+(dc?':delta':''),n:'🏠 Roseta'+(dc?' · DeltaCenter':'')}}
+ if(m==='nap')return {k:'nap',n:'📦 Caja NAP'};return {k:m,n:m}}
+function srPen(){const E=(typeof ACD!=='undefined'&&ACD&&ACD.e)||{},B=(typeof ACD!=='undefined'&&ACD&&ACD.b)||{},o=(typeof OTD!=='undefined'&&OTD&&OTD.fin&&!OTD.skip&&!OTD.mg)?OTD.sc.ev:[];
+ const cort=(E.cleave||0),rot=(B.dead||0)+(E.prep||0),rad=(B.store||0)+(E.routing||0)+(o.some(e=>e.fault==='macro')?1:0),otros=Math.max(0,err-cort-(E.prep||0)-(E.routing||0));
+ return [['🔪 Cortes malos',cort,10],['💥 Fibras rotas o quebradas',rot,15],['🌀 Radios de curvatura no cumplidos',rad,10],['⚠️ Otros errores',otros,5],['📢 Reclamos del equipo',reclamos,5]]}
+function srAfterEnd(){if(SRN.done||!SRN.on||$('#end').hidden||(typeof SUPON!=='undefined'&&SUPON))return;SRN.done=true;SRN.stop=Date.now();const e=$('#sprt');if(e)e.classList.add('fin');
+ if(typeof MG!=='undefined'&&MG&&!MG.fin)return;const raw=SRN.stop-SRN.t0,P=srPen(),pen=P.reduce((a,x)=>a+x[1]*x[2]*1000,0),fin=raw+pen,K=srKey(),A=srAll(),L=(A[K.k]&&A[K.k].top)||[];
+ const me={t:fin,raw,pen,name:(acct&&acct.name)||'Invitado',fecha:new Date().toISOString(),pts:score(),tec:TECS[TEC]&&TECS[TEC].n};
+ const prevBest=L.length?L[0].t:null;L.push(me);L.sort((a,b)=>a.t-b.t);const top=L.slice(0,5),pos=top.indexOf(me)+1;A[K.k]={n:K.n,top};LS.set('taller_speedrun',A);
+ const avg=fusN?loss/fusN:null,pw=MODE==='roseta'?+R.pw:MODE==='nap'?+NP.pw:null;
+ const html=`<div class="srbox"><div class="srh"><b>⏱️ Speedrun · ${K.n}</b>${pos===1?'<span class="srrec">🏁 ¡Récord!</span>':pos?`<span class="srpos">#${pos} de tus 5 mejores</span>`:''}</div>
+  <div class="srg"><div><small>Tiempo de ejecución</small><b>${srFmt(raw)}</b></div><div><small>Penalizaciones</small><b>+${srFmt(pen)}</b></div><div class="srf"><small>Tiempo final</small><b>${srFmt(fin)}</b></div></div>
+  ${avg!=null?`<p>📉 Pérdida de inserción promedio: <b>${avg.toFixed(3)} dB</b> por empalme${pw!=null&&!isNaN(pw)?` · OPM: <b>${pw.toFixed(2)} dBm</b>`:''}</p>`:''}
+  <ul class="srl">${P.filter(x=>x[1]).map(x=>`<li>${x[0]}: <b>${x[1]}</b> × ${x[2]} s = +${x[1]*x[2]} s</li>`).join('')||'<li>✅ Sin penalizaciones</li>'}</ul>
+  ${prevBest!=null&&pos!==1?`<p class="note">Tu récord en esta categoría: <b>${srFmt(prevBest)}</b> (${fin>prevBest?'+':''}${((fin-prevBest)/1000).toFixed(1)} s)</p>`:''}
+  <ol class="srtop">${top.slice(0,3).map((x,i)=>`<li class="${x===me?'me':''}">${['🥇','🥈','🥉'][i]} ${srFmt(x.t)} <small>${x.name} · ${new Date(x.fecha).toLocaleDateString('es-AR')}</small></li>`).join('')}</ol></div>`;
+ const res=$('#res'),h=res.querySelector('.stars');if(h)h.insertAdjacentHTML('beforebegin',html);else{const b=res.querySelector('button.big');if(b)b.insertAdjacentHTML('beforebegin',html);else res.insertAdjacentHTML('beforeend',html)}
+ try{const pt=ptAll(),x=pt[pt.length-1];if(x&&x.tipo!=='minijuego'&&Date.now()-Date.parse(x.fecha)<5000){x.speedrun={categoria:K.k,tiempo_ms:raw,penalizacion_ms:pen,final_ms:fin,posicion:pos||null};ptSaveAll(pt)}}catch(e){}}
+{const f=end;end=function(){const r=f.apply(this,arguments);try{srAfterEnd()}catch(e){console.warn('speedrun',e)}return r}}
+/* récords en «Mis partidas» */
+{const f=ptRender;ptRender=function(){f();const el=$('#ptd'),A=srAll(),ks=Object.keys(A);if(!el)return;const at=el.querySelector('.ptfl');if(!at)return;
+ at.insertAdjacentHTML('beforebegin',`<details class="srrk"${ks.length?'':' hidden'}><summary>🏁 Récords de speedrun (${ks.length} categoría${ks.length===1?'':'s'})</summary>${ks.map(k=>{const c=A[k];return `<div class="srrow"><b>${c.n}</b>${c.top.slice(0,3).map((x,i)=>`<span>${['🥇','🥈','🥉'][i]} ${srFmt(x.t)}</span>`).join('')}</div>`}).join('')}</details>`)}}
 
 applyQ();loop();
 </script></body></html>
