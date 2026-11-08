@@ -4664,7 +4664,10 @@ function ptRender(){const el=$('#ptd'),all=ptAll(),me=acct&&acct.key,mine=all.fi
  el.querySelector('[data-a=exp]').onclick=ptExport;const inp=el.querySelector('input[type=file]');el.querySelector('[data-a=imp]').onclick=()=>inp.click();inp.onchange=()=>{const f=inp.files[0];if(f)f.text().then(ptImport)};
  el.querySelector('[data-a=del]').onclick=()=>{if(!PTF.del){PTF.del=1;ptRender();setTimeout(()=>{if(PTF.del){PTF.del=0;if(!$('#ptd').hidden)ptRender()}},4000);return}PTF.del=0;LS.set(PT_KEY,[]);ptRender();wToast('🗑️ Historial borrado.')}}
 function ptExport(){const all=ptAll(),j={schema:PT_SCHEMA,exportado:new Date().toISOString(),juego:'Taller de empalmes',ver:VER,jugador:(acct&&acct.name)||null,clave:(acct&&acct.key)||null,dispositivo:ptDev(),partidas:all};
- const b=new Blob([JSON.stringify(j,null,1)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`partidas-${(acct&&acct.key)||'invitado'}-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);return j}
+ const fn=`partidas-${(acct&&acct.key)||'invitado'}-${new Date().toISOString().slice(0,10)}.json`,txt=JSON.stringify(j,null,1);
+ (async()=>{let dl=null;try{if(window.claude&&claude.use)dl=await Promise.race([claude.use('downloads'),new Promise(r=>setTimeout(()=>r(null),1500))])}catch(e){}
+  if(dl){try{await dl.save({filename:fn,data:txt});wToast('⬇️ Historial exportado.')}catch(e){wToast('No se descargó el archivo.')}return}
+  const b=new Blob([txt],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)})();return j}
 function ptImport(txt){try{const j=JSON.parse(txt),L=Array.isArray(j)?j:j.partidas;if(!Array.isArray(L))throw 0;const a=ptAll(),have=new Set(a.map(x=>x.id));let n=0;
   L.forEach(x=>{if(x&&x.schema===PT_SCHEMA&&x.id&&!have.has(x.id)){a.push(x);have.add(x.id);n++}});a.sort((p,q)=>String(p.fecha).localeCompare(String(q.fecha)));ptSaveAll(a);ptRender();wToast(n?`⬆️ Se importaron ${n} partida${n>1?'s':''}.`:'No había partidas nuevas en ese archivo.')}
  catch(e){wToast('❌ Ese archivo no es un historial de partidas válido.')}}
