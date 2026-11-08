@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "taller-partida/1",
+  "title": "Partida del Taller de empalmes",
+  "description": "Registro de un trabajo o minijuego terminado. Se guarda en localStorage con la clave 'taller_partidas' (array, últimas 300).",
+  "type": "object",
+  "required": ["schema", "id", "tipo", "ver", "fecha", "dispositivo", "jugador", "puntos"],
+  "properties": {
+    "schema": { "const": "taller-partida/1" },
+    "id": { "type": "string", "description": "UUID único de la partida (sirve para no duplicar al importar o sincronizar)" },
+    "tipo": { "enum": ["trabajo", "nivel", "guardia", "minijuego"] },
+    "ver": { "type": "integer", "description": "Versión del juego" },
+    "fecha": { "type": "string", "format": "date-time" },
+    "dispositivo": { "type": "string", "description": "Id aleatorio del navegador (localStorage 'taller_dev')" },
+    "jugador": {
+      "type": "object",
+      "properties": {
+        "nombre": { "type": "string" },
+        "clave": { "type": ["string", "null"], "description": "Nombre normalizado (minúsculas, sin acentos): identifica al jugador" },
+        "uid": { "type": ["string", "null"], "description": "Id de usuario en la nube (solo en la versión de Claude)" }
+      }
+    },
+    "sync": { "enum": [false, "nube", "servidor"], "description": "false = pendiente de subir" },
+    "modo": { "enum": ["roseta", "nap", "botella", "cableado"] },
+    "minijuego": { "type": "string", "description": "Clave del minijuego (pelar, cortar, fusion, otdr, colores, vfl…)" },
+    "entrenamiento": { "type": "boolean" },
+    "tecnico": { "type": "string" },
+    "cuadrilla": { "type": ["integer", "null"] },
+    "nivel": { "type": "integer" },
+    "duracion_s": { "type": ["integer", "null"] },
+    "puntos": { "type": "integer" },
+    "estrellas": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "monedas": { "type": "integer" },
+    "errores": { "type": "integer" },
+    "reclamos": { "type": "integer" },
+    "fusiones": { "type": "integer" },
+    "perdida_prom_db": { "type": ["number", "null"] },
+    "detalle": { "type": "object", "description": "Datos propios de cada modo (fusion_db, guardado, potencia_dbm, orden, fibras, lote, desperdicio_m…)" },
+    "guardia": { "type": "object", "description": "evento, tiempo_s, sla_s, dentro_sla, puntos" },
+    "otdr": { "type": "object", "description": "certificado, fallas_corregidas, diagnosticos_errados, perdida_1310_db, puntos" },
+    "academia": { "type": "object", "description": "general (0-100), competencias {prep, cleave, fusion, routing, norma}, fallas [códigos]" },
+    "progreso": { "type": "object", "description": "xp, rango, certificacion al momento de la partida" }
+  }
+}

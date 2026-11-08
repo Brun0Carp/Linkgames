@@ -1,0 +1,1 @@
+Acá van los JSON exportados desde «Mis partidas» (partidas-<jugador>-<fecha>.json).

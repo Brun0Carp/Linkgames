@@ -237,6 +237,16 @@ button:active:not(:disabled){transform:scale(.96)}
 @keyframes acsk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
 .acvs{width:100%;max-width:520px;display:block;margin:0 auto;touch-action:none;cursor:crosshair}.acpt{cursor:pointer}.acm{margin:0 0 6px}.acfl{animation:acfl .5s infinite alternate}.acfl2{animation:acfl 1.3s infinite alternate}@keyframes acfl{from{opacity:.35}to{opacity:1}}
 .acdk{padding:10px 14px;border-radius:10px;font-weight:700}.acdrok{font-weight:800;color:#16a34a}
+#ptd{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
+#ptd .tbox{max-width:620px;width:100%}.ptbar{display:flex;align-items:center;gap:8px}.ptbar h1{font-size:24px;margin:0;flex:1}
+.ptx{width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;font-weight:800;display:grid;place-items:center;background:#fff;color:#16222c;border:1.5px solid #c9d3db;margin:0;flex:none}.ptx:hover{background:#e5484d;color:#fff;border-color:#e5484d}
+.ptst{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px}.ptst div{border:1.5px solid var(--line);border-radius:12px;padding:8px 4px;text-align:center}.ptst b{display:block;font-size:17px}.ptst span{font-size:11px;opacity:.7}
+@media(max-width:480px){.ptst{grid-template-columns:repeat(3,1fr)}}
+.ptfl{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px}.ptfl button{flex:none;margin:0;padding:7px 11px;border-radius:999px;font-size:13px;font-weight:700;border:1.5px solid var(--line);background:transparent;color:inherit}.ptfl button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.ptls{display:flex;flex-direction:column;gap:6px;max-height:52vh;overflow:auto;padding-right:2px}.ptit{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:8px 10px}
+.ptst2{color:#f2b900;font-size:13px;white-space:nowrap}.ptst2 i{font-style:normal;opacity:.25}.ptin{flex:1;min-width:0}.ptin b{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ptin small{opacity:.7;font-size:12px}
+.ptpt{text-align:right}.ptpt b{display:block;font-size:17px}.ptpt small{font-size:11px;opacity:.6}.ptbt{display:flex;gap:8px;margin-top:8px}.ptbt .big{flex:1;margin:0}
+.ptdel{display:block;margin:10px auto 0;background:none;border:0;color:#e5484d;font-weight:700;font-size:13px;padding:6px}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -382,7 +392,7 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt prbtn" onclick="openPR()">🏅 Desafíos y logros</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt prbtn" onclick="openPR()">🏅 Desafíos y logros</button><button class="big alt ptbtn" onclick="openPT()">📂 Mis partidas</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -2749,7 +2759,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=71,NEWS=[
+const VER=72,NEWS=[
+ {v:72,t:'Historial de partidas',items:[
+  ['📂','Mis partidas','Cada trabajo (roseta, NAP, botella, cableado, guardia y niveles) y cada minijuego se guarda en este dispositivo con todos sus datos: puntos, estrellas, errores, pérdidas, potencia, OTDR, academia y más. Botón «Mis partidas» en el menú, con filtros y estadísticas.'],
+  ['🧾','Formato estándar','Las partidas usan un formato fijo («taller-partida/1») documentado en el repositorio de GitHub, así cuando llegue el multijugador todos los datos se pueden juntar igual.'],
+  ['⬇️','Exportar e importar','Podés bajar tu historial como archivo JSON y volver a cargarlo en otro dispositivo sin duplicar partidas.'],
+  ['☁️','Sincronización','En la versión de Claude se guarda además un resumen de tus últimas 20 partidas en la nube del juego. Cada partida queda marcada como sincronizada o pendiente para cuando haya un servidor.']]},
  {v:71,t:'Academia y diagnóstico profesional',items:[
   ['🎓','Diagnóstico al terminar','Al terminar cada trabajo se abre el tablero de la Academia con tu puntaje en 5 competencias: preparación y limpieza, corte (ángulo y estado de la cuchilla), fusión (alineación, pérdida y termo), enrutamiento y radio de curvatura, y normativa (colores TIA-598, puertos y conectores SC/APC). Semáforo: verde estándar de operador, amarillo mejorable, rojo crítico.'],
   ['🩺','Causa raíz y buenas prácticas','Si algo salió mal te explica la causa detectada, qué pasó en tu trabajo, el impacto en la red y el consejo del instructor, con la referencia de la norma (ITU-T G.652/G.657, TIA-598, IEC 61300-3-35).'],
@@ -3072,7 +3087,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -4585,6 +4600,75 @@ function acdVfl(B){const lv=acdLv(),N=lv>=3?24:16,port=rint(1,N),cols=N/2>8?12:8
  draw()}
 {const f=mgPlay;mgPlay=function(k){const r=f(k);if(k==='colores')acdColores($('#mgb'));else if(k==='vfl')acdVfl($('#mgb'));return r}}
 window.ACDauto=()=>{if(!MG)return;if(MG.k==='colores'||MG.k==='vfl')mgDone()};
+
+/*C72*/
+/* ===== V72: historial de partidas en localStorage (formato estándar "taller-partida/1"), exportar/importar y cola de sincronización para el multijugador ===== */
+const PT_KEY='taller_partidas',PT_MAX=300,PT_SCHEMA='taller-partida/1';
+function ptAll(){const a=LS.get(PT_KEY);return Array.isArray(a)?a:[]}
+function ptSaveAll(a){a=a.slice(-PT_MAX);LS.set(PT_KEY,a);return a}
+function ptDev(){let d=null;try{d=localStorage.getItem('taller_dev')}catch(e){}if(!d){d='d-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);try{localStorage.setItem('taller_dev',d)}catch(e){}}return d}
+const ptId=()=>(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'p-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
+const ptN=(v,d=3)=>v==null||v===''||isNaN(+v)?null:+(+v).toFixed(d);
+function ptBase(tipo){return {schema:PT_SCHEMA,id:ptId(),tipo,ver:VER,fecha:new Date().toISOString(),dispositivo:ptDev(),
+ jugador:{nombre:(acct&&acct.name)||LS.get('taller_nombre')||'Invitado',clave:(acct&&acct.key)||null,uid:(typeof UID!=='undefined'&&UID)||null},sync:false}}
+function ptJob(){const p=score(),CO=(()=>{try{return coinsFor(p)}catch(e){return {co:0}}})(),m=MODE,txt=($('#res').innerText||''),r=ptBase(LEVEL&&LEVEL.on?'nivel':(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin)?'guardia':'trabajo');
+ Object.assign(r,{modo:m,tecnico:TECS[TEC]&&TECS[TEC].n,cuadrilla:m==='cableado'?null:CUAD,duracion_s:(typeof PRT0!=='undefined'&&PRT0)?Math.round((Date.now()-PRT0)/1000):null,
+  puntos:p,estrellas:[400,650,850].filter(x=>p>=x).length,monedas:CO.co||0,errores:err,reclamos,fusiones:fusN,perdida_prom_db:fusN?ptN(loss/fusN):null,detalle:{}});
+ const d=r.detalle;
+ if(m==='roseta'){Object.assign(d,{fusion_db:ptN(R.spl),guardado:R.rate||null,guardado_db:ptN(R.store),potencia_dbm:ptN(R.pw,2),orden:R.ot?{bien:R.ot.ok,total:R.ot.tot}:null,deltacenter:txt.includes('DeltaCenter')})}
+ else if(m==='nap'){Object.assign(d,{fusion_db:ptN(NP.spl0),conector_db:ptN(NP.cl,2),puerto:NP.port!=null?NP.port+1:null,guardado:NP.rate||null,potencia_dbm:ptN(NP.pw,2)})}
+ else if(m==='botella'){Object.assign(d,{fibras:NFIB,guardado:(typeof W!=='undefined'&&W&&W.rates)?['Apretado','Desprolijo','Aceptable','Prolijo'].find(x=>W.rates.includes(x))||null:null,rehechos:(typeof W!=='undefined'&&W&&W.redos)||0})}
+ else if(m==='cableado'){Object.assign(d,{lugar:(typeof CBLOC!=='undefined'&&CBLOC==='delta')?'DeltaCenter':'Santa Ana',lote:CB.lot||null,cortado_m:CB.cut||null,desperdicio_m:CB.waste!=null?CB.waste:null,dobleces:CB.kinks||0,corto:!!CB.short,cano:CB.duct||null})}
+ if(LEVEL&&LEVEL.on)r.nivel=LEVEL.n;
+ if(typeof GUARD!=='undefined'&&GUARD&&GUARD.fin)r.guardia={evento:GUARD.ev&&(GUARD.ev.id||GUARD.ev.t),tiempo_s:Math.round(GUARD.used||0),sla_s:GUARD.sla,dentro_sla:!GUARD.late,puntos:GUARD.pts};
+ if(typeof OTD!=='undefined'&&OTD&&OTD.fin&&!OTD.mg)r.otdr=OTD.skip?{certificado:false}:{certificado:true,fallas_corregidas:OTD.fixN,diagnosticos_errados:OTD.mist,perdida_1310_db:ptN(otdTot(1310),2),puntos:OTD.pts};
+ if(typeof ACD!=='undefined'&&ACD&&ACD.res)r.academia={general:ACD.res.ov,competencias:ACD.res.s,fallas:ACD.res.diag.map(x=>x.k)};
+ if(typeof PRG!=='undefined')r.progreso={xp:PRG.xp,rango:(typeof rk==='function'?rk().n:null),certificacion:(typeof ACS!=='undefined'&&typeof ACCERT!=='undefined')?ACCERT[ACS.cert].n:null};
+ return r}
+function ptAdd(r){const a=ptAll();a.push(r);ptSaveAll(a);ptSync();return r}
+/* ---- sincronización: nube del artefacto (si existe) o un servidor futuro ---- */
+let ptSyncing=false;
+async function ptSync(){if(ptSyncing)return;ptSyncing=true;try{const a=ptAll(),pend=a.filter(x=>!x.sync);if(!pend.length)return;
+  if(typeof DB!=='undefined'&&DB&&acct){const ult=a.slice(-20).map(x=>({id:x.id,tipo:x.tipo,modo:x.modo||x.minijuego,fecha:x.fecha,puntos:x.puntos,estrellas:x.estrellas,errores:x.errores,academia:x.academia?x.academia.general:null}));acct.partidas_ult=ult;acct.partidas_total=(acct.partidas_total||0)+pend.length;saveAcct();pend.forEach(x=>x.sync='nube')}
+  let url=null;try{url=localStorage.getItem('taller_sync_url')}catch(e){}
+  if(url&&/^https:\/\//.test(url)){const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({schema:PT_SCHEMA,partidas:pend.filter(x=>x.sync!=='servidor')})});if(res.ok)pend.forEach(x=>x.sync='servidor')}
+  const ids=new Map(pend.map(x=>[x.id,x.sync]));ptSaveAll(a.map(x=>ids.has(x.id)?Object.assign(x,{sync:ids.get(x.id)}):x))}catch(e){}finally{ptSyncing=false}}
+/* API para el multijugador: window.TallerPartidas */
+window.TallerPartidas={schema:PT_SCHEMA,todas:ptAll,pendientes:()=>ptAll().filter(x=>!x.sync),marcar:(ids,v='servidor')=>{const s=new Set(ids);ptSaveAll(ptAll().map(x=>s.has(x.id)?Object.assign(x,{sync:v}):x))},exportar:()=>ptExport(),sincronizar:ptSync};
+/* ---- ganchos: fin de trabajo y fin de minijuego ---- */
+let PTDONE=false;
+{const f=startGame;startGame=function(){PTDONE=false;return f.apply(this,arguments)}}
+{const f=end;end=function(){const r=f.apply(this,arguments);try{if(!PTDONE&&!$('#end').hidden&&!(typeof SUPON!=='undefined'&&SUPON)){PTDONE=true;ptAdd(ptJob())}}catch(e){console.warn('partidas',e)}return r}}
+{const f=mgDone;mgDone=function(){const k=MG&&!MG.fin&&MG.k,a=MG&&MG.acad,t0=MG&&MG.t0,e0=MG&&MG.save?MG.save.err:0,e1=err;const r=f.apply(this,arguments);
+ if(k){try{const tx=$('#mg').innerText||'',m=tx.match(/(\d+)\s*pts/),pts=m?+m[1]:0,x=ptBase('minijuego');Object.assign(x,{minijuego:k,entrenamiento:!!a,puntos:pts,estrellas:[400,650,850].filter(v=>pts>=v).length,errores:Math.max(0,e1-e0),duracion_s:t0?Math.round((Date.now()-t0)/1000):null});ptAdd(x)}catch(e){}}return r}}
+/* ---- panel "Mis partidas" ---- */
+const PTMN={roseta:'🏠 Roseta',nap:'📦 Caja NAP',botella:'🍾 Botella',cableado:'🧵 Cableado'};
+function openPT(){let el=$('#ptd');if(!el){el=document.createElement('div');el.id='ptd';el.hidden=true;document.body.appendChild(el)}$('#title').hidden=true;el.hidden=false;PTF.f='todas';ptRender()}
+function closePT(){$('#ptd').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
+const PTF={f:'todas',del:0};
+function ptLabel(x){if(x.tipo==='minijuego'){const g=(typeof MGS!=='undefined'&&MGS.find(m=>m.k===x.minijuego))||{};return `${g.ic||'🎮'} ${g.n||x.minijuego}${x.entrenamiento?' · entrenamiento':''}`}return (PTMN[x.modo]||x.modo)+(x.tipo==='guardia'?' · 🚨 guardia':x.tipo==='nivel'?` · nivel ${x.nivel||''}`:'')+(x.detalle&&x.detalle.fibras?` · ${x.detalle.fibras} pelos`:'')+(x.detalle&&x.detalle.deltacenter?' · DeltaCenter':'')}
+function ptRender(){const el=$('#ptd'),all=ptAll(),me=acct&&acct.key,mine=all.filter(x=>!me||!x.jugador||!x.jugador.clave||x.jugador.clave===me),
+ L=mine.filter(x=>PTF.f==='todas'||(PTF.f==='minijuegos'?x.tipo==='minijuego':x.modo===PTF.f&&x.tipo!=='minijuego')).slice().reverse(),
+ jobs=mine.filter(x=>x.tipo!=='minijuego'),avg=jobs.length?Math.round(jobs.reduce((a,x)=>a+(x.puntos||0),0)/jobs.length):0,best=jobs.reduce((a,x)=>Math.max(a,x.puntos||0),0),pend=all.filter(x=>!x.sync).length,
+ secs=jobs.reduce((a,x)=>a+(x.duracion_s||0),0),fmt=s=>s<60?`${s} s`:s>=3600?`${Math.floor(s/3600)} h ${Math.floor(s%3600/60)} min`:`${Math.floor(s/60)} min`;
+ const chip=(k,t)=>`<button data-f="${k}" class="${PTF.f===k?'on':''}">${t}</button>`;
+ el.innerHTML=`<div class="tbox"><div class="ptbar"><h1>📂 Mis partidas</h1><button class="ptx" onclick="closePT()" aria-label="Cerrar">✕</button></div>
+ <p class="sub" style="margin:2px 0 10px">Cada trabajo y cada minijuego se guarda en este dispositivo con un formato estándar, listo para el multijugador.</p>
+ <div class="ptst"><div><b>${jobs.length}</b><span>Trabajos</span></div><div><b>${mine.length-jobs.length}</b><span>Minijuegos</span></div><div><b>${avg}</b><span>Promedio</span></div><div><b>${best}</b><span>Mejor</span></div><div><b>${fmt(secs)}</b><span>Jugado</span></div></div>
+ <div class="ptfl">${chip('todas','Todas')}${chip('roseta','🏠 Roseta')}${chip('nap','📦 NAP')}${chip('botella','🍾 Botella')}${chip('cableado','🧵 Cableado')}${chip('minijuegos','🎮 Minijuegos')}</div>
+ <div class="ptls">${L.length?L.slice(0,120).map(x=>`<div class="ptit"><div class="ptst2">${'★'.repeat(x.estrellas||0)}<i>${'★'.repeat(3-(x.estrellas||0))}</i></div><div class="ptin"><b>${ptLabel(x)}</b><small>${new Date(x.fecha).toLocaleString('es-AR',{dateStyle:'short',timeStyle:'short'})}${x.tecnico?' · '+x.tecnico:''}${x.duracion_s!=null?` · ${Math.floor(x.duracion_s/60)}:${String(x.duracion_s%60).padStart(2,'0')}`:''}${x.errores?` · ${x.errores} error${x.errores>1?'es':''}`:''}${x.academia?` · 🎓 ${x.academia.general}%`:''}</small></div><div class="ptpt"><b>${x.puntos}</b><small>pts</small></div></div>`).join(''):'<p class="note" style="text-align:center;padding:18px 0">Todavía no hay partidas acá. ¡Andá a empalmar!</p>'}</div>
+ <p class="note">${all.length} partida${all.length===1?'':'s'} guardada${all.length===1?'':'s'} (se guardan las últimas ${PT_MAX}) · ${pend?`${pend} sin sincronizar`:'todo sincronizado'}${typeof DB!=='undefined'&&DB?' · copia de las últimas 20 en la nube':''}</p>
+ <div class="ptbt"><button class="big" data-a="exp">⬇️ Exportar (JSON)</button><button class="big alt" data-a="imp">⬆️ Importar</button></div>
+ <button class="ptdel" data-a="del">${PTF.del?'⚠️ Tocá de nuevo para borrar todo el historial':'🗑️ Borrar historial'}</button><input type="file" accept=".json,application/json" hidden></div>`;
+ el.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{PTF.f=b.dataset.f;PTF.del=0;ptRender()});
+ el.querySelector('[data-a=exp]').onclick=ptExport;const inp=el.querySelector('input[type=file]');el.querySelector('[data-a=imp]').onclick=()=>inp.click();inp.onchange=()=>{const f=inp.files[0];if(f)f.text().then(ptImport)};
+ el.querySelector('[data-a=del]').onclick=()=>{if(!PTF.del){PTF.del=1;ptRender();setTimeout(()=>{if(PTF.del){PTF.del=0;if(!$('#ptd').hidden)ptRender()}},4000);return}PTF.del=0;LS.set(PT_KEY,[]);ptRender();wToast('🗑️ Historial borrado.')}}
+function ptExport(){const all=ptAll(),j={schema:PT_SCHEMA,exportado:new Date().toISOString(),juego:'Taller de empalmes',ver:VER,jugador:(acct&&acct.name)||null,clave:(acct&&acct.key)||null,dispositivo:ptDev(),partidas:all};
+ const b=new Blob([JSON.stringify(j,null,1)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`partidas-${(acct&&acct.key)||'invitado'}-${new Date().toISOString().slice(0,10)}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);return j}
+function ptImport(txt){try{const j=JSON.parse(txt),L=Array.isArray(j)?j:j.partidas;if(!Array.isArray(L))throw 0;const a=ptAll(),have=new Set(a.map(x=>x.id));let n=0;
+  L.forEach(x=>{if(x&&x.schema===PT_SCHEMA&&x.id&&!have.has(x.id)){a.push(x);have.add(x.id);n++}});a.sort((p,q)=>String(p.fecha).localeCompare(String(q.fecha)));ptSaveAll(a);ptRender();wToast(n?`⬆️ Se importaron ${n} partida${n>1?'s':''}.`:'No había partidas nuevas en ese archivo.')}
+ catch(e){wToast('❌ Ese archivo no es un historial de partidas válido.')}}
+setTimeout(()=>{try{ptSync()}catch(e){}},2500);
 
 applyQ();loop();
 </script></body></html>
