@@ -264,6 +264,15 @@ button:active:not(:disabled){transform:scale(.96)}
 .jgbtn{font-size:22px!important;padding:16px!important;letter-spacing:1px;font-weight:800}
 .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.tgrid button{margin:0;padding:12px 8px;font-weight:700;font-size:14px;border-radius:12px}.tgrid .tgw{grid-column:1/-1}
 @media(max-width:360px){.jggrid{grid-template-columns:1fr}}
+#tut{position:absolute;inset:0;z-index:9;overflow:auto;background:radial-gradient(120% 80% at 50% 0%,#e9eef2,#c4ced6);color:#16222c;padding:10px 10px max(16px,env(safe-area-inset-bottom))}
+.tutw{max-width:640px;margin:0 auto}.tutin{padding-top:8vh}.tuthd{display:flex;align-items:center;gap:8px;font-size:15px}.tuthd b{flex:1}.tuthd span{font-weight:700;opacity:.7}.tutsk{padding:8px 12px;font-size:13px;border-radius:10px;margin:0}
+.tutbar{height:7px;border-radius:7px;background:#cfd8df;margin:8px 0;overflow:hidden}.tutbar i{display:block;height:100%;background:linear-gradient(90deg,#22b573,#0ea5e9);transition:width .4s}
+.tutcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border-radius:16px;padding:12px 14px;box-shadow:0 6px 18px rgba(0,0,0,.08)}.tutcard>span{font-size:34px;line-height:1}.tutcard h2{margin:0 0 4px;font-size:18px}.tutcard p{margin:0;font-size:14px;line-height:1.4}.tutcard.big h2{font-size:22px}.tutcard.big p{margin-bottom:6px}
+.tutmsg{min-height:20px;margin:8px 2px;font-size:14px;font-weight:600}#tutb{background:#fff;border-radius:16px;padding:10px}#tutb svg{width:100%;display:block;touch-action:none}
+.tutbtns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.tutbtns .big{flex:1;margin:0}.tutq{margin:8px 0 0;font-size:14px;text-align:center}
+#tutar{position:fixed;width:32px;height:44px;z-index:40;pointer-events:none;animation:tutb .8s ease-in-out infinite alternate;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}#tutar svg{width:100%;height:100%}
+#tutring{position:fixed;z-index:39;pointer-events:none;border:3px solid #f2b900;border-radius:12px;box-shadow:0 0 0 4px rgba(242,185,0,.25);animation:tutp 1.2s ease-in-out infinite}
+@keyframes tutb{from{transform:translateY(-6px)}to{transform:translateY(4px)}}@keyframes tutp{0%,100%{opacity:1}50%{opacity:.45}}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2778,7 +2787,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=74,NEWS=[
+const VER=75,NEWS=[
+ {v:75,t:'Primeros pasos en campo',items:[
+  ['🎓','Tutorial guiado','Si sos nuevo, al entrar te aparece el tutorial «Primeros pasos en campo» (lo podés omitir). También está en JUGAR para repetirlo cuando quieras.'],
+  ['👇','Flechas y guías','Una flecha amarilla y un recuadro te marcan dónde tocar en cada paso: los colores TIA-598, el termo, la peladora, la limpieza con alcohol, el cleaver, la carga de las fibras en las ranuras V, la alineación X/Y, el horno y la bandeja.'],
+  ['🧷','Pasos nuevos','Cargás cada fibra en su ranura V (sin pasarte de los electrodos), cerrás las mordazas y la tapa, y en la bandeja calzás el termo en el peine y armás el rulo respetando el radio mínimo de 30 mm.'],
+  ['🎁','Premio','La primera vez que lo terminás ganás 🪙 100 y 100 XP.']]},
  {v:74,t:'Menú más simple',items:[
   ['▶','Botón JUGAR','El menú principal ahora tiene un solo botón grande, JUGAR, con todo lo que tiene que ver con partidas: botella, roseta, caja NAP, cableado, trabajo al azar, guardia nocturna, soporte técnico y minijuegos.'],
   ['🎛️','Opciones de cada trabajo','Al elegir botella, roseta, NAP o cableado te aparecen solo sus opciones: cantidad de pelos, splitter, cable de la NAP, pelos del drop, lugar del cableado y herramientas 3D o 2D. Después tocás «Empezar».'],
@@ -3115,7 +3129,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#jg','#aj','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#jg','#aj','#tut','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -4781,6 +4795,90 @@ function jgPick(k){if(k==='azar'){closeJG(false);return playLevel()}if(k==='guar
 function openAJ(){$('#title').hidden=true;$('#aj').hidden=false}
 function closeAJ(){$('#aj').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
 /* los paneles que se abren desde JUGAR vuelven al menú principal al cerrarse (ya lo hacían) */
+
+/*C75*/
+/* ===== V75: tutorial guiado «Primeros pasos en campo» (onboarding con flechas) ===== */
+let TUT=null;
+const TUTS=[
+ {ic:'🎨',t:'Código de colores TIA-598',d:'Antes de cortar nada, identificá el pelo. Los 12 colores van siempre en el mismo orden: Azul, Naranja, Verde, Marrón, Gris, Blanco, Rojo, Negro, Amarillo, Violeta, Rosado y Celeste. Primero se mira el color del buffer y después el del pelo.',run:(B,d)=>tutColors(B,d)},
+ {ic:'🧪',t:'El termo va primero',d:'Pasá el protector de empalme (termo de 60 mm) por una de las fibras ANTES de pelar: después del empalme ya no entra.',run:(B,d)=>termoUI(B,'#2fa84f',d)},
+ {ic:'✂️',t:'Pelado con la peladora',d:'Usá el agujero de 250 µm para el pelo (el de 900 µm es para el acrilato del pigtail). Apoyá la peladora en la marca y tirá en un solo movimiento, recto y parejo, sin doblar el vidrio.',run:(B,d)=>stripUI(B,{c:'#2fa84f',thick:7,inner:glassIn,what:'de la fibra',k:'f',onSlip:()=>{},done:d})},
+ {ic:'🧽',t:'Limpieza con alcohol',d:'Pasá un paño sin pelusa con alcohol isopropílico al 99 % desde el acrilato hacia la punta, tres veces. Después no toques más el vidrio con los dedos.',run:(B,d)=>tutClean(B,d)},
+ {ic:'🔪',t:'Corte con el cleaver',d:'Apoyá la fibra recta en la regla milimétrica, bajá la tapa y deslizá la cuchilla. El corte tiene que quedar a 90°: un ángulo de más de 0,5° sube la pérdida.',run:(B,d)=>cleaveUI(B,'#2fa84f',d)},
+ {ic:'🧷',t:'Carga en las ranuras V',d:'Llevá cada fibra a su ranura en V de la fusionadora, con la punta entre el borde de la ranura y los electrodos. Cerrá las mordazas y la tapa (parabrisas) antes de alinear.',run:(B,d)=>tutVgroove(B,d)},
+ {ic:'⚡',t:'Alineación X/Y y arco',d:'Mirá las dos vistas (X e Y): mové las fibras hasta 0 µm en las dos y dejá un hueco de 5 a 15 µm. Recién ahí disparás el arco.',run:(B,d)=>{CUAD=2;fuseUI(B,'#2fa84f',d,'#1f6feb')}},
+ {ic:'🔥',t:'Horno de termocontracción',d:'Corré el termo hasta que el empalme quede justo en el medio y calentalo en el horno. Dejalo enfriar antes de guardarlo.',run:(B,d)=>heatUI(B,'#2fa84f',d,'#1f6feb')},
+ {ic:'🌀',t:'Bandeja y radio de curvatura',d:'Calzá el termo en el peine de la bandeja y guardá el sobrante en un rulo amplio: el radio mínimo es 30 mm para fibra G.652.D (G.657.A2 aguanta 7,5 mm, pero en bandeja se respeta igual). Una curva más cerrada pierde luz.',run:(B,d)=>tutTray(B,d)}];
+function tutArrow(get){clearInterval(tutArrow.t);let a=$('#tutar'),r=$('#tutring');if(!a){a=document.createElement('div');a.id='tutar';a.innerHTML='<svg viewBox="0 0 40 52"><path d="M20 50 L4 30 H14 V2 H26 V30 H36 Z" fill="#f2b900" stroke="#1b2430" stroke-width="2.5" stroke-linejoin="round"/></svg>';document.body.appendChild(a);r=document.createElement('div');r.id='tutring';document.body.appendChild(r)}
+ const up=()=>{const e=get&&get();if(!e||!e.isConnected||!TUT||$('#tut').hidden){a.hidden=r.hidden=true;return}const b=e.getBoundingClientRect();if(!b.width){a.hidden=r.hidden=true;return}a.hidden=r.hidden=false;
+  a.style.left=(b.left+b.width/2-16)+'px';a.style.top=Math.max(4,b.top-50)+'px';Object.assign(r.style,{left:b.left-5+'px',top:b.top-5+'px',width:b.width+10+'px',height:b.height+10+'px'})};up();tutArrow.t=setInterval(up,150)}
+function tutStep(){const el=$('#tut'),i=TUT.i,s=TUTS[i];
+ el.innerHTML=`<div class="tutw"><div class="tuthd"><b>🎓 Primeros pasos en campo</b><span>${i+1} / ${TUTS.length}</span><button class="tutsk">Omitir</button></div><div class="tutbar"><i style="width:${i/TUTS.length*100}%"></i></div>
+  <div class="tutcard"><span>${s.ic}</span><div><h2>${s.t}</h2><p>${s.d}</p></div></div><p class="tutmsg"></p><div id="tutb"></div></div>`;
+ el.querySelector('.tutsk').onclick=()=>tutEnd(false);const B=el.querySelector('#tutb'),done=()=>{try{fxOK()}catch(e){}tutArrow(null);el.querySelector('.tutmsg').innerHTML='✅ <b>¡Bien!</b>';setTimeout(()=>{if(!TUT)return;TUT.i++;TUT.i<TUTS.length?tutStep():tutDone()},900)};
+ msg('');s.run(B,done);
+ /* flecha por defecto: la zona interactiva de cada paso */
+ if(!TUT.custom)tutArrow(()=>{if(i===6){const ok=typeof fu!=='undefined'&&fu&&fu.ox===0&&fu.oy===0&&fu.gap>=5&&fu.gap<=15;return B.querySelector(ok?'[data-a=arc]':fu&&fu.ox!==0?(fu.ox>0?'[data-a="x-"]':'[data-a="x+"]'):fu&&fu.oy!==0?(fu.oy>0?'[data-a="y-"]':'[data-a="y+"]'):fu&&fu.gap>15?'[data-a="g-"]':'[data-a="g+"]')||B.querySelector('button')}return B.querySelector('svg')});TUT.custom=false}
+function openTut(){$('#title').hidden=true;['#jg','#acd','#end'].forEach(k=>{const e=$(k);if(e)e.hidden=true});let el=$('#tut');if(!el){el=document.createElement('div');el.id='tut';document.body.appendChild(el)}el.hidden=false;
+ TUT={i:0,save:{err,loss,fusN,last,cuad:CUAD}};
+ el.innerHTML=`<div class="tutw tutin"><div class="tutcard big"><span>🎓</span><div><h2>Primeros pasos en campo</h2><p>Antes de salir a la calle, el instructor te muestra lo básico de un empalme por fusión, paso a paso y con flechas: colores TIA-598, termo, pelado, limpieza, corte, carga en las ranuras V, alineación X/Y, horno y bandeja.</p><p class="note">Te lleva unos 3 minutos. Al terminar ganás 🪙 100 y 100 XP.</p></div></div>
+  <div class="tutbtns"><button class="big tutgo">▶ Empezar el tutorial</button><button class="tutsk">Omitir por ahora</button></div></div>`;
+ el.querySelector('.tutgo').onclick=()=>tutStep();el.querySelector('.tutsk').onclick=()=>tutEnd(false);
+ TUT.mo=new MutationObserver(()=>{const t=$('#msg').textContent,p=$('#tut .tutmsg');if(t&&p)p.textContent=t});TUT.mo.observe($('#msg'),{childList:true,characterData:true,subtree:true})}
+function tutRestore(){if(!TUT)return;const s=TUT.save;err=s.err;loss=s.loss;fusN=s.fusN;last=s.last;CUAD=s.cuad;if(TUT.mo)TUT.mo.disconnect();tutArrow(null)}
+function tutEnd(done){tutRestore();try{localStorage.setItem('taller_tut',done?'done':'skip')}catch(e){}TUT=null;$('#tut').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
+function tutDone(){const el=$('#tut'),first=(()=>{try{return localStorage.getItem('taller_tut')!=='done'}catch(e){return true}})();tutRestore();
+ if(first){if(acct){acct.coins=(acct.coins||0)+100;saveAcct()}if(typeof PRG!=='undefined'){PRG.xp+=100;prSave()}}
+ try{localStorage.setItem('taller_tut','done');const x=ptBase('minijuego');Object.assign(x,{minijuego:'tutorial',puntos:1000,estrellas:3,errores:0});ptAdd(x)}catch(e){}
+ el.innerHTML=`<div class="tutw tutin"><div class="tutcard big"><span>🏅</span><div><h2>¡Primeros pasos completados!</h2><p>Ya sabés el recorrido completo de un empalme por fusión. ${first?'Ganaste <b>🪙 100</b> y <b>100 XP</b>.':''} Ahora probalo en un trabajo de verdad: la roseta es el mejor lugar para empezar.</p></div></div>
+  <div class="tutbtns"><button class="big tutgo">▶ Ir a JUGAR</button><button class="tutsk">Volver al menú</button></div></div>`;
+ TUT=null;el.querySelector('.tutgo').onclick=()=>{el.hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}openJG()};el.querySelector('.tutsk').onclick=()=>{el.hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}}
+/* --- pasos propios del tutorial --- */
+function tutColors(B,done){const seq=[2,7];let k=0;TUT.custom=true;
+ const draw=()=>{B.innerHTML=`<div class="fgr"><b>Buffer azul · 12 pelos</b><div>${F.slice(0,12).map((f,i)=>`<button class="fpel tutf" data-k="${i}" style="--c:${hex(f[1])}"><i>${i+1}</i><span>${f[0]}</span></button>`).join('')}</div></div><p class="tutq">Tocá el pelo <b>${F[seq[k]][0].toLowerCase()}</b> (n.º ${seq[k]+1}).</p>`;
+  B.querySelectorAll('.tutf').forEach(b=>b.onclick=()=>{const i=+b.dataset.k;if(i===seq[k]){k++;if(k>=seq.length)return done();draw()}else msg(`Ese es el ${F[i][0].toLowerCase()} (n.º ${i+1}). Contá desde el azul, que es el 1.`)});
+  tutArrow(()=>B.querySelector(`.tutf[data-k="${seq[k]}"]`))};draw()}
+function tutClean(B,done){TUT.custom=true;let n=0,dir=1,lx=null,drag=false,px=40;
+ B.innerHTML=`<svg class="tcl" viewBox="0 0 300 120"><rect width="300" height="120" rx="10" fill="url(#gbg)"/><rect x="10" y="55" width="110" height="9" rx="2" fill="#2fa84f" stroke="#33414d" stroke-width=".6"/><rect x="120" y="58" width="170" height="3" fill="#dff2ff" stroke="#9fb3c2" stroke-width=".6"/><g class="tdirt">${[...Array(7)].map((_,i)=>`<circle cx="${135+i*21}" cy="${57+(i%3)}" r="1.8" fill="#a08a5a"/>`).join('')}</g>
+  <g class="tpano"><rect x="-16" y="40" width="32" height="38" rx="5" fill="#f4f8fb" stroke="#9fb3c2"/><text y="94" font-size="9" text-anchor="middle" fill="#33414d">paño + IPA</text></g><text x="150" y="22" font-size="11" text-anchor="middle" fill="#33414d" class="tct">Pasadas: 0 de 3 (hacia la punta →)</text></svg>`;
+ const sv=B.querySelector('svg'),pa=sv.querySelector('.tpano'),put=()=>pa.setAttribute('transform',`translate(${px},0)`);put();
+ const mv=e=>{if(!drag)return;const p=svgPt(sv,e);px=Math.max(110,Math.min(290,p.x));put();if(px>=280&&dir===1){n++;dir=-1;sv.querySelector('.tct').textContent=`Pasadas: ${n} de 3 ${n<3?'· volvé a empezar desde el acrilato':''}`;sv.querySelector('.tdirt').setAttribute('opacity',(1-n/3).toFixed(2));if(n>=3){drag=false;return done()}}if(px<=125)dir=1};
+ sv.onpointerdown=e=>{const p=svgPt(sv,e);if(Math.abs(p.x-px)<30){drag=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}}};sv.onpointermove=mv;sv.onpointerup=()=>{drag=false;if(dir===1&&px>125){}};
+ px=112;put();tutArrow(()=>pa)}
+function tutVgroove(B,done){TUT.custom=true;const st={L:{x:40,y:130,in:false},R:{x:260,y:130,in:false},cl:{L:false,R:false},lid:false};
+ const G0={L:{x:118,y:70},R:{x:182,y:70}};
+ const draw=()=>{B.innerHTML=`<svg class="tvg" viewBox="0 0 300 170"><rect width="300" height="170" rx="10" fill="#2b3742"/>
+  <rect x="64" y="58" width="72" height="24" rx="4" fill="#9aa6b0"/><rect x="164" y="58" width="72" height="24" rx="4" fill="#9aa6b0"/><path d="M64 70 H136 M164 70 H236" stroke="#55636e" stroke-width="3"/><text x="100" y="52" font-size="9" fill="#cfd8df" text-anchor="middle">ranura V izq.</text><text x="200" y="52" font-size="9" fill="#cfd8df" text-anchor="middle">ranura V der.</text>
+  <rect x="146" y="30" width="8" height="26" fill="#d6b25e"/><rect x="146" y="84" width="8" height="26" fill="#d6b25e"/><text x="150" y="124" font-size="8" fill="#cfd8df" text-anchor="middle">electrodos</text>
+  <rect class="tcl tclL" x="70" y="${st.cl.L?60:30}" width="40" height="14" rx="3" fill="${st.cl.L?'#e5484d':'#7b8790'}" stroke="#1b2430"/><rect class="tcl tclR" x="190" y="${st.cl.R?60:30}" width="40" height="14" rx="3" fill="${st.cl.R?'#e5484d':'#7b8790'}" stroke="#1b2430"/>
+  <g class="tfb tfL" transform="translate(${st.L.x},${st.L.y})"><rect x="-80" y="-2" width="80" height="4" fill="#2fa84f"/><rect x="0" y="-1" width="${st.L.in?0:0}" height="2" fill="#dff2ff"/><circle r="9" fill="rgba(242,185,0,${st.L.in?0:.35})"/></g>
+  <g class="tfb tfR" transform="translate(${st.R.x},${st.R.y})"><rect x="0" y="-2" width="80" height="4" fill="#1f6feb"/><circle r="9" fill="rgba(242,185,0,${st.R.in?0:.35})"/></g>
+  ${st.lid?'<rect x="40" y="20" width="220" height="100" rx="10" fill="rgba(160,200,230,.35)" stroke="#9fd8ff"/>':''}</svg>
+  <div class="tutbtns"><button class="big tlid" ${st.L.in&&st.R.in&&st.cl.L&&st.cl.R&&!st.lid?'':'disabled'}>🛡️ Cerrar la tapa</button></div>`;
+  const sv=B.querySelector('svg');let dr=null;
+  sv.onpointerdown=e=>{const p=svgPt(sv,e);for(const k of ['L','R']){const f=st[k];if(!f.in&&Math.hypot(p.x-f.x,p.y-f.y)<22){dr=k;try{sv.setPointerCapture(e.pointerId)}catch(_){}return}}
+   const c=e.target.closest('.tcl');if(c){const k=c.classList.contains('tclL')?'L':'R';if(!st[k].in){msg('Primero poné la fibra en la ranura; después cerrás la mordaza.');return}st.cl[k]=true;draw()}};
+  sv.onpointermove=e=>{if(!dr)return;const p=svgPt(sv,e);st[dr].x=p.x;st[dr].y=p.y;sv.querySelector('.tf'+dr).setAttribute('transform',`translate(${p.x},${p.y})`)};
+  sv.onpointerup=()=>{if(!dr)return;const f=st[dr],g=G0[dr];if(Math.hypot(f.x-g.x,f.y-g.y)<26){f.x=g.x+(dr==='L'?20:-20);f.y=70;f.in=true;msg(dr==='L'?'Izquierda en su ranura. Ahora la derecha.':'Las dos en su ranura: cerrá las mordazas.')}else if(Math.abs(f.y-70)<20&&((dr==='L'&&f.x>140)||(dr==='R'&&f.x<160))){msg('¡Te pasaste! La punta no puede quedar entre los electrodos: quedaría quemada por el arco.');f.x=dr==='L'?40:260;f.y=130}else{f.x=dr==='L'?40:260;f.y=130}dr=null;draw()};
+  B.querySelector('.tlid').onclick=()=>{st.lid=true;draw();setTimeout(done,500)}};
+ draw();tutArrow(()=>{if(!st.L.in)return B.querySelector('.tfL');if(!st.R.in)return B.querySelector('.tfR');if(!st.cl.L)return B.querySelector('.tclL');if(!st.cl.R)return B.querySelector('.tclR');return B.querySelector('.tlid')})}
+function tutTray(B,done){TUT.custom=true;let placed=false,r=12,drag=false;const K=1.5;
+ B.innerHTML=`<svg class="ttr" viewBox="0 0 300 190"><rect x="6" y="6" width="288" height="178" rx="16" fill="#e8edf1" stroke="#33414d" stroke-width="2"/>
+  <g class="tcomb">${[...Array(6)].map((_,i)=>`<rect x="${120+i*11}" y="20" width="7" height="22" rx="2" fill="#c3ccd4" stroke="#7b8790"/>`).join('')}</g><rect class="tslot" x="141" y="20" width="18" height="22" rx="3" fill="rgba(242,185,0,.25)" stroke="#f2b900" stroke-dasharray="3 2"/>
+  <rect class="tprot" x="${placed?144:30}" y="${placed?22:150}" width="${placed?12:60}" height="${placed?18:12}" rx="4" fill="#cfe9ff" stroke="#5a7a90"/>
+  <circle cx="150" cy="112" r="${30*K}" fill="none" stroke="#22b573" stroke-dasharray="4 3"/><text x="150" y="${112-30*K-4}" font-size="9" text-anchor="middle" fill="#159a5f">mínimo 30 mm</text>
+  <circle class="trulo" cx="150" cy="112" fill="none" stroke-width="3"/><circle class="th" cy="112" r="8" fill="#f2b900" stroke="#33414d"/></svg><p class="tutq tr"></p><div class="tutbtns"><button class="big tok">✅ Cerrar la bandeja</button></div>`;
+ const sv=B.querySelector('svg'),q=s=>B.querySelector(s),up=()=>{const ok=placed&&r>=30&&r<=48,R1=r*K;q('.trulo').setAttribute('r',R1.toFixed(1));q('.trulo').setAttribute('stroke',r>=30?'#1f6feb':'#e5484d');q('.th').setAttribute('cx',(150+R1).toFixed(1));
+  q('.tr').innerHTML=placed?`Radio del rulo: <b>${r.toFixed(0)} mm</b> ${r<30?'· ¡muy cerrado! agrandalo':r>48?'· se sale de las guías':'✅'}`:'Tocá la ranura del peine para calzar el termo.';q('.tok').disabled=!ok};
+ q('.tslot').onclick=()=>{placed=true;const p=q('.tprot');Object.entries({x:144,y:22,width:12,height:18}).forEach(([k,v])=>p.setAttribute(k,v));up()};
+ sv.onpointerdown=e=>{if(!placed)return;const p=svgPt(sv,e);if(Math.abs(Math.hypot(p.x-150,p.y-112)-r*K)<14){drag=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}}};
+ sv.onpointermove=e=>{if(!drag)return;const p=svgPt(sv,e);r=Math.max(8,Math.min(52,Math.hypot(p.x-150,p.y-112)/K));up()};sv.onpointerup=()=>{drag=false};
+ q('.tok').onclick=done;up();tutArrow(()=>!placed?q('.tslot'):(r<30||r>48)?q('.th'):q('.tok'))}
+/* --- obligatorio para jugadores nuevos (con opción de omitir) --- */
+function tutNeeded(){try{if(localStorage.getItem('taller_tut'))return false}catch(e){return false}return !(ptAll().some(x=>x.tipo!=='minijuego'))&&!((acct&&acct.partidas)>0)}
+{const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{if(acct&&!tutNeeded.shown&&tutNeeded()&&!$('#prof').hidden){tutNeeded.shown=true;setTimeout(()=>{if(!$('#title').hidden)openTut()},400)}}catch(e){}return r}}
+JGM.unshift({k:'tut',ic:'🎓',n:'Primeros pasos en campo',d:'Tutorial guiado: colores, pelado, cleaver, fusionadora, horno y bandeja.'});
+{const f=jgPick;jgPick=function(k){if(k==='tut'){closeJG(false);return openTut()}return f(k)}}
 
 applyQ();loop();
 </script></body></html>
