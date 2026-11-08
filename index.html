@@ -282,6 +282,9 @@ button:active:not(:disabled){transform:scale(.96)}
 .imppk{display:flex;flex-direction:column;gap:6px}.imppk button{display:flex;gap:10px;align-items:center;text-align:left;margin:0;padding:10px;border-radius:12px;font-size:14px}.imppk span{font-size:22px}
 .imppr{display:flex;flex-direction:column;gap:10px}.impg{position:relative;height:30px;border-radius:15px;background:linear-gradient(90deg,#e8edf1 40%,rgba(34,181,115,.25) 40%,rgba(34,181,115,.25) 60%,#e8edf1 60%);overflow:hidden;border:1.5px solid #9aa6b0}.impg i{position:absolute;inset:0 auto 0 0;width:0;opacity:.8}.impg b{position:relative;display:block;text-align:center;line-height:30px;font-variant-numeric:tabular-nums}.imph{user-select:none;-webkit-user-select:none;touch-action:none}
 #res .impsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(229,72,77,.08);border:1.5px solid rgba(229,72,77,.35);font-size:13.5px;text-align:left}
+.shcv{position:fixed;z-index:30;pointer-events:none}
+#shchip{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(66px + env(safe-area-inset-bottom));z-index:6;margin:0;padding:8px 14px;border-radius:999px;background:#fff7e0;color:#7a4b00;border:1.5px solid #f2b900;font-weight:700;font-size:13px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+#res .shsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(242,185,0,.12);border:1.5px solid rgba(242,185,0,.5);font-size:13.5px;text-align:left}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2796,7 +2799,11 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=76,NEWS=[
+const VER=77,NEWS=[
+ {v:77,t:'Física de micro-elementos',items:[
+  ['🔪','Astilla del cleaver','Cada vez que cortás con el cleaver, el pedacito de vidrio que sobra sale volando con gravedad: rebota en la mesa o cae en el contenedor de residuos. Si queda en la mesa, tocá «Astillas» para levantarla con cinta. Las que quedan al terminar cuentan como error de seguridad.'],
+  ['🧵','Hilos de aramida','En la botella, al cortar la cubierta del cable troncal quedan sueltos los hilos de kevlar: son cuerdas livianas que se mueven con el aire (más con viento en la guardia) y se apartan cuando les pasás cerca una herramienta.'],
+  ['💥','Estrés por curvatura','Mientras agarrás una fibra, se ilumina en naranja si la curva baja de 7,5 mm y en rojo cuando está por quebrarse. Si la seguís forzando, se quiebra: microfisura de +0,35 dB y un error.']]},
  {v:76,t:'Imprevistos en las guardias',items:[
   ['⚠️','Averías de golpe','Durante una guardia nocturna pueden aparecer una o dos averías inesperadas mientras trabajás, y el SLA sigue corriendo.'],
   ['🌀','Fibra atenuada','El OPM marca pérdida de más: abrís la bandeja, encontrás el rulo apretado, lo rehacés con radio de 30 a 45 mm y volvés a medir.'],
@@ -4962,6 +4969,68 @@ function impRemeasure(B,ok,m){B.innerHTML=`<div class="impopm"><div class="impsc
 /* resumen en el resultado */
 {const f=end;end=function(){const r=f.apply(this,arguments);try{const g=typeof GUARD!=='undefined'&&GUARD;if(g&&g.imp&&g.imp.length&&!$('#end').hidden&&!$('#res .impsum')){const h=$('#res h2');if(h)h.insertAdjacentHTML('beforebegin',`<div class="impsum"><b>⚠️ Imprevistos de la guardia</b>${g.imp.map(x=>`<br>${x.ic} ${x.t}: ${x.sec} s${x.bad?` · ${x.bad} error${x.bad>1?'es':''}`:''} · <b>+${x.pts} pts</b>`).join('')}</div>`)}}catch(e){}return r}}
 window.IMPauto=()=>{if(!IMP)return;IMP.i=IMP.steps.length;impDone()};
+
+/*C77*/
+/* ===== V77: físicas de micro-elementos: astilla del cleaver, hilos de aramida y estrés por radio de curvatura ===== */
+/* ---------- 1) astilla de vidrio del cleaver ---------- */
+const SHD={n:0,inBin:0,done:false,m3:[]};
+function shardFx(el,cb){cb=cb||(()=>{});const sv=el&&el.querySelector('svg');if(!sv)return cb();const b=sv.getBoundingClientRect();if(!b.width)return cb();
+ const cv=document.createElement('canvas'),dpr=Math.min(2,devicePixelRatio||1);cv.className='shcv';cv.width=b.width*dpr;cv.height=b.height*dpr;Object.assign(cv.style,{left:b.left+'px',top:b.top+'px',width:b.width+'px',height:b.height+'px'});document.body.appendChild(cv);
+ const g=cv.getContext('2d'),S=b.width/300,floor=212*S,bin={x:232*S,y:176*S,w:56*S,h:36*S};
+ const p={x:212*S,y:113*S,vx:(2+rnd()*3)*S,vy:(-3.4-rnd()*2)*S,a:0,va:(rnd()-.5)*.5,L:26*S,rest:false,inB:false,t:0};
+ const draw=()=>{g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,b.width,b.height);
+  g.fillStyle='rgba(60,72,84,.85)';g.fillRect(bin.x,bin.y,bin.w,bin.h);g.fillStyle='rgba(255,255,255,.9)';g.font=`${Math.max(8,9*S)}px system-ui`;g.textAlign='center';g.fillText('residuos',bin.x+bin.w/2,bin.y+bin.h-6*S);g.fillStyle='#f2b900';g.fillRect(bin.x,bin.y,bin.w,3*S);
+  g.save();g.translate(p.x,p.y);g.rotate(p.a);g.fillStyle='rgba(223,242,255,.95)';g.strokeStyle='#7fa3bb';g.lineWidth=.8;g.fillRect(-p.L/2,-1.6*S,p.L,3.2*S);g.strokeRect(-p.L/2,-1.6*S,p.L,3.2*S);g.restore();
+  if(p.rest&&!p.inB){g.fillStyle='#e5484d';g.font=`bold ${Math.max(9,10*S)}px system-ui`;g.fillText('⚠ astilla en la mesa',p.x,p.y-10*S)}};
+ const step=()=>{p.t++;if(!p.rest){p.vy+=.55*S;p.x+=p.vx;p.y+=p.vy;p.a+=p.va;
+   if(p.x>bin.x&&p.x<bin.x+bin.w&&p.y>bin.y&&p.y<bin.y+bin.h-4*S&&p.vy>0){p.inB=true;p.vx*=.3;if(p.y>bin.y+bin.h-12*S){p.rest=true;p.y=bin.y+bin.h-12*S}}
+   else if(p.y>floor){p.y=floor;p.vy*=-.32;p.vx*=.6;p.va*=.5;if(Math.abs(p.vy)<.6*S){p.rest=true;p.vy=0;p.a=Math.round(p.a/Math.PI)*Math.PI}}
+   if(p.x>b.width-6*S){p.x=b.width-6*S;p.vx*=-.4}}
+  draw();if(p.t<70&&!(p.rest&&p.t>30))requestAnimationFrame(step);else{cb();cv.style.transition='opacity .25s';cv.style.opacity=0;setTimeout(()=>cv.remove(),300);
+   if(p.inB){SHD.inBin++}else{SHD.n++;shardChip();shard3D();try{if(SHD.n===1)wToast('⚠️ Quedó una astilla de vidrio en la mesa: tocá «Astillas» para levantarla con cinta y tirarla al contenedor.')}catch(e){}}}};
+ requestAnimationFrame(step)}
+function shardChip(){let c=$('#shchip');if(!c){c=document.createElement('button');c.id='shchip';c.onclick=shardClean;document.body.appendChild(c)}c.hidden=!SHD.n||!playing;c.innerHTML=`🧷 Astillas en la mesa: <b>${SHD.n}</b> · levantar`}
+function shardClean(){if(!SHD.n)return;SHD.n--;SHD.inBin++;const m=SHD.m3.pop();if(m&&m.parent)m.parent.remove(m);try{fxOK()}catch(e){}msg('🧷 Levantaste la astilla con cinta y la tiraste al contenedor de residuos.');shardChip()}
+function shard3D(){try{if(typeof scene==='undefined')return;const x=cx+(rnd()-.5)*.8,z=cz+(rnd()-.5)*.8,y0=fFloor(x,z)+.006,m=new THREE.Mesh(new THREE.CylinderGeometry(.006,.006,.12,5),M(0xdff2ff,{roughness:.1,metalness:.1,transparent:true,opacity:.9,emissive:0x335566}));
+ m.rotation.z=Math.PI/2;m.rotation.y=rnd()*6.28;m.position.set(x,y0+.7,z);scene.add(m);SHD.m3.push(m);let vy=0;const f=()=>{if(!m.parent)return;vy-=.004;m.position.y+=vy;if(m.position.y<=y0){m.position.y=y0;if(Math.abs(vy)>.01){vy*=-.3;requestAnimationFrame(f)}return}requestAnimationFrame(f)};f()}catch(e){}}
+{const f=cleaveUI;cleaveUI=function(el,c,done,yel){let shot=false;const mo=new MutationObserver(()=>{const g=el.querySelector('.glint');if(g&&!shot){shot=true;mo.disconnect();try{shardFx(el)}catch(e){}}});mo.observe(el,{subtree:true,attributes:true,attributeFilter:['class']});return f(el,c,function(...a){mo.disconnect();return done.apply(this,a)},yel)}}
+{const f=startGame;startGame=function(){SHD.n=0;SHD.inBin=0;SHD.done=false;SHD.m3.forEach(m=>m.parent&&m.parent.remove(m));SHD.m3=[];shardChip();kevClear();return f.apply(this,arguments)}}
+setInterval(()=>{const c=$('#shchip');if(c)c.hidden=!SHD.n||!playing||!$('#end').hidden},500);
+/* al terminar: cada astilla que quedó en la mesa cuenta como error de seguridad */
+{const f=end;end=function(){if(SHD.n&&!SHD.done&&!GO){SHD.done=true;SHD.left=SHD.n;err+=SHD.n;if(typeof ACD!=='undefined'&&ACD)ACD.b.shard=SHD.n}const r=f.apply(this,arguments);
+ try{if(SHD.left&&!$('#end').hidden&&!$('#res .shsum')){const h=$('#res h2');if(h)h.insertAdjacentHTML('beforebegin',`<div class="shsum">⚠️ Dejaste <b>${SHD.left}</b> astilla${SHD.left>1?'s':''} de vidrio en la mesa (cuenta${SHD.left>1?'n':''} como error de seguridad). Las astillas se clavan en la piel y no se ven: siempre al contenedor de residuos.</div>`)}}catch(e){}return r}}
+/* ---------- 2) hilos de aramida (kevlar) al cortar la cubierta del cable ---------- */
+const KEV={on:false,S:[],grp:null};
+function kevClear(){if(KEV.grp&&KEV.grp.parent)KEV.grp.parent.remove(KEV.grp);KEV.on=false;KEV.S=[];KEV.grp=null}
+function kevSpawn(){kevClear();if(typeof scene==='undefined'||MODE!=='botella')return;const r0=(typeof CR==='function'?CR():.12)+.004,x0=-6.6,N=Q==='baja'?8:14,K=9;KEV.grp=new THREE.Group();scene.add(KEV.grp);
+ const mat=new THREE.LineBasicMaterial({color:0xf2c94c});
+ for(let s=0;s<N;s++){const a=s/N*Math.PI*2+rnd()*.2,ax=x0,ay=PY+Math.cos(a)*r0,az=ZA+Math.sin(a)*r0,L=.45+rnd()*.35,seg=L/(K-1),P=[],O=[];
+  for(let i=0;i<K;i++){const p=V(ax+i*seg,ay,az);P.push(p);O.push(p.clone())}const geo=new THREE.BufferGeometry().setFromPoints(P),line=new THREE.Line(geo,mat);KEV.grp.add(line);KEV.S.push({P,O,seg,line,ax,ay,az,ph:rnd()*6})}
+ KEV.on=true;KEV.t=0;msg('🧵 Al cortar la cubierta quedaron sueltos los hilos de aramida (kevlar): se mueven con el aire. Se cortan con la tijera de kevlar, nunca con la peladora.')}
+function kevTick(){if(!KEV.on||!KEV.S.length)return;KEV.t+=1/60;const gw=typeof GUARD!=='undefined'&&GUARD&&GUARD.t0&&!GUARD.fin&&GUARD.env&&GUARD.env.wind,
+ wx=(gw?.0016:.0004)*(.6+.4*Math.sin(KEV.t*1.7)),wz=(gw?.0012:.0003)*Math.sin(KEV.t*2.3+1),tools=(typeof T!=='undefined'?T:[]).filter(o=>o&&o.position),fl=y=>Math.max(y,.02);
+ for(const s of KEV.S){const P=s.P,O=s.O;for(let i=1;i<P.length;i++){const p=P[i],o=O[i],vx=(p.x-o.x)*.96,vy=(p.y-o.y)*.96,vz=(p.z-o.z)*.96;o.copy(p);p.x+=vx+wx*(1+.5*Math.sin(KEV.t*5+s.ph+i));p.y+=vy-.0011;p.z+=vz+wz*(1+.5*Math.cos(KEV.t*4+s.ph));
+   for(const t of tools){const dx=p.x-t.position.x,dy=p.y-t.position.y,dz=p.z-t.position.z,d=Math.hypot(dx,dy,dz);if(d<.22&&d>1e-4){const k=(.22-d)/d*.5;p.x+=dx*k;p.y+=dy*k;p.z+=dz*k}}
+   const ff=fFloor(p.x,p.z)+.004;if(p.y<ff)p.y=ff}
+  for(let it=0;it<4;it++){P[0].set(s.ax,s.ay,s.az);for(let i=0;i<P.length-1;i++){const a=P[i],b=P[i+1],dx=b.x-a.x,dy=b.y-a.y,dz=b.z-a.z,L=Math.hypot(dx,dy,dz)||1e-6,f=(L-s.seg)/L;if(i===0){b.x-=dx*f;b.y-=dy*f;b.z-=dz*f}else{a.x+=dx*f*.5;a.y+=dy*f*.5;a.z+=dz*f*.5;b.x-=dx*f*.5;b.y-=dy*f*.5;b.z-=dz*f*.5}}}
+  s.line.geometry.setFromPoints(P)}}
+{let last=0;const loopK=t=>{requestAnimationFrame(loopK);if(document.hidden||!KEV.on)return;if(t-last<15)return;last=t;try{kevTick()}catch(e){}};requestAnimationFrame(loopK)}
+{const f=cutAnim;cutAnim=function(o){const r=f.apply(this,arguments);setTimeout(()=>{try{if(MODE==='botella'&&playing)kevSpawn()}catch(e){}},1550);return r}}
+{const f=setModo;setModo=function(m){if(m!=='botella')kevClear();return f.apply(this,arguments)}}
+/* ---------- 3) estrés mecánico por radio de curvatura (y quiebre) ---------- */
+const BND={warn:7.5,crit:4,mmu:20,lastT:0};
+function bendCheck(m){const u=m.userData,r=u.rp;if(!r||!(u.r<=.035)||u.fract)return;if(u.grab==null){if(u.bl&&m.material&&m.material.emissive){m.material.emissive.setHex(u.em0);m.material.emissiveIntensity=1;u.bl=0}u.crT=0;return}const P=r.P,n=r.n;let mn=Infinity,at=-1;
+ for(let i=2;i<n-2;i++){const a=P[i-1],b=P[i],c=P[i+1],ab=a.distanceTo(b),bc=b.distanceTo(c),ac=a.distanceTo(c),s=(ab+bc+ac)/2,ar=Math.sqrt(Math.max(1e-12,s*(s-ab)*(s-bc)*(s-ac)));if(ar<1e-9)continue;const R=ab*bc*ac/(4*ar);if(R<mn){mn=R;at=i}}
+ const mm=mn*BND.mmu,mat=m.material;if(!mat||!mat.emissive)return;if(u.em0==null)u.em0=mat.emissive.getHex();
+ const lvl=mm<BND.crit?2:mm<BND.warn?1:0;u.bendMM=mm;
+ if(lvl===0){if(u.bl){mat.emissive.setHex(u.em0);mat.emissiveIntensity=1;u.bl=0}u.crT=0;return}
+ const pulse=.55+.45*Math.sin(performance.now()/90);mat.emissive.setHex(lvl===2?0xff1a1a:0xff8a00);mat.emissiveIntensity=lvl===2?pulse:.5;u.bl=lvl;
+ if(u.grab!=null&&Date.now()-BND.lastT>6000&&playing){BND.lastT=Date.now();wToast(lvl===2?`⚠️ ¡Estrés mecánico! Radio de ${mm.toFixed(1)} mm: la fibra se va a quebrar. Soltala y abrí la curva.`:`⚠️ Curva muy cerrada: ${mm.toFixed(1)} mm (mínimo 7,5 mm en G.657.A2). La luz se escapa.`)}
+ if(lvl===2&&u.grab!=null){u.crT=(u.crT||0)+1;if(u.crT>110)bendBreak(m,P[at])}else u.crT=Math.max(0,(u.crT||0)-2)}
+function bendBreak(m,p){const u=m.userData;u.fract=true;u.crT=0;const mat=m.material;mat.emissive.setHex(0x7a0000);mat.emissiveIntensity=.8;err++;loss+=.35;try{boss('dead')}catch(e){}try{fxBad()}catch(e){}
+ wToast('💥 ¡Se quebró la fibra!');msg('💥 ¡Se quebró la fibra por radio de curvatura! Quedó una microfisura: +0,35 dB. Nunca la dobles más cerrado que el mínimo.');
+ try{const s=new THREE.Mesh(new THREE.SphereGeometry(.03,8,6),new THREE.MeshBasicMaterial({color:0xffe9a8,transparent:true,opacity:1}));s.position.copy(p);scene.add(s);const t0=performance.now(),f=()=>{const q=(performance.now()-t0)/600;if(q>=1){scene.remove(s);return}s.scale.setScalar(1+q*3);s.material.opacity=1-q;requestAnimationFrame(f)};f()}catch(e){}}
+{const f=fStep;fStep=function(m){const r=f(m);try{bendCheck(m)}catch(e){}return r}}
 
 applyQ();loop();
 </script></body></html>
