@@ -197,6 +197,13 @@ button:active:not(:disabled){transform:scale(.96)}
 .prrl{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:12px;margin-bottom:6px;border:1.5px solid var(--line);opacity:.6}.prrl.ok{opacity:1}.prrl.cur{border-color:#f2b900;background:rgba(242,185,0,.1)}.prrl>span{font-size:24px}
 #rkchip{display:inline-block;margin-left:6px;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(242,185,0,.18);border:1px solid rgba(242,185,0,.5);vertical-align:middle}
 .prsum{margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(242,185,0,.1);border:1.5px solid rgba(242,185,0,.5);text-align:left;font-size:13.5px}.prsum p{margin:4px 0}.prtop{display:flex;justify-content:space-between}.prup{font-weight:700;color:#159a5f}
+#news{align-items:flex-start}#news>.tbox{margin:auto 0;position:relative}
+.nwx{position:sticky;top:0;float:right;margin:-6px -6px 0 8px;z-index:3;width:40px;height:40px;padding:0;border-radius:50%;font-size:20px;line-height:1;font-weight:800;display:grid;place-items:center;background:#fff;color:#16222c;border:1.5px solid #c9d3db;box-shadow:0 4px 12px rgba(0,0,0,.15);cursor:pointer}
+.nwx:hover{background:#e5484d;color:#fff;border-color:#e5484d}
+.nwtg{display:flex;gap:8px;margin:6px 0 8px}.nwtg button{flex:1;padding:8px;font-size:13px;font-weight:700;border-radius:10px;border:1.5px solid var(--line);background:transparent;color:inherit;cursor:pointer}
+.nvd{border:1.5px solid var(--line);border-radius:14px;margin-bottom:8px;overflow:hidden}.nvd>summary{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer;list-style:none;font-size:14px}.nvd>summary::-webkit-details-marker{display:none}
+.nvd>summary::after{content:'▾';margin-left:auto;opacity:.6;transition:transform .2s}.nvd[open]>summary::after{transform:rotate(180deg)}.nvd>summary b{flex:1;min-width:0}.nvd>summary small{opacity:.6;white-space:nowrap}
+.nvn{flex:none;font-size:12px;font-weight:800;padding:3px 8px;border-radius:999px;background:var(--ac);color:#fff}.nvd .nlist{margin:0;padding:0 10px 10px}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -335,7 +342,7 @@ button:active:not(:disabled){transform:scale(.96)}
  <div class="tprev" id="tprev"></div><div class="tsel" id="tsel" role="group" aria-label="Técnicos"></div>
  <div id="cuadw"><h2 class="cuh">Cuadrilla</h2><div class="qrow" id="cuads" role="group" aria-label="Cuadrilla"></div><p class="note" id="cuadn" style="margin:6px 0 0"></p></div>
  <button class="big" id="tgo" onclick="startGame()">¡A empalmar!</button><button class="lnk" onclick="$('#tec').hidden=true;$('#title').hidden=false">Volver al menú</button></div></div>
-<div id="news" hidden><div class="tbox" role="dialog" aria-labelledby="nwt"><span class="nver" id="nwv"></span><h1 id="nwt" style="font-size:26px;margin:8px 0 2px">Novedades</h1><p class="sub" id="nws" style="margin:0"></p><ul class="nlist" id="nwl"></ul><details class="nold"><summary>Todo lo que se agregó antes</summary><div id="nwo"></div></details><button class="big" onclick="closeNews()">¡Dale, a empalmar!</button></div></div>
+<div id="news" hidden><div class="tbox" role="dialog" aria-labelledby="nwt"><button class="nwx" onclick="closeNews()" aria-label="Cerrar novedades" title="Cerrar">✕</button><span class="nver" id="nwv"></span><h1 id="nwt" style="font-size:26px;margin:8px 0 2px">Novedades</h1><p class="sub" id="nws" style="margin:0"></p><ul class="nlist" id="nwl"></ul><details class="nold" open><summary>Todo lo que se agregó antes</summary><div class="nwtg"><button onclick="nwAll(true)">Abrir todas</button><button onclick="nwAll(false)">Cerrar todas</button></div><div id="nwo"></div></details><button class="big" onclick="closeNews()">¡Dale, a empalmar!</button></div></div>
 <div id="title"><div class="tbox">
  <div class="thd"><div><h1>Taller de empalmes</h1><p class="sub">Simulador 3D de fibra óptica</p></div><div class="tbtns"><button class="nwb" id="nwbtn" onclick="openNews()">🆕 Novedades<span class="dot" id="nwdot" hidden></span></button><button class="nwb" onclick="openTheory()">📘 Teoría</button></div></div>
  <div id="login"><label for="nm">Tu nombre</label><input id="nm" maxlength="20" autocomplete="nickname" placeholder="Hasta 20 caracteres"><div class="cnt"><span id="nc">0</span>/20</div>
@@ -2709,7 +2716,10 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=69,NEWS=[
+const VER=70,NEWS=[
+ {v:70,t:'Novedades más completas',items:[
+  ['📜','Historial al detalle','En «Todo lo que se agregó antes» ahora ves cada versión anterior con todas sus novedades completas, no solo los títulos. Tocá una versión para abrirla o cerrarla, o usá «Abrir todas» y «Cerrar todas».'],
+  ['✕','Cerrar con la X','Arriba a la derecha hay una X para cerrar la pestaña de novedades directamente, aunque estés abajo de todo.']]},
  {v:69,t:'Desafíos diarios, insignias y rangos',items:[
   ['🎯','Desafíos del día','Cada día aparecen 3 desafíos nuevos (por ejemplo: instalá 3 rosetas, terminá una roseta en menos de 8 minutos, hacé una fusión de 0,015 dB, certificá con el OTDR o resolvé una guardia dentro del SLA). Cada uno da monedas y XP, y si completás los 3 abrís un cofre.'],
   ['📶','Rangos','Con la XP subís de rango: Aprendiz → Técnico Junior → Oficial Empalmador → Especialista Core → Maestro de la Fibra. Cada rango tiene bonificaciones: descuentos en la tienda y el taller, más minutos de SLA en las guardias y más monedas.'],
@@ -2868,9 +2878,12 @@ const VER=69,NEWS=[
  {i:'🏠',t:'Modo roseta',txt:'Drop, diente, corte al medio, pelado, cortadora, pigtail con termo, fusión, guardado prolijo y medición con el power meter.'},
  {i:'🧵',t:'Bandeja y fibras reales',txt:'Bandeja como la de la foto, con tapa que abrís para empalmar, peines uno al lado del otro, buffers más cortos y pelos finitos y flexibles con curvas suaves. Se sacó la tarea de la manguera.'},
  {i:'🧰',t:'Domos y menú',txt:'Domo mini para cables de 6 y 12 fibras, domos más largos para los cables grandes y botón de menú durante el juego.'}];
-function renderNews(){const n=NEWS[0];$('#nwv').textContent='VERSIÓN '+n.v;$('#nws').textContent=n.t;
- $('#nwl').innerHTML=n.items.map(([i,b,t])=>`<li><span class="ni">${i}</span><div><b>${b}</b><span>${t}</span></div></li>`).join('');
- $('#nwo').innerHTML=`<ul class="nlist">`+NEWS.slice(1).map(o=>`<li><span class="ni">${o.i||'🧩'}</span><div><b>${o.v?'Versión '+o.v+' · ':''}${o.t}</b><span>${o.txt||(o.items||[]).map(x=>x[1]).join(' · ')}</span></div></li>`).join('')+'</ul>'}
+function renderNews(){const n=NEWS[0],li=([i,b,t])=>`<li><span class="ni">${i}</span><div><b>${b}</b><span>${t}</span></div></li>`;$('#nwv').textContent='VERSIÓN '+n.v;$('#nws').textContent=n.t;
+ $('#nwl').innerHTML=n.items.map(li).join('');
+ const ver=NEWS.slice(1).filter(o=>o.v&&o.items),old=NEWS.slice(1).filter(o=>!(o.v&&o.items));
+ $('#nwo').innerHTML=ver.map((o,k)=>`<details class="nvd"${k<2?' open':''}><summary><span class="nvn">V${o.v}</span><b>${o.t}</b><small>${o.items.length} novedad${o.items.length>1?'es':''}</small></summary><ul class="nlist">${o.items.map(li).join('')}</ul></details>`).join('')
+  +(old.length?`<details class="nvd"><summary><span class="nvn">V1–${Math.min(...ver.map(o=>o.v))-1}</span><b>Las primeras versiones</b><small>${old.length} novedades</small></summary><ul class="nlist">${old.map(o=>li([o.i||'🧩',(o.v?'Versión '+o.v+' · ':'')+o.t,o.txt||(o.items||[]).map(x=>x[1]+': '+x[2]).join(' · ')])).join('')}</ul></details>`:'')}
+function nwAll(on){document.querySelectorAll('#nwo .nvd').forEach(d=>d.open=on)}
 function openNews(){renderNews();$('#news').hidden=false;lsSet('tde_ver',VER);$('#nwdot').hidden=true}
 function closeNews(){$('#news').hidden=true}
 (()=>{const seen=lsGet('tde_ver',0);if(seen<VER){$('#nwdot').hidden=false;setTimeout(openNews,400)}})();
