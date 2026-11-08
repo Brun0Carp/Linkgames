@@ -254,6 +254,16 @@ button:active:not(:disabled){transform:scale(.96)}
 .srg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 0}.srg div{border-radius:10px;padding:6px;background:rgba(127,127,127,.1);text-align:center}.srg small{display:block;font-size:11px;opacity:.7}.srg b{font-size:17px;font-variant-numeric:tabular-nums}.srg .srf{background:rgba(22,163,74,.15)}
 .srl{margin:4px 0;padding-left:18px}.srl li{margin:2px 0}.srtop{list-style:none;margin:6px 0 0;padding:0}.srtop li{padding:3px 6px;border-radius:8px;font-variant-numeric:tabular-nums}.srtop li.me{background:rgba(242,185,0,.2);font-weight:700}.srtop small{opacity:.65}
 .srrk{border:1.5px solid var(--line);border-radius:12px;padding:6px 10px;margin-bottom:8px}.srrk summary{font-weight:700;cursor:pointer}.srrow{display:flex;flex-wrap:wrap;gap:4px 10px;padding:6px 0;border-top:1px solid var(--line);font-size:13px}.srrow b{flex:1 0 100%}.srrow span{font-variant-numeric:tabular-nums}
+#jg,#aj{position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
+#jg .tbox,#aj .tbox{max-width:620px;width:100%}.jghd{display:flex;align-items:center;gap:8px;margin-bottom:4px}.jghd h1{flex:1;margin:0;font-size:24px;text-align:center}
+.jgbk,.jgx{width:40px;height:40px;padding:0;margin:0;border-radius:50%;font-size:20px;font-weight:800;display:grid;place-items:center;background:#fff;color:#16222c;border:1.5px solid #c9d3db;flex:none}.jgx:hover{background:#e5484d;color:#fff;border-color:#e5484d}.jghd>span{width:40px}
+.jgsub{text-align:center;opacity:.75;margin:2px 0 12px}.jggrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.jgc{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:12px;border-radius:16px;margin:0;border:1.5px solid var(--line);background:var(--card);color:inherit;min-height:112px}
+.jgc span{font-size:28px;line-height:1}.jgc b{font-size:15px;margin-top:4px}.jgc small{font-size:12px;opacity:.72;font-weight:400;line-height:1.3}.jgc.main{border-color:var(--ac);background:linear-gradient(180deg,rgba(14,165,233,.12),transparent)}
+.jgc:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.12)}.jgcfg h2{font-size:16px}.jg2 .jggo{margin-top:16px;position:sticky;bottom:0}
+.jgbtn{font-size:22px!important;padding:16px!important;letter-spacing:1px;font-weight:800}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.tgrid button{margin:0;padding:12px 8px;font-weight:700;font-size:14px;border-radius:12px}.tgrid .tgw{grid-column:1/-1}
+@media(max-width:360px){.jggrid{grid-template-columns:1fr}}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -399,7 +409,9 @@ button:active:not(:disabled){transform:scale(.96)}
   <button id="enter" class="big" onclick="enter()">Entrar</button><p id="lmsg"></p></div>
  <div id="prof" hidden><p class="hi">Hola, <b id="pn"></b></p>
   <div class="stats"><div><b id="pp">0</b><span>Partidas</span></div><div><b id="pbst">—</b><span>Mejor puntaje</span></div><div><b id="pcoin">0</b><span>🪙 Monedas</span></div><div><b id="plvl">1</b><span>⭐ Nivel</span></div></div>
-  <button class="big" onclick="playLevel()">🎲 Trabajo al azar · Nivel <span id="plv2">1</span></button><button class="big alt" onclick="playFree()">Jugar libre (elegís vos)</button><button class="big alt" onclick="openSup()">📞 Soporte técnico</button><button class="big alt" onclick="openMG()">🎮 Minijuegos</button><button class="big alt gdbtn" onclick="openGuard()">🚨 Guardia nocturna</button><button class="big alt wtbtn" onclick="openWT()">🔧 Taller de mantenimiento</button><button class="big alt prbtn" onclick="openPR()">🏅 Desafíos y logros</button><button class="big alt ptbtn" onclick="openPT()">📂 Mis partidas</button><button class="big alt" onclick="openShop()">🛒 Tienda</button><button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
+  <button class="big jgbtn" onclick="openJG()">▶ JUGAR</button><span id="plv2" hidden>1</span>
+  <div class="tgrid"><button class="alt prbtn" onclick="openPR()">🏅 Desafíos</button><button class="alt ptbtn" onclick="openPT()">📂 Mis partidas</button><button class="alt wtbtn" onclick="openWT()">🔧 Taller</button><button class="alt" onclick="openShop()">🛒 Tienda</button><button class="alt tgw" onclick="openAJ()">⚙️ Ajustes</button></div>
+  <button class="lnk" onclick="showLogin()">Cambiar nombre</button></div>
  <p class="note" id="cloud">Conectando…</p>
  <h2>¿Qué vas a empalmar?</h2><div class="qrow" id="msel" role="group" aria-label="Qué vas a empalmar"><button data-m="botella">Botella de empalmes</button><button data-m="roseta">Roseta</button><button data-m="nap">Caja NAP</button><button data-m="cableado">Cableado</button></div><p class="note" id="mnote" style="margin-top:6px"></p>
  <div id="cabw"><h2>Cable (cantidad de fibras)</h2><div class="qrow" id="fsel" role="group" aria-label="Cantidad de fibras"><button data-n="6">6</button><button data-n="12">12</button><button data-n="24">24</button><button data-n="36">36</button><button data-n="48">48</button></div><p class="note" id="fnote" style="margin-top:6px"></p></div>
@@ -2766,7 +2778,11 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=73,NEWS=[
+const VER=74,NEWS=[
+ {v:74,t:'Menú más simple',items:[
+  ['▶','Botón JUGAR','El menú principal ahora tiene un solo botón grande, JUGAR, con todo lo que tiene que ver con partidas: botella, roseta, caja NAP, cableado, trabajo al azar, guardia nocturna, soporte técnico y minijuegos.'],
+  ['🎛️','Opciones de cada trabajo','Al elegir botella, roseta, NAP o cableado te aparecen solo sus opciones: cantidad de pelos, splitter, cable de la NAP, pelos del drop, lugar del cableado y herramientas 3D o 2D. Después tocás «Empezar».'],
+  ['⚙️','Ajustes aparte','Modo IA, voces y calidad gráfica pasaron a «Ajustes». Desafíos, Mis partidas, Taller y Tienda quedan como accesos rápidos.']]},
  {v:73,t:'Rendimiento y speedrun',items:[
   ['⚙️','Calidad en el juego','Nuevo botón ⚙️ en la columna de la cámara para cambiar al instante entre Alta, Media y Baja sin salir del trabajo.'],
   ['📱','Optimización para celulares','En Media y Baja las fibras, cables y drops se arman con menos polígonos (LOD), y en Baja no hay sombras. Si tu equipo no llega a mover el juego fluido, la calidad baja sola (salvo que la hayas elegido vos). La física de las fibras no cambia.'],
@@ -3099,7 +3115,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#jg','#aj','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -4206,7 +4222,7 @@ function wRub(t,kind,done){const el=$('#wt');let n=0,lx=null,dir=0;const N=10;
  box.querySelector('.lnk').onclick=()=>{fin=true;box.remove();if(acct){acct.coins+=price(WSV[kind==='elec'?'cle':'len'].p);saveAcct()}wtRender()}}
 function wCal(done){const el=$('#wt'),box=document.createElement('div');box.className='wrub';box.innerHTML=`<div class="tbox"><h2 style="margin:0 0 6px">🎯 Calibración de arco</h2><p class="note" style="margin:0 0 8px">Arco de prueba sobre dos fibras: la fusionadora mide cuánto se funden y ajusta la potencia.</p><svg viewBox="0 0 320 120"><rect width="320" height="120" rx="8" fill="#0d2233"/><rect x="0" y="50" width="150" height="16" fill="#9fd8ff"/><rect x="170" y="50" width="150" height="16" fill="#9fd8ff"/><circle class="arcf" cx="160" cy="58" r="30" fill="url(#garc)"/></svg><p class="wcp" style="font-weight:700;margin:8px 0 0">Arco de prueba 1/3…</p></div>`;
  el.appendChild(box);let i=1;const t=setInterval(()=>{i++;const p=box.querySelector('.wcp');if(i<=3)p.textContent=`Arco de prueba ${i}/3… potencia ${(100+rint(-6,6))}%`;else{clearInterval(t);p.textContent='✅ Arco calibrado: potencia ajustada.';setTimeout(()=>{box.remove();done()},700)}},700)}
-function wBadge(){const b=$('.wtbtn');if(!b)return;const n=wNeeds().filter(x=>!x.startsWith('b1')).length;b.innerHTML='🔧 Taller de mantenimiento'+(n?` <span class="wbd">${n}</span>`:'')}
+function wBadge(){const b=$('.wtbtn');if(!b)return;const n=wNeeds().filter(x=>!x.startsWith('b1')).length;b.innerHTML='🔧 Taller'+(n?` <span class="wbd">${n}</span>`:'')}
 {const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{wBadge()}catch(e){}return r}}
 setTimeout(()=>{try{wBadge()}catch(e){}},500);
 
@@ -4435,7 +4451,7 @@ function prRender(){const el=$('#prg'),i=rkIdx(),r=RANKS[i],nx=RANKS[i+1],pc=nx?
  <p class="note">Ganás XP con cada trabajo terminado (según tus puntos), con los desafíos y con las insignias (+50 XP cada una).</p>
  <button class="big" onclick="closePR()">Volver al menú</button></div>`}
 function prChip(){const pn=$('#pn');if(!pn)return;let c=$('#rkchip');if(!c){c=document.createElement('span');c.id='rkchip';pn.insertAdjacentElement('afterend',c)}const r=rk();c.textContent=r.ic+' '+r.n;
- const b=$('.prbtn');if(b){prRoll();const n=PRG.ch.filter(x=>!x.done).length;b.innerHTML='🏅 Desafíos y logros'+(n?` <span class="wbd" style="background:#22b573">${n}</span>`:'')}}
+ const b=$('.prbtn');if(b){prRoll();const n=PRG.ch.filter(x=>!x.done).length;b.innerHTML='🏅 Desafíos'+(n?` <span class="wbd" style="background:#22b573">${n}</span>`:'')}}
 {const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{prChip()}catch(e){}return r}}
 setTimeout(()=>{try{prChip()}catch(e){}},600);
 window.PRauto=(n)=>{PRG.xp+=n||0;prSave();prChip()};
@@ -4731,6 +4747,40 @@ function srAfterEnd(){if(SRN.done||!SRN.on||$('#end').hidden||(typeof SUPON!=='u
 /* récords en «Mis partidas» */
 {const f=ptRender;ptRender=function(){f();const el=$('#ptd'),A=srAll(),ks=Object.keys(A);if(!el)return;const at=el.querySelector('.ptfl');if(!at)return;
  at.insertAdjacentHTML('beforebegin',`<details class="srrk"${ks.length?'':' hidden'}><summary>🏁 Récords de speedrun (${ks.length} categoría${ks.length===1?'':'s'})</summary>${ks.map(k=>{const c=A[k];return `<div class="srrow"><b>${c.n}</b>${c.top.slice(0,3).map((x,i)=>`<span>${['🥇','🥈','🥉'][i]} ${srFmt(x.t)}</span>`).join('')}</div>`}).join('')}</details>`)}}
+
+/*C74*/
+/* ===== V74: menú principal simplificado: JUGAR (todos los modos y sus opciones) + Ajustes ===== */
+(()=>{const tb=$('#title .tbox');if(!tb)return;
+ const mk=(id,inner)=>{const d=document.createElement('div');d.id=id;d.hidden=true;d.innerHTML=inner;document.body.appendChild(d);return d};
+ const jg=mk('jg',`<div class="tbox"><div class="jghd"><button class="jgbk" aria-label="Volver">←</button><h1>JUGAR</h1><button class="jgx" aria-label="Cerrar">✕</button></div><div class="jgv jg1"></div><div class="jgv jg2" hidden><p class="jgsub"></p><div class="jgcfg"></div><button class="big jggo">▶ Empezar</button></div></div>`);
+ const aj=mk('aj',`<div class="tbox"><div class="jghd"><span></span><h1>⚙️ Ajustes</h1><button class="jgx" aria-label="Cerrar">✕</button></div><div class="ajcfg"></div><button class="lnk" onclick="closeAJ();showLogin()">Cambiar nombre</button></div>`);
+ /* mover las opciones existentes (con sus eventos) a los paneles nuevos */
+ const kids=[...tb.children],h2=t=>kids.findIndex(e=>e.tagName==='H2'&&e.textContent.trim().startsWith(t)),a=h2('¿Qué vas a empalmar?'),b=h2('Modo IA'),rk=kids.findIndex(e=>e.id==='rk');
+ const cfg=jg.querySelector('.jgcfg'),acf=aj.querySelector('.ajcfg');
+ if(a>=0&&b>a)kids.slice(a,b).forEach(e=>cfg.appendChild(e));if(b>=0&&rk>b)kids.slice(b,rk).forEach(e=>acf.appendChild(e));
+ const ms=$('#msel');if(ms){ms.hidden=true;const p=ms.previousElementSibling;if(p&&p.tagName==='H2')p.hidden=true}})();
+const JGM=[
+ {k:'botella',ic:'🍾',n:'Botella de empalmes',d:'Cable multifibra, domo y bandeja. Elegís pelos y splitter.'},
+ {k:'roseta',ic:'🏠',n:'Roseta',d:'Drop + pigtail, guardado, OPM, router y orden de trabajo.'},
+ {k:'nap',ic:'📦',n:'Caja NAP',d:'Pelo con potencia, splitter conectorizado y conector de campo.'},
+ {k:'cableado',ic:'🧵',n:'Cableado',d:'Santa Ana o DeltaCenter: cámara, caño, pasacables y drop.'},
+ {k:'azar',ic:'🎲',n:'Trabajo al azar',d:'El juego elige el trabajo según tu nivel, con vidas.'},
+ {k:'guardia',ic:'🚨',n:'Guardia nocturna',d:'Emergencia contrarreloj, de noche y con mal tiempo.'},
+ {k:'soporte',ic:'📞',n:'Soporte técnico',d:'Atendé clientes y resolvé sus problemas.'},
+ {k:'mg',ic:'🎮',n:'Minijuegos',d:'Practicá cada técnica por separado.'}];
+function openJG(){if(!acct)return showLogin();$('#title').hidden=true;const el=$('#jg');el.hidden=false;jgHome()}
+function closeJG(back){$('#jg').hidden=true;if(back!==false){$('#title').hidden=false;try{showTitle()}catch(e){}}}
+function jgHome(){const el=$('#jg');el.querySelector('.jg1').hidden=false;el.querySelector('.jg2').hidden=true;el.querySelector('.jgbk').style.visibility='hidden';el.querySelector('h1').textContent='JUGAR';
+ const lv=(acct&&acct.nivel)||1;el.querySelector('.jg1').innerHTML=`<p class="jgsub">¿Qué querés hacer hoy?</p><div class="jggrid">${JGM.map(m=>`<button class="jgc${['botella','roseta','nap','cableado'].includes(m.k)?' main':''}" data-k="${m.k}"><span>${m.ic}</span><b>${m.n}${m.k==='azar'?` · Nivel ${lv}`:''}</b><small>${m.d}</small></button>`).join('')}</div>`;
+ el.querySelectorAll('.jgc').forEach(b=>b.onclick=()=>jgPick(b.dataset.k))}
+function jgPick(k){if(k==='azar'){closeJG(false);return playLevel()}if(k==='guardia'){closeJG(false);$('#title').hidden=false;return openGuard()}if(k==='soporte'){closeJG(false);return openSup()}if(k==='mg'){closeJG(false);return openMG()}
+ const b=document.querySelector(`#msel [data-m="${k}"]`);if(b)b.click();else setModo(k);const m=JGM.find(x=>x.k===k),el=$('#jg');
+ el.querySelector('.jg1').hidden=true;el.querySelector('.jg2').hidden=false;el.querySelector('.jgbk').style.visibility='visible';el.querySelector('h1').textContent=m.ic+' '+m.n;el.querySelector('.jg2 .jgsub').textContent=m.d;el.querySelector('.jgv.jg2').scrollTop=0}
+(()=>{const el=$('#jg');el.querySelector('.jgbk').onclick=jgHome;el.querySelector('.jgx').onclick=()=>closeJG();el.querySelector('.jggo').onclick=()=>{closeJG(false);playFree()};
+ const aj=$('#aj');aj.querySelector('.jgx').onclick=closeAJ;[el,aj].forEach(o=>o.addEventListener('click',e=>{if(e.target===o)(o===aj?closeAJ():closeJG())}))})();
+function openAJ(){$('#title').hidden=true;$('#aj').hidden=false}
+function closeAJ(){$('#aj').hidden=true;$('#title').hidden=false;try{showTitle()}catch(e){}}
+/* los paneles que se abren desde JUGAR vuelven al menú principal al cerrarse (ya lo hacían) */
 
 applyQ();loop();
 </script></body></html>
