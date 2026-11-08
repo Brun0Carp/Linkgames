@@ -285,6 +285,8 @@ button:active:not(:disabled){transform:scale(.96)}
 .shcv{position:fixed;z-index:30;pointer-events:none}
 #shchip{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(66px + env(safe-area-inset-bottom));z-index:6;margin:0;padding:8px 14px;border-radius:999px;background:#fff7e0;color:#7a4b00;border:1.5px solid #f2b900;font-weight:700;font-size:13px;box-shadow:0 6px 16px rgba(0,0,0,.18)}
 #res .shsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(242,185,0,.12);border:1.5px solid rgba(242,185,0,.5);font-size:13.5px;text-align:left}
+.pksv{width:100%;max-width:440px;display:block;margin:0 auto;touch-action:none;background:#eef3f6;border-radius:12px}.pkm{min-height:20px;margin:4px 0 8px;font-size:14px}
+#acmb.on{background:#f2b900!important;color:#1b2430}#acmr{font-size:18px;font-weight:800}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2799,7 +2801,12 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=77,NEWS=[
+const VER=78,NEWS=[
+ {v:78,t:'Embalajes, cierre estanco y splitter',items:[
+  ['📦','Desembalaje','La caja NAP, el domo de la botella y la roseta vienen embalados: cortás la cinta con el cúter, abrís las solapas (primero las cortas), cortás la bolsa sellada por la línea punteada y sacás el material. La caja vacía queda en la mesa.'],
+  ['🔩','Cierre estanco del domo','Antes de cerrar la botella limpiás la base, colocás la junta tórica en la ranura y elegís la goma correcta para la entrada del cable. Después ponés el aro, ajustás la abrazadera en tres etapas alternando izquierda y derecha, y hacés la prueba de estanqueidad.'],
+  ['🔀','Splitter en la NAP','La NAP ya no trae el splitter puesto: al levantar la bandeja de empalmes sacás el splitter PLC que elegiste en el menú de su bolsa, lo ponés en la bandeja de distribución con la entrada hacia el empalme, trabás los clips y enchufás cada salida en su cupla, en orden.'],
+  ['✋','Acomodar la mesa','Nuevo botón ✋ en la columna de la cámara: arrastrá la fusionadora, la caja del cleaver, la peladora, la caja de termos y las cajas vacías a donde quieras sobre la mesa. No se pueden encimar, y las girás con la rueda del mouse, las teclas Q y E o el botón ⟳.']]},
  {v:77,t:'Física de micro-elementos',items:[
   ['🔪','Astilla del cleaver','Cada vez que cortás con el cleaver, el pedacito de vidrio que sobra sale volando con gravedad: rebota en la mesa o cae en el contenedor de residuos. Si queda en la mesa, tocá «Astillas» para levantarla con cinta. Las que quedan al terminar cuentan como error de seguridad.'],
   ['🧵','Hilos de aramida','En la botella, al cortar la cubierta del cable troncal quedan sueltos los hilos de kevlar: son cuerdas livianas que se mueven con el aire (más con viento en la guardia) y se apartan cuando les pasás cerca una herramienta.'],
@@ -5031,6 +5038,115 @@ function bendBreak(m,p){const u=m.userData;u.fract=true;u.crT=0;const mat=m.mate
  wToast('💥 ¡Se quebró la fibra!');msg('💥 ¡Se quebró la fibra por radio de curvatura! Quedó una microfisura: +0,35 dB. Nunca la dobles más cerrado que el mínimo.');
  try{const s=new THREE.Mesh(new THREE.SphereGeometry(.03,8,6),new THREE.MeshBasicMaterial({color:0xffe9a8,transparent:true,opacity:1}));s.position.copy(p);scene.add(s);const t0=performance.now(),f=()=>{const q=(performance.now()-t0)/600;if(q>=1){scene.remove(s);return}s.scale.setScalar(1+q*3);s.material.opacity=1-q;requestAnimationFrame(f)};f()}catch(e){}}
 {const f=fStep;fStep=function(m){const r=f(m);try{bendCheck(m)}catch(e){}return r}}
+
+/*C78*/
+/* ===== V78: embalajes (cajas y bolsas), cierre estanco del domo por etapas, splitter colocado en la NAP y colocación libre de herramientas ===== */
+const PK={on:()=>{try{return localStorage.getItem('taller_pack')!=='0'}catch(e){return true}},boxes:[]};
+function pkMsgEl(el){el.innerHTML='<p class="pkm"></p><div class="pkb"></div>';const p=el.querySelector('.pkm');return [el.querySelector('.pkb'),t=>{p.innerHTML=t}]}
+function pkDummy(){if(typeof IMP!=='undefined'&&!IMP){IMP={bad:0,ev:{},steps:[],dummy:1};return true}return false}
+function pkUndummy(){if(typeof IMP!=='undefined'&&IMP&&IMP.dummy)IMP=null}
+/* ---------- gestos de desembalaje ---------- */
+function pkTape(el,next,lbl){const [B,m]=pkMsgEl(el);let lo=999,hi=-1,dn=false;
+ B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="40" y="16" width="220" height="178" rx="6" fill="#c8a06a" stroke="#8a6a3a" stroke-width="2"/><line x1="150" y1="16" x2="150" y2="194" stroke="#8a6a3a" stroke-width="1.5"/><text x="95" y="110" font-size="11" fill="#6b4f24" text-anchor="middle" transform="rotate(-90 95 110)">${lbl}</text>
+  <rect class="tp" x="138" y="10" width="24" height="190" fill="rgba(210,180,120,.85)" stroke="#a88a52"/><rect class="tpc" x="148" y="10" width="4" height="0" fill="#5a4320"/><g class="ctr" visibility="hidden"><rect x="-6" y="-22" width="12" height="26" rx="3" fill="#f2b900" stroke="#33414d"/><polygon points="-4,4 4,4 0,14" fill="#c9d1d8" stroke="#33414d"/></g></svg>`;
+ m('Pasá el cúter a lo largo de la cinta, de punta a punta, sin salirte.');const sv=B.querySelector('svg');
+ const mv=e=>{if(!dn)return;const p=svgPt(sv,e);const c=sv.querySelector('.ctr');c.setAttribute('visibility','visible');c.setAttribute('transform',`translate(${p.x},${p.y})`);
+  if(Math.abs(p.x-150)>18){m('❌ Te saliste de la cinta: cuidado con cortar lo que hay adentro.');return}lo=Math.min(lo,p.y);hi=Math.max(hi,p.y);const L=Math.max(0,hi-Math.max(10,lo));sv.querySelector('.tpc').setAttribute('y',Math.max(10,lo));sv.querySelector('.tpc').setAttribute('height',L);
+  if(L>=176){dn=false;sv.querySelector('.tp').setAttribute('opacity',.35);m('✅ Cinta cortada.');setTimeout(next,450)}};
+ sv.onpointerdown=e=>{dn=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}mv(e)};sv.onpointermove=mv;sv.onpointerup=()=>{dn=false}}
+function pkFlaps(el,next,inside){const [B,m]=pkMsgEl(el);const op=[0,0,0,0];
+ const draw=()=>{const f=(i,x,y,w,h,ox,oy)=>`<rect class="fl" data-i="${i}" x="${op[i]?x+ox:x}" y="${op[i]?y+oy:y}" width="${w}" height="${h}" fill="${op[i]?'#d9b884':'#c8a06a'}" stroke="#8a6a3a" stroke-width="1.5" opacity="${op[i]?.9:1}"/>`;
+  B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="60" y="40" width="180" height="130" fill="#7a5a2e"/><g opacity="${op.every(x=>x)?1:.35}">${inside}</g>${f(0,60,40,90,130,-58,0)}${f(1,150,40,90,130,58,0)}${f(2,60,40,180,24,0,-34)}${f(3,60,146,180,24,0,34)}</svg>`;
+  B.querySelectorAll('.fl').forEach(r=>r.onclick=()=>{const i=+r.dataset.i;if(op[i])return;if(i<2&&!(op[2]&&op[3])){m('Primero abrí las solapas cortas (arriba y abajo).');return}op[i]=1;draw();if(op.every(x=>x)){m('✅ Caja abierta.');setTimeout(next,450)}})};
+ m('Abrí las cuatro solapas: primero las cortas, después las largas.');draw()}
+function pkBag(el,next,inside){const [B,m]=pkMsgEl(el);let lo=999,hi=-1,dn=false;
+ B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="50" y="24" width="200" height="170" rx="10" fill="rgba(200,225,245,.55)" stroke="#8fb3cc" stroke-width="2"/><g opacity=".85">${inside}</g><line x1="50" y1="48" x2="250" y2="48" stroke="#5a7a90" stroke-dasharray="6 4" stroke-width="1.5"/><polygon points="50,42 58,48 50,54" fill="#5a7a90"/><text x="150" y="40" font-size="9" fill="#33414d" text-anchor="middle">cortar por la línea · bolsa sellada</text><rect class="bc" x="50" y="46" width="0" height="4" fill="#e5484d"/></svg>`;
+ m('Cortá la bolsa siguiendo la línea punteada (arrastrá de izquierda a derecha).');const sv=B.querySelector('svg');
+ const mv=e=>{if(!dn)return;const p=svgPt(sv,e);if(Math.abs(p.y-48)>16){m('❌ Seguí la línea punteada: si cortás la bolsa por el medio podés rayar lo que tiene adentro.');return}lo=Math.min(lo,p.x);hi=Math.max(hi,p.x);const a=Math.max(50,lo),L=Math.max(0,Math.min(250,hi)-a);const bc=sv.querySelector('.bc');bc.setAttribute('x',a);bc.setAttribute('width',L);if(L>=190){dn=false;m('✅ Bolsa abierta.');setTimeout(next,400)}};
+ sv.onpointerdown=e=>{dn=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}mv(e)};sv.onpointermove=mv;sv.onpointerup=()=>{dn=false}}
+function pkTake(el,next,inside,what){const [B,m]=pkMsgEl(el);let y=0,dn=false,y0=0;
+ B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="50" y="60" width="200" height="140" rx="10" fill="rgba(200,225,245,.45)" stroke="#8fb3cc" stroke-width="2"/><g class="it">${inside}</g><rect x="50" y="60" width="200" height="140" rx="10" fill="rgba(200,225,245,.35)" pointer-events="none"/></svg>`;
+ m(`Arrastrá ${what} hacia arriba para sacarl${/^la /.test(what)?'a':'o'} de la bolsa.`);const sv=B.querySelector('svg'),it=sv.querySelector('.it');
+ sv.onpointerdown=e=>{dn=true;y0=svgPt(sv,e).y-y;try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointermove=e=>{if(!dn)return;y=Math.min(0,svgPt(sv,e).y-y0);it.setAttribute('transform',`translate(0,${y})`);if(y<-95){dn=false;m('✅ Afuera.');setTimeout(next,350)}};sv.onpointerup=()=>{dn=false;if(y>-95){y=0;it.setAttribute('transform','')}}}
+const PKART={
+ nap:'<rect x="95" y="70" width="110" height="90" rx="10" fill="#3a3f45" stroke="#1b2430" stroke-width="2"/><rect x="105" y="80" width="90" height="16" rx="3" fill="#2c3035"/><text x="150" y="132" font-size="10" fill="#cfd8df" text-anchor="middle">NAP</text>',
+ dome:'<rect x="80" y="85" width="140" height="60" rx="30" fill="#5d666e" stroke="#1b2430" stroke-width="2"/><rect x="72" y="92" width="18" height="46" rx="4" fill="#33414d"/>',
+ kit:'<circle cx="110" cy="115" r="22" fill="none" stroke="#1b2430" stroke-width="6"/><rect x="150" y="95" width="16" height="40" rx="4" fill="#1b2430"/><rect x="176" y="95" width="16" height="40" rx="4" fill="#1b2430"/><text x="150" y="160" font-size="9" fill="#33414d" text-anchor="middle">junta tórica · gomas · sellador</text>',
+ ros:'<rect x="105" y="78" width="90" height="90" rx="12" fill="#f4f6f8" stroke="#9aa6b0" stroke-width="2"/><circle cx="150" cy="123" r="22" fill="none" stroke="#c9d1d8" stroke-width="4"/>',
+ spl:(n)=>`<rect x="85" y="100" width="130" height="34" rx="5" fill="#d9dee3" stroke="#33414d" stroke-width="2"/><text x="150" y="122" font-size="11" fill="#1b2430" text-anchor="middle" font-weight="700">PLC 1x${n}</text>${[...Array(Math.min(n,16))].map((_,i)=>`<line x1="215" y1="${104+i*26/Math.min(n,16)}" x2="245" y2="${100+i*34/Math.min(n,16)}" stroke="${['#1f6feb','#f28c28','#2fa84f','#8b5a2b'][i%4]}" stroke-width="1.6"/>`).join('')}<line x1="60" y1="117" x2="85" y2="117" stroke="#1f6feb" stroke-width="2"/>`};
+function pkSeq(){const m=MODE;if(m==='nap')return ['📦 Caja NAP',[['Cortá la cinta',(e,n)=>pkTape(e,n,'CAJA NAP · FRÁGIL')],['Abrí las solapas',(e,n)=>pkFlaps(e,n,PKART.nap)],['Cortá la bolsa sellada',(e,n)=>pkBag(e,n,PKART.nap)],['Sacá la caja NAP',(e,n)=>pkTake(e,n,PKART.nap,'la caja NAP')]]];
+ if(m==='botella')return ['📦 Kit de la botella',[['Cortá la cinta',(e,n)=>pkTape(e,n,'DOMO DE EMPALME')],['Abrí las solapas',(e,n)=>pkFlaps(e,n,PKART.dome)],['Abrí la bolsa del kit de sellado',(e,n)=>pkBag(e,n,PKART.kit)],['Sacá el kit de sellado',(e,n)=>pkTake(e,n,PKART.kit,'el kit')]]];
+ if(m==='roseta')return ['📦 Roseta nueva',[['Cortá la bolsa sellada',(e,n)=>pkBag(e,n,PKART.ros)],['Sacá la roseta',(e,n)=>pkTake(e,n,PKART.ros,'la roseta')]]];return null}
+function pkBox3D(){try{const b=G();const mt=M(0xc8a06a,{roughness:.9}),w=1.1,d=.8,h=.6;mesh(box(w,.03,d),mt,0,.015,0,b);[[0,h/2,d/2,w,h,.03],[0,h/2,-d/2,w,h,.03],[w/2,h/2,0,.03,h,d],[-w/2,h/2,0,.03,h,d]].forEach(([x,y,z,a,bb,c])=>mesh(box(a,bb,c),mt,x,y,z,b));
+  [[0,h,d/2+.18,w,.03,.36,.5],[0,h,-d/2-.18,w,.03,.36,-.5]].forEach(([x,y,z,a,bb,c,r])=>{const f=mesh(box(a,bb,c),mt,x,y,z,b);f.rotation.x=r});
+  b.rotation.y=.3;scene.add(b);b.userData.free=true;PK.boxes.push(b);const C=[[4.6,1.4],[4.6,-.6],[-3.2,1.6],[2.2,3],[5.5,3],[-1,4.2]];for(const [dx,dz] of C){const p=V(BKX+dx,.02,BKZ+dz);b.userData.home0=p.clone();if(acmOk(b,p)){b.position.copy(p);break}}b.userData.home0=b.position.clone()}catch(e){}}
+{const f=toolsOut;toolsOut=function(done){return f(()=>{const s=PK.on()&&!(typeof GUARD!=='undefined'&&GUARD&&GUARD.t0&&!GUARD.fin)?pkSeq():null;if(!s)return done();$('#st').textContent='Antes de empezar · desembalá los materiales';
+  try{ttlB(s[0]+': abrilo')}catch(e){}seqRun(s[0],s[1],()=>{msg('Material desembalado. La caja vacía queda en la mesa: podés correrla con ✋.');if(MODE!=='roseta')pkBox3D();done()})})}}
+{const f=startGame;startGame=function(){PK.boxes.forEach(b=>b.parent&&b.parent.remove(b));PK.boxes=[];return f.apply(this,arguments)}}
+/* ---------- cierre estanco del domo por etapas ---------- */
+function sealRing(el,next){const [B,m]=pkMsgEl(el);let x=60,y=150,dn=false;
+ B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><ellipse cx="170" cy="100" rx="90" ry="70" fill="#5d666e" stroke="#1b2430" stroke-width="2"/><ellipse cx="170" cy="100" rx="78" ry="58" fill="none" stroke="#2c3035" stroke-width="10"/><ellipse cx="170" cy="100" rx="78" ry="58" fill="none" stroke="#f2b900" stroke-dasharray="5 5" stroke-width="1.5"/><text x="170" y="104" font-size="10" fill="#e8edf1" text-anchor="middle">ranura de la base</text>
+  <g class="or"><ellipse rx="40" ry="28" fill="none" stroke="#111" stroke-width="7"/></g></svg>`;
+ const sv=B.querySelector('svg'),o=sv.querySelector('.or'),put=()=>o.setAttribute('transform',`translate(${x},${y}) scale(${dn||Math.hypot(x-170,y-100)<14?1:.55})`);put();m('Arrastrá la junta tórica (O-ring) nueva hasta la ranura de la base. Antes, revisá que no esté cortada ni retorcida.');
+ sv.onpointerdown=e=>{dn=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointermove=e=>{if(!dn)return;const p=svgPt(sv,e);x=p.x;y=p.y;put()};
+ sv.onpointerup=()=>{dn=false;if(Math.hypot(x-170,y-100)<26){x=170;y=100;o.querySelector('ellipse').setAttribute('rx',78);o.querySelector('ellipse').setAttribute('ry',58);put();m('✅ Junta asentada en toda la ranura, sin torceduras.');sv.onpointerdown=null;setTimeout(next,500)}else{put();m('La junta tiene que quedar adentro de la ranura amarilla.')}}}
+function sealClamp(el,next){const [B,m]=pkMsgEl(el);const tq=[0,0];let last=-1;const ST=3;
+ const draw=()=>{B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><circle cx="150" cy="105" r="70" fill="none" stroke="#9aa6b0" stroke-width="16"/><circle cx="150" cy="105" r="70" fill="none" stroke="#c9d1d8" stroke-width="4"/>
+  ${[0,1].map(i=>{const x=i?232:68;return `<g class="bt" data-i="${i}"><rect x="${x-18}" y="80" width="36" height="50" rx="6" fill="${tq[i]>=ST?'#22b573':'#7b8790'}" stroke="#1b2430"/><text x="${x}" y="110" font-size="13" fill="#fff" text-anchor="middle" font-weight="800">${i?'D':'I'}</text><rect x="${x-16}" y="138" width="32" height="7" rx="3" fill="#dfe5ea"/><rect x="${x-16}" y="138" width="${32*tq[i]/ST}" height="7" rx="3" fill="#f2b900"/></g>`}).join('')}
+  <text x="150" y="110" font-size="11" text-anchor="middle" fill="#33414d">Torque: ${Math.round((tq[0]+tq[1])/(2*ST)*100)}%</text></svg>`;
+  B.querySelectorAll('.bt').forEach(g=>g.onclick=()=>{const i=+g.dataset.i;if(tq[i]>=ST){impBad(m,'¡No te pases! Ese perno ya tiene el torque final: apretar de más deforma la junta.');return}if(i===last){impBad(m,'Alterná: un poco de un lado y un poco del otro, así el aro baja parejo.');return}tq[i]++;last=i;draw();
+   if(tq[0]>=ST&&tq[1]>=ST){m('✅ Abrazadera ajustada pareja en tres etapas.');setTimeout(next,500)}else m(`Etapa ${Math.min(tq[0],tq[1])+1} de ${ST}: seguí alternando.`)})};
+ m('Ajustá la abrazadera en tres etapas, alternando izquierda (I) y derecha (D).');draw()}
+{const i=SB.findIndex(f=>f.toString().includes("Cerrá el domo: tocá el aro"));if(i>=0)SB[i]=function(){if(!PK.on()){ttl('Cerrá el domo: tocá el aro para colocarlo y trabarlo');camTo(1,DZ+2.5,1,1.5,.8);taps=[ring];onTap=()=>{taps=[];ring.rotation.z=0;ring.position.set(XR+.05,PY,DZ);msg('Domo cerrado y sellado.');nx()};return}
+ ttl('Prepará el sellado antes de cerrar el domo');const d=pkDummy();
+ seqRun('Cierre estanco del domo',[['Limpiá la base',(e,n)=>{const [B,m]=pkMsgEl(e);impRub(B,n,m,'🟤')}],['Colocá la junta tórica',sealRing],['Sellá las entradas de cable',(e,n)=>{const [B,m]=pkMsgEl(e);impPick(B,n,m,`¿Qué goma va en la entrada del cable de ${NFIB} fibras?`,[['🟢','La goma del diámetro del cable, marcada en el kit',1],['⭕','Una goma más grande, así el cable entra fácil',0],['🩹','Sin goma: cinta aisladora alrededor',0]],'Con una goma más grande o con cinta, el agua entra por la entrada del cable.')}]],()=>{
+  ttl('Cerrá el domo: tocá el aro para colocarlo');camTo(1,DZ+2.5,1,1.5,.8);taps=[ring];
+  onTap=()=>{taps=[];ring.rotation.z=0;ring.position.set(XR+.05,PY,DZ);ring.userData.mt.color.set(0x22d3ee);setTimeout(()=>ring.userData.mt.color.set(0xb8c0c8),800);
+   seqRun('Cierre estanco del domo',[['Ajustá la abrazadera por etapas',sealClamp],['Prueba de estanqueidad',(e,n)=>{const [B,m]=pkMsgEl(e);impPress(B,n,m)}]],()=>{if(d)pkUndummy();msg('Domo cerrado, ajustado y estanco.');try{fxOK()}catch(e){}nx()})}})}}
+/* ---------- splitter colocado en la bandeja de distribución de la NAP ---------- */
+function splPlace(el,next){const [B,m]=pkMsgEl(el);let x=70,y=170,rot=180,dn=false,dx=0,dy=0;const n=NP.spl||8;
+ const draw=()=>{const ok=Math.hypot(x-150,y-92)<18;B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="20" y="20" width="260" height="140" rx="10" fill="#2c3035"/><text x="150" y="36" font-size="9" fill="#cfd8df" text-anchor="middle">bandeja de distribución · ← entrada (empalme) | salidas → cuplas</text>
+  <rect x="80" y="72" width="140" height="40" rx="6" fill="none" stroke="#f2b900" stroke-dasharray="5 4"/><rect x="74" y="66" width="8" height="52" fill="#7b8790"/><rect x="218" y="66" width="8" height="52" fill="#7b8790"/>
+  ${[...Array(8)].map((_,i)=>`<rect x="${240+(i%2)*18}" y="${48+Math.floor(i/2)*26}" width="14" height="20" rx="2" fill="#2fa84f" stroke="#111"/>`).join('')}
+  <g class="sp" transform="translate(${x},${y}) rotate(${rot})"><g transform="translate(-150,-117)">${PKART.spl(n)}</g></g></svg>
+  <div class="tutbtns"><button class="pkrot">⟳ Girar 180°</button><button class="big pkok" ${ok?'':'disabled'}>🔒 Trabar los clips</button></div>`;
+  const sv=B.querySelector('svg');sv.onpointerdown=e=>{const p=svgPt(sv,e);if(Math.hypot(p.x-x,p.y-y)<70){dn=true;dx=p.x-x;dy=p.y-y;try{sv.setPointerCapture(e.pointerId)}catch(_){}}};
+  sv.onpointermove=e=>{if(!dn)return;const p=svgPt(sv,e);x=p.x-dx;y=p.y-dy;sv.querySelector('.sp').setAttribute('transform',`translate(${x},${y}) rotate(${rot})`)};
+  sv.onpointerup=()=>{if(!dn)return;dn=false;if(Math.hypot(x-150,y-92)<26){x=150;y=92}draw()};
+  B.querySelector('.pkrot').onclick=()=>{rot=(rot+180)%360;draw()};
+  B.querySelector('.pkok').onclick=()=>{if(rot!==0){impBad(m,'Está al revés: la entrada (1 fibra) va del lado de la bandeja de empalmes, a la izquierda, y las salidas hacia las cuplas.');return}m(`✅ Splitter PLC 1x${n} trabado con la entrada hacia el empalme.`);setTimeout(next,500)}};
+ m(`Llevá el splitter PLC 1x${n} a su lugar en la bandeja de distribución. Fijate el sentido: entrada a la izquierda, salidas a la derecha.`);draw()}
+function splCords(el,next){const [B,m]=pkMsgEl(el);const n=Math.min(NP.spl||8,8);let k=0;
+ const draw=()=>{B.innerHTML=`<svg class="pksv" viewBox="0 0 300 210"><rect x="20" y="20" width="260" height="170" rx="10" fill="#2c3035"/><rect x="40" y="80" width="110" height="34" rx="5" fill="#d9dee3"/><text x="95" y="102" font-size="10" text-anchor="middle" font-weight="700">PLC 1x${NP.spl||8}</text>
+  ${[...Array(n)].map((_,i)=>{const y=40+i*18,c=['#1f6feb','#f28c28','#2fa84f','#8b5a2b','#7b8790','#f4f6f8','#e5484d','#111'][i];return `<path d="M150 ${86+i*3} C190 ${86+i*3} 200 ${y+6} ${i<k?232:200} ${y+6}" stroke="${c}" stroke-width="2" fill="none"/><g class="cp" data-i="${i}"><rect x="234" y="${y}" width="26" height="13" rx="2" fill="${i<k?'#22b573':i===k?'#f2b900':'#4b5560'}" stroke="#111"/><text x="247" y="${y+10}" font-size="8" text-anchor="middle" fill="#fff">${i+1}</text></g>`}).join('')}</svg>`;
+  B.querySelectorAll('.cp').forEach(g=>g.onclick=()=>{const i=+g.dataset.i;if(i!==k){impBad(m,`Van en orden: la salida ${k+1} del splitter al puerto ${k+1}.`);return}k++;draw();if(k>=n){m('✅ Salidas conectadas a sus cuplas, en orden.');setTimeout(next,450)}})};
+ m('Enchufá cada salida del splitter en su cupla, en orden (1 con 1, 2 con 2…).');draw()}
+{const i=SN.findIndex(f=>f.toString().includes("Levantá la bandeja de empalmes"));if(i>=0){const orig=SN[i];SN[i]=function(){if(!PK.on())return orig();
+ ttl('Levantá la bandeja de empalmes: tocala');camTo(NTC.x,NTC.z+.4,.62,NTY,1.05);const mk=mark(NTC.x+1.2,NTC.z,0xffffff,NTY+.3,.35);taps=[NP.tr];
+ onTap=()=>{taps=[];scene.remove(mk);NP.trDown=false;rotAnim(NP.tr,'z',1.42,750,()=>{camTo(NPX+.2,NPZ+.6,.62,.3,1.05);ttl('Colocá el splitter en la bandeja de distribución');const d=pkDummy();
+  seqRun(`Splitter PLC 1x${NP.spl}`,[['Abrí la bolsa del splitter',(e,n)=>pkBag(e,n,PKART.spl(NP.spl))],['Colocalo en su lugar',splPlace],['Conectá las salidas',splCords]],()=>{if(d)pkUndummy();
+   if(NP.spM){const sp=NP.spM,y0=sp.position.y;sp.visible=true;sp.position.y=y0+1.2;const t0=performance.now(),f=()=>{const q=Math.min(1,(performance.now()-t0)/600);sp.position.y=y0+1.2*(1-q*q);if(q<1)requestAnimationFrame(f)};f()}
+   (NP.cords||[]).forEach(c=>{if(c&&c.visible===false)c.visible=true});msg(`Splitter PLC 1x${NP.spl} instalado con sus ${NP.spl} salidas en las cuplas.`);
+   setTimeout(()=>{ttl('Bajá la bandeja otra vez: tocala');taps=[NP.tr];onTap=()=>{taps=[];rotAnim(NP.tr,'z',0,650,()=>{NP.trDown=true;msg('Bandeja abajo, lista para empalmar.');nx()})}},400)})})}}}}
+{const f=napSetup;napSetup=function(){const r=f.apply(this,arguments);try{if(PK.on()&&NP.spM){NP.spM.visible=false;(NP.cords||[]).forEach(c=>{if(c)c.visible=false})}}catch(e){}return r}}
+/* ---------- colocación libre: ✋ Acomodar ---------- */
+const ACM={on:false,sel:null,dr:null,pl:new THREE.Plane(),off:V(0,0,0),hit:V(0,0,0)};
+function acmList(){return [BK.sp,BK.cb,BK.str,BK.sb,...PK.boxes].filter(o=>o&&o.parent===scene&&o.visible!==false)}
+function acmRad(o){if(!o.userData.rad){const b=new THREE.Box3().setFromObject(o),s=V(0,0,0);b.getSize(s);o.userData.rad=Math.max(.25,Math.min(1.6,Math.max(s.x,s.z)*.42));o.userData.home0=o.position.clone()}return o.userData.rad}
+function acmOk(o,p){if(o.userData.home0&&p.distanceTo(o.userData.home0)>4.5)return false;if(p.z>6.3||p.z<-1.2||p.x<-13.2)return false;for(const q of acmList()){if(q===o)continue;const d=Math.hypot(q.position.x-p.x,q.position.z-p.z);if(d<acmRad(q)+acmRad(o)-.05)return false}
+ if(MODE==='botella'&&TXc!=null&&Math.abs(p.x-TXc)<TL/2+.4&&Math.abs(p.z-DZ)<TW/2+.4)return false;return true}
+function acmSync(o){if(o===BK.cb)CBP.copy(o.position);if(o===BK.str)STP.copy(o.position);if(o===BK.sb)SBP.copy(o.position)}
+(()=>{const c=$('#camb');if(!c)return;const b=document.createElement('button');b.id='acmb';b.title='Acomodar herramientas y cajas en la mesa';b.textContent='✋';b.onclick=()=>{ACM.on=!ACM.on;b.classList.toggle('on',ACM.on);$('#acmr').hidden=!ACM.on;
+ wToast(ACM.on?'✋ Modo acomodar: arrastrá herramientas, cajas y equipos sobre la mesa. Rueda o ⟳ para girarlos.':'✋ Modo acomodar apagado.');if(!ACM.on&&ACM.sel){ACM.sel=null}};c.appendChild(b);
+ const r=document.createElement('button');r.id='acmr';r.hidden=true;r.textContent='⟳';r.title='Girar el objeto elegido';r.onclick=()=>{const o=ACM.sel;if(!o)return wToast('Primero tocá una herramienta o caja.');const r0=o.rotation.y;o.rotation.y+=Math.PI/4;if(!acmOk(o,o.position))o.rotation.y=r0};c.appendChild(r)})();
+window.addEventListener('pointerdown',e=>{if(!ACM.on||!playing||e.target!==cv)return;const L=acmList().filter(o=>!(typeof drags!=='undefined'&&drags.includes(o)));if(!L.length)return;
+ const rc0=ray(e),hs=rc0.intersectObjects(L,true);if(!hs.length)return;const o=rootOf(hs[0].object,L);if(!o)return;acmRad(o);e.stopImmediatePropagation();e.preventDefault();
+ ACM.sel=o;ACM.dr={o,id:e.pointerId,last:o.position.clone()};ACM.pl.set(V(0,1,0),-o.position.y);if(rc0.ray.intersectPlane(ACM.pl,ACM.hit))ACM.off.copy(o.position).sub(ACM.hit);o.position.y+=.06;try{cv.setPointerCapture(e.pointerId)}catch(_){}},true);
+window.addEventListener('pointermove',e=>{const d=ACM.dr;if(!d||e.pointerId!==d.id)return;e.stopImmediatePropagation();const rc0=ray(e);if(!rc0.ray.intersectPlane(ACM.pl,ACM.hit))return;const p=ACM.hit.clone().add(ACM.off);p.y=d.o.position.y;
+ if(acmOk(d.o,p)){d.o.position.x=p.x;d.o.position.z=p.z;d.last.copy(d.o.position)}},true);
+const acmUp=e=>{const d=ACM.dr;if(!d||e.pointerId!==d.id)return;e.stopImmediatePropagation();d.o.position.y-=.06;acmSync(d.o);ACM.dr=null};window.addEventListener('pointerup',acmUp,true);window.addEventListener('pointercancel',acmUp,true);
+cv.addEventListener('wheel',e=>{if(!ACM.on||!ACM.sel)return;e.stopImmediatePropagation();e.preventDefault();const o=ACM.sel,r0=o.rotation.y;o.rotation.y+=Math.sign(e.deltaY)*.18;if(!acmOk(o,o.position))o.rotation.y=r0},{capture:true,passive:false});
+window.addEventListener('keydown',e=>{if(!ACM.on||!ACM.sel||!playing)return;if(e.key==='q'||e.key==='e'){ACM.sel.rotation.y+=(e.key==='q'?1:-1)*Math.PI/8}});
 
 applyQ();loop();
 </script></body></html>
