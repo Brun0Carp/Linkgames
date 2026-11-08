@@ -273,6 +273,15 @@ button:active:not(:disabled){transform:scale(.96)}
 #tutar{position:fixed;width:32px;height:44px;z-index:40;pointer-events:none;animation:tutb .8s ease-in-out infinite alternate;filter:drop-shadow(0 3px 4px rgba(0,0,0,.35))}#tutar svg{width:100%;height:100%}
 #tutring{position:fixed;z-index:39;pointer-events:none;border:3px solid #f2b900;border-radius:12px;box-shadow:0 0 0 4px rgba(242,185,0,.25);animation:tutp 1.2s ease-in-out infinite}
 @keyframes tutb{from{transform:translateY(-6px)}to{transform:translateY(4px)}}@keyframes tutp{0%,100%{opacity:1}50%{opacity:.45}}
+#imp{position:fixed;inset:0;z-index:26;overflow:auto;background:rgba(40,8,8,.6);padding:12px;display:flex;align-items:flex-start;justify-content:center;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.impw{max-width:560px;width:100%;margin:6vh auto 0;background:#fff;color:#16222c;border-radius:18px;padding:14px;box-shadow:0 20px 50px rgba(0,0,0,.45);border-top:6px solid #e5484d}
+.imphd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.imphd b{flex:1;font-size:16px}.imphd small{opacity:.6;font-weight:700}.imppl{background:#e5484d;color:#fff;font-weight:800;font-size:11px;padding:3px 8px;border-radius:999px;animation:tutp 1s infinite}.imphd.ok .imppl{background:#16a34a;animation:none}
+.impd{background:#fff4f4;border:1px solid #f6caca;border-radius:10px;padding:8px 10px;font-size:13.5px;margin:8px 0}.impw h3{margin:10px 0 2px;font-size:16px}.impm{min-height:20px;font-size:13.5px;margin:4px 0 8px}
+.impsv{width:100%;display:block;touch-action:none;background:#f4f7fa;border-radius:12px}.impopm{display:flex;flex-direction:column;gap:10px;align-items:stretch}.impscr{background:#0d1f12;color:#7dff9f;font:700 30px ui-monospace,monospace;text-align:center;padding:14px;border-radius:12px}.impscr.ok{color:#9dffb8}
+.imprub{position:relative;height:150px;border-radius:12px;background:repeating-linear-gradient(45deg,#e8edf1,#e8edf1 10px,#dfe5ea 10px,#dfe5ea 20px);touch-action:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:grab}.impdirt{font-size:22px;letter-spacing:6px;transition:opacity .2s}.impbar{width:70%;height:9px;border-radius:9px;background:#cfd8df;overflow:hidden}.impbar i{display:block;height:100%;width:0;background:#22b573}
+.imppk{display:flex;flex-direction:column;gap:6px}.imppk button{display:flex;gap:10px;align-items:center;text-align:left;margin:0;padding:10px;border-radius:12px;font-size:14px}.imppk span{font-size:22px}
+.imppr{display:flex;flex-direction:column;gap:10px}.impg{position:relative;height:30px;border-radius:15px;background:linear-gradient(90deg,#e8edf1 40%,rgba(34,181,115,.25) 40%,rgba(34,181,115,.25) 60%,#e8edf1 60%);overflow:hidden;border:1.5px solid #9aa6b0}.impg i{position:absolute;inset:0 auto 0 0;width:0;opacity:.8}.impg b{position:relative;display:block;text-align:center;line-height:30px;font-variant-numeric:tabular-nums}.imph{user-select:none;-webkit-user-select:none;touch-action:none}
+#res .impsum{margin:8px 0;padding:8px 10px;border-radius:10px;background:rgba(229,72,77,.08);border:1.5px solid rgba(229,72,77,.35);font-size:13.5px;text-align:left}
 #shop,#sshop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;background:linear-gradient(rgba(8,24,38,.3),rgba(8,24,38,.65));overflow:auto;z-index:6}
 .stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .big.alt{background:var(--card);color:var(--fg);border-color:var(--line);box-shadow:none}
@@ -2787,7 +2796,13 @@ function theoClose(){$('#theo').hidden=true;ptrReset()}
 function invClose(){$('#invp').hidden=true;ptrReset()}
 addEventListener('keydown',e=>{if(e.key!=='Escape')return;['#theo','#invp','#tipp'].forEach(k=>{const o=$(k);if(o&&!o.hidden)o.hidden=true});ptrReset()});
 /* ===== novedades: lo que se agregó en cada versión ===== */
-const VER=75,NEWS=[
+const VER=76,NEWS=[
+ {v:76,t:'Imprevistos en las guardias',items:[
+  ['⚠️','Averías de golpe','Durante una guardia nocturna pueden aparecer una o dos averías inesperadas mientras trabajás, y el SLA sigue corriendo.'],
+  ['🌀','Fibra atenuada','El OPM marca pérdida de más: abrís la bandeja, encontrás el rulo apretado, lo rehacés con radio de 30 a 45 mm y volvés a medir.'],
+  ['🧼','Conector sucio','El adaptador SC/APC tiene polvo o grasa: inspeccionás con el microscopio, limpiás el adaptador con el bastoncillo, limpiás el conector con el limpiador de un click y recién ahí certificás.'],
+  ['💧','Humedad y roedores','Agua adentro de la caja o cable mordido: cortás la parte dañada, secás, cambiás la goma, aplicás sellador, ajustás los pernos en cruz y hacés la prueba de estanqueidad con la bombita.'],
+  ['🏅','Puntos','Cada imprevisto resuelto suma puntos de guardia (menos si te equivocás) y aparece en el resumen final.']]},
  {v:75,t:'Primeros pasos en campo',items:[
   ['🎓','Tutorial guiado','Si sos nuevo, al entrar te aparece el tutorial «Primeros pasos en campo» (lo podés omitir). También está en JUGAR para repetirlo cuando quieras.'],
   ['👇','Flechas y guías','Una flecha amarilla y un recuadro te marcan dónde tocar en cada paso: los colores TIA-598, el termo, la peladora, la limpieza con alcohol, el cleaver, la carga de las fibras en las ranuras V, la alineación X/Y, el horno y la bandeja.'],
@@ -3129,7 +3144,7 @@ function perfTick(){const n=performance.now(),dt=n-ftL;ftL=n;if(!playing||dt>250
  if(av>26&&DYN>.6){DYN=Math.max(.6,+(DYN-.15).toFixed(2));ftG=0;size()}else if(av<15&&DYN<1){if(++ftG>=3){DYN=Math.min(1,+(DYN+.1).toFixed(2));ftG=0;size()}}else ftG=0}
 const RM_=matchMedia('(prefers-reduced-motion: reduce)').matches;
 let cx=-2,cz=-2,cyy=1,ck=1.15;
-function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#jg','#aj','#tut','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
+function loop(){requestAnimationFrame(loop);if(lost||document.hidden||SUPON)return;frm++;if(Q==='baja'&&(frm&1))return;if(!(frm%20)){const cb=$('#camb');if(cb)cb.hidden=!playing||SUPON||!$('#pan').hidden||!$('#end').hidden}if(!(frm%20))ovl=['#theo','#end','#news','#shop','#wt','#otdr','#prg','#ptd','#jg','#aj','#tut','#imp','#sshop','#sop','#tec','#title'].some(k=>{const e=$(k);return e&&!e.hidden});if((ovl||!playing)&&frm%3)return;perfTick();if(!playing&&!RM_)tyaw+=.0015;
  if(!rotP&&!pin&&(vyaw||vel)){tyaw+=vyaw;tel=clampE(tel+vel);vyaw*=.9;vel*=.9;if(Math.abs(vyaw)<1e-4)vyaw=0;if(Math.abs(vel)<1e-4)vel=0}
  yaw+=(tyaw-yaw)*.22;el+=(tel-el)*.14;cx+=(FX-cx)*.07;cz+=(FZ-cz)*.07;cyy+=(FY-cyy)*.07;ck+=(zm-ck)*.12;
  const k=Math.max(1,1.05/cam.aspect)*ck,D=17.2*k,hr=D*Math.cos(el);
@@ -4879,6 +4894,74 @@ function tutNeeded(){try{if(localStorage.getItem('taller_tut'))return false}catc
 {const f=showTitle;showTitle=function(){const r=f.apply(this,arguments);try{if(acct&&!tutNeeded.shown&&tutNeeded()&&!$('#prof').hidden){tutNeeded.shown=true;setTimeout(()=>{if(!$('#title').hidden)openTut()},400)}}catch(e){}return r}}
 JGM.unshift({k:'tut',ic:'🎓',n:'Primeros pasos en campo',d:'Tutorial guiado: colores, pelado, cleaver, fusionadora, horno y bandeja.'});
 {const f=jgPick;jgPick=function(k){if(k==='tut'){closeJG(false);return openTut()}return f(k)}}
+
+/*C76*/
+/* ===== V76: averías e imprevistos de campo durante las guardias ===== */
+let IMP=null;
+const IMPT=[
+ {k:'bend',ic:'🌀',t:'Fibra atenuada por radio de curvatura',d:'El OPM marca pérdida de más en una fibra que ya estaba andando. Alguien cerró la bandeja apretando un rulo: hay que encontrarlo y rehacer el ruteo interno.'},
+ {k:'dirty',ic:'🧼',t:'Conector sucio en el adaptador',d:'El cliente perdió señal: el adaptador SC/APC de la caja tiene polvo y grasa. Antes de certificar el enlace hay que inspeccionar y limpiar.'},
+ {k:'water',ic:'💧',t:'Ingreso de humedad',d:'La caja tiene agua adentro: la goma de sellado está vencida. Hay que secar, cambiar la goma, sellar y cerrar con el apriete correcto.'},
+ {k:'rat',ic:'🐀',t:'Daño por roedores',d:'Los roedores mordieron la cubierta del cable en la entrada de la caja. Hay que cortar la parte dañada, cambiar el pasacable de goma, sellar y cerrar.'}];
+function impOn(){return typeof GUARD!=='undefined'&&GUARD&&GUARD.t0&&!GUARD.fin}
+{const f=startGame;startGame=function(){const r=f.apply(this,arguments);IMP=null;if(impOn()){GUARD.imp=[];GUARD.impAt=Date.now()+rint(35,70)*1000;GUARD.impMax=rint(1,2)}return r}}
+setInterval(()=>{if(!impOn()||IMP||!playing||!$('#end').hidden)return;try{if(localStorage.getItem('taller_imp')==='0')return}catch(e){}const g=GUARD;if(!g.impAt||g.imp.length>=g.impMax||Date.now()<g.impAt)return;
+ const pan=$('#pan');if(pan&&!pan.hidden)return;if(['#ot','#otdr','#acd'].some(k=>{const e=$(k);return e&&!e.hidden}))return;
+ const pool=IMPT.filter(x=>!g.imp.some(y=>y.k===x.k));impStart(srnd(pool));g.impAt=Date.now()+rint(60,110)*1000},1000);
+function impStart(ev){IMP={ev,i:0,e0:err,t0:Date.now(),bad:0};let el=$('#imp');if(!el){el=document.createElement('div');el.id='imp';document.body.appendChild(el)}el.hidden=false;
+ try{fxBad()}catch(e){}try{if(typeof PH!=='undefined'&&PH&&PH.on){const t=`¡Ojo! ${ev.t}. Arreglalo rápido que corre el SLA.`;phAdd('grp',{who:'Julián',t});phPing('grp','Julián',t)}}catch(e){}
+ const steps=impSteps(ev.k);IMP.steps=steps;impRender()}
+function impRender(){const el=$('#imp'),ev=IMP.ev,s=IMP.steps[IMP.i];
+ el.innerHTML=`<div class="impw"><div class="imphd"><span class="imppl">⚠️ IMPREVISTO</span><b>${ev.ic} ${ev.t}</b><small>${IMP.i+1} / ${IMP.steps.length}</small></div>${IMP.i===0?`<p class="impd">${ev.d}</p>`:''}
+  <h3>${s.t}</h3><p class="impm">${s.h||''}</p><div class="impb"></div></div>`;
+ const B=el.querySelector('.impb'),m=t=>{el.querySelector('.impm').innerHTML=t};s.run(B,()=>{try{fxOK()}catch(e){}IMP.i++;if(IMP.i<IMP.steps.length)impRender();else impDone()},m)}
+function impBad(m,t){err++;IMP.bad++;try{fxBad()}catch(e){}m('❌ '+t)}
+function impDone(){const ev=IMP.ev,sec=Math.round((Date.now()-IMP.t0)/1000),pts=Math.max(0,40-IMP.bad*15);GUARD.pts+=pts;GUARD.imp.push({k:ev.k,t:ev.t,ic:ev.ic,sec,bad:IMP.bad,pts});
+ const el=$('#imp');el.innerHTML=`<div class="impw"><div class="imphd ok"><span class="imppl">✅ RESUELTO</span><b>${ev.ic} ${ev.t}</b></div><p>Lo resolviste en <b>${sec} s</b>${IMP.bad?` con ${IMP.bad} error${IMP.bad>1?'es':''}`:' sin errores'}: <b>+${pts} pts</b> de guardia.</p><div class="tutbtns"><button class="big impok">Volver al trabajo</button></div></div>`;
+ el.querySelector('.impok').onclick=()=>{el.hidden=true;IMP=null};try{aura()}catch(e){}}
+/* --- pasos de cada imprevisto --- */
+function impSteps(k){
+ const opm={t:'1 · Medí con el OPM',h:'Conectá el power meter en el puerto del cliente y medí.',run:(B,ok,m)=>{const pw=-(19+rnd()*3).toFixed(2);B.innerHTML=`<div class="impopm"><div class="impscr">--.-- dBm</div><button class="big impgo">📟 Medir en 1490 nm</button></div>`;B.querySelector('.impgo').onclick=()=>{B.querySelector('.impscr').textContent=pw+' dBm';B.querySelector('.impgo').disabled=true;m(`La potencia bajó a <b>${pw} dBm</b>: ${k==='bend'?'el enlace pierde más de 0,5 dB de lo normal':'hay un problema entre la caja y el cliente'}.`);setTimeout(ok,1100)}}};
+ const seal=[
+  {t:'Secá y limpiá el interior',h:'Pasá el paño de un lado al otro hasta que no quede humedad ni barro.',run:(B,ok,m)=>impRub(B,ok,m,k==='water'?'💧':'🟤')},
+  {t:'Cambiá la goma de sellado',h:'Sacá la goma vieja (rota o deformada) y colocá la nueva en la ranura, sin torcerla.',run:(B,ok,m)=>impPick(B,ok,m,'¿Qué goma va?',[['🟢','Goma nueva del kit, del diámetro del cable',1],['♻️','La misma goma, dada vuelta',0],['🩹','Cinta aisladora alrededor de la vieja',0]],'Una goma vieja o con cinta no sella: el agua vuelve a entrar.')},
+  {t:'Aplicá el sellador',h:'Pasá el gel o la cinta de sellado por todo el borde de la tapa, sin dejar huecos.',run:(B,ok,m)=>impSeal(B,ok,m)},
+  {t:'Ajustá los pernos en estrella',h:'Apretá en cruz, nunca en ronda: así la goma se comprime pareja. Orden: 1 → 3 → 2 → 4.',run:(B,ok,m)=>impBolts(B,ok,m)},
+  {t:'Prueba de estanqueidad',h:'Inflá la caja con la bombita y mantené la presión estable unos segundos.',run:(B,ok,m)=>impPress(B,ok,m)}];
+ if(k==='bend')return [opm,{t:'2 · Abrí la bandeja y encontrá el rulo apretado',h:'Mirá los tres rulos: el que tiene la curva más cerrada es el que pierde luz.',run:(B,ok,m)=>impFind(B,ok,m)},{t:'3 · Rehacé el rulo',h:'Arrastrá el punto amarillo hasta dejar el radio entre 30 y 45 mm.',run:(B,ok,m)=>impLoop(B,ok,m)},{t:'4 · Volvé a medir',h:'Medí otra vez en el puerto del cliente.',run:(B,ok,m)=>impRemeasure(B,ok,m)}];
+ if(k==='dirty')return [opm,{t:'2 · Inspeccioná el conector',h:'Mirá la cara del conector con el microscopio antes de limpiar.',run:(B,ok,m)=>impMic(B,ok,m,true)},{t:'3 · Limpiá el adaptador',h:'Pasá el bastoncillo limpiador por dentro del adaptador SC/APC, girándolo.',run:(B,ok,m)=>impRub(B,ok,m,'🦠')},{t:'4 · Limpiá el conector y volvé a inspeccionar',h:'Usá el limpiador de un click hasta que el núcleo quede limpio.',run:(B,ok,m)=>impMic(B,ok,m,false)},{t:'5 · Volvé a medir y certificá',h:'Conectá y medí: ahora sí podés certificar.',run:(B,ok,m)=>impRemeasure(B,ok,m)}];
+ if(k==='rat')return [{t:'1 · Cortá la cubierta dañada',h:'Marcá el corte por fuera de la zona mordida: 5 cm después del último mordisco.',run:(B,ok,m)=>impCut(B,ok,m)},...seal];
+ return seal}
+function impRub(B,ok,m,ic){let n=0,dir=0,lx=null,dn=false;B.innerHTML=`<div class="imprub"><div class="impdirt">${ic.repeat(10)}</div><div class="impbar"><i></i></div><p class="note">Arrastrá de un lado a otro sobre la zona.</p></div>`;
+ const z=B.querySelector('.imprub'),d=B.querySelector('.impdirt');z.onpointerdown=e=>{dn=true;lx=e.clientX;try{z.setPointerCapture(e.pointerId)}catch(_){}};z.onpointerup=()=>{dn=false};
+ z.onpointermove=e=>{if(!dn)return;const dd=Math.sign(e.clientX-lx);if(Math.abs(e.clientX-lx)>6&&dd!==dir){if(dir)n++;dir=dd}lx=e.clientX;const k=Math.min(1,n/8);B.querySelector('.impbar i').style.width=k*100+'%';d.style.opacity=1-k;if(k>=1&&!z.dataset.ok){z.dataset.ok=1;setTimeout(ok,300)}}}
+function impPick(B,ok,m,q,opts,why){B.innerHTML=`<p><b>${q}</b></p><div class="imppk">${opts.map((o,i)=>`<button data-i="${i}"><span>${o[0]}</span>${o[1]}</button>`).join('')}</div>`;
+ B.querySelectorAll('.imppk button').forEach(b=>b.onclick=()=>{const o=opts[+b.dataset.i];if(o[2])ok();else impBad(m,why)})}
+function impSeal(B,ok,m){const N=12,done=new Set();B.innerHTML=`<svg class="impsv" viewBox="0 0 300 170"><rect x="40" y="25" width="220" height="120" rx="18" fill="#d9e2e8" stroke="#33414d" stroke-width="2"/>${[...Array(N)].map((_,i)=>{const a=i/N*Math.PI*2,x=150+118*Math.cos(a)*.93,y=85+66*Math.sin(a)*.95;return `<circle class="sd" data-i="${i}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="#fff" stroke="#9aa6b0" stroke-dasharray="2 2"/>`}).join('')}<text x="150" y="90" text-anchor="middle" font-size="12" fill="#33414d" class="sdt">Sellado 0%</text></svg>`;
+ const sv=B.querySelector('svg');let dn=false;const hit=e=>{const t=document.elementFromPoint(e.clientX,e.clientY);if(t&&t.classList&&t.classList.contains('sd')&&!done.has(t.dataset.i)){done.add(t.dataset.i);t.setAttribute('fill','#22b573');t.setAttribute('stroke','#159a5f');sv.querySelector('.sdt').textContent=`Sellado ${Math.round(done.size/N*100)}%`;if(done.size>=N)setTimeout(ok,300)}};
+ sv.onpointerdown=e=>{dn=true;hit(e)};sv.onpointermove=e=>{if(dn||e.pointerType==='mouse'&&e.buttons)hit(e)};sv.onpointerup=()=>{dn=false};m('Pasá el dedo (o el mouse) por todos los puntos del borde.')}
+function impBolts(B,ok,m){const P=[[70,45],[230,45],[230,125],[70,125]],ord=[0,2,1,3];let k=0;
+ const draw=()=>{B.innerHTML=`<svg class="impsv" viewBox="0 0 300 170"><rect x="50" y="25" width="200" height="120" rx="16" fill="#d9e2e8" stroke="#33414d" stroke-width="2"/>${P.map((p,i)=>{const d=ord.indexOf(i)<k;return `<g class="bolt" data-i="${i}"><circle cx="${p[0]}" cy="${p[1]}" r="14" fill="${d?'#22b573':'#9aa6b0'}" stroke="#33414d"/><text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">${i+1}</text></g>`}).join('')}</svg>`;
+  B.querySelectorAll('.bolt').forEach(g=>g.onclick=()=>{const i=+g.dataset.i;if(i===ord[k]){k++;draw();if(k>=4)setTimeout(ok,300)}else impBad(m,`Ese no: apretá en cruz. Después del ${ord[k-1]!=null?ord[k-1]+1:'—'} va el ${ord[k]+1}.`)})};draw()}
+function impPress(B,ok,m){let p=0,hold=false,good=0;B.innerHTML=`<div class="imppr"><div class="impg"><i></i><b>0,0 bar</b></div><button class="big imph">🫸 Mantené apretado para inflar</button><p class="note">La presión tiene que quedar en la franja verde (0,4–0,6 bar) durante 3 segundos.</p></div>`;
+ const b=B.querySelector('.imph'),i=B.querySelector('.impg i'),t=B.querySelector('.impg b');['pointerdown'].forEach(ev=>b.addEventListener(ev,()=>{hold=true}));['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>{hold=false}));
+ const tk=setInterval(()=>{if(!b.isConnected){clearInterval(tk);return}p=Math.max(0,Math.min(1,p+(hold?.03:-.004)));i.style.width=p*100+'%';t.textContent=p.toFixed(2).replace('.',',')+' bar';const inb=p>=.4&&p<=.6;i.style.background=inb?'#22b573':p>.6?'#e5484d':'#0ea5e9';
+  if(p>.85){p=.3;impBad(m,'¡Te pasaste de presión! Soltá y volvé a inflar despacio.')}if(inb){good+=100;if(good>=3000){clearInterval(tk);m('✅ Presión estable: la caja es estanca.');setTimeout(ok,500)}}else good=0},100)}
+function impCut(B,ok,m){const bites=[110,138,152],lim=Math.max(...bites)+25;let x=null;B.innerHTML=`<svg class="impsv" viewBox="0 0 300 120"><rect x="10" y="48" width="280" height="22" rx="10" fill="#1d2024"/>${bites.map(b=>`<path d="M${b-6} 48 q6 10 12 0" fill="#e8edf1"/><path d="M${b-4} 70 q4 -8 9 0" fill="#e8edf1"/>`).join('')}<line class="cutl" x1="0" y1="35" x2="0" y2="84" stroke="#e5484d" stroke-width="3" stroke-dasharray="4 3" visibility="hidden"/><text x="150" y="108" font-size="11" text-anchor="middle" fill="#33414d">Tocá dónde cortar (la caja está a la derecha →)</text></svg>`;
+ const sv=B.querySelector('svg');sv.onclick=e=>{const p=svgPt(sv,e);const l=sv.querySelector('.cutl');l.setAttribute('x1',p.x);l.setAttribute('x2',p.x);l.setAttribute('visibility','visible');if(p.x<lim&&p.x>Math.min(...bites)-25)impBad(m,'Ese corte deja parte mordida: corré el corte unos centímetros más allá del daño.');else if(p.x<Math.min(...bites)-25)impBad(m,'Estás cortando cable sano antes del daño: el daño quedaría adentro de la caja.');else if(p.x>lim+60)impBad(m,'Cortaste de más: te puede quedar corto el cable dentro de la caja.');else{m('✅ Corte limpio, fuera de la zona dañada.');setTimeout(ok,600)}}}
+function impFind(B,ok,m){const bad=rint(0,2),R=[26,26,26];R[bad]=9;B.innerHTML=`<svg class="impsv" viewBox="0 0 300 150"><rect x="8" y="8" width="284" height="134" rx="14" fill="#e8edf1" stroke="#33414d" stroke-width="2"/>${R.map((r,i)=>`<g class="lp" data-i="${i}"><circle cx="${60+i*90}" cy="75" r="40" fill="transparent"/><ellipse cx="${60+i*90}" cy="75" rx="${r+8}" ry="${r}" fill="none" stroke="#1f6feb" stroke-width="3"/></g>`).join('')}</svg>`;
+ B.querySelectorAll('.lp').forEach(g=>g.onclick=()=>{if(+g.dataset.i===bad){m('✅ Ese es: la curva está cerradísima.');setTimeout(ok,500)}else impBad(m,'Ese rulo está bien: buscá la curva más cerrada.')})}
+function impLoop(B,ok,m){let r=9,drag=false;const K=1.6;B.innerHTML=`<svg class="impsv" viewBox="0 0 300 170"><rect x="8" y="8" width="284" height="154" rx="14" fill="#e8edf1" stroke="#33414d" stroke-width="2"/><circle cx="150" cy="85" r="${30*K}" fill="none" stroke="#22b573" stroke-dasharray="4 3"/><circle class="lr" cx="150" cy="85" fill="none" stroke-width="3"/><circle class="lh" cy="85" r="8" fill="#f2b900" stroke="#33414d"/></svg><div class="tutbtns"><button class="big lok">✅ Cerrar la bandeja</button></div>`;
+ const sv=B.querySelector('svg'),up=()=>{const g=r>=30&&r<=45;sv.querySelector('.lr').setAttribute('r',r*K);sv.querySelector('.lr').setAttribute('stroke',r>=30?'#1f6feb':'#e5484d');sv.querySelector('.lh').setAttribute('cx',150+r*K);B.querySelector('.lok').disabled=!g;m(`Radio: <b>${r.toFixed(0)} mm</b> ${r<30?'· muy cerrado':r>45?'· no entra en la bandeja':'✅'}`)};
+ sv.onpointerdown=e=>{drag=true;try{sv.setPointerCapture(e.pointerId)}catch(_){}};sv.onpointermove=e=>{if(!drag)return;const p=svgPt(sv,e);r=Math.max(6,Math.min(50,Math.hypot(p.x-150,p.y-85)/K));up()};sv.onpointerup=()=>{drag=false};B.querySelector('.lok').onclick=ok;up()}
+function impMic(B,ok,m,look){let dots=look?[...Array(rint(6,9))].map(()=>[otR(-30,30),otR(-30,30),otR(2,5)]):(IMP.dots||[]);if(look)IMP.dots=dots;
+ const draw=()=>{B.innerHTML=`<div class="otmic"><svg viewBox="-60 -60 120 120"><circle r="58" fill="#0b0f14"/><circle r="44" fill="#6f7f8c"/><circle r="40" fill="#8796a2"/><circle r="5" fill="#cfe9ff"/>${dots.map(d=>`<circle cx="${d[0].toFixed(1)}" cy="${d[1].toFixed(1)}" r="${d[2].toFixed(1)}" fill="#3a2f22" opacity=".85"/>`).join('')}</svg></div>
+  <div class="tutbtns">${look?'<button class="big mk">👍 Visto: hay que limpiar</button>':dots.length?'<button class="big mc">🖊️ Limpiador de un click</button>':'<button class="big mk">🔌 Limpio: conectar</button>'}</div>`;
+  const c=B.querySelector('.mc');if(c)c.onclick=()=>{dots=dots.filter(()=>Math.random()<.45);if(dots.length===IMP.dots.length)dots.pop();IMP.dots=dots;draw()};const k=B.querySelector('.mk');if(k)k.onclick=ok};draw();if(look)m(`Se ven ${dots.length} partículas sobre la cara del conector: así no se puede certificar.`)}
+function impRemeasure(B,ok,m){B.innerHTML=`<div class="impopm"><div class="impscr">--.-- dBm</div><button class="big impgo">📟 Medir otra vez</button></div>`;B.querySelector('.impgo').onclick=()=>{const pw=-(15+rnd()*2).toFixed(2);B.querySelector('.impscr').textContent=pw+' dBm';B.querySelector('.impscr').classList.add('ok');m(`✅ ${pw} dBm: el enlace volvió a la normalidad y quedó certificado.`);B.querySelector('.impgo').disabled=true;setTimeout(ok,1100)}}
+/* resumen en el resultado */
+{const f=end;end=function(){const r=f.apply(this,arguments);try{const g=typeof GUARD!=='undefined'&&GUARD;if(g&&g.imp&&g.imp.length&&!$('#end').hidden&&!$('#res .impsum')){const h=$('#res h2');if(h)h.insertAdjacentHTML('beforebegin',`<div class="impsum"><b>⚠️ Imprevistos de la guardia</b>${g.imp.map(x=>`<br>${x.ic} ${x.t}: ${x.sec} s${x.bad?` · ${x.bad} error${x.bad>1?'es':''}`:''} · <b>+${x.pts} pts</b>`).join('')}</div>`)}}catch(e){}return r}}
+window.IMPauto=()=>{if(!IMP)return;IMP.i=IMP.steps.length;impDone()};
 
 applyQ();loop();
 </script></body></html>
